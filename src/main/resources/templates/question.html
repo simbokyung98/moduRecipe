@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Q&A</title>
+<style type="text/css">
+	@font-face {
+	    font-family: 'Cafe24Simplehae';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Simplehae.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	@font-face {
+	    font-family: 'Cafe24Dangdanghae';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.2/Cafe24Dangdanghae.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}	
+	*{
+		margin: 0 auto;
+		padding: 0;
+	}
+	#news_main{
+			height:1000px;
+			width:1200px;
+			margin: 0 auto;
+		}
+	#news_aside{
+			width: 20%;
+			float: left;
+			margin-top: 50px;	
+		}
+	.news_title_wrap{
+		padding: 20px;
+		background: #ffa500;
+		list-style-type: none;
+	}
+	#question_btn{
+			width: 870px;
+			margin: 10px 0 0 0;
+			text-align: right;
+		}
+		.question_btn:active, .question_btn:link, .question_btn:visited {
+			background: #ffa500;
+			padding: 10px 20px 10px 20px;
+			border-radius: 2px;
+			text-decoration: none;
+			font-family: 'Cafe24Simplehae';
+			font-weight: bold;
+			font-size: 18px;
+			color: white;
+			letter-spacing: 2px;
+
+
+		}
+	.news-title{
+			font-family: 'Cafe24Simplehae';
+			font-size: 25px;
+			letter-spacing: 2px;	 
+			color: white; 
+		}
+		.news-ul{
+			font-family: 'Cafe24Simplehae';
+			font-size: 20px;
+		}
+		.news_img_wrap {
+			text-align: center;
+			padding: 30px 0 30px 0;
+			border: 1px solid #dddddd;
+			list-style-type: none;
+		}
+		.news_list_wrap{
+			border: 1px solid #dddddd;
+			padding: 15px 0 15px 10px;
+			list-style-type: none;
+		}
+		.news-ul span{
+			float: right;
+			margin-right: 15px;
+		}
+		.news-ul a:link, .news-ul a:visited, .news-ul a:active{
+			text-decoration: none;
+			color: black;
+		}
+		.news-ul a:hover{   
+			color: black;
+			font-weight: bold;
+		} 
+		#news_section{
+			width: 79%;
+			float: left;
+		} 
+		#question_wrap{
+			margin: 70px 0 0 70px;
+		}
+		.question_things{
+			width: 700px;
+		}
+		.question_things li{
+			padding: 15px 0 45px 0;
+			border-bottom: 1px solid gray;
+			border-top: 1px solid gray;
+			list-style: none;
+		}
+		
+		.question_things h5{
+			float: left;
+			padding-left: 20px;
+			font-family: 'Cafe24Simplehae';
+			font-size: 18px;
+			letter-spacing: 3px;
+			margin-top: 5px;
+			font-weight: bold;
+		}
+		.question_things li:hover{
+			color: #8977ad;
+		}
+		.question_things button{
+			float: right;
+			padding: 5px 20px 0 0;
+			border: 0;
+			background: white;
+		}
+		.question_content{
+			height: 150px;
+			background: #FFDEAD;
+			border-bottom: 1px solid gray;
+			display: none;
+			
+		}
+		.question_inside{
+			padding: 20px 20px 20px 20px;
+		}
+		.question_inside_left{
+			float: left;
+			font-family: 'Cafe24Simplehae';
+			color:#8977ad; 
+			padding: 5px 5px 0 0;
+		}
+		.question_inside_right{
+			float: left;
+			font-family: 'Cafe24Simplehae';
+			 
+		} 
+		
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+	$(document).ready(function(){
+		$('.but_click').click(function(){
+			
+			  if($(this).parent().next().css('display') == 'none'){
+				  $(this).parent().next().show();
+			  }else{
+				  $(this).parent().next().hide();
+			  }
+			
+		});
+	});
+</script>
+</head>
+<body>
+	<main id="news_main">
+		<aside id="news_aside">
+			
+			<ul class="news-ul">
+				<li class="news_title_wrap"><h4 class="news-title">고객센터</h4></li>  
+				<li class="news_img_wrap"><img alt="악수" src="img/notionIcon.png" style="width: 100px;height: 100px;"><p>모두를 위한 고객센터</p> </li>
+				<li class="news_list_wrap"><a th:href="@{/notionmain}" class="news-li">공지사항<span>></span></a></li>
+				<li class="news_list_wrap"><a href="question.jsp" class="news-li" style="font-weight: bold;color: #ffa500;">Q&A<span>></span></a></li>
+			</ul>	
+		</aside>
+		<section id="news_section">
+					<div id="question_wrap">
+						<ul th:each="questionlist: ${questionlist}" class="question_things" id="1">
+							<li>
+							<h5 th:text="${questionlist.oq_title}"> </h5>
+							<button class="but_click" id="1"><img src="img/open.png" style="width: 20px; height: 20px;"> </button>
+							</li>
+							<div class="question_content">
+								<div class="question_inside">
+									<div class="question_inside_left"><h4>A.</h4></div>
+									<div class="question_inside_right" th:text="${questionlist.oq_content}">
+									</div>
+								</div>
+							</div>
+						</ul>
+
+					</div>
+			<div id="question_btn" style="margin-top:50px;">
+				<a th:href="@{/questionwrite}" class="question_btn">등록</a>
+			</div>
+				</section>
+	</main>
+	<footer>
+	</footer>
+
+</body>
+</html>
