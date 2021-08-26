@@ -21,6 +21,11 @@ public class NoticeController {
 
     private NoticeService noticeService;
     private NoticeRepository noticeRepository;
+    @GetMapping("/")
+    public String homapage(Model model)
+    {
+        return "index.html";
+    }
 
     @GetMapping("/notionmain")
     public String notionmain(Model model, @RequestParam(value = "page", defaultValue = "1")Integer pageNum)

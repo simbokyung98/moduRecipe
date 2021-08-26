@@ -17,14 +17,14 @@ import java.time.LocalDateTime;
 public class NoticeEntity {
 
     @Id
-    @Column(name="notice_Key", nullable = false)
+    @Column(name="noticeKey", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long noticekey;
 
-    @Column(name = "notice_Title", nullable = false)
+    @Column(name = "noticeTitle", nullable = false)
     private String noticetitle;
 
-    @Column(name = "notice_Content", nullable = false)
+    @Column(name = "noticeContent", nullable = false)
     private String noticecontent;
 
     @Builder

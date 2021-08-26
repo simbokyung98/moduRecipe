@@ -16,14 +16,14 @@ import javax.persistence.*;
 public class OftenQuestionEntity {
 
     @Id
-    @Column(name="oq_Key", nullable = false)
+    @Column(name="oqKey", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int oq_key;
 
-    @Column(name="oq_Title", nullable = false)
+    @Column(name="oqTitle", nullable = false)
     private String oq_title;
 
-    @Column(name="oq_Content", nullable = false)
+    @Column(name="oqContent", nullable = false)
     private String oq_content;
 
     @Builder
