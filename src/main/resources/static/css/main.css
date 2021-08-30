@@ -1,0 +1,137 @@
+#moma_main_wrap{
+      width: 1200px;
+      height: 1700px;
+
+   }
+   .item:nth-child(1) { background-image: url("../img/slide1.png"); background-size: 100% 100%;}
+    .item:nth-child(2) { background-image: url("../img/slide2.png"); background-size: 100% 100%; }
+    .item:nth-child(3) { background-image: url("../img/slide3.png"); background-size: 100% 100%;}
+    .item:nth-child(4) { background-image: url("../img/slide4.png"); background-size: 100% 100%;}
+    #left-button{
+       background-image: url("../img/left.png");
+       height: 50px;
+       width: 30px;
+       background-size: 100% 100%;
+       border: 0;
+       background-color: transparent;
+       position: absolute;
+       top: 43%;
+       left: 15%;
+       cursor:pointer;
+
+    }
+    #right-button{
+       background-image: url("../img/right.png");
+       height: 50px;
+       width: 30px;
+       background-size: 100% 100%;
+       border: 0;
+       background-color: transparent;
+       float: right;
+       position: absolute;
+       top: 43%;
+       right: 15%;
+       cursor:pointer;
+    }
+    #main_content_wrap{
+       width: 1200px;
+       margin: 0 auto;
+    }
+
+    .all_meter-wrap{
+       width: 1200px;
+       height: 500px;
+    }
+    .cut_side{
+       width: 1100px;
+    }
+    .meter_list li{
+      list-style-type: none;
+   }
+   .meter_item a {
+      text-decoration: none;
+   }
+   .meter_img_wrap{
+      height: 230px;
+   }
+   .meter_img img{
+      width: 200px;
+      height: 200px;
+   }
+
+   .meter_title{
+      font-family: 'Cafe24Simplehae';
+      color: black;
+      font-size: 19px;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+   }
+   .meter_price{
+      font-family: 'Cafe24Dangdanghae';
+      font-size: 25px;
+      margin-top: 5px;
+      color: black;
+   }
+   .meter_g{
+      font-family: 'Cafe24Simplehae';
+      font-size: 12px;
+      margin-top: 5px;
+      color: black;
+   }
+   .meter_size{
+      width: 210px;
+      height: 450px;
+      float: left;
+      margin: 20px 30px 20px 30px;
+      padding: 0;
+   }
+   .meter_cart_but{
+      border: 0;
+      outline: 0;
+      background: 0;
+
+   }
+   .meter_cart_but img{
+      width: 50px;
+      height: 50px;
+   }
+   .meter_cart{
+      width: 70px;
+      position: relative;
+      top: -70px;
+      left: 70px;
+
+   }
+
+
+   .main_recom_recipe_wrap{
+      width: 1200px;
+      height: 500px;
+      margin-top: 150px;
+   }
+   #main_recom_reci_content_wrap{
+      width: 1120px;
+      height: 150px;
+   }
+   .main_recom_recipe{
+      float: left;
+      width: 250px;
+      height: 150px;
+      margin-left: 20px;
+
+   }
+   .mian_content_title{
+      text-align: center;
+       font-family: 'NanumSquareRound';
+       font-size: 30px;
+       margin-bottom: 70px;
+   }
+   .main_content_but{
+      border: 1px solid #cccccc;
+      background: white;
+      margin-left: 30px;
+      border-radius: 20px;
+      width: 40px;
+      height: 40px;
+      padding-top: 3px;
+      cursor:pointer;
