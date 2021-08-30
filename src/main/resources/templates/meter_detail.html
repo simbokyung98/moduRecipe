@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../static/css/style2.css">
+<head>
+<meta charset="UTF-8">
+<title>재료 세부페이지</title>
+<style type="text/css">
+		@font-face {
+	    font-family: 'Cafe24Simplehae';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Simplehae.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+		}
+		@font-face {
+	    font-family: 'Cafe24Dangdanghae';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.2/Cafe24Dangdanghae.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+		}	
+	*{
+		margin: 0 auto;
+		padding: 0;
+	}
+	
+	.meter_main{
+		height: auto;
+		width: 1200px; 
+	}
+	.meter_detail_wrap{
+		margin: 30px 0 0 50px; 
+		height: 500px;
+	}
+	.meter_detail_img{
+		float: left;	
+	}
+	.meter_detail_img img {
+		width: 500px;
+		height: 500px;
+	}
+	.meter_detail_title_wrap{
+		float: left;
+		margin-left: 50px;
+	}
+	.meter_detail_title_name{
+		 font-family: 'Cafe24Simplehae';
+	}
+	.meter_detail_title_name_strong {
+		font-size: 30px;
+		letter-spacing:3px;
+		font-weight: bold;
+		
+	}
+	.meter_detail_title_name_span{
+		margin-top: 5px;
+		color: gray;
+	}
+	.meter_detail_title_price{
+		margin: 20px 0 20px 5px;
+		font-family: 'Cafe24Simplehae';
+		font-size: 30px;
+		font-weight: bold;
+	}
+	.meter_detail_title_contents{
+		margin-bottom: 100px;
+	}
+	.meter_detail_title_contents dt, .meter_detail_title_contents dd{
+		float: left;
+		width: 150px;
+		padding: 15px 0 15px 0;
+		font-family: 'Cafe24Simplehae';
+	}
+	.meter_detail_title_contents dd{
+		font-weight: bold;
+	}
+	.meter_detail_title_contents dl, .meter_detail_title_box{
+		clear: left;
+	}
+	.meter_detail_title_box{
+		border: 1px solid gray;
+		margin-top: 20px;
+		height: 120px;   
+	}
+	.meter_detail_title_box_dl{
+		margin: 20px;
+	}
+	.meter_detail_title_box_dl dt{
+		font-family: 'Cafe24Simplehae';
+		font-size: 20px;
+		margin-bottom: 30px;
+	}
+	.meter_detail_title_count_wrap{
+		width: 75px;
+		height: 25px;
+		float: left;
+		border: 1px solid gray;
+		border-radius: 2px;
+		
+	}
+	.m_title_count{
+		width: 20px;
+		height: 20px;
+		text-align: center;
+		font-family: 'Cafe24Simplehae';
+		color: gray;
+		background: white; border: 0;
+		font-size: 25px;
+		
+	}
+	.m_title_count_num{
+		margin-bottom: 30px;   
+		width: 20px;
+		height: 20px;
+		text-align: center;
+		background: white; border: 0;
+		font-family: 'Cafe24Simplehae';
+		font-size: 18px;
+	}
+	.meter_detail_buy_wrap{
+		clear: left;
+	}
+	.meter_detail_title_total{
+		margin: 20px 0 20px 0;	
+		border-bottom: 2px solid black;
+	}
+	.mdtt_span1{
+		font-family: 'Cafe24Simplehae';
+		font-weight: bold;
+		font-size: 25px;
+		padding-right: 200px;
+	}
+	.mdtt_span2{
+		font-family: 'Cafe24Simplehae';
+		font-size: 20px;
+	}
+	.mdtt_span2 strong {
+		font-size: 35px;
+	}
+	.mdtt_but1{
+		width: 210px;
+		height: 50px;
+		border: 0;	
+		margin-left: 5px;
+		font-family: 'Cafe24Simplehae';
+		font-size: 25px;
+		font-weight: bold;
+		background: gray;
+		color: white;
+	}
+	.mdtt_but2{
+		width: 210px;
+		height: 50px;
+		border: 0;
+		background: orange;
+		font-family: 'Cafe24Simplehae';
+		font-size: 25px;
+		font-weight: bold;
+		color: white;
+	}
+	.meter_detail_conwrap {
+		clear: left;
+		width: 100%;
+		margin: 150px 0 0 50px;
+	}
+	.meter_detail_conwrap li{
+		float: left;
+		list-style-type: none;
+		width: 28%;
+		
+		text-align: center;
+		padding: 20px 0 20px 0;
+		font-family: 'Cafe24Simplehae';
+		font-size: 22px;
+		
+		
+	}
+	.mdc_main{
+		color: #ffa500;
+		border-bottom: 3px solid #ffa500;
+		font-weight: bold;
+	}
+	.mdc_suv{
+		border-bottom: 1px solid black;
+	}
+	.me_d_crecipe{
+		clear: left;
+		height: 250px;
+		padding: 50px 0 0 50px;
+	}
+	.me_d_recipe{
+		margin: 10px;
+		float: left;
+		width: 200px;
+	}
+	.me_d_cdetail{
+		height: 1500px;
+		padding: 50px 0 0 50px;
+		clear: left;
+	}
+	.me_d_cbuy{
+		clear: left;
+		height: 250px;
+		padding: 50px 0 0 50px;
+	}
+</style>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<main class="meter_main">
+	<div class="meter_detail_wrap">
+		<div class="meter_detail_img">
+			<img alt="세부 이미지" th:src="@{../static/img/} + ${material.materialImg}">
+		</div>
+		
+		<div class="meter_detail_title_wrap">	
+			<div >
+				<p class="meter_detail_title_name">
+					<div class="meter_detail_title_name_strong"><span th:text="${material.materialTitle}"></span></div>
+					<div class="meter_detail_title_name_span">명품한돈 신선한 다짐육 (200g)</div>
+				</p>
+				<p class="meter_detail_title_price">
+					3,000<span style="font-size: 15px; font-weight: normal;">원</span>
+				</p>
+				<div class="meter_detail_title_contents">
+					<dl>
+						<dt>판매단위</dt>
+						<dd>1팩</dd>
+					</dl>
+						<dl>
+						<dt>중량/용량</dt>
+						<dd>200g</dd>
+					</dl>
+			 		<dl>
+						<dt>원산지</dt>
+						<dd>국내산</dd>
+					</dl>
+				</div>
+			</div>
+		
+			
+			
+			
+			
+			<div class="meter_detail_title_box">
+				<dl class="meter_detail_title_box_dl">
+					<dt><span>[냉장]돼지고기 다짐육(한돈)</span> </dt>
+					<dd class="meter_detail_title_count_wrap">
+						<input type="button" value="-" class="m_title_count">
+						<input type="text" value="1" class="m_title_count_num">
+						<input type="button" value="+" class="m_title_count">
+					</dd>
+				</dl>
+			</div>
+			<div class="meter_detail_buy_wrap">
+				<div class="meter_detail_title_total">
+					<span class="mdtt_span1">총 상품금액</span> 
+					<span class="mdtt_span2"><strong>3,000</strong> 원</span>
+				</div>
+				<div>
+					<button class="mdtt_but1">장바구니</button>
+					<button class="mdtt_but2">바로구매</button>
+				</div>
+			</div>
+			</div>
+		</div>	
+
+		
+		
+		
+		
+		<div class="meter_detail_conwrap">
+				<ul>
+					<li class="mdc_main"><a>관련레시피</a></li>
+					<li class="mdc_suv"><a>상세정보</a></li>
+					<li class="mdc_suv"><a>구매정보</a></li>
+				</ul>
+				<div class="me_d_crecipe">
+					<div>
+						<div class="me_d_recipe">
+							<iframe width="200" height="130" src="https://www.youtube.com/embed/BqxpjY7TJ8g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+						</div>
+						<div class="me_d_recipe">
+							<iframe width="200" height="130" src="https://www.youtube.com/embed/5iRPP3nqCJE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+						</div>
+						<div class="me_d_recipe">
+							<iframe width="200" height="130" src="https://www.youtube.com/embed/wPxuQdfYErk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+						</div>
+						<div class="me_d_recipe">
+							<iframe width="200" height="130" src="https://www.youtube.com/embed/_qnLV46GSr4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+						</div>
+					</div>
+				</div>
+				<ul>
+					<li class="mdc_suv"><a>관련레시피</a></li>
+					<li class="mdc_main"><a>상세정보</a></li>
+					<li class="mdc_suv"><a>구매정보</a></li>
+				</ul>
+				<div class="me_d_cdetail">
+					<img alt="다짐육_상세설명 " src="../static/img/chop_pig_detail.jpg" style="border: 1px solid #cccccc; width: 900px; height: 1400px;">
+				</div>
+				<ul>
+					<li class="mdc_suv"><a>관련레시피</a></li>
+					<li class="mdc_suv"><a>상세정보</a></li>
+					<li class="mdc_main"><a>구매정보</a></li>
+				</ul>
+				<div class="me_d_cbuy">
+					<img alt="구매설명" src="../static/img/buydetail.PNG" style="width: 900px;">
+				</div>
+				
+		</div>
+</main>
+<footer>
+	<div th:replace="fragments/footer::footer"></div>
+</footer>
+</body>
+</html>
