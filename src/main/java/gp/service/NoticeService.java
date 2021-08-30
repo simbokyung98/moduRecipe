@@ -84,7 +84,7 @@ public class NoticeService {
     }
 
     @Transactional
-    public Long getNoticeCount() {
+    public Long getnoticeCount() {
         return noticeRepository.count();
     }
 
@@ -92,7 +92,7 @@ public class NoticeService {
         Integer[] pageList = new Integer[BLOCK_PAGE_NUM_COUNT];
 
 // 총 게시글 갯수
-        Double postsTotalCount = Double.valueOf(this.getNoticeCount());
+        Double postsTotalCount = Double.valueOf(this.getnoticeCount());
 
 // 총 게시글 기준으로 계산한 마지막 페이지 번호 계산 (올림으로 계산)
         Integer totalLastPageNum = (int)(Math.ceil((postsTotalCount/PAGE_POST_COUNT)));

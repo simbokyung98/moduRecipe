@@ -192,7 +192,7 @@
         <div style="margin-top:100px;" >
             <div style="text-align:center;">
 					<span th:each="pageNum : ${pageList}" th:inline="text">
-						<a th:href="@{'/myqnamain/?page=' + ${pageNum}}"></a>
+						<a th:href="@{'/myqnamain/?page=' + ${pageNum}}">[[${pageNum}]]</a>
 					</span>
             </div>
         </div>
