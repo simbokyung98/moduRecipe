@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
@@ -130,10 +130,8 @@
 </style>
 </head>
 <body>
-	<%@ include file="header.jsp"%>
 	<main id="adminque_main_wrap">
 		<section id="adminque_main">
-			<%@include file="adminmenu.jsp" %>
 			<section id="adminque_section_wrap">
 				<div id="adminque_section">
 					<p>1:1 질문 관리</p>
@@ -143,38 +141,20 @@
 						<p class="admin_que_p">답변대기</p>
 						<table class="admin_que_table">
 							<thead>
-								<tr>
-									<th>고객ID</th>
-									<th width="350">질문제목</th>
-									<th>등록일자</th>
-									<th>상세보기</th>
+								<tr th:each="qnalist:${qnalist}">
+									<td class="adque_no" th:text="${qnalist.qnakey}">고객ID</td>
+									<td class="adque_bo" th:text="${qnalist.qnatitle}">질문제목</td>
+									<td class="adque_no" th:text="${qnalist.qnadate}">질문일자</td>
+									<td class="adque_no"><a th:href="@{'/adminqnadetail/' +${qnalist.qnakey}}" class="adque_but">보기</a></td>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td class="adque_no">aaa</td>
-									<td class="adque_bo">아이디 관련</td>
-									<td class="adque_no">2021-05-27</td>
-									<td class="adque_no"><a href="adminQuestionDetail.jsp" class="adque_but">보기</a></td>
+								<tr >
+									<td class="adque_no"></td>
+									<td class="adque_bo"></td>
+									<td class="adque_no"></td>
 								</tr>
-								<tr>
-									<td class="adque_no">aaa</td>
-									<td class="adque_bo">아이디 관련</td>
-									<td class="adque_no">2021-05-27</td>
-									<td class="adque_no"><a href="adminQuestionDetail.jsp" class="adque_but">보기</a></td>
-								</tr>
-								<tr>
-									<td class="adque_no">aaa</td>
-									<td class="adque_bo">아이디 관련</td>
-									<td class="adque_no">2021-05-27</td>
-									<td class="adque_no"><a href="adminQuestionDetail.jsp" class="adque_but">보기</a></td>
-								</tr>
-								<tr>
-									<td class="adque_no">aaa</td>
-									<td class="adque_bo">아이디 관련</td>
-									<td class="adque_no">2021-05-27</td>
-									<td class="adque_no"><a href="adminQuestionDetail.jsp" class="adque_but">보기</a></td>
-								</tr>
+
 								
 							</tbody>
 						</table>
@@ -191,31 +171,15 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td class="adque_no">aaa</td>
-									<td class="adque_bo">아이디 관련</td>
-									<td class="adque_no">2021-05-27</td>
-									<td class="adque_no"><a href="adminQuestionDetail.jsp" class="adque_end_but">보기</a></td>
+								<tr th:each="qnalist : ${qnalist}">
+									<td class="adque_no" th:text="${qnalist.qnakey}"></td>
+									<td class="adque_bo" th:text="${qnalist.qnatitle}"></td>
+									<td class="adque_no" th:text="${qnalist.qnadate}"></td>
+									<td class="adque_no"><a th:href="@{'/adminqnadetail/' +${qnalist.qnakey}}" class="adque_but">보기</a></td>
+
+
 								</tr>
-								<tr>
-									<td class="adque_no">aaa</td>
-									<td class="adque_bo">아이디 관련</td>
-									<td class="adque_no">2021-05-27</td>
-									<td class="adque_no"><a href="adminQuestionDetail.jsp" class="adque_end_but">보기</a></td>
-								</tr>
-								<tr>
-									<td class="adque_no">aaa</td>
-									<td class="adque_bo">아이디 관련</td>
-									<td class="adque_no">2021-05-27</td>
-									<td class="adque_no"><a href="adminQuestionDetail.jsp" class="adque_end_but">보기</a></td>
-								</tr>
-								<tr>
-									<td class="adque_no">aaa</td>
-									<td class="adque_bo">아이디 관련</td>
-									<td class="adque_no">2021-05-27</td>
-									<td class="adque_no"><a href="adminQuestionDetail.jsp" class="adque_end_but">보기</a></td>
-								</tr>
-								
+
 							</tbody>
 						</table>
 					</div>

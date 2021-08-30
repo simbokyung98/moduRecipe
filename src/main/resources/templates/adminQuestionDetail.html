@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>1:1 질문 확인</title>
@@ -142,10 +142,8 @@
 </style>
 </head>
 <body>
-	<%@ include file="header.jsp"%>
 	<main id="adminque_main_wrap">
 		<section id="adminque_main">
-			<%@include file="adminmenu.jsp" %>
 			<section id="adminque_section_wrap">
 				<div id="adminque_section">
 					<p>1:1 질문 관리</p>
@@ -156,27 +154,26 @@
 					</div>
 					<div class="am_quede_conwrap">
 						<div class="am_quede_title">
-							<span id="aqt_con">문의 제목창입니다</span>
-							<span id="aqt_date">2021-05-27</span>
+							<span id="aqt_con" th:text="${qnaDto.qnatitle}"></span>
+							<span id="aqt_date" th:text="${qnaDto.qnadate}"></span>
 						</div>
-						<div class="am_quede_content">
-							문의 내용 부분입니다 문의 내용 부분입니다 문의 내용 부분입니다 
-							문의 내용 부분입니다 문의 내용 부분입니다 문의 내용 부분입니다
-							 문의 내용 부분입니다문의 내용 부분입니다문의 내용 부분입니다 
+						<div class="am_quede_content" th:text="${qnaDto.qnacontent}">
 						</div>
 						<div class="am_quede_coment">
-							<p id="aqc_p">답변하기</p>
-							<textarea rows="10" cols="105" placeholder="질문에 대한 답변하기" id="aqc_text"></textarea><br>
-							<button type="submit" id="aqc_subbut">답변하기</button>
-							<a href="adminQuestion.jsp" id="aqc_backbut">목록가기</a>
+							<form id="form2" action="#"  th:object="${qnaDto}" method="post">
+								<p id="aqc_p">답변하기</p>
+								<textarea rows="10" cols="105"  placeholder="질문에 대한 답변하기" id="aqc_text" th:field="*{answercontent}"></textarea><br>
+								<button type="submit"   id="aqc_subbut">답변하기</button>
+								<a th:href="@{/adminqna}" id="aqc_backbut">목록가기</a>
+							</form>
 						</div>
+
 					</div>
 				</div>
 			</section>
 		</section>
 	</main>
 	<footer>
-		<%@ include file="footer.jsp"%>
 	</footer>
 </body>
 </html>
