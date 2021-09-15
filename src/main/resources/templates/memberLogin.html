@@ -248,17 +248,20 @@ function enterKeyCheck(){
             <input type="button"  class="pwd_find" onclick="location.href='pwdfind.jsp'" value="비밀번호 찾기">
 
         </div>
+
+        <br>
+        <br>
         <input name="${_csrf.parameterName}" type="hidden" value="${_crsf.token}">
-        <br>
-        <br>
     </form>
 
+    <form>
     <p>
         <input type="button" class="join" value="회원가입">
     </p>
     <p>
         <input type="submit" class="Administrator_Login" value="관리자 로그인">
     </p>
+    </form>
 
 </div>
 <div th:replace="fragments/footer::footer"></div>
