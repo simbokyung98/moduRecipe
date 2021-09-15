@@ -14,7 +14,7 @@ public class MemberController {
     private final MemberService memberService;
 
     // 회원가입
-    @GetMapping("/join")
+    @GetMapping("/user/join")
     public String join() {
         return "/memberJoin";
     }
@@ -24,19 +24,12 @@ public class MemberController {
     public String Sign(MemberDto memberDto) {
         memberService.joinUser(memberDto);
 
-        return "redirect:/login";
+        return "redirect:/user/login";
     }
 
     // 로그인
-    @GetMapping("/login")
+    @GetMapping("/user/login")
     public String login() {
         return "/memberLogin";
-    }
-
-
-    // 로그인 처리
-    @GetMapping("/user/login/result")
-    public String loginResult() {
-        return "/loginSuccess";
     }
 }
