@@ -194,14 +194,16 @@
         <input name="${_csrf.parameterName}" type="hidden" value="${_crsf.token}">
     </form>
 
-    <form action="/user/jo" method="post">
-        <p>
-            <input type="button" class="join" value="회원가입" href="/memberJoin.jsp">
-        </p>
-        <p>
-            <input type="submit" class="Administrator_Login" value="관리자 로그인" href="/adminLogin.jsp">
-        </p>
+    <form>
+    <p>
+        <input type="button" class="join" value="회원가입">
+    </p>
+    <p>
+        <input type="submit" class="Administrator_Login" value="관리자 로그인">
+    </p>
     </form>
+
+
 </div>
 <footer th:insert="footer.html"></footer>
 </body>
