@@ -1,6 +1,5 @@
 package gp.config;
 
-
 import gp.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -34,8 +33,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
@@ -45,12 +42,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/myQnaMain").hasRole("MEMBER")
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
-                    .and()
+                .and()
                 .formLogin()            //로그인 수행
-                    .loginPage("/login")
-                    .loginProcessingUrl("/userLogin")
-                    .defaultSuccessUrl("/user/login/result")
-                    .failureUrl("/login?error=true")
+                .loginPage("/login")
+                .loginProcessingUrl("/userLogin")
+                .defaultSuccessUrl("/user/login/result")
+                .failureUrl("/login?error=true")
                 .permitAll()
                 .and()
                 .logout()
@@ -59,11 +56,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
-
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
     }
+
+
 
 
 }

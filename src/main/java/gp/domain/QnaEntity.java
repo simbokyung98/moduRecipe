@@ -3,13 +3,14 @@ package gp.domain;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "qna")
@@ -47,5 +48,13 @@ public class QnaEntity {
         this.qnaDate=qnadate;
         this.answerstate=false;
 
+    }
+
+    public Boolean getAnswerstate() {
+        if(this.answercontent != null)
+        {
+            setAnswerstate(true);
+        }
+        return answerstate;
     }
 }

@@ -10,8 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
-
     private final MemberService memberService;
+
+
+    @GetMapping("/")
+    public String main() {
+        return "/main";
+    }
 
     // 회원가입
     @GetMapping("/join")
@@ -33,10 +38,19 @@ public class MemberController {
         return "/memberLogin";
     }
 
-
-    // 로그인 처리
     @GetMapping("/user/login/result")
-    public String loginResult() {
+    public String dispLoginResult() {
         return "/loginSuccess";
     }
+
+
+
+
+    /*
+    // 마이페이지
+    @GetMapping("/myQnaMain")
+    public String goMyPage() {
+        return "/"
+    }
+     */
 }

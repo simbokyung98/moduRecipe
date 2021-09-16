@@ -1,6 +1,6 @@
 package gp.service;
 
-
+import gp.domain.Role;
 import gp.domain.Member;
 import gp.domain.MemberRepository;
 import gp.web.dto.MemberDto;
@@ -13,14 +13,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @Service
 @RequiredArgsConstructor
+/*@Transactional(readOnly = false)*/
 public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
