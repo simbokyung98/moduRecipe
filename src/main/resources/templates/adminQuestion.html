@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>관리자 페이지</title>
-<style type="text/css">
+	<meta charset="UTF-8">
+	<title>관리자 페이지</title>
+	<style type="text/css">
 	@font-face {
 		 font-family: 'NanumBarunGothic';
 		 font-style: normal;
@@ -12,7 +11,7 @@
 		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
 		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
 	}
-	
+
 	.nanumbarungothic * {
 		 font-family: 'NanumBarunGothic', sans-serif;
 	}
@@ -40,10 +39,10 @@
 	}
 	#adminque_section_wrap{
 		float: left;
-		width: 78%; 
+		width: 78%;
 	}
 	#adminque_section{
-		width: 100%;      
+		width: 100%;
 		height: 50px;
 		background: #dddddd;
 		box-shadow : 2px 2px 5px #999;
@@ -51,13 +50,13 @@
 		letter-spacing: 4px;
 	}
 	#adminque_section p{
-		padding: 15px 0 0 20px; 
+		padding: 15px 0 0 20px;
 		font-family: 'Cafe24Dangdanghae';
 		font-size: 20px;
-		
+
 	}
 	#am_section_content{
-		width: 100%;      
+		width: 100%;
 		height: 940px;
 		background: #dddddd;
 		box-shadow : 2px 2px 5px #999;
@@ -85,7 +84,7 @@
 		font-family: 'NanumBarunGothic';
 		padding: 15px 20px;
 		font-size: 17px;
-		
+
 	}
 	.adque_no{
 		border-bottom: 1px solid #dddddd;
@@ -100,6 +99,7 @@
 		font-family: 'NanumBarunGothic';
 		font-size: 17px;
 		font-weight: bold;
+		text-align: center;
 	}
 	.adque_but{
 		border: 0;
@@ -130,101 +130,72 @@
 </style>
 </head>
 <body>
-	<%@ include file="header.jsp"%>
-	<main id="adminque_main_wrap">
-		<section id="adminque_main">
-			<%@include file="adminmenu.jsp" %>
-			<section id="adminque_section_wrap">
-				<div id="adminque_section">
-					<p>1:1 질문 관리</p>
+<main id="adminque_main_wrap">
+	<section id="adminque_main">
+		<section id="adminque_section_wrap">
+			<div id="adminque_section">
+				<p>1:1 질문 관리</p>
+			</div>
+			<div id="am_section_content">
+				<div class="admin_que_wait">
+					<p class="admin_que_p">답변대기</p>
+					<table class="admin_que_table">
+						<thead>
+						<tr >
+							<th >질문번호</th>
+							<th width="350">질문제목</th>
+							<th>질문일자</th>
+							<th>상세보기</th>
+
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:each="nulllist:${nulllist}">
+							<td class="adque_no" th:text="${nulllist.qnakey}"></td>
+							<td class="adque_bo" th:text="${nulllist.qnatitle}" ></td>
+							<td class="adque_no" th:text="${nulllist.qnadate}" ></td>
+							<td class="adque_no"><a th:href="@{'/adminqnadetail/' +${nulllist.qnakey}}" class="adque_but">보기</a></td>
+
+
+						</tr>
+
+
+						</tbody>
+					</table>
 				</div>
-				<div id="am_section_content">
-					<div class="admin_que_wait">
-						<p class="admin_que_p">답변대기</p>
-						<table class="admin_que_table">
-							<thead>
-								<tr>
-									<th>고객ID</th>
-									<th width="350">질문제목</th>
-									<th>등록일자</th>
-									<th>상세보기</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td class="adque_no">aaa</td>
-									<td class="adque_bo">아이디 관련</td>
-									<td class="adque_no">2021-05-27</td>
-									<td class="adque_no"><a href="adminQuestionDetail.jsp" class="adque_but">보기</a></td>
-								</tr>
-								<tr>
-									<td class="adque_no">aaa</td>
-									<td class="adque_bo">아이디 관련</td>
-									<td class="adque_no">2021-05-27</td>
-									<td class="adque_no"><a href="adminQuestionDetail.jsp" class="adque_but">보기</a></td>
-								</tr>
-								<tr>
-									<td class="adque_no">aaa</td>
-									<td class="adque_bo">아이디 관련</td>
-									<td class="adque_no">2021-05-27</td>
-									<td class="adque_no"><a href="adminQuestionDetail.jsp" class="adque_but">보기</a></td>
-								</tr>
-								<tr>
-									<td class="adque_no">aaa</td>
-									<td class="adque_bo">아이디 관련</td>
-									<td class="adque_no">2021-05-27</td>
-									<td class="adque_no"><a href="adminQuestionDetail.jsp" class="adque_but">보기</a></td>
-								</tr>
-								
-							</tbody>
-						</table>
-					</div>
-					<div class="admin_que_end">
-						<p class="admin_que_p">답변완료</p>
-						<table class="admin_que_table">
-							<thead>
-								<tr>
-									<th>고객ID</th>
-									<th width="350">질문제목</th>
-									<th>등록일자</th>
-									<th>상세보기</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td class="adque_no">aaa</td>
-									<td class="adque_bo">아이디 관련</td>
-									<td class="adque_no">2021-05-27</td>
-									<td class="adque_no"><a href="adminQuestionDetail.jsp" class="adque_end_but">보기</a></td>
-								</tr>
-								<tr>
-									<td class="adque_no">aaa</td>
-									<td class="adque_bo">아이디 관련</td>
-									<td class="adque_no">2021-05-27</td>
-									<td class="adque_no"><a href="adminQuestionDetail.jsp" class="adque_end_but">보기</a></td>
-								</tr>
-								<tr>
-									<td class="adque_no">aaa</td>
-									<td class="adque_bo">아이디 관련</td>
-									<td class="adque_no">2021-05-27</td>
-									<td class="adque_no"><a href="adminQuestionDetail.jsp" class="adque_end_but">보기</a></td>
-								</tr>
-								<tr>
-									<td class="adque_no">aaa</td>
-									<td class="adque_bo">아이디 관련</td>
-									<td class="adque_no">2021-05-27</td>
-									<td class="adque_no"><a href="adminQuestionDetail.jsp" class="adque_end_but">보기</a></td>
-								</tr>
-								
-							</tbody>
-						</table>
-					</div>
+				<div class="admin_que_wait">
+					<p class="admin_que_p">답변완료</p>
+					<table class="admin_que_table">
+						<thead>
+						<tr>
+							<th>질문번호</th>
+							<th width="350">질문제목</th>
+							<th>등록일자</th>
+							<th>상세보기</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:each="answerlist:${answerlist}">
+							<td class="adque_no" th:text="${answerlist.qnakey}"></td>
+							<td class="adque_bo" th:text="${answerlist.qnatitle}"></td>
+							<td class="adque_no" th:text="${answerlist.qnadate}"></td>
+							<td class="adque_no"><a th:href="@{'/adminqnadetail/' +${answerlist.qnakey}}" class="adque_but">보기</a></td>
+
+
+
+						</tr>
+
+						</tbody>
+					</table>
 				</div>
-			</section>
+			</div>
 		</section>
-	</main>
-	<footer>
-		<%@ include file="footer.jsp"%>
-	</footer>
+	</section>
+</main>
+<footer>
+	<%@ include file="footer.jsp"%>
+</footer>
+</body>
+</html>
 </body>
 </html>

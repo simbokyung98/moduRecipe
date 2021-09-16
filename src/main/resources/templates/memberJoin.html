@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>모두의 레시피</title>
-    <link rel="stylesheet" href="../static/css/style2.css">
+    <link rel="stylesheet" href="/css/style.css">
     <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js">
 
   function signUpValidation(){
@@ -385,7 +386,7 @@ function btn(sample){
 
 </style>
 <body>
-<div th:replace="fragments/header :: header"></div>
+<header th:insert="header.html"></header>
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js">
     function openZipSearch() {
   new  daum.Postcod( {
@@ -407,7 +408,7 @@ function btn(sample){
         <a class="passwd">비밀번호</a>
         <input type="password" class="pwd" name="password" ><br>
         <a class="passwdche">비밀번호확인</a>
-        <input type="password" class="pwdCheck" name="password" ><br>
+        <input type="password" class="pwdCheck"  ><br>
         <a class="Na">이름</a>
         <input type="text" class="name" name="name" ><br>
         <a class="adr">주소</a>
@@ -615,10 +616,10 @@ function btn(sample){
             <label for="mail_agree">이메일수신동의</label>
         </div>
         <input type="submit" class="join" value="가입하기">
-
+        <input name="${_csrf.parameterName}" type="hidden" value="${_crsf.token}">
     </form>
 </div>
-<div th:replace="fragments/footer::footer"></div>
+<footer th:insert="footer.html"></footer>
 
 <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
 

@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +26,18 @@ public class QnaService {
     private static final int PAGE_POST_COUNT = 5; // 한 페이지에 존재하는 게시글 수
 
 
-    public Long saveQna(QnaDto qnaDto){return qnaRepository.save(qnaDto.toEntity()).getQnakey();}
+    public Long saveQna(QnaDto qnaDto){
+        return qnaRepository.save(qnaDto.toEntity()).getQnakey();}
 
-    public List<QnaDto> getAllQna(){
+    public List<QnaDto> getAllQna() {
+
         List<QnaEntity> qnaEntities = qnaRepository.findAll();
         List<QnaDto> qnaDtoList = new ArrayList<>();
 
-        for (QnaEntity qnaEntity:qnaEntities){
+
+
+
+        for (QnaEntity qnaEntity : qnaEntities) {
             QnaDto qnaDto = QnaDto.builder()
                     .qnakey(qnaEntity.getQnakey())
                     .qnatitle(qnaEntity.getQnatitle())
@@ -41,7 +47,9 @@ public class QnaService {
                     .answerstate(qnaEntity.getAnswerstate()).build();
             qnaDtoList.add(qnaDto);
         }
+
         return qnaDtoList;
+
     }
     @Transactional
     public QnaDto getQna(Long qnakey){
@@ -68,6 +76,7 @@ public class QnaService {
                 .answercontent(qnaEntity.getAnswercontent())
                 .answerstate(qnaEntity.getAnswerstate())
                 .build();
+
     }
 
     public List<QnaDto> getqnalist(Integer pageNum){
@@ -78,6 +87,37 @@ public class QnaService {
 
         for (QnaEntity qnaEntity : qnaEntities){
             qnaDtoList.add(this.convertEntityToDto(qnaEntity));
+        }
+
+        return qnaDtoList;
+    }
+    public  List<QnaDto>getnullqnalist(){
+        List<QnaEntity> qnaEntities = qnaRepository.nullfind();
+        List<QnaDto> qnaDtoList = new ArrayList<>();
+
+        for (QnaEntity qnaEntity : qnaEntities){
+            QnaDto qnaDto = QnaDto.builder()
+                    .qnakey(qnaEntity.getQnakey())
+                    .qnacontent(qnaEntity.getQnacontent())
+                    .qnatitle(qnaEntity.getQnatitle())
+                    .qnadate(qnaEntity.getQnaDate())
+                    .build();
+            qnaDtoList.add(qnaDto);
+        }
+        return qnaDtoList;
+    }
+    public List<QnaDto> getanswerqnalist(){
+        List<QnaEntity> qnaEntities = qnaRepository.find();
+        List<QnaDto> qnaDtoList = new ArrayList<>();
+
+        for (QnaEntity qnaEntity : qnaEntities){
+            QnaDto qnaDto = QnaDto.builder()
+                    .qnakey(qnaEntity.getQnakey())
+                    .qnacontent(qnaEntity.getQnacontent())
+                    .qnatitle(qnaEntity.getQnatitle())
+                    .qnadate(qnaEntity.getQnaDate())
+                    .build();
+            qnaDtoList.add(qnaDto);
         }
         return qnaDtoList;
     }

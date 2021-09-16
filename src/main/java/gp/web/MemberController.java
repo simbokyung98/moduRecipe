@@ -10,11 +10,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
-
     private final MemberService memberService;
 
+
+    @GetMapping("/")
+    public String main() {
+        return "/main";
+    }
+
     // 회원가입
-    @GetMapping("/user/join")
+    @GetMapping("/join")
     public String join() {
         return "/memberJoin";
     }
@@ -24,12 +29,28 @@ public class MemberController {
     public String Sign(MemberDto memberDto) {
         memberService.joinUser(memberDto);
 
-        return "redirect:/user/login";
+        return "redirect:/login";
     }
 
     // 로그인
-    @GetMapping("/user/login")
+    @GetMapping("/login")
     public String login() {
         return "/memberLogin";
     }
+
+    @GetMapping("/user/login/result")
+    public String dispLoginResult() {
+        return "/loginSuccess";
+    }
+
+
+
+
+    /*
+    // 마이페이지
+    @GetMapping("/myQnaMain")
+    public String goMyPage() {
+        return "/"
+    }
+     */
 }
