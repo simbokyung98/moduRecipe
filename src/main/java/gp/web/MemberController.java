@@ -32,11 +32,4 @@ public class MemberController {
     public String login() {
         return "/memberLogin";
     }
-
-
-    // 로그인 처리
-    @GetMapping("/user/login/result")
-    public String loginResult() {
-        return "/loginSuccess";
-    }
 }
