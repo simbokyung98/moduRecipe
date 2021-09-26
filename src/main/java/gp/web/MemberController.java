@@ -38,19 +38,5 @@ public class MemberController {
         return "/memberLogin";
     }
 
-    @GetMapping("/user/login/result")
-    public String dispLoginResult() {
-        return "/loginSuccess";
-    }
-
-
-
-
-    /*
-    // 마이페이지
-    @GetMapping("/myQnaMain")
-    public String goMyPage() {
-        return "/"
-    }
-     */
 }
+
