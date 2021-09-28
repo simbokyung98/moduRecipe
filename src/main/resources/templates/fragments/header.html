@@ -17,7 +17,8 @@
                 <ul class="dep1">
                     <li class="usermenuli"><a class="subusermenuli" th:href="@{/join}">회원가입</a>
                     </li>
-                    <li class="usermenuli"><a class="subusermenuli" th:href="@{/login}">로그인</a>
+                    <li th:if = "${session.user == null}" class="usermenuli"><a class="subusermenuli" th:href="@{/login}">로그인</a>
+                    <li th:if = "${session.user != null}" class="usermenuli"><a class="subusermenuli" th:href="@{/login}"><span th:text = "${session.user.username}"></span></a>
                     </li>
                     <li class="usermenuli"><a class="subusermenuli" th:href="@{/user/logout}">로그아웃</a></li>
 
