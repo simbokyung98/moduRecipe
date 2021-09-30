@@ -57,6 +57,12 @@ public class MemberController {
             return "redirect:/login";
         }
     }
+    //로그아웃
+    @GetMapping("/userlogout")
+    public String logout(){
+        session.setAttribute("user", null);
+        return "index";
+    }
 
 }
 
