@@ -211,33 +211,48 @@
 				</div>
 					<div id="am_section_search-as">
 						<ul class="am_section_ul">
-							<li><a th:href="@{/adminMater}" class="am_section_ul_ama">전체</a></li>
-							<li><a th:href="@{/adminMaterCate/정육}" class="am_section_ul_asuv">정육</a></li>
-							<li><a th:href="@{/adminMaterCate/수산}" class="am_section_ul_asuv">수산/해산</a></li>
-							<li><a th:href="@{/adminMaterCate/면}" class="am_section_ul_asuv">면/견과</a></li>
-							<li><a th:href="@{/adminMaterCate/과일}" class="am_section_ul_asuv">과일</a></li>
-							<li><a th:href="@{/adminMaterCate/채소}" class="am_section_ul_asuv">채소</a></li>
-							<li><a th:href="@{/adminMaterCate/베이커리}" class="am_section_ul_asuv">베이커리</a></li>
-							<li><a th:href="@{/adminMaterCate/양념}" class="am_section_ul_asuv">양념/오일</a></li>
-							<li><a th:href="@{/adminMaterCate/계란}" class="am_section_ul_asuv">계란/유제품</a></li>
+							<li><a th:href="@{/adminMater}" class="am_section_ul_asuv">전체</a></li>
+							<li>
+								<a th:if="${main.toString()} == '정육'" th:href="@{/adminMaterCate/정육}" class="am_section_ul_ama">정육</a>
+								<a th:unless="${main.toString()} == '정육'" th:href="@{/adminMaterCate/정육}" class="am_section_ul_asuv">정육</a>
+							</li>
+							<li>
+								<a th:if="${main.toString()} == '수산'" th:href="@{/adminMaterCate/수산}" class="am_section_ul_ama">수산/해산</a>
+								<a th:unless="${main.toString()} == '수산'" th:href="@{/adminMaterCate/수산}" class="am_section_ul_asuv">수산/해산</a>
+							</li>
+							<li>
+								<a th:if="${main.toString()} == '면'" th:href="@{/adminMaterCate/면}" class="am_section_ul_ama">면/견과</a>
+								<a th:unless="${main.toString()} == '면'" th:href="@{/adminMaterCate/면}" class="am_section_ul_asuv">면/견과</a>
+							</li>
+							<li>
+								<a th:if="${main.toString()} == '과일'" th:href="@{/adminMaterCate/과일}" class="am_section_ul_ama">과일</a>
+								<a th:unless="${main.toString()} == '과일'" th:href="@{/adminMaterCate/과일}" class="am_section_ul_asuv">과일</a>
+							</li>
+							<li>
+								<a th:if="${main.toString()} == '채소'" th:href="@{/adminMaterCate/채소}" class="am_section_ul_ama">채소</a>
+								<a th:unless="${main.toString()} == '채소'" th:href="@{/adminMaterCate/채소}" class="am_section_ul_asuv">채소</a>
+							</li>
+							<li>
+								<a th:if="${main.toString()} == '베이커리'" th:href="@{/adminMaterCate/베이커리}" class="am_section_ul_ama">베이커리</a>
+								<a th:unless="${main.toString()} == '베이커리'" th:href="@{/adminMaterCate/베이커리}" class="am_section_ul_asuv">베이커리</a>
+							</li>
+							<li>
+								<a th:if="${main.toString()} == '양념'" th:href="@{/adminMaterCate/양념}" class="am_section_ul_ama">양념/오일</a>
+								<a th:unless="${main.toString()} == '양념'" th:href="@{/adminMaterCate/양념}" class="am_section_ul_asuv">양념/오일</a>
+							</li>
+							<li>
+								<a th:if="${main.toString()} == '계란'" th:href="@{/adminMaterCate/계란}" class="am_section_ul_ama">계란/유제품</a>
+								<a th:unless="${main.toString()} == '계란'" th:href="@{/adminMaterCate/계란}" class="am_section_ul_asuv">계란/유제품</a>
+							</li>
 						</ul>
 					</div>
 					<div id="am_section_contents_wrap">
-						<div id="section_search_wrap">
-							<select id="ssearch_sele">
-								<option>상품명</option>
-								<option>유통기한</option>
-								<option>상태</option>
-							</select>
-							<input type="text" id="ssearch_text" placeholder="검색어를 입력하세요">
-							<input type="submit" id="ssearch_sub" value="검색">
-						</div>
 						<table class="am_sc_table">
 							<thead>
 								<tr>
 									<th class="am_sc_th">상품코드</th>
 									<th class="am_sc_th" colspan="2">상품명</th>
-									<th class="am_sc_th">유통기한</th>
+									<th class="am_sc_th">등록마감일</th>
 									<th class="am_sc_th">가격<span style="font-weight: normal;font-size: 10px;">(100g)</span></th>
 									<th class="am_sc_th">현재고</th>
 									<th class="am_sc_th">수정재고</th>
@@ -261,8 +276,8 @@
 						</table>
 						<div class="page-num">
 							<ul class="add_mater_ul">
-								<li ><a th:href="@{/adminMater?(page=${previous})}">Previous</a></li>
-								<li th:if="${check}"><a th:href="@{/adminMater?(page=${next})}">Next</a></li>
+								<li ><a th:href="@{/adminMater/${addMater.materialMainCate}?(page=${previous})}">Previous</a></li>
+								<li th:if="${check}"><a th:href="@{/adminMater/${addMater.materialMainCate}?(page=${next})}">Next</a></li>
 							</ul>
 						</div>
 
