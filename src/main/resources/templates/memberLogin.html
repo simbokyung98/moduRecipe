@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../static/css/style2.css">
+<link rel="stylesheet" href="../static/css/material.css">
 <head>
     <meta charset="UTF-8">
     <title>모두의 레시피</title>
@@ -164,7 +166,7 @@
    }
 </style>
 <body>
-<header th:insert="header.html"></header>
+<div th:replace="fragments/header :: header"></div>
 <script type="text/javascript"></script>
 <script type="memberLogin.js"></script>
 </script>
@@ -202,5 +204,5 @@
         </p>
     </form>
 </div>
-<footer th:insert="footer.html"></footer>
+<div th:replace="fragments/footer::footer"></div>
 </body>
