@@ -10,5 +10,6 @@ public interface MaterialRepository extends JpaRepository<Material, Long> {
 
 //    public List<Material> findByMaterialMainCate(String MaterialMainCate);
     public Page<Material> findByMaterialMainCate(String materialMainCate, Pageable pageable);
+    public List<Material> findByMaterialMainCate(String materialMainCate);
 
 }

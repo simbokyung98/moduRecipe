@@ -38,15 +38,15 @@ public class MaterialController {
         return "meterialMain";
     }
 
-//    //재료 목록 종류별 띄우기
-//    @GetMapping("/meterialMain/{materialMainCate}")
-//    public String materialMainCate(@PathVariable("materialMainCate") String materialMainCate, Model model){
-//        List<MaterialDto> materialDtoList =materialService.getCateMaterial(materialMainCate);
-//
-//        model.addAttribute("materialList", materialDtoList);
-//
-//        return "meterialMain";
-//    }
+    //재료 목록 종류별 띄우기
+    @GetMapping("/meterialMain/{materialMainCate}")
+    public String materialMainCate(@PathVariable("materialMainCate") String materialMainCate, Model model){
+        List<MaterialDto> materialDtoList =materialService.getCateMaterial(materialMainCate);
+
+        model.addAttribute("materialList", materialDtoList);
+
+        return "meterialMain";
+    }
 
     //재료 세부 띄우기
     @GetMapping("/meter_detail/{materialKey}")

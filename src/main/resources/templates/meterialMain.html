@@ -113,14 +113,14 @@
 			</div>
 			<div>	
 				<ul class="meter_cate_ul">
-					<li class="meter_cate_li"><a href="#"><img src="../static/img/meat.png" class="meter_cate_img"> 정육</a></li>
-					<li class="meter_cate_li"><a href="#"><img src="../static/img/fish.png" class="meter_cate_img">수산 &#124; 해산</a></li>
-					<li class="meter_cate_li"><a href="#"><img src="../static/img/wheat.png" class="meter_cate_img">면 &#124; 견과</a></li>
-					<li class="meter_cate_li"><a href="#"><img src="../static/img/fruits.png" class="meter_cate_img">과일</a></li>
-					<li class="meter_cate_li"><a href="#"><img src="../static/img/vegetable.png" class="meter_cate_img">채소</a></li>
-					<li class="meter_cate_li"><a href="#"><img src="../static/img/bread.png" class="meter_cate_img">베이커리</a></li>
-					<li class="meter_cate_li"><a href="#"><img src="../static/img/sauce.png" class="meter_cate_img">양념 	&#124; 오일</a></li>
-					<li class="meter_cate_end"><a href="#"><img src="../static/img/milk.png" class="meter_cate_img">계란 &#124; 유제품</a></li>
+					<li class="meter_cate_li"><a th:href="@{/meterialMain}"><img src="../static/img/meat.png" class="meter_cate_img"> 정육</a></li>
+					<li class="meter_cate_li"><a th:href="@{/meterialMain/수산}"><img src="../static/img/fish.png" class="meter_cate_img">수산 &#124; 해산</a></li>
+					<li class="meter_cate_li"><a th:href="@{/meterialMain/면}"><img src="../static/img/wheat.png" class="meter_cate_img">면 &#124; 견과</a></li>
+					<li class="meter_cate_li"><a th:href="@{/meterialMain/과일}"><img src="../static/img/fruits.png" class="meter_cate_img">과일</a></li>
+					<li class="meter_cate_li"><a th:href="@{/meterialMain/채소}"><img src="../static/img/vegetable.png" class="meter_cate_img">채소</a></li>
+					<li class="meter_cate_li"><a th:href="@{/meterialMain/베이커리}"><img src="../static/img/bread.png" class="meter_cate_img">베이커리</a></li>
+					<li class="meter_cate_li"><a th:href="@{/meterialMain/양념}"><img src="../static/img/sauce.png" class="meter_cate_img">양념 	&#124; 오일</a></li>
+					<li class="meter_cate_end"><a th:href="@{/meterialMain/계란}"><img src="../static/img/milk.png" class="meter_cate_img">계란 &#124; 유제품</a></li>
 				</ul>
 			</div>
 		</div>
@@ -128,35 +128,13 @@
 	<section class="meter_section">
 <!--		<div th:replace="fragments/MeterialExample :: MeterialExample "></div>-->
 		<ul class="meter_list">
-			<li class="meter_item">
-				<a href="meter_detail.jsp">
-					<div class="meter_size">
-						<div class="meter_img_wrap">
-							<div class="meter_img">
-								<img alt="돼지고기 다짐육" src="../static/img/chop_pig.jpg">
-							</div>
-							<div class="meter_cart">
-								<button type="button" class="meter_cart_but"><img alt="장바구니" src="../static/img/cart.png"> </button>
-							</div>
-						</div>
-						<div class="meter_text">
-
-							<div class="meter_full">
-								<div class="meter_title"><strong>[냉장]돼지고기 다짐육(한돈) , 200g</strong></div>
-								<div class="meter_price">3,000원</div>
-								<div class="meter_g">(100g 당 1,500원)</div>
-							</div>
-						</div>
-					</div>
-				</a>
-			</li>
 
 			<li class="meter_item" th:each = "materialDto : ${materialList}">
 				<a th:href="@{'/meter_detail/'+${materialDto.materialKey}}">
 					<div class="meter_size">
 						<div class="meter_img_wrap">
 							<div class="meter_img">
-								<img alt="for문 test"  th:src="@{../static/img/} + ${materialDto.materialImg}">
+								<img alt="for문 test"  th:src="@{../static/materialImg/} + ${materialDto.materialImg}">
 							</div>
 							<div class="meter_cart">
 								<button type="button" class="meter_cart_but"><img alt="장바구니" src="../static/img/cart.png"> </button>

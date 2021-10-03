@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="../static/css/style2.css">
@@ -203,36 +202,71 @@
 		padding: 50px 0 0 50px;
 	}
 </style>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script>
+	function count(type)  {
+		  // 결과를 표시할 element
+		  const resultElement = document.getElementById('result').value;
+
+		  //메인 가격
+		  var price;
+		  price = document.getElementById('sample_price').innerHTML;
+
+		  // 현재 화면에 표시된 값
+		  let number = document.getElementById('result').value;
+
+		  //변경 가격
+		  var total_price;
+
+		  // 더하기/빼기
+		  if(type === 'plus') {
+		    number = parseInt(number) + 1;
+		    total_price = parseInt(price) * number;
+		  }else if(type === 'minus')  {
+			  if(number === '1'){
+				  number = '1';
+				  total_price = parseInt(price) * number;
+			  }else{
+				  number = parseInt(number) - 1;
+				  total_price = parseInt(price) * number;
+			  }
+		  }
+
+		  // 결과 출력
+		  document.getElementById('result').value = number;
+		  document.getElementById('total_price').innerHTML = total_price;
+		}
+</script>
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
 <main class="meter_main">
 	<div class="meter_detail_wrap">
 		<div class="meter_detail_img">
-			<img alt="세부 이미지" th:src="@{../static/img/} + ${material.materialImg}">
+			<img alt="세부 이미지" th:src="@{../static/materialImg/} + ${material.materialImg}">
 		</div>
 		
 		<div class="meter_detail_title_wrap">	
 			<div >
 				<p class="meter_detail_title_name">
 					<div class="meter_detail_title_name_strong"><span th:text="${material.materialTitle}"></span></div>
-					<div class="meter_detail_title_name_span">명품한돈 신선한 다짐육 (200g)</div>
+					<div class="meter_detail_title_name_span"><span th:text="${material.materialDetail}"></span> (<span th:text="${material.materialCapacity}"></span>g)</div>
 				</p>
 				<p class="meter_detail_title_price">
-					3,000<span style="font-size: 15px; font-weight: normal;">원</span>
+				<span th:text="${material.materialPrice}" id="sample_price"></span><span style="font-size: 15px; font-weight: normal;">원</span>
 				</p>
 				<div class="meter_detail_title_contents">
 					<dl>
 						<dt>판매단위</dt>
-						<dd>1팩</dd>
+						<dd><span th:text="${material.materialUnit}"></span>팩</dd>
 					</dl>
 						<dl>
 						<dt>중량/용량</dt>
-						<dd>200g</dd>
+						<dd><span th:text="${material.materialCapacity}"></span>g</dd>
 					</dl>
 			 		<dl>
 						<dt>원산지</dt>
-						<dd>국내산</dd>
+						<dd><span th:text="${material.materialCountry}"></span></dd>
 					</dl>
 				</div>
 			</div>
@@ -243,18 +277,18 @@
 			
 			<div class="meter_detail_title_box">
 				<dl class="meter_detail_title_box_dl">
-					<dt><span>[냉장]돼지고기 다짐육(한돈)</span> </dt>
+					<dt><span th:text="${material.materialTitle}"></span> </dt>
 					<dd class="meter_detail_title_count_wrap">
-						<input type="button" value="-" class="m_title_count">
-						<input type="text" value="1" class="m_title_count_num">
-						<input type="button" value="+" class="m_title_count">
+						<input type="button"  onclick="count('minus')" value="-" class="m_title_count">
+						<input type="text" value="1" class="m_title_count_num" id="result">
+						<input type="button" onclick="count('plus')" value="+" class="m_title_count">
 					</dd>
 				</dl>
 			</div>
 			<div class="meter_detail_buy_wrap">
 				<div class="meter_detail_title_total">
 					<span class="mdtt_span1">총 상품금액</span> 
-					<span class="mdtt_span2"><strong>3,000</strong> 원</span>
+					<span class="mdtt_span2"><strong th:text="${material.materialPrice}" id="total_price"></strong> 원</span>
 				</div>
 				<div>
 					<button class="mdtt_but1">장바구니</button>
@@ -296,7 +330,7 @@
 					<li class="mdc_suv"><a>구매정보</a></li>
 				</ul>
 				<div class="me_d_cdetail">
-					<img alt="다짐육_상세설명 " src="../static/img/chop_pig_detail.jpg" style="border: 1px solid #cccccc; width: 900px; height: 1400px;">
+					<img alt="다짐육_상세설명 "  th:src="@{../static/materialDeImg/} + ${material.materialDeImg}" style="border: 1px solid #cccccc; width: 900px; height: 1400px;">
 				</div>
 				<ul>
 					<li class="mdc_suv"><a>관련레시피</a></li>
