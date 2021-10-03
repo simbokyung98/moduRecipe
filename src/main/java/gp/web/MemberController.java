@@ -5,6 +5,7 @@ import gp.service.MemberService;
 import gp.web.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -19,10 +20,6 @@ public class MemberController {
     private final HttpSession session;
 
 
-    @GetMapping("/")
-    public String main() {
-        return "/index";
-    }
 
     // 회원가입
     @GetMapping("/join")
@@ -63,6 +60,17 @@ public class MemberController {
         session.setAttribute("user", null);
         return "index";
     }
+
+    //회원정보확인
+    @GetMapping("/membercheck")
+    public String memberchech(){
+        return "membercheck";
+    }
+    @GetMapping("/datachange")
+    public String datachange(){
+        return "datachange";
+    }
+
 
 }
 

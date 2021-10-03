@@ -149,7 +149,6 @@
 </style>
 </head>
 <body>
-<%@ include file="header.jsp"%>
 <main id="news_main">
   <aside id="news_aside">
 
@@ -170,7 +169,7 @@
       <table class="notion_table">
         <thead class="notion_table_thead">
         <tr>
-          <td class="notion_table_tb tb2" th:text="${qnaDtop..qnakey}"> ></td>
+          <td class="notion_table_tb tb2" th:text="${qnaDto.qnakey}"> ></td>
           <td class="notion_table_tb tb3" th:text="${qnaDto.qnatitle}">></td>
           <td class="notion_table_tb tb4" th:text="${qnaDto.qnadate}">></td>
         </tr>

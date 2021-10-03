@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../static/css/style2.css">
+<link rel="stylesheet" href="../static/css/main.css">
+<meta charset="UTF-8">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div id="body">
+
+    <div style=" border-bottom:2px solid black;">
+        <h1 style="font-family: 'NanumSquareRound';">회원정보수정</h1>
+    </div>
+    <div class="datachangediv">
+        <table id="datachangetable">
+
+            <tr>
+                <td>이름</td>
+                <td>
+                    <span class="changetext" th:text="${session.user.name}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>아이디</td>
+                <td>
+                    <span class="changetext" th:text="${session.user.username}"></span>            </tr>
+            <tr>
+                <td>현재 비밀번호</td>
+                <td>
+                    <input type="password" class="changetext"></td>
+            </tr>
+
+            <tr>
+                <td>변경 비밀번호</td>
+                <td>
+                    <input type="password" class="changetext"></td>
+            </tr>
+
+            <tr>
+                <td>새 비밀번호 확인</td>
+                <td>
+                    <input type="password" class="changetext"></td>
+            </tr>
+
+
+        </table>
+        <div class="datachangebuttondiv">
+            <button class="changesubmitbtn">탈퇴하기</button>
+            <button class="changecanclebtn">회원정보수정</button>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

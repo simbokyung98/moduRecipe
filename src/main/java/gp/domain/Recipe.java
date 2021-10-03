@@ -2,16 +2,19 @@ package gp.domain;
 
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Getter
 @Setter
-@ToString
+@Entity
 @NoArgsConstructor
+@Table(name = "recipe")
 public class Recipe {
     @Id
+    @Column(name = "recipekey")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long recipekey;
 
@@ -33,15 +36,15 @@ public class Recipe {
     @Column(name = "recipehit")
     private Integer recipehit;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     @Column(name = "recipeupdated")
     private Date recipeupdated;
 
-    @ManyToOne
-    @JoinColumn(name = "materialKey")
-    private Material material;
+
 
     @Builder
-    public Recipe(Long recipekey, String recipetitle, String recipetype, String recipecreator, String recipedetail, String recipelink, int recipehit, Date recipeupdated, Material material){
+    public Recipe(Long recipekey, String recipetitle, String recipetype, String recipecreator, String recipedetail, String recipelink, int recipehit, Date recipeupdated){
         this.recipekey=recipekey;
         this.recipetitle=recipetitle;
         this.recipetype=recipetype;
@@ -50,7 +53,7 @@ public class Recipe {
         this.recipelink=recipelink;
         this.recipehit=recipehit;
         this.recipeupdated=recipeupdated;
-        this.material=material;
+
     }
 
 }

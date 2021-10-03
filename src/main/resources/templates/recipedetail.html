@@ -1,0 +1,324 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<link rel="stylesheet" type="text/css" href=https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css>
+<link rel="stylesheet" href="../static/css/style2.css">
+<head>
+<meta charset="UTF-8">
+<title>모두의 레시피</title>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+</head>
+
+<style type="text/css">
+	@font-face {
+		 font-family: 'NanumBarunGothic';
+		 font-style: normal;
+		 font-weight: 400;
+		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+	}
+	@font-face {
+	    font-family: 'Cafe24Simplehae';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Simplehae.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	@font-face {
+	    font-family: 'Cafe24Dangdanghae';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.2/Cafe24Dangdanghae.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	body {
+		font-family: 'NanumBarunGothic';
+
+	}
+	
+	.wrap {
+		width: 1200px;	
+	}
+	
+	#section {		
+		margin: 50px;
+		padding: 10px;
+	}
+	
+	.img {
+		float: left;
+		margin-top: 50px;
+		padding: 10px 0 10px;
+		background-size: cover;
+	}
+	
+	select {
+		text-align: center;
+	}
+	
+	.meterial {
+		text-align: center;
+		font-size: 30px;
+		padding: 10px 0 10px;
+	}
+	
+	.table1 {
+		float: center;
+	}
+	
+	.text {
+		text-align: center;
+		font-size: 20px;
+		margin: 10px;
+		padding: 10px;
+	}
+	
+	.text .table1 .tr1 .td {
+		padding: 5px;
+	}
+	
+	.button {
+		border: 1px solid gray;
+		background-color: white;
+		color: black;
+		margin-left: 20px;
+		text-align: right;
+		cursor:pointer;
+	}
+	
+	.basket_order {
+		text-align: right;
+		border: 1px solid white;
+		background-color: white;
+		color:black;
+		padding:5px;
+	}
+	
+	
+	.basket {
+		display: inline-block;
+		width: 200px;
+		height: 42px;
+		font-size: 14px;
+		color: white;
+		font-weight: bold;
+		text-align: center;
+		line-height: 42px;
+		margin: 5px;
+		border: 1px solid #333;
+		background: #333;
+		webkit-transition: all 0.3s ease;
+		transition: all 0.3s ease;
+		border-radius: 5px;
+		cursor:pointer;
+	}
+	
+	.order {
+		display: inline-block;
+		width: 200px;
+		height: 42px;
+		font-size: 14px;
+		color: #333;
+		font-weight: bold;
+		text-align: center;
+		line-height: 42px;
+		margin: 5px;
+		border: 1px solid #ddd;
+		background: white;
+		webkit-transition: all 0.3s ease;
+		transition: all 0.3s ease;
+		border-radius: 5px;
+		cursor:pointer;
+	}
+	
+	.container {
+		width: 960px;
+    	margin : 0 auto;
+	}
+	
+	.msg {
+		text-align: left;
+	}
+
+	.more {    
+	    font-size: 15px;
+	    background-color: white;
+	    border-color: gray;
+	    cursor:pointer;
+  	}
+  
+  	.vdoclick {
+	  	margin-left: 50px;
+	  	padding: 50px;
+  	}
+  	.more:active {
+	    background-color: #a3a3a3;
+	    color: white;
+  	}
+  
+  	.review {
+	  	float: left;
+	  	margin-top: 100px;
+  	}
+  	
+  	.tr2 {
+  		text-align: center;
+  	}
+  	.notion_table{
+			width: 1100px;
+			border-top: 2px solid gray;
+			border-collapse: collapse;
+
+		}
+		.notion_table_thead{
+			border-bottom: 1px solid gray;
+		}
+		.notion_table_th{
+			font-family: 'Cafe24Simplehae';
+			padding: 20px 0 20px 0;
+			border-bottom: 1px solid gray;
+		}
+		.notion_table_a:hover{
+			background: gray;
+		}
+		.notion_table_tb{
+			border-bottom: 1px solid #dddddd;
+			font-family: 'Cafe24Simplehae';
+			font-size:35px;
+		}
+  	.tab {
+  		width: 100%;
+  		border-top: 1px solid #dedede;
+  	}
+  	
+  	.th1, .th2, .td1, .td2, .td3, .td4 {
+  		border-bottom: 1px solid #dedede;
+  		border-collapse: collapse;
+  		padding: 20px 40px;
+  	}
+  	
+  	.td5 {
+  		border-bottom: 1px solid #dedede;
+  	}
+  	
+  	.see {
+  		border: 1px solid black;
+  		border-radius: 10px;
+  		background-color: black;
+  		color: white; 
+  	}
+  	
+  	.recom {
+  		clear: left;
+  	}
+  	
+  	.con {
+  		clear: left;
+  	}
+
+</style>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<form action="/recipedetail/{recipekey}">
+<table class="notion_table">
+	<thead class="notion_table_thead">
+		<tr class="tr2">
+			<th class="th1">제목</th>
+			<th class="th2">크리에이터명</th>
+			<th class="th1">조회수</th>
+	</tr>
+		<tr class="tr2">
+			<th class="th1" th:text="${recipeDto.recipetitle}"></th>
+			<th class="th2" th:text="${recipeDto.recipecreator}"></th>
+			<th class="th1" th:text="${recipeDto.recipehit}"></th>
+		</tr>
+	</thead>
+</table>
+	<div class="wrap">
+			<section id="section">		
+			<div class="img">
+
+				<iframe width="700" height="500" th:src="${recipeDto.recipelink}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			</div>
+			
+			<div class="meterial">
+				<h2>재료 장바구니</h2>
+				<div class="text">
+					<table class="table1">
+						<tr class="tr1">
+
+						</tr>						
+					</table>
+				</div>
+			</div>
+				<div class="basket_order">
+					<input type="button" class="basket" value="장바구니" onclick="location.href='basket.jsp'">
+					<input type="button" class="order" value="구매하기" onclick="location.href='order.jsp'">
+				</div>
+				
+			<hr width="100%" color="#b0aeae">
+			<div class="msg">
+				<div class="vdoclick">
+
+			   	</div>
+				<br><br><br><br><br><br><br><br><br><br><br>
+				<div class="recipedetail">
+			   	<input th:text="${recipeDto.recipedetail}" style="white-space:pre-line;" value="more" class="more" onclick="if(this.parentNode.getElementsByTagName('div')[0].style.display != ''){this.parentNode.getElementsByTagName('div')[0].style.display = '';this.value = 'Hide';}else{this.parentNode.getElementsByTagName('div')[0].style.display = 'none'; this.value = 'more';}" type="button" />
+			   </div>
+				<div>
+			  </div>
+			  
+			  <hr width="100%" color="#ededed">
+			  <br>
+				<br><br><br><br><br><br><br><br><br>
+				<form class="review">
+					<textarea name="reviewcontent" th:field="*{reviewcontent}" rows="10" cols="100">
+
+					</textarea>
+					<input type="submit" value="리뷰등록" th:href="@{/reviewdetail/{recipekey}}">
+					<h2 class="rev">Review</h2>
+					<table class="tab">
+						<thead clsas="the">
+						<tr class="tr2">
+							<th class="th1">번호</th>
+							<th class="th2">제목</th>
+							<th class="th1">작성자</th>
+							<th class="th1">작성일</th>
+
+						</tr>
+						</thead>
+						<tbody class="tbo">
+						<tr class="tr2">
+							<td class="td1" th:text="${}">
+								1
+							</td>
+							<td class="td2">
+							</td>
+							<td class="td3">
+								홍길동
+							</td>
+							<td class="td4">
+								2021.06.01
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</form>
+
+				<div class="main_recom_recipe_wrap">
+					<h2 class="mian_content_title">추천 레시피 <button class="main_content_but"><img alt="plus" src="../static/img/plus.png" style="width: 25px; height: 25px;"> </button> </h2>
+					<div id="main_recom_reci_content_wrap">
+						<div class="main_recom_recipe mrr_frist"  th:each="recipelist: ${recipelist}">
+							<a class="video" th:href="@{'/recipedetail/'+${recipelist.recipekey}}"><iframe style="pointer-events:none;" width="250" height="150" th:src="${recipelist.recipelink}"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></a>
+						</div>
+
+					</div>
+				</div>
+			<button id="left-button">←</button>
+	    	<button id="right-button">→</button>
+			</div>
+		</section>
+	</div>
+</form>
+	</div>
+
+</body>
+
+</html>

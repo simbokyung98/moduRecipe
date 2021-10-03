@@ -26,7 +26,7 @@ public class RecipeDto {
     private Material material;
 
     @Builder
-    public RecipeDto(Long recipekey, String recipetitle, String recipetype, String recipecreator, String recipedetail, String recipelink, int recipehit, Date recipeupdated, Material material) {
+    public RecipeDto(Long recipekey, String recipetitle, String recipetype, String recipecreator, String recipedetail, String recipelink, int recipehit, Date recipeupdated) {
         this.recipekey = recipekey;
         this.recipetitle = recipetitle;
         this.recipetype = recipetype;
@@ -35,7 +35,7 @@ public class RecipeDto {
         this.recipelink = recipelink;
         this.recipehit = recipehit;
         this.recipeupdated = recipeupdated;
-        this.material = material;
+
     }
 
     public Recipe toEntity(){
@@ -48,6 +48,6 @@ public class RecipeDto {
                 .recipelink(recipelink)
                 .recipehit(recipehit)
                 .recipeupdated(recipeupdated)
-                .material(material).build();
+                .build();
     }
 }
