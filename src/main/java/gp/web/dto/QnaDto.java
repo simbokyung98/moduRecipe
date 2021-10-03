@@ -37,7 +37,7 @@ public class QnaDto {
         this.qnatitle=qnatitle;
         this.qnacontent=qnacontent;
         this.qnadate=qnadate;
-        this.answerstate=answerstate;
+        this.answerstate=false;
         this.answercontent=answercontent;
 
     }
