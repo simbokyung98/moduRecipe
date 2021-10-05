@@ -29,16 +29,16 @@ public class Review {
     @JoinColumn(name = "recipekey")
     private Recipe recipe;
 
-    @ManyToOne
-    @JoinColumn(name = "id")
-    private Member member;
+    @Column(name = "reviewwriter")
+    private String reviewwriter;
 
     @Builder
-    public Review(Long reviewkey, String reviewcontent, Date reviewupdated, Recipe recipe, Member member){
+    public Review(Long reviewkey, String reviewcontent, Date reviewupdated, Recipe recipe, String reviewwriter){
         this.reviewkey=reviewkey;
         this.reviewcontent=reviewcontent;
         this.reviewupdated=reviewupdated;
         this.recipe=recipe;
-        this.member=member;
+        this.reviewwriter=reviewwriter;
     }
+
 }

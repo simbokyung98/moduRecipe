@@ -1,11 +1,13 @@
 package gp.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -40,6 +42,10 @@ public class Recipe {
     @CreationTimestamp
     @Column(name = "recipeupdated")
     private Date recipeupdated;
+
+    @JsonIgnoreProperties({"recipe"})
+    @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER)
+    private List<Review> reviewlist;
 
 
 

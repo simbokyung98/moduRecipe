@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>모두의 레시피</title>
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script th:src="@{../static/js/review.js}"></script>
 </head>
 
 <style type="text/css">
@@ -260,44 +261,44 @@
 			   	</div>
 				<br><br><br><br><br><br><br><br><br><br><br>
 				<div class="recipedetail">
-			   	<input th:text="${recipeDto.recipedetail}" style="white-space:pre-line;" value="more" class="more" onclick="if(this.parentNode.getElementsByTagName('div')[0].style.display != ''){this.parentNode.getElementsByTagName('div')[0].style.display = '';this.value = 'Hide';}else{this.parentNode.getElementsByTagName('div')[0].style.display = 'none'; this.value = 'more';}" type="button" />
+			   		<input th:text="${recipeDto.recipedetail}" style="white-space:pre-line;" value="more" class="more" onclick="if(this.parentNode.getElementsByTagName('div')[0].style.display != ''){this.parentNode.getElementsByTagName('div')[0].style.display = '';this.value = 'Hide';}else{this.parentNode.getElementsByTagName('div')[0].style.display = 'none'; this.value = 'more';}" type="button" />
 			   </div>
-				<div>
-			  </div>
-			  
 			  <hr width="100%" color="#ededed">
 			  <br>
 				<br><br><br><br><br><br><br><br><br>
 				<form class="review">
-					<textarea name="reviewcontent" th:field="*{reviewcontent}" rows="10" cols="100">
-
-					</textarea>
-					<input type="submit" value="리뷰등록" th:href="@{/reviewdetail/{recipekey}}">
+					<div class="card-body">
+						<input type="hidden" id="recipekey" th:value="${recipeDto.recipekey}">
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">
+								<textarea class="form-control" id="reviewcontent" rows="1"></textarea>
+								<button id="review-btn-save" type="button" class="btn btn-dark mt-3">등록</button>
+							</li>
+						</ul>
+					</div>
 					<h2 class="rev">Review</h2>
 					<table class="tab">
 						<thead clsas="the">
-						<tr class="tr2">
+						<tr class="tr2" >
 							<th class="th1">번호</th>
 							<th class="th2">제목</th>
 							<th class="th1">작성자</th>
 							<th class="th1">작성일</th>
-
 						</tr>
 						</thead>
-						<tbody class="tbo">
-						<tr class="tr2">
-							<td class="td1" th:text="${}">
-								1
-							</td>
-							<td class="td2">
-							</td>
-							<td class="td3">
-								홍길동
-							</td>
-							<td class="td4">
-								2021.06.01
-							</td>
-						</tr>
+						<tbody class="tbo" >
+							<tr class="tr2" id="reply--box" th:each="review : ${recipe?.reviewlist}">
+								<td class="td1" th:id="'review--' + ${review.reviewkey}">
+								</td>
+								<td class="td2" th:text="${review.reviewcontent}">
+								</td>
+								<td class="td3" th:text="${review.reviewwriter}">
+
+								</td>
+								<td class="td4" th:text="${review.reviewupdated}">
+
+								</td>
+							</tr>
 						</tbody>
 					</table>
 				</form>

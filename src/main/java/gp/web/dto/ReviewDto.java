@@ -15,16 +15,16 @@ public class ReviewDto {
     private String reviewcontent;
     private Date reviewupdated;
     private Recipe recipe;
-    private Member member;
+    private String reviewwriter;
 
     @Builder
-    public ReviewDto(Long reviewkey, String reviewcontent, Date reviewupdated,Recipe recipe, Member member)
+    public ReviewDto(Long reviewkey, String reviewcontent, Date reviewupdated,Recipe recipe, String reviewwriter)
     {
         this.reviewkey=reviewkey;
         this.reviewcontent=reviewcontent;
         this.reviewupdated=reviewupdated;
         this.recipe=recipe;
-        this.member=member;
+        this.reviewwriter=reviewwriter;
     }
 
     public Review toEntity(){
@@ -33,7 +33,7 @@ public class ReviewDto {
                 .reviewcontent(reviewcontent)
                 .reviewupdated(reviewupdated)
                 .recipe(recipe)
-                .member(member)
+                .reviewwriter(reviewwriter)
                 .build();
 
     }

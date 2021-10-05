@@ -1,11 +1,13 @@
 package gp.web;
 
 import gp.domain.Recipe;
+import gp.domain.Review;
 import gp.service.RecipeService;
 import gp.service.ReviewService;
 import gp.web.dto.RecipeDto;
 import gp.web.dto.ReviewDto;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,19 +33,26 @@ public class RecipeController {
     }
 
     @GetMapping("/recipedetail/{recipekey}")
-    public String recipedetail(@PathVariable("recipekey")Long recipekey,@PathVariable("reviewkey")Long reviewkey, Model model){
+    public String recipedetail(@PathVariable("recipekey")Long recipekey, Model model){
         RecipeDto recipeDto = recipeService.getRecipe(recipekey);
-        ReviewDto reviewDto = reviewService.getReview(reviewkey);
 
 
-        model.addAttribute("reviewDto",reviewDto);
+
+
         model.addAttribute("recipehit",recipeService.updateView(recipekey));
         model.addAttribute("recipeDto",recipeDto);
         return "recipedetail.html";
     }
-    @PostMapping("/recipedetail/{recipekey}")
-    public String reviewwrite(@ModelAttribute ReviewDto reviewDto){
-        reviewService.savereview(reviewDto);
-        return ("redirect:/reviewdetail/{recipekey}");
-    }
+    /*@RequiredArgsConstructor
+    @RestController
+    public class ReviewController {
+        private final ReviewService reviewService;
+
+        @PostMapping("/recipedetail/{recipekey}")
+        public void save(@PathVariable Long recipekey,
+                         @RequestBody Review review)
+        { reviewService.reviewsave(recipekey,review); }
+    }*/
+
+
 }
