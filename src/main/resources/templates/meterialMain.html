@@ -144,8 +144,8 @@
 
 							<div class="meter_full">
 								<div class="meter_title"><strong th:text = "${materialDto.materialTitle}"></strong></div>
-								<div class="meter_price">0원</div>
-								<div class="meter_g">(100g 당 0원)</div>
+								<div class="meter_price"><span th:text = "${materialDto.materialPrice}"></span>원</div>
+								<div class="meter_g">(<span th:text = "${materialDto.materialCapacity}"></span>g 기준)</div>
 							</div>
 						</div>
 					</div>

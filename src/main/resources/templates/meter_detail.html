@@ -241,6 +241,7 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 <main class="meter_main">
+
 	<div class="meter_detail_wrap">
 		<div class="meter_detail_img">
 			<img alt="세부 이미지" th:src="@{../static/materialImg/} + ${material.materialImg}">
@@ -270,17 +271,17 @@
 					</dl>
 				</div>
 			</div>
-		
-			
-			
-			
-			
+
+
+
+
+			<form action="/savaCart" method="post">
 			<div class="meter_detail_title_box">
 				<dl class="meter_detail_title_box_dl">
 					<dt><span th:text="${material.materialTitle}"></span> </dt>
 					<dd class="meter_detail_title_count_wrap">
 						<input type="button"  onclick="count('minus')" value="-" class="m_title_count">
-						<input type="text" value="1" class="m_title_count_num" id="result">
+						<input type="text" value="1" class="m_title_count_num" id="result" name="cartCount">
 						<input type="button" onclick="count('plus')" value="+" class="m_title_count">
 					</dd>
 				</dl>
@@ -291,12 +292,18 @@
 					<span class="mdtt_span2"><strong th:text="${material.materialPrice}" id="total_price"></strong> 원</span>
 				</div>
 				<div>
-					<button class="mdtt_but1">장바구니</button>
+					<input type="hidden" th:value="${material.materialTitle}" name="cartMaterial">
+					<input type="hidden" th:value="${material.materialImg}" name="cartImage">
+					<input type="hidden" th:value="${material.materialPrice}" name="cartPrice">
+					<input type="hidden" th:value="${session.user.username}" name="username">
+					<button class="mdtt_but1" type="submit">장바구니</button>
 					<button class="mdtt_but2">바로구매</button>
 				</div>
 			</div>
+			</form>
 			</div>
-		</div>	
+		</div>
+
 
 		
 		
