@@ -259,7 +259,7 @@
 				<div class="meter_detail_title_contents">
 					<dl>
 						<dt>판매단위</dt>
-						<dd><span th:text="${material.materialUnit}"></span>팩</dd>
+						<dd><span th:text="${material.materialUnit}"></span></dd>
 					</dl>
 						<dl>
 						<dt>중량/용량</dt>
@@ -275,7 +275,7 @@
 
 
 
-			<form action="/savaCart" method="post">
+			<form action="/saveCart" method="post">
 			<div class="meter_detail_title_box">
 				<dl class="meter_detail_title_box_dl">
 					<dt><span th:text="${material.materialTitle}"></span> </dt>
@@ -295,8 +295,9 @@
 					<input type="hidden" th:value="${material.materialTitle}" name="cartMaterial">
 					<input type="hidden" th:value="${material.materialImg}" name="cartImage">
 					<input type="hidden" th:value="${material.materialPrice}" name="cartPrice">
-					<input type="hidden" th:value="${session.user.username}" name="username">
-					<button class="mdtt_but1" type="submit">장바구니</button>
+					<input type="hidden" th:value="${session.user?.username}" name="username">
+					<input type="hidden" th:value="${material.materialCapacity}" name="cartCapacity">
+					<button class="mdtt_but1"  type="submit">장바구니</button>
 					<button class="mdtt_but2">바로구매</button>
 				</div>
 			</div>
@@ -304,11 +305,6 @@
 			</div>
 		</div>
 
-
-		
-		
-		
-		
 		<div class="meter_detail_conwrap">
 				<ul>
 					<li class="mdc_main"><a>관련레시피</a></li>

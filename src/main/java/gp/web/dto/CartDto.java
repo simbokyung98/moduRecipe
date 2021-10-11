@@ -16,17 +16,19 @@ public class CartDto {
     private String username;
     private String cartMaterial;
     private String cartImage;
-    private String cartCount;
+    private int cartCount;
     private String cartPrice;
+    private String cartCapacity;
 
     @Builder
-    public CartDto(Long cartKey, String username, String cartMaterial, String cartImage, String cartCount, String cartPrice){
+    public CartDto(Long cartKey, String username, String cartMaterial, String cartImage, int cartCount, String cartPrice, String cartCapacity){
         this.cartKey = cartKey;
         this.username = username;
         this.cartMaterial = cartMaterial;
         this.cartImage = cartImage;
         this.cartCount = cartCount;
         this.cartPrice = cartPrice;
+        this.cartCapacity = cartCapacity;
     }
 
     public Cart toEntity(){
@@ -37,6 +39,7 @@ public class CartDto {
                 .cartImage(cartImage)
                 .cartCount(cartCount)
                 .cartPrice(cartPrice)
+                .cartCapacity(cartCapacity)
                 .build();
     }
 }

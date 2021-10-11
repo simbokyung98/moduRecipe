@@ -1,6 +1,7 @@
-
 <!DOCTYPE html>
-<html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../static/css/style2.css">
+<link rel="stylesheet" href="../static/css/main.css">
 <head>
 	<meta charset="UTF-8">
 	<title>모두의 레시피</title>
@@ -57,7 +58,7 @@
 		margin: 10px 0;
 	}
 
-	.table {
+	.cart_table {
 		width: 100%;
 		border-collapse: collapse;
 		border-spacing: 0;
@@ -170,12 +171,6 @@
 	#cartWrap .cart-ft2 {
 		margin-top: 20px;
 		text-align: center;
-	}
-
-
-
-	div {
-		display: block;
 	}
 
 	.tb-center {
@@ -301,30 +296,38 @@
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
-	function count(type)  {
-		  // 결과를 표시할 element
-		  const resultElement = document.getElementById('result').value;
 
-		  // 현재 화면에 표시된 값
-		  let number = document.getElementById('result').value;
-
-		  // 더하기/빼기
-		  if(type === 'plus') {
-		    number = parseInt(number) + 1;
-		  }else if(type === 'minus')  {
-			  if(number === '1'){
-				  number = '1';
-			  }else{
-				  number = parseInt(number) - 1;
-			  }
-		  }
-
-		  // 결과 출력
-		  document.getElementById('result').value = number;
+	 <!-- 금액 총 합계  -->
+	function itemSum(){
+		var str = "";
+		var sum = 0;
+		var count = $('.cartChkbox').length;
+		for(var i=0;i<count;i++){
+			if ($('.cartChkbox')[i].checked == true){
+				sum += parseInt($('.cartChkbox')[i].value);
+			}
 		}
+		$("#cartsum").html(sum);
+		$("#totalsum").html(sum + 2500);
+
+	}
+	$(window).on('load',function(){
+
+		//총 금액 계산하기
+		var sum = 0;
+  		var count = $('.cartChkbox').length;
+  		for (var i=0; i<count; i++){
+  			sum += parseInt($('.cartChkbox')[i].value);
+
+  		}
+  		$("#cartsum").html(sum);
+  		$("#totalsum").html(sum + 2500);
+	});
+
 </script>
 
 <body class="bo_dy">
+<div th:replace="fragments/header :: header"></div>
 <div id="contentWrapper">
 	<div id="contentWrap">
 		<div id="content">
@@ -332,25 +335,31 @@
 				<h2 class="tit-page">장바구니</h2>
 				<div class="page-body">
 					<div class="table-cart table-fill-prd">
-						<table class=" table" summary="번호, 사진, 제품명, 수량, 적립, 가격, 배송비, 취소">
+						<table class=" cart_table" summary="번호, 사진, 제품명, 수량, 적립, 가격, 배송비, 취소" id="cart_all" >
 							<caption class="caption">장바구니 담긴 상품</caption>
 							<colgroup class="colgroup">
-								<col width="60">
-								<col width="130">
-								<col width="*">
-								<col width="160">
-								<col width="110">
-								<col width="165">
-								<col width="110">
-								<col width="130">
+								<col width="60"><col width="130"><col width="*"><col width="200"><col width="165"><col width="110"><col width="130">
 							</colgroup>
 							<thead class="thead">
 							<tr class="tr">
 								<th class="th" scope="col">
 									<div class="tb-center">
-										<input type="checkbox" name="_allcheck" onclick="all_basket_check(this);" class="MS_input_checkbox" checked>
+										<input type="checkbox" name="allcheck" id="allCheck" class="MS_input_checkbox" checked>
 									</div>
 								</th>
+								<!-- 상품 전체선택  -->
+								<script>
+                                    $("#allCheck").click(function () {
+                                        var chk = $("#allCheck").prop("checked");
+                                        if (chk) {
+                                            $(".chkbox").prop("checked", true);
+                                            itemSum();
+                                        } else {
+                                            $(".chkbox").prop("checked", false);
+                                            itemSum();
+                                        }
+                                    });
+                                </script>
 								<th class="th" scope="col">
 									<div class="tb-center">사진</div>
 								</th>
@@ -361,52 +370,37 @@
 									<div class="tb-center">수량</div>
 								</th>
 								<th class="th" scope="col">
-									<div class="tb-center">적립금</div>
+									<div class="tb-center">중량</div>
 								</th>
 								<th class="th" scope="col">
 									<div class="tb-center">가격</div>
-								</th>
-								<th class="th" scope="col">
-									<div class="tb-center">배송비</div>
 								</th>
 								<th class="th" scope="col">
 									<div class="tb-center">선택</div>
 								</th>
 							</tr>
 							</thead>
-							<tbody class="tbody">
-							<form action="backet.jsp" method="post" name="forms" id="basket_form0"></form>
-							<input class="cart_input" type="hidden" name="brandcode" value="034004001579">
-							<input class="cart_input" type="hidden" name="branduid" value="79859">
-							<input class="cart_input" type="hidden" name="type">
-							<input class="cart_input" type="hidden" name="orgamount" value="1">
-							<input class="cart_input" type="hidden" name="orgspcode" value="0">
-							<input class="cart_input" type="hidden" name="orgspcode2" value="0">
-							<input class="cart_input" type="hidden" name="opts" value="0">
-							<input class="cart_input" type="hidden" name="optioncode" value="0,4">
-							<input class="cart_input" type="hidden" name="optionvalue" value>
-							<input class="cart_input" type="hidden" name="option_type" value="PS">
-							<input class="cart_input" type="hidden" name="pack_uid" value>
-							<input class="cart_input" type="hidden" name="min_add_amount" value="1">
-							<tr class="nbg">
+							<tbody class="tbody" >
+
+							<tr class="nbg" th:each = "cartDto : ${cartList}">
 								<td class = "cart_td">
 									<div class="tb-center">
-										<input class="cart_input" type="checkbox" name="basketchks" id="basketchks" checked="checked" class="MS_input_checkbox">
-										<input class="cart_input" type="hidden" name="basket_item" value="{uid":"79859","brandcod":"034004001579","spcode":"0","spcode2":"0","optcode":"0","optioncode":"0,4","pack_uid":"","optionvalue":""}">
+										<input class="cart_input MS_input_checkbox cartChkbox" type="checkbox" name="basketchks"
+											   id="basketchks" checked="checked" th:value = "${cartDto.cartPrice}*${cartDto.cartCount}" onClick="itemSum()">
 									</div>
 								</td>
 								<td class = "cart_td">
 									<div class="tb-center">
 										<div class="thumb">
 											<a href="b.jsp" class="cart_a">
-												<img class="img" src="img/milk.png" alt="상품 섬네일">
+												<img class="img" th:src="@{../static/materialImg/} + ${cartDto.cartImage}" alt="상품 섬네일">
 											</a>
 										</div>
 									</div>
 								</td>
 								<td class = "cart_td">
 									<div class="tb-center">
-										<a class="cart_a">우유</a>
+										<a class="cart_a" th:text = "${cartDto.cartMaterial}"></a>
 										<span class="MK-product-icons">
 												</span>
 									</div>
@@ -414,28 +408,25 @@
 								<td class = "cart_td">
 									<div class="tb-center">
 										<div class="opt-spin">
-											<input type="button" onclick="count('minus')" class="btn-dw" value="-">
-											<input type="text" readonly="readonly" value="1" id="result" class="btn-dw">
-											<input type="button" onclick="count('plus')" class="btn-dw" value="+">
-											<a href="javascript:send basket(0, 'upd')" class="CSSbuttonBlack">수정</a>
+											<input type="button" class="btn-dw plusbt" value="-"th:onclick="'location.href=\''+ @{'/cartUpDown/' + ${cartDto.cartKey}+ '/1'} + '\''">
+											<input type="text" readonly="readonly" th:value="${cartDto.cartCount}" class="btn-dw countbt">
+											<input type="button" class="btn-dw miubt" value="+" th:onclick="'location.href=\''+@{'/cartUpDown/' + ${cartDto.cartKey} + '/2'} + '\''">
 										</div>
+
 									</div>
-								</td>
-								<td class = "cart_td">
-									<div class="tb-center">250</div>
 								</td>
 								<td class = "cart_td">
 									<div class="tb-center tb-price">
-										<span>3,700원</span>
+										<span th:text = "${cartDto.cartCapacity}"></span>g
 									</div>
 								</td>
 								<td class = "cart_td">
-									<div class="tb-center tb-delivery">2,500원</div>
+									<div class="tb-center tb-delivery"><span th:text = "${cartDto.cartPrice}*${cartDto.cartCount}"></span>원</div>
 								</td>
 								<td class = "cart_td">
 									<div class="tb-center">
 												<span class="d-block">
-													<a href="javascrip:send_basket(0, 'del')" class="cart_a" class="cartDel">
+													<a  class="cart_a cartDel" th:href = "@{'/cartdelete/' + ${cartDto.cartKey}}">
 														<i class="xi-close">
 															X
 														</i>
@@ -447,24 +438,21 @@
 							</tbody>
 							<tfoot class="tfoot">
 							<tr>
-								<td class = "cart_td"colspan="8">
+								<td class = "cart_td"colspan="7">
 									<div class="tb-center">
-										총 구매금액 : 3,700원 + 배송료 2,500원 = 6,200원
+										총 구매금액 : <span id="cartsum"></span>원 + 배송료 2500원 = <span id="totalsum">원</span>
 									</div>
 								</td>
 							</tr>
 							</tfoot>
 						</table>
 					</div>
-					<div class="btn-order-ctrll">
-						<a href="javascript:basket multidel(.)" class="CSSbuttonGray">선택상품 삭제</a>
-					</div>
 					<!-- 카트 프리 -->
 					<div class="btn-order-ctr12">
 						<a href="order.jsp" class="CSSbuttonBlackB" onmousedown="try{_CTS_CART();}catch(_e){}">전체상품 주문하기</a>
-						<a href="javascript:alert('주문이 가능한 금액이 아닙니다. 고객센터에 문의 바랍니다.')" class="CSSbuttonB" class="cart_a" onmousedown="try{_CTS_CART();}catch(_e){}">선택상품 주문하기</a>
-						<a href="javascript:basket clear();" class="cart_a" class="CSSbuttonB">장바구니 비우기</a>
-						<a href="main.jsp" class="cart_a" class="CSSbuttonB">쇼핑 계속하기</a>
+						<a href="javascript:alert('주문이 가능한 금액이 아닙니다. 고객센터에 문의 바랍니다.')" class="CSSbuttonB cart_a" onmousedown="try{_CTS_CART();}catch(_e){}">선택상품 주문하기</a>
+						<a href="javascript:basket clear();" class="cart_a CSSbuttonB" >장바구니 비우기</a>
+						<a href="main.jsp" class="cart_a CSSbuttonB">쇼핑 계속하기</a>
 					</div>
 					<div class="cart-ft2">
 					</div>
@@ -482,7 +470,7 @@
 	</div>
 </div>
 <hr>
-<%@ include file="footer.jsp"%>
+<div th:replace="fragments/footer::footer"></div>
 
 </body>
 </html>

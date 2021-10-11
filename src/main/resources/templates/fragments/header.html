@@ -15,14 +15,7 @@
         >
             <nav id="sub-menu">
                 <ul class="dep1">
-                    <li class="usermenuli"><a class="subusermenuli" th:href="@{/join}">회원가입</a>
-                    </li>
-                    <li th:if = "${session.user == null}" class="usermenuli"><a class="subusermenuli" th:href="@{/login}">로그인</a>
-                    <li th:if = "${session.user != null}" class="usermenuli"><a class="subusermenuli" th:href="@{/login}"><span th:text = "${session.user.username}"></span></a>
-                    </li>
-                    <li class="usermenuli"><a class="subusermenuli" th:href="@{/userlogout}">로그아웃</a></li>
-
-                    <li class="usermenuli"><a class="subusermenuli" sec:authorize="isAuthenticated()" th:href="@{/user/info}">마이메뉴</a>
+                    <li th:if = "${session.user != null}"  class="usermenuli"><a class="subusermenuli" sec:authorize="isAuthenticated()" th:href="@{/user/info}">마이메뉴</a>
                         <ul class="sub-menu2">
                             <li class="usermenuli2"><a class="subusermenu"
                                                        href="orderlist.jsp"
@@ -34,6 +27,16 @@
                                                        href="membercheck.jsp"
                             >개인정보</a></li>
                         </ul></li>
+                    <li th:if = "${session.user == null}" class="usermenuli"><a class="subusermenuli" th:href="@{/join}">회원가입</a>
+                    </li>
+                    <li th:if = "${session.user != null}" class="usermenuli"><a class="subusermenuli" th:href="@{/cart}">장바구니</a>
+                    </li>
+                    <li th:if = "${session.user == null}" class="usermenuli"><a class="subusermenuli" th:href="@{/login}">로그인</a>
+                    <li th:if = "${session.user != null}" class="usermenuli"><a class="subusermenuli" th:href="@{/login}"><span th:text = "${session.user.username}"></span></a>
+                    </li>
+                    <li class="usermenuli"><a class="subusermenuli" th:href="@{/userlogout}">로그아웃</a></li>
+
+
                 </ul>
             </nav>
         </div>

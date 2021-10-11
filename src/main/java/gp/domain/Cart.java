@@ -28,19 +28,42 @@ public class Cart {
     private String cartImage;
 
     @Column(length = 45)
-    private String cartCount;
+    private int cartCount;
 
     @Column(length = 45)
     private String cartPrice;
 
+    @Column(length = 45)
+    private String cartCapacity;
+
     @Builder
-    public Cart(String username, String cartMaterial, String cartImage, String cartCount, String cartPrice){
+    public Cart(String username, String cartMaterial, String cartImage, int cartCount, String cartPrice, String cartCapacity){
         this.username = username;
         this.cartMaterial = cartMaterial;
         this.cartImage = cartImage;
         this.cartCount  = cartCount;
         this.cartPrice = cartPrice;
+        this.cartCapacity = cartCapacity;
     }
+
+
+    //장바구니 수량 업데이트
+    public void update(int cartCount){
+
+        this.cartCount += cartCount;
+    }
+
+    //장바구니 수량 +1
+    public void up(int cartCount){
+
+        this.cartCount += 1;
+    }
+    //장바구니 수량 -1
+    public void down(int cartCount){
+
+        this.cartCount -= 1;
+    }
+
 
 
 }
