@@ -12,10 +12,12 @@ import javax.persistence.*;
 @Getter
 @Builder
 @AllArgsConstructor
+@Table(name = "material")
 public class Material {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)//오토키
+    @Column
     private Long materialKey;
 
     @Column(length = 40)

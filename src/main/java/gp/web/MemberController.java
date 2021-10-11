@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -48,6 +50,8 @@ public class MemberController {
         if(result != null){
 
             session.setAttribute("user", result);
+            session.setAttribute("username",memberDto.getUsername());
+
             return "redirect:/" ;
 
         }else{
@@ -63,13 +67,37 @@ public class MemberController {
 
     //회원정보확인
     @GetMapping("/membercheck")
-    public String memberchech(){
-        return "membercheck";
+    public String memberchech(Model model, HttpSession httpSession){
+        if(session.getAttribute("user")==null){
+            return "redirect:/login";
+        } else {
+            return "membercheck";
+        }
     }
+    @PostMapping("/membercheck")
+    public String pwcheck(MemberDto memberDto, HttpSession session, Model model, RedirectAttributes attr){
+        MemberDto loginMember=(MemberDto)session.getAttribute("user");
+        memberDto.setUsername(loginMember.getUsername());
+        MemberDto memberXO = memberService.userLogin(memberDto);
+        if(memberXO == null){
+            attr.addFlashAttribute("msg","비밀번호가 잘못되었습니다");
+            return "redirect:/membercheck";
+        }
+            session.setAttribute("user", memberXO);
+            return "redirect:/datachange";
+
+    }
+
     @GetMapping("/datachange")
-    public String datachange(){
-        return "datachange";
+    public String updateform(Model model, HttpSession session){
+        if(session.getAttribute("user")==null){
+            return "redirect:/login";
+        } else {
+            return "/datachange";
+        }
+
     }
+
 
 
 }

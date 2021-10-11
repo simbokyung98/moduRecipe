@@ -145,6 +145,7 @@
 							<th >질문번호</th>
 							<th width="350">질문제목</th>
 							<th>질문일자</th>
+							<th>작성자</th>
 							<th>상세보기</th>
 
 						</tr>
@@ -154,6 +155,7 @@
 							<td class="adque_no" th:text="${nulllist.qnakey}"></td>
 							<td class="adque_bo" th:text="${nulllist.qnatitle}" ></td>
 							<td class="adque_no" th:text="${nulllist.qnadate}" ></td>
+							<td class="adque_bo" th:text="${nulllist.qnawriter}"></td>
 							<td class="adque_no"><a th:href="@{'/adminqnadetail/' +${nulllist.qnakey}}" class="adque_but">보기</a></td>
 
 
@@ -171,6 +173,7 @@
 							<th>질문번호</th>
 							<th width="350">질문제목</th>
 							<th>등록일자</th>
+							<th>작성자</th>
 							<th>상세보기</th>
 						</tr>
 						</thead>
@@ -179,6 +182,7 @@
 							<td class="adque_no" th:text="${answerlist.qnakey}"></td>
 							<td class="adque_bo" th:text="${answerlist.qnatitle}"></td>
 							<td class="adque_no" th:text="${answerlist.qnadate}"></td>
+							<td class="adque_bo" th:text="${answerlist.qnawriter}"></td>
 							<td class="adque_no"><a th:href="@{'/adminqnadetail/' +${answerlist.qnakey}}" class="adque_but">보기</a></td>
 
 

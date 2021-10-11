@@ -153,22 +153,32 @@
 					<p>1:1문의 세부내용<p>
 				</div>
 				<div class="am_quede_conwrap">
+
 					<div class="am_quede_title">
-						<span id="aqt_con" th:text="${qnaDto.qnatitle}"></span>
-						<span id="aqt_date" th:text="${qnaDto.qnadate}"></span>
-					</div>
-					<div class="am_quede_content" th:text="${qnaDto.qnacontent}">
-					</div>
+						<form th:action="@{'/adminqnadetail/' + ${qnaDto.qnakey}}" method="post">
+							<input type="hidden" name="_method" value="put"/>
+							<input type="hidden" name="qnakey" th:value="${qnaDto.qnakey}"/>
+
+							<input type="text" name="qnatitle" id="aqt_con" th:value="${qnaDto.qnatitle}">
+							<input type="text" name="qnadate" id="aqt_date" th:value="${qnaDto.qnadate}">
+							<input type="text" name="qnawriter" th:value="${qnaDto.qnawriter}">
+
+
+
+					<input type="text" name="qnacontent" class="am_quede_content" th:value="${qnaDto.qnacontent}">
+
 					<div class="am_quede_coment">
-						<form id="form2" action="#"  th:object="${qnaDto}" method="post">
 							<p id="aqc_p">답변하기</p>
-							<textarea rows="10" cols="105"  placeholder="질문에 대한 답변하기" id="aqc_text" th:field="*{answercontent}"></textarea><br>
+							<input type="text" name="answercontent" rows="10" cols="105"  placeholder="질문에 대한 답변하기" id="aqc_text" th:value="${qnaDto.answercontent}"></input><br>
 							<button type="submit"   id="aqc_subbut">답변하기</button>
 							<a th:href="@{/adminqna}" id="aqc_backbut">목록가기</a>
-						</form>
+
 					</div>
+						</form>
+
 
 				</div>
+			</div>
 			</div>
 		</section>
 	</section>

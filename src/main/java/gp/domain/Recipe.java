@@ -43,9 +43,7 @@ public class Recipe {
     @Column(name = "recipeupdated")
     private Date recipeupdated;
 
-    @JsonIgnoreProperties({"recipe"})
-    @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER)
-    private List<Review> reviewlist;
+
 
 
 

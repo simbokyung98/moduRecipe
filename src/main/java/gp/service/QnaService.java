@@ -27,6 +27,7 @@ public class QnaService {
 
 
     public Long saveQna(QnaDto qnaDto){
+
         return qnaRepository.save(qnaDto.toEntity()).getQnakey();}
 
     public List<QnaDto> getAllQna() {
@@ -44,6 +45,7 @@ public class QnaService {
                     .qnacontent(qnaEntity.getQnacontent())
                     .qnadate(qnaEntity.getQnaDate())
                     .answercontent(qnaEntity.getAnswercontent())
+                    .qnawriter(qnaEntity.getQnawriter())
                     .answerstate(qnaEntity.getAnswerstate()).build();
             qnaDtoList.add(qnaDto);
         }
@@ -63,6 +65,7 @@ public class QnaService {
                 .qnadate(qnaEntity.getQnaDate())
                 .answerstate(qnaEntity.getAnswerstate())
                 .answercontent(qnaEntity.getAnswercontent())
+                .qnawriter(qnaEntity.getQnawriter())
                 .build();
 
         return qnaDto;
@@ -101,6 +104,7 @@ public class QnaService {
                     .qnacontent(qnaEntity.getQnacontent())
                     .qnatitle(qnaEntity.getQnatitle())
                     .qnadate(qnaEntity.getQnaDate())
+                    .qnawriter(qnaEntity.getQnawriter())
                     .build();
             qnaDtoList.add(qnaDto);
         }
@@ -116,6 +120,7 @@ public class QnaService {
                     .qnacontent(qnaEntity.getQnacontent())
                     .qnatitle(qnaEntity.getQnatitle())
                     .qnadate(qnaEntity.getQnaDate())
+                    .qnawriter(qnaEntity.getQnawriter())
                     .build();
             qnaDtoList.add(qnaDto);
         }

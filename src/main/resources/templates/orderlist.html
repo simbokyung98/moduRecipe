@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../static/css/style2.css">
+
 <head>
 <style>
 	@font-face {
@@ -40,8 +42,9 @@ function showConfirm() {
 </script>
 </head>
 <body>
+<div th:replace="fragments/header :: header"></div>
+
 <div id="wrap" style="position:relative; padding-bottom:70px;min-height:100%; ">
-<%@ include file="header.jsp"%>
            <div class="all_meter">
            <div class="mysidebardiv" style="position:relative; " >
 	<aside class="mysidebar">

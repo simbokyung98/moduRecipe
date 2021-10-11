@@ -43,6 +43,10 @@ public class MemberService {
     }
 
 
+    public void withDrawl(MemberDto memberDto){
+
+
+    }
 
 
 

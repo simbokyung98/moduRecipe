@@ -31,6 +31,13 @@ public class RecipeController {
 
         return "index";
     }
+    @GetMapping("/best")
+    public String bestrecipe(Model model){
+        List<RecipeDto> recipeDtoList = recipeService.getbestrecipe();
+        model.addAttribute("bestlist",recipeDtoList);
+        return "best";
+    }
+
 
     @GetMapping("/recipedetail/{recipekey}")
     public String recipedetail(@PathVariable("recipekey")Long recipekey, Model model){

@@ -23,7 +23,7 @@ public class RecipeDto {
     private String recipelink;
     private Integer recipehit;
     private Date recipeupdated;
-    private Material material;
+
 
     @Builder
     public RecipeDto(Long recipekey, String recipetitle, String recipetype, String recipecreator, String recipedetail, String recipelink, int recipehit, Date recipeupdated) {
@@ -35,6 +35,7 @@ public class RecipeDto {
         this.recipelink = recipelink;
         this.recipehit = recipehit;
         this.recipeupdated = recipeupdated;
+
 
     }
 
