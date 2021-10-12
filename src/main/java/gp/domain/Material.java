@@ -26,7 +26,7 @@ public class Material {
     @Column(length = 45)
     private String materialDetail;
 
-    @Column(length = 40)
+    @Column(length = 100)
     private String materialImg;
 
     @Column(length = 40)
@@ -51,7 +51,7 @@ public class Material {
     @Column(length = 40)
     private String materialSale;
 
-    @Column(length = 45)
+    @Column(length = 100)
     private String materialDeImg;
 
     @Column(length = 45)

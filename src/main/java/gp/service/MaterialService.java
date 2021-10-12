@@ -46,42 +46,53 @@ public class MaterialService {
         return materialDtoList;
     }
 
-//    //종류별 재료 목록 보기
-//    public List<MaterialDto> getCateMaterial(String materialMainCate){
-//        List<Material> materialList = materialRepository.findByMaterialMainCate(materialMainCate);
-//        List<MaterialDto> materialDtoList = new ArrayList<>();
-//
-//        for(Material materialEntity:materialList){
-//            MaterialDto materialDto = MaterialDto.builder()
-//                    .materialKey(materialEntity.getMaterialKey())
-//                    .materialTitle(materialEntity.getMaterialTitle())
-//                    .materialDetail(materialEntity.getMaterialDetail())
-//                    .materialImg(materialEntity.getMaterialImg())
-//                    .materialMainCate(materialEntity.getMaterialMainCate())
-//                    .materialSubCate(materialEntity.getMaterialSubCate())
-//                    .materialCountry(materialEntity.getMaterialCountry())
-//                    .materialCapacity(materialEntity.getMaterialCapacity())
-//                    .materialInventory(materialEntity.getMaterialInventory())
-//                    .materialDistDate(materialEntity.getMaterialDistDate())
-//                    .materialSale(materialEntity.getMaterialSale())
-//                    .materialUnit(materialEntity.getMaterialUnit())
-//                    .materialPrice(materialEntity.getMaterialPrice()).build();
-//            materialDtoList.add(materialDto);
-//
-//        }
-//        return materialDtoList;
-//    }
+    //종류별 재료 목록 보기
+    public List<MaterialDto> getCateMaterial(String materialMainCate){
+        List<Material> materialList = materialRepository.findByMaterialMainCate(materialMainCate);
+        List<MaterialDto> materialDtoList = new ArrayList<>();
+
+        for(Material materialEntity:materialList){
+            MaterialDto materialDto = MaterialDto.builder()
+                    .materialKey(materialEntity.getMaterialKey())
+                    .materialTitle(materialEntity.getMaterialTitle())
+                    .materialDetail(materialEntity.getMaterialDetail())
+                    .materialImg(materialEntity.getMaterialImg())
+                    .materialMainCate(materialEntity.getMaterialMainCate())
+                    .materialSubCate(materialEntity.getMaterialSubCate())
+                    .materialCountry(materialEntity.getMaterialCountry())
+                    .materialCapacity(materialEntity.getMaterialCapacity())
+                    .materialInventory(materialEntity.getMaterialInventory())
+                    .materialDistDate(materialEntity.getMaterialDistDate())
+                    .materialSale(materialEntity.getMaterialSale())
+                    .materialDeImg(materialEntity.getMaterialDeImg())
+                    .materialUnit(materialEntity.getMaterialUnit())
+                    .materialPrice(materialEntity.getMaterialPrice()).build();
+            materialDtoList.add(materialDto);
+
+        }
+        return materialDtoList;
+    }
 
     //재료 세부 목록 보기
     public MaterialDto getMaterial(Long materialKey){
         Optional<Material> optionalMaterial = materialRepository.findById(materialKey);
-        Material material = optionalMaterial.get();
+        Material materialEntity = optionalMaterial.get();
 
         MaterialDto materialDto = MaterialDto.builder()
-                .materialKey(material.getMaterialKey())
-                .materialTitle(material.getMaterialTitle())
-                .materialImg(material.getMaterialImg()).build();
-
+                .materialKey(materialEntity.getMaterialKey())
+                .materialTitle(materialEntity.getMaterialTitle())
+                .materialDetail(materialEntity.getMaterialDetail())
+                .materialImg(materialEntity.getMaterialImg())
+                .materialMainCate(materialEntity.getMaterialMainCate())
+                .materialSubCate(materialEntity.getMaterialSubCate())
+                .materialCountry(materialEntity.getMaterialCountry())
+                .materialCapacity(materialEntity.getMaterialCapacity())
+                .materialInventory(materialEntity.getMaterialInventory())
+                .materialDistDate(materialEntity.getMaterialDistDate())
+                .materialSale(materialEntity.getMaterialSale())
+                .materialDeImg(materialEntity.getMaterialDeImg())
+                .materialUnit(materialEntity.getMaterialUnit())
+                .materialPrice(materialEntity.getMaterialPrice()).build();
         return materialDto;
     }
 
