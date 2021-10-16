@@ -386,7 +386,7 @@
 								<td class = "cart_td">
 									<div class="tb-center">
 										<input class="cart_input MS_input_checkbox cartChkbox" type="checkbox" name="basketchks"
-											   id="basketchks" checked="checked" th:value = "${cartDto.cartPrice}*${cartDto.cartCount}" onClick="itemSum()">
+											   id="basketchks" checked="checked" th:value = "${cartDto.cartPrice} + '*' + ${cartDto.cartCount}" onClick="itemSum()">
 									</div>
 								</td>
 								<td class = "cart_td">
@@ -421,7 +421,7 @@
 									</div>
 								</td>
 								<td class = "cart_td">
-									<div class="tb-center tb-delivery"><span th:text = "${cartDto.cartPrice}*${cartDto.cartCount}"></span>원</div>
+									<div class="tb-center tb-delivery"><span th:text = "${cartDto.cartPrice}  * ${cartDto.cartCount}"></span>원</div>
 								</td>
 								<td class = "cart_td">
 									<div class="tb-center">

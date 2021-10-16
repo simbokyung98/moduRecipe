@@ -1,29 +1,29 @@
 package gp.web;
 
 import gp.domain.Member;
+import gp.domain.MemberRepository;
 import gp.service.MemberService;
 import gp.web.dto.MemberDto;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
+
 public class MemberController {
     private final MemberService memberService;
     private final HttpServletRequest request;
     private final HttpSession session;
+    private final MemberRepository memberRepository;
 
-
-
-    // 회원가입
     @GetMapping("/join")
     public String join() {
         return "/memberJoin";
@@ -71,7 +71,7 @@ public class MemberController {
         if(session.getAttribute("user")==null){
             return "redirect:/login";
         } else {
-            return "membercheck";
+            return "/membercheck";
         }
     }
     @PostMapping("/membercheck")
@@ -83,18 +83,8 @@ public class MemberController {
             attr.addFlashAttribute("msg","비밀번호가 잘못되었습니다");
             return "redirect:/membercheck";
         }
-            session.setAttribute("user", memberXO);
-            return "redirect:/datachange";
-
-    }
-
-    @GetMapping("/datachange")
-    public String updateform(Model model, HttpSession session){
-        if(session.getAttribute("user")==null){
-            return "redirect:/login";
-        } else {
-            return "/datachange";
-        }
+        session.setAttribute("user", memberXO);
+        return "datachange";
 
     }
 

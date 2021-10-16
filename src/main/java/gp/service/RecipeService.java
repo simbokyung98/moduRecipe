@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +23,12 @@ public class RecipeService {
 
     @Autowired
     private RecipeRepository recipeRepository;
-
+    private RecipeDto recipeDto;
     private static final int BLOCK_PAGE_NUM_COUNT = 5; // 블럭에 존재하는 페이지 번호 수
     private static final int PAGE_POST_COUNT = 5; // 한 페이지에 존재하는 게시글 수
 
     public Long saveRecipe(RecipeDto recipeDto){
+
         return recipeRepository.save(recipeDto.toEntity()).getRecipekey();
     }
     @Transactional
@@ -49,6 +51,7 @@ public class RecipeService {
                     .recipelink(recipe.getRecipelink())
                     .recipetype(recipe.getRecipetype())
                     .recipeupdated(recipe.getRecipeupdated())
+                    .recipemateriallist(recipe.getRecipemateriallist())
                     .build();
             recipeDtoList.add(recipeDto);
         }
@@ -56,8 +59,11 @@ public class RecipeService {
     }
     @Transactional
     public RecipeDto getRecipe(Long recipekey){
+
         Optional<Recipe> recipeWrapper = recipeRepository.findById(recipekey);
         Recipe recipe = recipeWrapper.get();
+
+
 
         RecipeDto recipeDto = RecipeDto.builder()
                 .recipekey(recipe.getRecipekey())
@@ -68,6 +74,7 @@ public class RecipeService {
                 .recipelink(recipe.getRecipelink())
                 .recipetype(recipe.getRecipetype())
                 .recipeupdated(recipe.getRecipeupdated())
+                .recipemateriallist(recipe.getRecipemateriallist())
                 .build();
 
         return recipeDto;
@@ -81,6 +88,7 @@ public class RecipeService {
                 .recipehit(recipe.getRecipehit())
                 .recipelink(recipe.getRecipelink())
                 .recipetype(recipe.getRecipetype())
+                .recipemateriallist(recipe.getRecipemateriallist())
                 .recipeupdated(recipe.getRecipeupdated()).build();
 
 
@@ -98,6 +106,7 @@ public class RecipeService {
         return recipeDtoList;
     }
 
+
     public List<RecipeDto> getbestrecipe(){
         List<Recipe> recipes = recipeRepository.bestrecipe();
         List<RecipeDto> recipeDtoList = new ArrayList<>();
@@ -112,10 +121,19 @@ public class RecipeService {
                     .recipetitle(recipe.getRecipetitle())
                     .recipetype(recipe.getRecipetype())
                     .recipeupdated(recipe.getRecipeupdated())
+                    .recipemateriallist(recipe.getRecipemateriallist())
                     .build();
             recipeDtoList.add(recipeDto);
         }
         return recipeDtoList;
+    }
+    public void recipemateriallist(){
+        String rm = "h,e,l,l,o";
+        String[] arr = rm.split(",");
+        for(int i=0; i<arr.length-1; i++);{
+            System.out.println(arr[1]);
+        }
+
     }
 
 

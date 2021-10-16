@@ -20,6 +20,8 @@ public class MemberDto {
 
 
 
+
+
     @Builder
     public MemberDto(Long id, String username, String password, String name, String address, String date, String gender, String phone, String email) {
         this.id = id;

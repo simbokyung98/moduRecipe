@@ -44,12 +44,11 @@ public class RecipeController {
         RecipeDto recipeDto = recipeService.getRecipe(recipekey);
 
 
-
-
         model.addAttribute("recipehit",recipeService.updateView(recipekey));
         model.addAttribute("recipeDto",recipeDto);
         return "recipedetail.html";
     }
+
     /*@RequiredArgsConstructor
     @RestController
     public class ReviewController {

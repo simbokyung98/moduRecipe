@@ -33,7 +33,6 @@ public class CartDto {
 
     public Cart toEntity(){
         return  Cart.builder()
-                .cartKey(cartKey)
                 .username(username)
                 .cartMaterial(cartMaterial)
                 .cartImage(cartImage)

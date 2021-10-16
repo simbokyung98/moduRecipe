@@ -10,7 +10,8 @@
 
 <div id="body">
 
-    <form id="datachange">
+    <form id="datachange" action="/datachange/{id}" method="post">
+        <input type="hidden" name="_method" value="put"/>
     <div style=" border-bottom:2px solid black;">
         <h1 style="font-family: 'NanumSquareRound';">회원정보수정</h1>
     </div>
@@ -26,34 +27,41 @@
             <tr>
                 <td>아이디</td>
                 <td>
-                    <span class="changetext" th:text="${session.user.username}"></span>            </tr>
-            <tr>
-                <td>현재 비밀번호</td>
-                <td>
-                    <input type="password" class="changetext"></td>
+                    <span class="changetext" th:text="${session.user.username}"></span>
             </tr>
 
             <tr>
                 <td>변경 비밀번호</td>
                 <td>
-                    <input type="password" class="changetext"></td>
+                    <input type="password" name="password"   class="changetext"></td>
             </tr>
-
             <tr>
-                <td>새 비밀번호 확인</td>
+                <td>비밀번호 확인</td>
                 <td>
-                    <input type="password" class="changetext"></td>
+                    <input type="password" name="password"   class="changetext"></td>
             </tr>
 
+
+            <div class="datachangebuttondiv">
+
+                <button type="submit" >비밀번호변경</button>
+
+            </div>
 
         </table>
-        <div class="datachangebuttondiv">
-            <button class="changecanclebtn">탈퇴하기</button>
-            <button class="changecanclebtn">회원정보수정</button>
+    </div>
+    </form>
+
+            <form id="delete-form " action="/datachange/{id}" method="post">
+                <input type="hidden" name="_method" value="delete"/>
+                <button class="changecanclebtn">탈퇴하기</button>
+            </form>
+
         </div>
+
     </div>
 
-    </form>
+
 </div>
 </body>
 </html>

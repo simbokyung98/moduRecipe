@@ -2,6 +2,7 @@ package gp.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import gp.web.dto.RecipeDto;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -43,12 +44,15 @@ public class Recipe {
     @Column(name = "recipeupdated")
     private Date recipeupdated;
 
+    @Column(name = "recipeMaterialList")
+    private String recipemateriallist;
+
 
 
 
 
     @Builder
-    public Recipe(Long recipekey, String recipetitle, String recipetype, String recipecreator, String recipedetail, String recipelink, int recipehit, Date recipeupdated){
+    public Recipe(Long recipekey, String recipetitle, String recipetype, String recipecreator, String recipedetail, String recipelink, int recipehit, Date recipeupdated, String recipemateriallist){
         this.recipekey=recipekey;
         this.recipetitle=recipetitle;
         this.recipetype=recipetype;
@@ -57,6 +61,7 @@ public class Recipe {
         this.recipelink=recipelink;
         this.recipehit=recipehit;
         this.recipeupdated=recipeupdated;
+        this.recipemateriallist=recipemateriallist;
 
     }
 
