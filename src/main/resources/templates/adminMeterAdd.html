@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../static/css/style2.css">
+<link rel="stylesheet" href="../static/css/material.css">
+<head>
+<meta charset="UTF-8">
+<title>관리자 페이지</title>
+<style type="text/css">
+	@font-face {
+		 font-family: 'NanumBarunGothic';
+		 font-style: normal;
+		 font-weight: 400;
+		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+	}
+	
+	.nanumbarungothic * {
+		 font-family: 'NanumBarunGothic', sans-serif;
+	}
+	@font-face {
+	    font-family: 'Cafe24Simplehae';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Simplehae.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	@font-face {
+	    font-family: 'Cafe24Dangdanghae';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.2/Cafe24Dangdanghae.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	*{
+		margin: 0 auto;
+		padding: 0;
+	}
+	#adminmeter_main_wrap{
+	}
+	#adminmeter_main{
+		height:2000px;
+		width:1200px;
+		margin: 0 auto;
+		padding-left: 5px;
+	}
+	#adminmeter_section_wrap{
+		float: left;
+		width: 78%; 
+	}
+	#adminmeter_section{
+		width: 100%;      
+		height: 50px;
+		background: #dddddd;
+		box-shadow : 2px 2px 5px #999;
+		margin: 60px 0 0 10px;
+		letter-spacing: 4px;
+	}
+
+	
+	#adminmeter_section p{ 
+		padding: 15px 0 0 20px; 
+		font-family: 'Cafe24Dangdanghae';
+		font-size: 20px;
+		
+	}
+
+	
+	#am_section_contents_wrap{
+		clear: left; 
+		width: 100%;
+		height: 868px;
+		background: #dddddd;
+		box-shadow : 2px 2px 5px #999;   
+		margin: 10px 0 0 10px; 
+		padding-top: 20px;
+	}
+	.am_add_wrap{
+		width: 95%;
+		height: auto;
+		padding-bottom: 50px;
+	}
+	.am_add_wrap p{
+		font-family: 'Cafe24Simplehae';
+		font-size: 23px;
+		color: orange;
+		font-weight: bold;
+		margin-bottom: 5px;
+	}
+	.am_add_wrap hr{
+		background: orange;
+		border: 0;
+		height: 2px;
+	}
+	.mater_add_imgsam{
+		width: 100px;
+		height: 70px;
+		float: left;
+		margin: 30px;
+	}
+	.mater_add_imgfile{
+		float: left;
+		margin: 45px 20px 20px 20px;
+	}
+	.float_no{
+		clear: left;
+	}
+	#mater_add_table{
+		width: 95%;
+		margin-top: 20px;
+	}
+	#mater_add_table td{
+		font-size: 18px;
+		font-family: 'Cafe24Simplehae';
+	}
+	.mater_add_input{
+		border: 0;
+		padding: 7px;
+		border-radius: 2px;
+		font-size: 15px;
+		font-family: 'NanumBarunGothic';
+		margin-bottom: 30px;
+	}
+	.mater_add_but_wrap{
+		float: right;
+		margin-right: 40px;
+	}
+	.mater_add_detail_but{
+		border: 0;
+		padding: 10px 20px;
+		font-family: 'NanumBarunGothic';
+		color: white;
+		background: orange;
+		font-size: 20px;
+		border-radius: 3px;
+		
+	}
+	.mater_add_detail_but:hover, .mater_add_backbut:hover{
+		box-shadow : 2px 2px 5px #999;
+	}
+	.mater_add_backbut{
+		border: 2px orange solid;
+		padding: 10px 20px;
+		font-family: 'NanumBarunGothic';
+		color: orange;
+		background: white;
+		font-size: 20px;
+		border-radius: 3px;
+	}
+</style>
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<main id="adminmeter_main_wrap">
+		<section id="adminmeter_main">
+			<div th:replace="fragments/adminmenu :: adminmenu"></div>
+			<section id="adminmeter_section_wrap">
+				<div id="adminmeter_section">
+					<p>재료추가</p>
+				</div>
+					<div id="am_section_contents_wrap">
+						<div class="am_add_wrap">
+							<p>재료이미지</p>
+							<hr>
+							 <div>
+							 	<img alt="재료샘플" src="../static/img/add-image.png" class="mater_add_imgsam">
+							 	<input type="file" class="mater_add_imgfile">
+							 </div>
+						</div>
+						<div class="am_add_wrap float_no">
+							<p>재료세부사항</p>
+							<hr>
+								<table id="mater_add_table">
+									<tr>
+										<td>재료명</td>
+										<td colspan="2">재료설명</td>
+									</tr>
+									<tr>
+										<td><input type="text" class="mater_add_input" style="width: 250px"> </td>
+										<td  colspan="2"><input type="text" class="mater_add_input" style="width: 350px"> </td>
+									</tr>
+									<tr>
+										<td>판매단위</td>
+										<td>중량/용량</td>
+										<td>원산지</td>
+									</tr>
+									<tr>
+										<td><input type="text" class="mater_add_input" style="width: 200px"></td>
+										<td><input type="text" class="mater_add_input" style="width: 200px"></td>
+										<td><input type="text" class="mater_add_input" style="width: 200px"></td>
+									</tr>
+									<tr>
+										<td>100g 당 가격</td>
+										<td>대분류</td>
+										<td>소분류</td>
+									</tr>
+									<tr>
+										<td><input type="text" class="mater_add_input" style="width: 200px"></td>
+										<td><select class="mater_add_input" style="width: 200px">
+											<option>정육</option><option>수산/해산</option><option>면/견과</option><option>과일</option><option>채소</option><option>베이커리</option><option>양념/오일</option><option>계란/유제품</option>
+										</select> </td>
+										<td><input type="text" class="mater_add_input" style="width: 200px"></td>
+									</tr>
+									<tr>
+										<td>유통기한</td>
+										<td>재고</td>
+									</tr>
+									<tr>
+										<td><input type="text" class="mater_add_input" style="width: 200px"></td>
+										<td><input type="text" class="mater_add_input" style="width: 200px"></td>
+									</tr>
+								</table>
+						</div>
+						<div class="am_add_wrap">
+							<p>재료세부설명파일</p>
+							<hr>
+							 <div>
+							 	<img alt="재료샘플" src="../static/img/add-image.png" class="mater_add_imgsam">
+							 	<input type="file" class="mater_add_imgfile">
+							 </div>
+						</div>
+						<div class="float_no mater_add_but_wrap" >
+							<button class="mater_add_detail_but">등록</button>
+							<button class="mater_add_backbut"  th:onclick="'location.href=\''+ @{/adminMater} + '\''">목록</button>
+						</div>
+					</div>
+						
+					
+			</section>
+		</section>
+	</main>
+	<footer>
+		<div th:replace="fragments/footer::footer"></div>
+	</footer>
+</body>
+</html>

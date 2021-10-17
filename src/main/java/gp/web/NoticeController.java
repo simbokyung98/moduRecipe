@@ -5,9 +5,6 @@ import gp.domain.NoticeRepository;
 import gp.service.NoticeService;
 import gp.web.dto.NoticeDto;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,11 +18,6 @@ public class NoticeController {
 
     private NoticeService noticeService;
     private NoticeRepository noticeRepository;
-    @GetMapping("/")
-    public String homapage(Model model)
-    {
-        return "index.html";
-    }
 
     @GetMapping("/notionmain")
     public String notionmain(Model model, @RequestParam(value = "page", defaultValue = "1")Integer pageNum)

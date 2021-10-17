@@ -1,0 +1,145 @@
+@font-face {
+	    font-family: 'Cafe24Simplehae';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Simplehae.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+		}
+		@font-face {
+	    font-family: 'Cafe24Dangdanghae';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.2/Cafe24Dangdanghae.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+		}
+		@font-face {
+        font-family: 'NanumBarunGothic';
+        font-style: normal;
+        font-weight: 400;
+        src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+        src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+        }
+
+        .nanumbarungothic * {
+              font-family: 'NanumBarunGothic', sans-serif;
+        }
+		.all_meter_wrap{
+		margin: 0;
+		pause: 0;
+		}
+		.meter_list li{
+			list-style-type: none;
+		}
+		.meter_item a {
+			text-decoration: none;
+		}
+		.meter_img_wrap{
+			height: 230px;
+		}
+		.meter_img img{
+			width: 200px;
+			height: 200px;
+		}
+
+		.meter_title{
+			font-family: 'Cafe24Simplehae';
+			color: black;
+			font-size: 19px;
+			margin-bottom: 20px;
+			letter-spacing: 2px;
+		}
+		.meter_price{
+			font-family: 'Cafe24Dangdanghae';
+			font-size: 25px;
+			margin-top: 5px;
+			color: black;
+		}
+		.meter_g{
+			font-family: 'Cafe24Simplehae';
+			font-size: 12px;
+			margin-top: 5px;
+			color: black;
+		}
+		.meter_size{
+			width: 210px;
+			height: 450px;
+			float: left;
+			margin: 20px 50px 20px 50px;
+			padding: 0;
+		}
+		.meter_cart_but{
+			border: 0;
+			outline: 0;
+			background: 0;
+
+		}
+		.meter_cart_but img{
+			width: 50px;
+			height: 50px;
+		}
+		.meter_cart{
+			width: 70px;
+			position: relative;
+			top: -70px;
+			left: 70px;
+
+		}
+
+
+        	#adminmeter_aside{
+        		width: 20%;
+        		float: left;
+        		margin-top: 50px;
+
+        	}
+        	#am_aside_wrap{
+        		width: 100%;
+        		height: 1000px;
+        		box-shadow : 2px 2px 5px #999;
+        		border-radius: 3px;
+        		background: #dddddd;
+        	}
+        	.am_aside_ul{
+        		list-style: none;
+        	}
+        	.am_aside_ul li{
+        		text-decoration: none;
+        		font-family: 'Cafe24Simplehae';
+        	}
+        	.am_aside_uwrap{
+        		width: 90%;
+        		border-bottom: 1px solid #cccccc;
+        		margin-top: 10px;
+        		text-align: center;
+        		padding: 30px 0 10px 0;
+        	}
+        	.am_aside_uwrap img{
+        		margin-bottom: 20px;
+        	}
+        	.am_aside_uwrap p{
+        		font-size: 20px;
+        		margin-bottom:20px;
+        		letter-spacing: 3px;
+        	}
+        	#am_aside_logoutbtn{
+        		padding: 8px 20px 8px 20px;
+        		font-size: 15px;
+        		margin-bottom: 30px;
+        		border: 0;
+        	}
+        	.am_aside_menu{
+        		font-size: 20px;
+        		letter-spacing: 2px;
+        		padding: 30px 0 0 50px;
+        	}
+        	.am-aside_msuv:active, .am-aside_msuv:visited, .am-aside_msuv:link {
+        		text-decoration: none;
+        		color: black;
+        	}
+        	.am-aside_msuv:hover{
+        		color: black;
+        		font-weight: bold;
+        	}
+        	.am-aside_mmain{
+        		text-decoration: none;
+        		color: orange;
+        		font-weight: bold;
+        	}
