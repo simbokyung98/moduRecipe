@@ -18,7 +18,7 @@ public class QnaDto {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date qnadate;
-    private Boolean answerstate;
+    private String answerstate;
     private String answercontent;
     private String qnawriter;
 
@@ -36,13 +36,13 @@ public class QnaDto {
     }
 
     @Builder
-    public QnaDto(Long qnakey, String qnatitle, String qnacontent, Date qnadate, Boolean answerstate, String answercontent, String qnawriter){
+    public QnaDto(Long qnakey, String qnatitle, String qnacontent, Date qnadate, String answerstate, String answercontent, String qnawriter){
 
         this.qnakey=qnakey;
         this.qnatitle=qnatitle;
         this.qnacontent=qnacontent;
         this.qnadate=qnadate;
-        this.answerstate=false;
+        this.answerstate=answerstate;
         this.answercontent=answercontent;
         this.qnawriter=qnawriter;
     }

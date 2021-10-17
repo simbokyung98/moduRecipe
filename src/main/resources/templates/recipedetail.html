@@ -217,7 +217,6 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 
-<form action="/recipedetail/{recipekey}">
 <table class="notion_table">
 	<thead class="notion_table_thead">
 		<tr class="tr2">
@@ -233,33 +232,38 @@
 	</thead>
 </table>
 	<div class="wrap">
+			<input type="hidden" id="userId" th:value="${session.user.id}"/>
 			<section id="section">		
 			<div class="img">
 
 				<iframe width="700" height="500" th:src="${recipeDto.recipelink}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 			</div>
-			
+
 			<div class="meterial">
 				<h2>재료 장바구니</h2>
 				<div class="text">
+					<form id="materialForm" method="post">
 					<table class="table1">
 						<tr class="tr1" style="text-align:right">
 							<th class="th1"> 재료명 </th>
 							<th class="th1"> 가격</th>
 							<th class="th1"> 선택여부</th>
 						</tr>
-						<tr  class="tr1" style="text-align:right" th:each="recipeDto:${recipeDto}">
-							<th class="th1" th:text="${recipeDto.recipemateriallist}"></th>
-							<th class="th1" ></th>
-							<th class="th1"><input type="checkbox" name="buy" value="260" checked=""></th>
+						<tr  class="tr1" style="text-align:right" th:each="material : ${materialDtoList}">
+							<input type="hidden" name="materialKey" th:value="${material.materialKey}"/>
+							<th class="th1" name="materialTitle" th:text="${material.materialTitle}"></th>
+							<th class="th1" name="materialPrice" th:text="${material.materialPrice}"></th>
+							<th class="th1"><input type="checkbox" onchange="setTotalPrice()" name="buy" th:value="${material.materialPrice}" checked=""></th>
 						</tr>
 					</table>
-					<span>총 가격 : </span>
+						<input type="hidden" id="hiddenTotalPrice" name="hiddenTotalPrice" />
+					<span>총 가격 : <span id="totalPrice" name="totalPrice"></span></span>
+					</form>
 				</div>
 			</div>
 				<div class="basket_order">
 					<input type="button" class="basket" value="장바구니" onclick="location.href='basket.jsp'">
-					<input type="button" class="order" value="구매하기" th:href="@{/order}">
+					<input type="button" class="order" value="구매하기" onclick="orderMaterials()">
 				</div>
 				
 			<hr width="100%" color="#b0aeae">
@@ -301,7 +305,6 @@
 			</div>
 		</section>
 	</div>
-</form>
 	</div>
 
 </body>

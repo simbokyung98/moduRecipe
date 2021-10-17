@@ -13,7 +13,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "order")
+@Table(name = "`order`")
 public class Order {
 
     @Id
@@ -21,9 +21,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderkey;
 
-    @JoinColumn(name = "id")
-    @ManyToOne
-    private Member member;
+    @Column(name = "memberid")
+    private Long memberid;
 
     @Column(name = "orderdate")
     private Date orderdate;
@@ -46,10 +45,14 @@ public class Order {
     @Column(name = "orderprice")
     private Integer orderprice;
 
+    public Long getOrderkey(){
+        return orderkey;
+    }
+
     @Builder
-    public Order(Long orderkey,Member member,Date orderdate, String orderrec,String orderphone,String orderrequest,String orderaddress, int orderstate, int orderprice){
+    public Order(Long orderkey,Long memberid,Date orderdate, String orderrec,String orderphone,String orderrequest,String orderaddress, int orderstate, int orderprice){
         this.orderkey=orderkey;
-        this.member=member;
+        this.memberid=memberid;
         this.orderdate=orderdate;
         this.orderrec=orderrec;
         this.orderphone=orderphone;

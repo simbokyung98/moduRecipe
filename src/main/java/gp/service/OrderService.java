@@ -32,7 +32,7 @@ public class OrderService {
         for(Order order : orderList){
             OrderDto orderDto = OrderDto.builder()
                     .orderkey(order.getOrderkey())
-                    .member(order.getMember())
+                    .memberid(order.getMemberid())
                     .orderdate(order.getOrderdate())
                     .orderrec(order.getOrderrec())
                     .orderphone(order.getOrderphone())
@@ -50,7 +50,7 @@ public class OrderService {
 
         OrderDto orderDto = OrderDto.builder()
                 .orderkey(order.getOrderkey())
-                .member(order.getMember())
+                .memberid(order.getMemberid())
                 .orderdate(order.getOrderdate())
                 .orderrec(order.getOrderrec())
                 .orderphone(order.getOrderphone())
@@ -94,5 +94,10 @@ public class OrderService {
 
         }
         return orderDetatilDtoList;
+    }
+
+    public Long save(OrderDto orderDto) {
+
+        return orderRepository.save(orderDto.toEntity()).getOrderkey();
     }
 }

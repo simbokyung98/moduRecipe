@@ -1,6 +1,7 @@
 package gp.service;
 
 
+import gp.domain.Cart;
 import gp.domain.Member;
 import gp.domain.MemberRepository;
 import gp.web.dto.MemberDto;
@@ -108,9 +109,17 @@ public class MemberService {
         memberRepository.delete(member);
         }
 
+    @Transactional
+    public void userUpdatePwd(Long id, String password) {
 
-
-
+        memberRepository.updatePwd(id, password);
     }
+
+    @Transactional
+    public void deleteUser(Long id) {
+
+        memberRepository.deleteById(id);
+    }
+}
 
 

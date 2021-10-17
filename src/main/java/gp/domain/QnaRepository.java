@@ -11,12 +11,14 @@ import java.util.List;
 public interface QnaRepository extends JpaRepository<QnaEntity, Long> {
 
     @Modifying
-    @Query(value = "select b from QnaEntity b where answerstate =1")
+    @Query(value = "select b from QnaEntity b where answerstate ='답변완료'")
     List<QnaEntity> find();
 
-    @Query( "UPDATE QnaEntity SET answerstate=1 WHERE answercontent is not null")
+    @Transactional
+    @Modifying
+    @Query( value = "UPDATE QNA SET answer_state='답변완료' where answer_content is not null", nativeQuery = true)
     List<QnaEntity> updateAnswerState();
 
-    @Query(value = "select b from QnaEntity b where answerstate =0")
+    @Query(value = "select b from QnaEntity b where answerstate ='답변대기'")
     List<QnaEntity> nullfind();
 }

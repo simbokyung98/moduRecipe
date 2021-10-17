@@ -3,6 +3,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="../static/css/main.css">
 <link rel="stylesheet" href="../static/css/style2.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script th:src="@{../static/js/order.js}"></script>
 
 <head>
 <meta charset="UTF-8">
@@ -556,6 +558,7 @@
 					<h2 class="tit-page">주문서작성</h2>
 					<div class="page-body">
 						<form name="form1" id="order_form" method="post">
+							<input type="hidden" name="_method" value="post"/>
 							<input type="hidden" name="kt_id" value>
 							<input type="hidden" name="deli_product_price" value="2500">
 							<input type="hidden" name="bankonly" value="N">
@@ -652,9 +655,10 @@
 													<th scope="row">
 														<div class="txt-l">이름</div>
 													</th>
-													<td>	
+													<td>
+														<input type="hidden" name="memberId" form="order_form" id="memberId" class="MS_input_txt" th:value="13">
 
-														<input type="hidden" name="sender" form="order_form" id="sender" class="MS_input_txt" value>
+														<input type="text" name="sender" form="order_form" id="sender" class="MS_input_txt" readonly th:value="${userName}">
 													</td>													
 												</tr>
 												<tr class="tr1">
@@ -684,6 +688,8 @@
 														<input type="text" name="emergency12" form="order_form" id="emergency12" size="4" maxlength="4" class="MS_input_txt w60" value>
 														  - 
 														<input type="text" name="emergency13" form="order_form" id="emergency13" size="4" maxlength="4" minlength="4" class="MS_input_txt w60" value>
+														<input type="hidden" name="orderphone" form="order_form" id="orderphone">
+
 													</td>
 												</tr>
 											</tbody>
@@ -707,7 +713,7 @@
 														<div class="txt-l">이름</div>
 													</th>
 													<td colspan="3">
-														<input type="text" name="receiver" form="order_form" id="receiver" class="MS_input_txt" value>
+														<input type="text" name="orderrec" form="order_form" id="receiver" class="MS_input_txt" value>
 													</td>
 												</tr>
 												<tr class="tr1">
@@ -774,6 +780,8 @@
 															<input type="hidden" name="old_offi_address" form="order_form" id="old_offi_address" value>
 															<input type="hidden" name="address2" form="order_form" id="address2" size="50" class="MS_input_txt w240">
 														</div>
+														<input type="hidden" name="orderaddress" form="order_form" id="orderaddress" value>
+
 													</td>
 												</tr>
 												<tr class="tr1">
@@ -785,7 +793,7 @@
 														</div>
 													</th>
 													<td colspan="3">
-														<textarea name="message" form="order_form" id="message" cols="50" rows="5" class="MS_textarea">
+														<textarea name="orderrequest" form="order_form" id="message" cols="50" rows="5" class="MS_textarea">
 														</textarea>
 													</td>
 												</tr>
@@ -834,7 +842,9 @@
 														<strong class="price">
 															<em>
 																<span id="block_unit_dollar" style="display:none">$</span>
-																<span id="op_total_price"> 결제예정금액 :</span>
+																<span id="op_total_price"> 결제예정금액 :<span th:value="${totalPrice}"> [[${totalPrice}]]</span></span>
+																<input type="hidden" name="orderprice" form="order_form" id="orderprice" th:value="${totalPrice}">
+
 															</em>
 															<span id="block_unit_won">원</span>
 														</strong>
@@ -844,7 +854,7 @@
 										</table>
 									</div>
 									<div id="paybutton">
-										<a href="orderComp.jsp" class="CSSbuttonLog">주문하기
+										<a class="CSSbuttonLog" onclick="order()">주문하기
 										</a>
 										<a href="javascript:order cancel('cancel')" class="CSSbuttonLogW">주문취소</a>
 									</div>

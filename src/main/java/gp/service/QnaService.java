@@ -28,6 +28,8 @@ public class QnaService {
 
     public Long saveQna(QnaDto qnaDto){
 
+
+        qnaRepository.updateAnswerState();
         return qnaRepository.save(qnaDto.toEntity()).getQnakey();}
 
     public List<QnaDto> getAllQna() {
@@ -126,6 +128,12 @@ public class QnaService {
         }
         return qnaDtoList;
     }
+
+    @Transactional
+    public List<QnaEntity> updateAnswerState(){
+        return qnaRepository.updateAnswerState();
+    }
+
     @Transactional
     public void deleteQna(Long qnakey){
         qnaRepository.deleteById(qnakey);

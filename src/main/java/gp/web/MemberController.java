@@ -76,6 +76,7 @@ public class MemberController {
     }
     @PostMapping("/membercheck")
     public String pwcheck(MemberDto memberDto, HttpSession session, Model model, RedirectAttributes attr){
+
         MemberDto loginMember=(MemberDto)session.getAttribute("user");
         memberDto.setUsername(loginMember.getUsername());
         MemberDto memberXO = memberService.userLogin(memberDto);
@@ -84,10 +85,28 @@ public class MemberController {
             return "redirect:/membercheck";
         }
         session.setAttribute("user", memberXO);
+        System.out.println("memberXO + " + memberXO.toString());
         return "datachange";
 
     }
 
+    @PostMapping("/datachange/{id}")
+    public String pwChange(MemberDto memberDto, HttpSession session, Model model, RedirectAttributes attr, @PathVariable("id") Long id){
+
+        memberService.userUpdatePwd(id, memberDto.getPassword());
+
+        return "/memberLogin";
+
+    }
+
+    @DeleteMapping("/member/{id}")
+    public String deleteUser(@PathVariable("id") Long id){
+
+        memberService.deleteUser(id);
+
+        return "/memberLogin";
+
+    }
 
 
 }

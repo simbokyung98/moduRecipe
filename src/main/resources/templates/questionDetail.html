@@ -60,7 +60,7 @@
 	}
 	#am_section_content{
 		width: 100%;
-		height: 940px;
+		height: 1200px;
 		background: #dddddd;
 		box-shadow : 2px 2px 5px #999;
 		margin: 10px 0 0 10px;
@@ -80,12 +80,21 @@
 	.am_quede_conwrap{
 		clear: left;
 		padding: 20px 0 0 10px;
+		height: 300px;
 
 	}
 	.am_quede_title{
 		border-bottom: 2px solid #cccccc;
 		border-top: 2px solid #cccccc;
-		height: 50px;
+		height: 100px;
+		width: 90%;
+		padding: 13px 20px 0 20px;
+		background: white;
+	}
+	.am_quede_title2{
+		border-bottom: 2px solid #cccccc;
+		border-top: 2px solid #cccccc;
+		height: 300px;
 		width: 90%;
 		padding: 13px 20px 0 20px;
 		background: white;
@@ -109,6 +118,7 @@
 	}
 	.am_quede_coment{
 		width: 95%;
+		height: 300px;
 		text-align: center;
 		padding-top: 30px;
 	}
@@ -141,10 +151,20 @@
 		font-size: 18px;
 		background: white;
 	}
+	.notion_table_thead{
+			border-bottom: 1px solid gray;
+		}
+		.notion_table_th{
+			font-family: 'Cafe24Simplehae';
+			padding: 20px 0 20px 0;
+			border-bottom: 1px solid gray;
+		}
+
 </style>
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
+
 
 <main id="adminque_main_wrap">
 	<section id="adminque_main">
@@ -159,23 +179,36 @@
 				<div class="am_quede_conwrap">
 
 					<div class="am_quede_title">
-						<form th:action="@{'/adminqnadetail/' + ${qnaDto.qnakey}}" method="post">
+						<form th:action="@{'/qnadetail/' + ${qnaDto.qnakey}}" method="get">
 							<input type="hidden" name="_method" value="put"/>
-							<input type="hidden" name="qnakey" th:value="${qnaDto.qnakey}"/>
-
-							<input type="text" name="qnatitle" id="aqt_con" th:value="${qnaDto.qnatitle}">
-							<input type="text" name="qnadate" id="aqt_date" th:value="${qnaDto.qnadate}">
-							<input type="text" name="qnawriter" th:value="${qnaDto.qnawriter}">
+							<table style="width:100% ;" >
+							<thead class="notion_table_thead">
+							<tr >
 
 
+								<th class="notion_table_th" style="text-align:center; padding:0px;">작성일자</th>
+								<th class="notion_table_th" style="text-align:center;">제&nbsp;&nbsp;&nbsp;&nbsp;목</th>
+								<th class="notion_table_th" style="text-align:center;">답변현황</th>
 
-					<input type="text" name="qnacontent" class="am_quede_content" th:value="${qnaDto.qnacontent}">
+							</tr>
+							</thead>
+								<tbody>
+								<tr>
+									<td style="text-align:center;" th:text="${qnaDto.qnadate}"></td>
+									<td style="text-align:center;"  th:text="${qnaDto.qnatitle}"></td>
+									<td style="text-align:center;"  th:text="${qnaDto.answerstate}"></td>
+								</tr>
+								</tbody>
 
-					<div class="am_quede_coment">
-							<p id="aqc_p">답변하기</p>
-							<input type="text" name="answercontent" rows="10" cols="105"  placeholder="질문에 대한 답변하기" id="aqc_text" th:value="${qnaDto.answercontent}"></input><br>
-							<button type="submit"   id="aqc_subbut">답변하기</button>
-							<a th:href="@{/adminqna}" id="aqc_backbut">목록가기</a>
+							</table>
+							<div style="margin-top:50px; margin-left:20px;"><h2>질문내용</h2></div>
+							<div style="margin-top:50px; width:900px;" class="am_quede_title2" name="qnacontent" th:text="${qnaDto.qnacontent}">
+
+							</div>
+							<div  style="margin-top:50px; margin-left:20px;"><h2>답&nbsp;&nbsp;&nbsp;&nbsp;변</h2></div>
+							<div style="margin-top:50px; width:900px;" class="am_quede_title2" name="answercontent" th:text="${qnaDto.answercontent}"></div>
+					<div class="am_quede_coment" >
+							<a th:href="@{/myqnamain}" id="aqc_backbut">목록가기</a>
 
 					</div>
 						</form>

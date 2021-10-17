@@ -22,6 +22,8 @@ import java.util.List;
 public class QnaController {
 
 
+    @Autowired
+    QnaRepository qnaRepository;
     private final HttpSession session;
     @Autowired
     private QnaService qnaService;
@@ -37,6 +39,7 @@ public class QnaController {
 
         List<QnaDto> qnaDtoList = qnaService.getqnalist(pageNum);
         Integer[] pageList = qnaService.getPageList(pageNum);
+
 
         model.addAttribute("qnalist", qnaDtoList);
         model.addAttribute("pageList", pageList);
@@ -55,7 +58,12 @@ public class QnaController {
     public String qnasubmit(@ModelAttribute QnaDto qnaDto, HttpSession session) {
         String qnawriter=(String)session.getAttribute("username");
         qnaDto.setQnawriter(qnawriter);
+        String answerstate="답변대기";
+        qnaDto.setAnswerstate(answerstate);
         qnaService.saveQna(qnaDto);
+
+
+
 
         return ("redirect:/myqnamain");
     }
@@ -80,6 +88,7 @@ public class QnaController {
 
     @GetMapping("/adminqnadetail/{qnakey}")
     public String anminqnadetail(@PathVariable("qnakey") Long qnakey, Model model) {
+
         QnaDto qnaDto = qnaService.getQna(qnakey);
         model.addAttribute("qnaDto", qnaDto);
         return "adminQuestionDetail.html";
@@ -87,11 +96,22 @@ public class QnaController {
 
     @PutMapping("/adminqnadetail/{qnakey}")
     public String qnaanswer(@ModelAttribute QnaDto qnaDto) {
-
+        String updatestate = "답변완료";
+        String state = qnaDto.getAnswercontent();
+        if(state!=null){
+            qnaDto.setAnswerstate(updatestate);
+        }
 
         qnaService.saveQna(qnaDto);
         return ("redirect:/adminqna");
 
+    }
+    @GetMapping("/qnadetail/{qnakey}")
+    public String qnadetail(@PathVariable("qnakey") Long qnakey, Model model) {
+
+        QnaDto qnaDto = qnaService.getQna(qnakey);
+        model.addAttribute("qnaDto", qnaDto);
+        return "questionDetail.html";
     }
 
 }
