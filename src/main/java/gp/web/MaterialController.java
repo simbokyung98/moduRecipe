@@ -67,7 +67,23 @@ public class MaterialController {
         model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
         model.addAttribute("next", pageable.next().getPageNumber());
         model.addAttribute("check", materialService.getListCheck(pageable));
+        //adminsidebar 설정 용도
+        model.addAttribute("adminmenu", "재료");
         return "adminMeter";
+    }
+    //관리자 재료 검색
+    @GetMapping("/materialSearch")
+    public String adminMaterialSearch(@RequestParam(value="keyword") String keyword, @RequestParam(value="select") String select, Model model,
+                                      @PageableDefault(size = 5, sort = "materialKey", direction = Sort.Direction.DESC)Pageable pageable){
+        Page<Material> materialDtoList = materialService.pageGetMaterialSearch(keyword, select, pageable);
+        model.addAttribute("addMater", materialDtoList);
+        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("next", pageable.next().getPageNumber());
+        model.addAttribute("check", materialService.getListCheck(pageable));
+        //adminsidebar 설정 용도
+        model.addAttribute("adminmenu", "재료");
+        return "adminMeter";
+
     }
 
     //관리자 재료페이지[카테고리]
@@ -81,12 +97,16 @@ public class MaterialController {
         model.addAttribute("next", pageable.next().getPageNumber());
         model.addAttribute("check", materialService.geCateListCheck( materialMainCate,pageable));
         model.addAttribute("main", materialMainCate);
+        //adminsidebar 설정 용도
+        model.addAttribute("adminmenu", "재료");
         return "adminMeterCate";
     }
 
     //관리자 재료추가페이지
     @GetMapping("/adminMaterialAdd")
-    public String adminMaterialAdd(){
+    public String adminMaterialAdd(Model model){
+        //adminsidebar 설정 용도
+        model.addAttribute("adminmenu", "재료");
         return "adminMeterAdd";
     }
 
@@ -168,5 +188,14 @@ public class MaterialController {
 
         return "redirect:/adminMater";
     }
+
+    //재료 수정
+    @PostMapping("/materialUpdate/{materialKey}")
+    public String adminMaterialUpdate(@PathVariable("materialKey") Long materialKey, MaterialDto materialDto){
+        materialService.adminmaterialUpdate(materialKey, materialDto);
+
+        return "redirect:/adminMater";
+    }
+
 }
 

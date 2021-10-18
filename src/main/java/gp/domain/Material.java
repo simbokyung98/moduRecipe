@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -46,8 +47,9 @@ public class Material {
     @Column(length = 40)
     private String materialDistDate;
 
+    @Builder.Default
     @Column(length = 40)
-    private String materialSale;
+    private String materialSale = "판매";
 
     @Column(length = 100)
     private String materialDeImg;
@@ -77,6 +79,13 @@ public class Material {
         this.materialDeImg = materialDeImg;
         this.materialUnit = materialUnit;
         this.materialPrice = materialPrice;
+    }
+
+    //재료 업데이트
+    public void materialUpdate(String materialPrice, String materialCountry, String materialSale){
+        this.materialPrice = materialPrice;
+        this.materialCountry = materialCountry;
+        this.materialSale = materialSale;
     }
 
 
