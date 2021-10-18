@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html  lang="en" xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" href="../static/css/style2.css">
-
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../static/css/main.css">
+<link rel="stylesheet" href="../static/css/style2.css"><head>
 <style>
 	@font-face {
 	    font-family: 'Cafe24Simplehae';
@@ -30,13 +29,13 @@
 
 </style>
 <link href="style2.css" rel="stylesheet" type="text/css">
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>orderlist</title>
 <script>
 function showConfirm() {
-	 if (confirm("аж╧╝ю╩ цК╪рго╫ц╟з╫ю╢о╠Н?"))
+	 if (confirm("Лё╪К╛╦Л²└ Л╥╗Л├▄М∙≤Л▀°Й╡═Л┼╣К▀┬Й╧▄?"))
 	  {
-	   alert("аж╧╝юл цК╪р╣г╬З╫ю╢о╢ы.");
+	   alert("Лё╪К╛╦Л²╢ Л╥╗Л├▄К░≤Л≈┬Л┼╣К▀┬К▀╓.");
 	  }
 	 }
 </script>
@@ -49,50 +48,55 @@ function showConfirm() {
            <div class="mysidebardiv" style="position:relative; " >
 	<aside class="mysidebar">
 		<ul class="mysidebarul">
-			<li class="mysidebarli" style="background:#ffa500;"><h1 style="color:white;">My╪Нгн</h1></li>
-			<li class="mysidebarli"><a href="orderlist.jsp" style="font-family: 'Cafe24Simplehae';">Ё╙юг аж╧╝╦Я╥о</a></li>
-			<li class="mysidebarli"><a href="myreview.jsp"style="font-family: 'Cafe24Simplehae';">Ё╙юг ╦╝╨Д╦Я╥о</a></li>
-			<li class="mysidebarli"><a href="qna.jsp"style="font-family: 'Cafe24Simplehae';">1╢К1╧╝югго╠Б</a></li>
-			<li class="mysidebarli"><a href="membercheck.jsp"style="font-family: 'Cafe24Simplehae';">╟Ёюна╓╨╦╨╞╟Ф</a></li>
+			<li class="mysidebarli" style="background:#ffa500;"><h1 style="color:white;">MyЛ┤╪М∙▒</h1></li>
+			<li class="mysidebarli"><a href="orderlist.jsp" style="font-family: 'Cafe24Simplehae';">К┌≤Л²≤ Лё╪К╛╦К╙╘К║²</a></li>
+			<li class="mysidebarli"><a href="myreview.jsp"style="font-family: 'Cafe24Simplehae';">К┌≤Л²≤ К╕╛К╥╟К╙╘К║²</a></li>
+			<li class="mysidebarli"><a href="qna.jsp"style="font-family: 'Cafe24Simplehae';">1К▄─1К╛╦Л²≤М∙≤Й╦╟</a></li>
+			<li class="mysidebarli"><a href="membercheck.jsp"style="font-family: 'Cafe24Simplehae';">Й╟°Л²╦Л═∙КЁ╢КЁ─Й╡╫</a></li>
 	
 		</ul>
 	</aside>
 	</div>
                 <div class="orderlisttitle" style="padding-top: 10px; padding-left:300px; ">
-                    <p style="font-size: 25px;font-family: 'NanumSquareRound';">аж╧╝╦Я╥о</p>
-                    <p class ="p_orderlisttitle"style="font-family: 'NanumSquareRound';font-size: 15px; color: gray;  padding-bottom: 30px;">аЖЁ╜ аж╧╝ Ё╩©╙ а╤х╦╦╕ гр ╪Ж юж╫ю╢о╢ы</p>
+                    <p style="font-size: 25px;font-family: 'NanumSquareRound';">Лё╪К╛╦К╙╘К║²</p>
+                    <p class ="p_orderlisttitle"style="font-family: 'NanumSquareRound';font-size: 15px; color: gray;  padding-bottom: 30px;">Л╖─К┌° Лё╪К╛╦ К┌╢Л≈╜ Л║╟М ▄К╔╪ М∙═ Л┬≤ Л·┬Л┼╣К▀┬К▀╓</p>
                 </div>
 
+
+               <block th:each="order : ${orderList}" th:remove="tag">
                 <div class="orderlisttablediv" style="width:90%; padding-left:250px;">
                     <div class="orderlisttable" style="padding-top: 30px; font-size: 20px;"></div>
                     <div
                         class="orderlistdate"
                         style="font-family: 'NanumSquareRound';padding-top: 30px; font-size: 30px; border-top: gray solid 1px; border-width=1em;">
-                            2021. 6. 02 аж╧╝</div>
+                            [[${order.orderdate}]] Лё╪К╛╦</div>
 
+                    <span style="font-family: 'NanumSquareRound';">[[${order.orderstate}]]</span>
 
-                    <span style="font-family: 'NanumSquareRound';">╧Х╪шаъ</span>
-                    
                     <div
                         class="productimgdiv"
                         style="height: 150px; width: 100%; border-bottom:solid 1px gray; ">
                         <img src="img/Logo.png">
-                        <span
-                            style="font-family: 'NanumSquareRound';padding-left: 80px; display: inline-block;  padding-bottom: 65px; vertical-align: middle;">╦П╣нюг╥╧╫цгг(а╕г╟╦М)</span>
+
+                        <span style="font-family: 'NanumSquareRound';padding-left: 80px; display: inline-block; height: 150px; padding-bottom: 65px; vertical-align: middle;">
+                            [[${order.materialname}]]</span>
+
                         <div class="orderlistbtndiv" style="position:relative; right:200px;">
-                            <div style="padding-bottom:10px;"><button onClick="location.href='orderlistdetail.jsp'" class="orderdetailbtn">аж╧╝╩С╪╪</button></div>
-                            <div><button onClick="javascript:showConfirm()" class="ordercancelbtn">аж╧╝цК╪р</button></div>
+
+                            <div><button class="ordercancelbtn">Лё╪К╛╦Л╥╗Л├▄</button></div>
                         </div>
-                        
+
+                    </div>
+
+
+                </div>
+               </block>
+
                     </div>
 
                     
                 </div>
-
-
-                    
-                </div>
             </div>
-
+            </div>
 </body>
 </html>
