@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -72,8 +73,7 @@ public class OrderService {
                     .orderdetailkey(orderDetail.getOrderdetailkey())
                     .order(orderDetail.getOrder())
                     .material(orderDetail.getMaterial())
-                    .ordernum(orderDetail.getOrdernum())
-                    .orderprice(orderDetail.getOrderprice()).build();
+                    .ordernum(orderDetail.getOrdernum()).build();
 
             return orderDetatilDto;
 
@@ -88,8 +88,7 @@ public class OrderService {
                     .orderdetailkey(orderDetail.getOrderdetailkey())
                     .order(orderDetail.getOrder())
                     .material(orderDetail.getMaterial())
-                    .ordernum(orderDetail.getOrdernum())
-                    .orderprice(orderDetail.getOrderprice()).build();
+                    .ordernum(orderDetail.getOrdernum()).build();
             orderDetatilDtoList.add(orderDetatilDto);
 
         }
@@ -99,5 +98,9 @@ public class OrderService {
     public Long save(OrderDto orderDto) {
 
         return orderRepository.save(orderDto.toEntity()).getOrderkey();
+    }
+
+    public List<Map<String, Object>> getOrderListById(Long userId) {
+        return orderRepository.findAllByUserId(userId);
     }
 }

@@ -205,7 +205,7 @@ g
                     </tr>
                     </thead>
                     <tbody class="notion_table_tbody">
-                    <tr th:each="qnalist: ${qnalist}" style="font-size:35px; border-bottom: 1px solid gray;" >
+                    <tr th:each="qnalist: ${qnaList}" style="font-size:35px; border-bottom: 1px solid gray;" >
                         <td style="text-align:center; font-family: 'Cafe24Simplehae';"><a class="a_qna" th:text="${qnalist.qnakey}" th:href="@{'/qnadetail/' + ${qnalist.qnakey}}"></a></td>
                         <td  style="text-align:center; font-family: 'Cafe24Simplehae';"><a class="a_qna" th:text="${qnalist.qnatitle}" th:href="@{'/qnadetail/' + ${qnalist.qnakey}}"></a></td>
                         <td  style="text-align:center; font-family: 'Cafe24Simplehae';"><a  class="a_qna" th:text="${qnalist.qnadate}"  th:href="@{'/qnadetail/' + ${qnalist.qnakey}}"></a></td>

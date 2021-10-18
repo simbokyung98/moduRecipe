@@ -47,6 +47,14 @@ function setTotalPrice() {
     $("#hiddenTotalPrice").val(totalPrice)
     $("#totalPrice").html(totalPrice)
 }
+function nullCheck(){
+
+    if($("input:checkbox[name='buy']").is(":checked")==false){
+        alert("한개 이상의 물품은 구매하셔야합니다");
+        location.reload();
+        return;
+    }
+}
 
 function orderMaterials(){
     var id = $("#userId").val()

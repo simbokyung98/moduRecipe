@@ -21,4 +21,6 @@ public interface QnaRepository extends JpaRepository<QnaEntity, Long> {
 
     @Query(value = "select b from QnaEntity b where answerstate ='답변대기'")
     List<QnaEntity> nullfind();
+
+    public List<QnaEntity> findByqnawriter(String qnawriter);
 }

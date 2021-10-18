@@ -68,7 +68,6 @@ public class RecipeController {
 
         model.addAttribute("recipehit",recipeService.updateView(recipekey));
         model.addAttribute("recipeDto",recipeDto);
-        model.addAttribute("userId", loginMember.getId());
         return "recipedetail";
     }
 

@@ -43,6 +43,7 @@
 	#adminque_section_wrap{
 		float: left;
 		width: 79%;
+
 	}
 	#adminque_section{
 		width: 100%;
@@ -71,6 +72,7 @@
 		width: 250px;
 		border-bottom: 2px solid orange;
 		float: left;
+
 	}
 	.am_quede_wrap p{
 		font-family: 'NanumBarunGothic', sans-serif;
@@ -84,11 +86,10 @@
 
 	}
 	.am_quede_title{
-		border-bottom: 2px solid #cccccc;
 		border-top: 2px solid #cccccc;
 		height: 100px;
 		width: 90%;
-		padding: 13px 20px 0 20px;
+		padding: 13px 20px 13px 0;
 		background: white;
 	}
 	.am_quede_title2{
@@ -96,7 +97,7 @@
 		border-top: 2px solid #cccccc;
 		height: 300px;
 		width: 90%;
-		padding: 13px 20px 0 20px;
+		padding: 13px 20px 0 0;
 		background: white;
 	}
 	#aqt_con{
@@ -172,8 +173,8 @@
 			<div id="adminque_section">
 				<p>1:1 질문 관리</p>
 			</div>
-			<div id="am_section_content">
-				<div class="am_quede_wrap">
+			<div id="am_section_content" >
+				<div class="am_quede_wrap" style="margin-left:50px">
 					<p>1:1문의 세부내용<p>
 				</div>
 				<div class="am_quede_conwrap">
@@ -192,8 +193,8 @@
 
 							</tr>
 							</thead>
-								<tbody>
-								<tr>
+								<tbody style="padding-bottom:20px;">
+								<tr >
 									<td style="text-align:center;" th:text="${qnaDto.qnadate}"></td>
 									<td style="text-align:center;"  th:text="${qnaDto.qnatitle}"></td>
 									<td style="text-align:center;"  th:text="${qnaDto.answerstate}"></td>
@@ -202,11 +203,11 @@
 
 							</table>
 							<div style="margin-top:50px; margin-left:20px;"><h2>질문내용</h2></div>
-							<div style="margin-top:50px; width:900px;" class="am_quede_title2" name="qnacontent" th:text="${qnaDto.qnacontent}">
+							<div style="margin-top:50px; width:850px;" class="am_quede_title2" name="qnacontent" th:text="${qnaDto.qnacontent}">
 
 							</div>
 							<div  style="margin-top:50px; margin-left:20px;"><h2>답&nbsp;&nbsp;&nbsp;&nbsp;변</h2></div>
-							<div style="margin-top:50px; width:900px;" class="am_quede_title2" name="answercontent" th:text="${qnaDto.answercontent}"></div>
+							<div style="margin-top:50px; width:850px;" class="am_quede_title2" name="answercontent" th:text="${qnaDto.answercontent}"></div>
 					<div class="am_quede_coment" >
 							<a th:href="@{/myqnamain}" id="aqc_backbut">목록가기</a>
 

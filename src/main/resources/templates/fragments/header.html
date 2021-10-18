@@ -18,14 +18,12 @@
                     <li th:if = "${session.user != null}"  class="usermenuli"><a class="subusermenuli" sec:authorize="isAuthenticated()" th:href="@{/user/info}">마이메뉴</a>
                         <ul class="sub-menu2">
                             <li class="usermenuli2"><a class="subusermenu"
-                                                       href="orderlist.jsp"
+                                                       th:href="@{/orderlist}"
                             >주문목록</a></li>
                             <li class="usermenuli2"><a class="subusermenu"
                                                        th:href="@{/myqnamain}"
                             >1대1문의</a></li>
-                            <li class="usermenuli2"><a class="subusermenu"
-                                                       href="myreview.jsp"
-                            >작성후기</a></li>
+
                             <li class="usermenuli2"><a class="subusermenu"
                                                       th:href="@{/membercheck}"
                             >개인정보</a></li>

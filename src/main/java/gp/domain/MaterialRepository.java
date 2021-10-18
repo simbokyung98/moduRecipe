@@ -16,4 +16,7 @@ public interface MaterialRepository extends JpaRepository<Material, Long> {
 
     @Query(value = "select * from  material where material_Title in (:materialList)", nativeQuery = true)
     List<Material> findMaterialList(String[] materialList);
+
+    @Query(value = "select * from  material where material_Key in (:materialList)", nativeQuery = true)
+    List<Material> findMaterialListById(String[] materialList);
 }

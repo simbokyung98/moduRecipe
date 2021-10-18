@@ -1,5 +1,6 @@
 package gp.web;
 
+import gp.domain.Material;
 import gp.domain.Order;
 import gp.service.MaterialService;
 import gp.service.OrderService;
@@ -21,7 +22,9 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @AllArgsConstructor
@@ -73,10 +76,35 @@ public class OrderController {
         model.addAttribute("materialKeys",materialKeys);
         model.addAttribute("userName",loginMember.getName());
 
-        orderService.save(orderDto);
-//        String[] keys = materialKeys.split(",");
+        Long orderKey  = orderService.save(orderDto);
+
+        Order order = new Order();
+        order.setOrderkey(orderKey);
+        orderDetatilDto.setOrder(order);
+
+        String[] materialList = materialKeys.split(",");
+        List<Material> materialDtoList = materialService.getMaterialById(materialList);
+
+        for(int i = 0; i < materialDtoList.size(); i++){
+            System.out.println("materialDtoList.get(i) : " + materialDtoList.get(i).toString());
+            orderDetatilDto.setMaterial(materialDtoList.get(i));
+            orderService.saveOrderDetail(orderDetatilDto);
+        }
 
         return "orderComp";
+    }
+
+    @GetMapping("/orderlist")
+    public String orderList(HttpSession session, Model model){
+
+        MemberDto loginMember=(MemberDto)session.getAttribute("user");
+        Long userId = loginMember.getId();
+
+        List<Map<String, Object>> orderList = orderService.getOrderListById(userId);
+
+        model.addAttribute("orderList", orderList);
+
+        return "orderlist";
     }
 
 }

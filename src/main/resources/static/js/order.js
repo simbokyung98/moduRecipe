@@ -17,9 +17,6 @@ function order(){
         alert("구매진행에대해 동의함을 체크해주세요.")
     }
 
-
-
-
 }
 
 function getParameterByName(name) {

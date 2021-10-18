@@ -24,7 +24,7 @@ public class OrderDetail {
     @OneToOne
     private Order order;
 
-    @JoinColumn(name = "materialkey1")
+    @JoinColumn(name = "materialkey")
     @ManyToOne
     private Material material;
 
@@ -34,17 +34,13 @@ public class OrderDetail {
     @Column(name = "ordernum")
     private int ordernum;
 
-    @Column(name = "orderprice")
-    private int orderprice;
-
     @Builder
-    public OrderDetail(Long orderdetailkey, Order order, Material material, String materialname, int ordernum, int orderprice){
+    public OrderDetail(Long orderdetailkey, Order order, Material material, String materialname, int ordernum){
         this.orderdetailkey=orderdetailkey;
         this.order=order;
         this.material=material;
         this.materialname=materialname;
         this.ordernum=ordernum;
-        this.orderprice=orderprice;
     }
 
 

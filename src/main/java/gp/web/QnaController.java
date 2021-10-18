@@ -30,22 +30,19 @@ public class QnaController {
 
 
     @GetMapping("/myqnamain")
-    public String myqnamain(Model model, @RequestParam(value = "page", defaultValue = "1") Integer pageNum,HttpSession httpSession) {
+    public String myqnamain(Model model) {
+
+        MemberDto user = (MemberDto)session.getAttribute("user");
+        List<QnaDto> qnaDtoList = qnaService.getMyQna(user.getUsername());
+        model.addAttribute("qnaList", qnaDtoList);
+
 
 
         if(session.getAttribute("user")==null){
             return "redirect:/login";
         }
 
-        List<QnaDto> qnaDtoList = qnaService.getqnalist(pageNum);
-        Integer[] pageList = qnaService.getPageList(pageNum);
-
-
-        model.addAttribute("qnalist", qnaDtoList);
-        model.addAttribute("pageList", pageList);
-
-
-        return "myqnamain";
+        return "/myqnamain";
     }
 
     @GetMapping("/qnawrite")
@@ -93,6 +90,7 @@ public class QnaController {
         model.addAttribute("qnaDto", qnaDto);
         return "adminQuestionDetail.html";
     }
+
 
     @PutMapping("/adminqnadetail/{qnakey}")
     public String qnaanswer(@ModelAttribute QnaDto qnaDto) {

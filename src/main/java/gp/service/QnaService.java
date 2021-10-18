@@ -72,6 +72,24 @@ public class QnaService {
 
         return qnaDto;
     }
+    public List<QnaDto> getMyQna(String qnawriter){
+        List<QnaEntity> qnaList = qnaRepository.findByqnawriter(qnawriter);
+        List<QnaDto> qnaDtoList = new ArrayList<>();
+
+        for(QnaEntity qnaEntity : qnaList){
+            QnaDto qnaDto = QnaDto.builder()
+                    .qnakey(qnaEntity.getQnakey())
+                    .qnatitle(qnaEntity.getQnatitle())
+                    .qnacontent(qnaEntity.getQnacontent())
+                    .qnadate(qnaEntity.getQnaDate())
+                    .answerstate(qnaEntity.getAnswerstate())
+                    .answercontent(qnaEntity.getAnswercontent())
+                    .qnawriter(qnaEntity.getQnawriter())
+                    .build();
+            qnaDtoList.add(qnaDto);
+        }
+        return qnaDtoList;
+    }
     private  QnaDto convertEntityToDto(QnaEntity qnaEntity){
         return QnaDto.builder()
                 .qnakey(qnaEntity.getQnakey())
