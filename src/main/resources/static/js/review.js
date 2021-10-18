@@ -4,43 +4,13 @@ $(document).ready(function(){
  });
 
 
-let replyIndex = {
-    init: function () {
-        $("#review-btn-save").on("click", () => {
-            this.reviewsave();
-        });
-    },
-
-    reviewsave: function () {
-        let data = {
-            content: $("#reviewcontent").val(),
-        }
-        let recipekey = $("#recipekey").val();
-        console.log(data);
-        console.log(recipekey);
-        $.ajax({
-            type: "POST",
-            url: `/recipedetail/{recipekey}`,
-            data: JSON.stringify(data),
-            contentType: "application/json; charset=utf-8",
-            dataType: "text"
-        }).done(function (res) {
-            alert("댓글작성이 완료되었습니다.");
-            location.href = `/recipedetail/{recipekey}`;
-        }).fail(function (err) {
-            alert(JSON.stringify(err));
-        });
-    },
-
-}
-
 function setTotalPrice() {
-    var obj_length = document.getElementsByName("buy").length;
+    var obj_length = document.getElementsByName("buy").length; //체크박스의name을 이용해 checkbox의 크기 변수선언
     var totalPrice = 0;
 
-    for (var i=0; i<obj_length; i++) {
-      if (document.getElementsByName("buy")[i].checked == true) {
-          totalPrice += Number(document.getElementsByName("buy")[i].value)
+    for (var i=0; i<obj_length; i++) { //체크박스의 갯수만큼 for문반복
+      if (document.getElementsByName("buy")[i].checked == true) { //만약 체크가됐다면
+          totalPrice += Number(document.getElementsByName("buy")[i].value)//check박스의 value값만큼 totalPrice 증가
       }
     }
 
@@ -56,7 +26,32 @@ function nullCheck(){
     }
 }
 
+
 function orderMaterials(){
+    var id = $("#userId").val()
+
+    var obj_length = document.getElementsByName("buy").length;
+    var materialKeys = "";
+
+
+    for (var i=0; i<obj_length; i++) {
+      if (document.getElementsByName("buy")[i].checked == true) {
+          if(i+1 == obj_length){
+            materialKeys += document.getElementsByName("materialKey")
+            materialKeys += document.getElementsByName("materialKey")[i].value + ",";
+          }
+      }
+    }[i].value;
+          } else {
+
+    $("#materialForm").attr("action", "/material/order?keys=" + materialKeys);
+    $("#materialForm").submit();
+    }
+
+
+
+
+/*function cartMaterials(){
     var id = $("#userId").val()
 
     var obj_length = document.getElementsByName("buy").length;
@@ -72,9 +67,12 @@ function orderMaterials(){
       }
     }
 
-    $("#materialForm").attr("action", "/material/order?keys=" + materialKeys);
+    $("#materialForm").attr("action", "/saveCart"= materialKeys);//materialForm의action값 변경
     $("#materialForm").submit();
 
-}
+
+    }
+    }*/
+
 
 replyIndex.init();

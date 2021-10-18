@@ -40,6 +40,8 @@ public class OrderController {
     @GetMapping("/order")
     public String orderform(HttpSession session, OrderDto orderDto, OrderDetatilDto orderDetatilDto, Model model){
 
+
+
         MemberDto loginMember=(MemberDto)session.getAttribute("user");
         System.out.println("loginMember : " + loginMember.toString());
         return "order";
@@ -48,13 +50,15 @@ public class OrderController {
     @PostMapping("/material/order")
     public String materialForm(HttpSession session, int hiddenTotalPrice, @RequestParam("keys") String materialKeys, Model model){
 
+        if(session.getAttribute("user")==null){
+            return "redirect:/login";
+        }
         MemberDto loginMember=(MemberDto)session.getAttribute("user");
 
         model.addAttribute("materialKeys",materialKeys);
         model.addAttribute("totalPrice",hiddenTotalPrice);
         model.addAttribute("userName",loginMember.getName());
 
-//        String[] keys = materialKeys.split(",");
 
         return "order";
     }
