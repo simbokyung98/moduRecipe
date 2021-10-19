@@ -223,15 +223,17 @@
 						</ul>
 					</div>
 					<div id="am_section_contents_wrap">
+						<form action="/materialSearch" method="get">
 						<div id="section_search_wrap">
-							<select id="ssearch_sele">
-								<option>상품명</option>
-								<option>유통기한</option>
-								<option>상태</option>
+							<select id="ssearch_sele" name="select">
+								<option value="materialTitle">상품명</option>
+								<option value="materialRegDate">유통기한</option>
+								<option value="materialSale">상태</option>
 							</select>
-							<input type="text" id="ssearch_text" placeholder="검색어를 입력하세요">
+							<input type="text" id="ssearch_text" placeholder="검색어를 입력하세요" name="keyword">
 							<input type="submit" id="ssearch_sub" value="검색">
 						</div>
+						</form>
 						<table class="am_sc_table">
 							<thead>
 								<tr>
@@ -245,19 +247,24 @@
 									<th class="am_sc_th">비고</th>
 								</tr>
 							</thead>
+
 							<tbody>
 								<tr th:each="addMater : ${addMater}">
-                  <form th:action="@{'/materialUpdate/'+${addMater.materialKey}}" method="post">
+									<form th:action="@{'/materialUpdate/'+${addMater.materialKey}}" method="post">
 
 									<td  class="am_sc_td-center"><span th:text="${addMater.materialKey}"></span></td>
 									<td class="am_sc_td-center"><img  th:src="@{../static/materialImg/} + ${addMater.materialImg}" style="width: 50px; height: 60px; "></td>
 									<td class="am_sc_td-center"><span th:text="${addMater.materialTitle}"></span></td>
 									<td class="am_sc_td-center">2021-06-19</td>
-									<td class="am_sc_td-center"><span th:text="${addMater.materialPrice}"></span>원</td>
+									<td class="am_sc_td-center"><input type="text" th:value="${addMater.materialPrice}" name="materialPrice" style="width:50px;">원</td>
 									<td class="am_sc_td-center"><span th:text="${addMater.materialInventory}"></span></td>
-									<td class="am_sc_td-center"><input th:value="${addMater.materialInventory}" style="width: 15px;"> </td>
-									<td class="am_sc_td-center"><input type="radio" >판매<br><input type="radio" >품절 </td>
-									<td class="am_sc_td-center"><input type="button" value="수정"><br><input type="button" value="삭제" th:onclick="'location.href=\''+ @{'/adminMaterDelete/' +${addMater.materialKey} } + '\''"></td>
+									<td class="am_sc_td-center"><input th:value="${addMater.materialInventory}" style="width: 15px;" name="materialInventory"> </td>
+									<td class="am_sc_td-center">
+										<input type="radio" th:checked = "${addMater.materialSale.equals('판매')}" value="판매" name="materialSale">판매<br>
+										<input type="radio" th:checked = "${addMater.materialSale.equals('품절')}" value="품절" name="materialSale">품절
+									</td>
+									<td class="am_sc_td-center"><input type="submit" value="수정"><br><input type="button" value="삭제" th:onclick="'location.href=\''+ @{'/adminMaterDelete/' +${addMater.materialKey} } + '\''"></td>
+									</form>
 								</tr>
 							</tbody>
 						</table>

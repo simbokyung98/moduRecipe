@@ -106,6 +106,22 @@ public class MaterialService {
 
         return materialRepository.findAll(pageable);
     }
+
+    //관리자 재료 검색
+    public Page<Material> pageGetMaterialSearch(String keyword, String select, Pageable pageable){
+
+        if(select.equals("materialTitle")){
+            return materialRepository.findByMaterialTitleContaining(keyword, pageable);
+
+        }else if(select.equals("materialRegDate")){
+            return materialRepository.findByMaterialDistDateContaining(keyword, pageable);
+
+        }else if(select.equals("materialSale")){
+            return materialRepository.findBymaterialSaleContaining(keyword, pageable);
+        }
+        return null;
+    }
+
     //관리자 재료 페이지 다음장 유무 확인
     @Transactional
     public Boolean getListCheck(Pageable pageable) {
@@ -139,6 +155,16 @@ public class MaterialService {
         Material material = optionalMaterial.get();
 
         materialRepository.delete(material);
+    }
+
+    //관리자 재료 수정
+    @Transactional
+    public void adminmaterialUpdate(Long materialKey, MaterialDto materialDto){
+        Optional<Material> optionalMaterial = materialRepository.findById(materialKey);
+        Material material = optionalMaterial.get();
+
+        material.materialUpdate(materialDto.getMaterialPrice(), materialDto.getMaterialCountry(), materialDto.getMaterialSale());
+
     }
 
 

@@ -63,7 +63,7 @@ public class MaterialDto {
                 .materialInventory(materialInventory)
                 //.materialRegDate(materialRegDate)
                 .materialDistDate(materialDistDate)
-                .materialSale(materialSale)
+                //.materialSale(materialSale)
                 .materialDeImg(materialDeImg)
                 .materialUnit(materialUnit)
                 .materialPrice(materialPrice).build();
