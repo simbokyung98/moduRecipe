@@ -51,18 +51,18 @@ public class Recipe {
 
 
 
-    @Builder
-    public Recipe(Long recipekey, String recipetitle, String recipetype, String recipecreator, String recipedetail, String recipelink, int recipehit, Date recipeupdated, String recipemateriallist){
-        this.recipekey=recipekey;
-        this.recipetitle=recipetitle;
-        this.recipetype=recipetype;
-        this.recipecreator=recipecreator;
-        this.recipedetail=recipedetail;
-        this.recipelink=recipelink;
-        this.recipehit=recipehit;
-        this.recipeupdated=recipeupdated;
-        this.recipemateriallist=recipemateriallist;
+        @Builder
+        public Recipe(Long recipekey, String recipetitle, String recipetype, String recipecreator, String recipedetail, String recipelink, int recipehit, Date recipeupdated, String recipemateriallist){
+            this.recipekey=recipekey;
+            this.recipetitle=recipetitle;
+            this.recipetype=recipetype;
+            this.recipecreator=recipecreator;
+            this.recipedetail=recipedetail;
+            this.recipelink=recipelink;
+            this.recipehit=recipehit;
+            this.recipeupdated=recipeupdated;
+            this.recipemateriallist=recipemateriallist;
 
-    }
+        }
 
 }
