@@ -1,5 +1,6 @@
 package gp.domain;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,14 +14,18 @@ import javax.persistence.*;
 @Getter
 @Builder
 @AllArgsConstructor
+
+@Table(name = "material")
 public class Material {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)//오토키
+    @Column
     private Long materialKey;
 
     @Column(length = 40)
     private String materialTitle;
+
 
     @Column(length = 45)
     private String materialDetail;
@@ -50,6 +55,7 @@ public class Material {
     @Builder.Default
     @Column(length = 40)
     private String materialSale = "판매";
+
 
     @Column(length = 100)
     private String materialDeImg;

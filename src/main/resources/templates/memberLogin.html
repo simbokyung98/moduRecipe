@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="../static/css/style2.css">
-<link rel="stylesheet" href="../static/css/material.css">
 <head>
     <meta charset="UTF-8">
     <title>모두의 레시피</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script th:src="@{../static/js/memberLogin.js}"></script>
+    <script type="text/javascript" src="/js/login.js"></script>
+
 </head>
 <style>
    @font-face {
@@ -187,22 +187,21 @@
             </p>
 
             <input type="button" class="id_find" onclick="location.href='idfind.jsp'" value="아이디 찾기">
+
             <input type="button"  class="pwd_find" onclick="location.href='pwdfind.jsp'" value="비밀번호 찾기">
 
         </div>
+    </form>
+    <br>
+    <br>
 
-        <br>
-        <br>
+
+    <form th:action="@{/adLogin}" method="get">
+        <input type="submit" th:if = "${session.admin == null}" class="Administrator_Login" value="관리자 로그인">
     </form>
 
-    <form action="/user/jo" method="post">
-        <p>
-            <input type="button" class="join" value="회원가입" href="/memberJoin.jsp">
-        </p>
-        <p>
-            <input type="submit" class="Administrator_Login" value="관리자 로그인" href="/adminLogin.jsp">
-        </p>
-    </form>
+
+
 </div>
 <div th:replace="fragments/footer::footer"></div>
 </body>

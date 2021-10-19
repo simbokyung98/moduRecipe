@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>모두의 레시피</title>
+    <link rel="stylesheet" href="../static/css/style2.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script>
+   $(document).ready(function(){
+      $('#show_but').click(function(){
+
+           if($('.best_menu_wrap_hide').css('display') == 'none'){
+              $('.best_menu_wrap_hide').show();
+              $('#show_but').html('hide');
+           }else{
+              $('.best_menu_wrap_hide').hide();
+              $('#show_but').html('open');
+           }
+
+      });
+
+      $('#new_show_but').click(function(){
+
+           if($('.new_menu_wrap_hide').css('display') == 'none'){
+              $('.new_menu_wrap_hide').show();
+              $('#new_show_but').html('hide');
+           }else{
+              $('.new_menu_wrap_hide').hide();
+              $('#new_show_but').html('open');
+           }
+
+      });
+   });
+</script>
+</head>
+<style>
+	@font-face {
+		 font-family: 'NanumBarunGothic';
+		 font-style: normal;
+		 font-weight: 400;
+		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+	}
+
+	 *{
+      font-family: 'NanumBarunGothic';
+   }
+
+   .b_main_wrap{
+      width: 1200px;
+      height: 2000px;
+   }
+
+   .best_menu_wrap{
+      width: 1200px;
+   }
+   .new_menu_wrap{
+      width: 1200px;
+   }
+   .best_menu_h2{
+      text-align: center;
+      margin-top: 100px;
+      margin-bottom: 20px;
+   }
+   .best_menu_wrap_inside{
+      width: 1200px;
+   }
+   .new_menu_wrap_inside{
+      width: 1200px;
+   }
+   .main_recom_recipe{
+      float: left;
+      width: 300px;
+      height: 200px;
+   }
+   .best_link_but{
+      text-align: left;
+      float: left;
+   }
+
+   .new_link_but {
+   	  text-align: left;
+      float: left;
+   }
+   .best_menu_wrap_hide{
+      clear: left;
+      display: none;
+   }
+   .new_menu_wrap_hide{
+      clear: left;
+      display: none;
+   }
+   .bmw_but_wrap{
+      clear: left;
+      width: 1200px;
+      height: 80px;
+      text-align: center;
+   }
+
+   .bmw_but_wrap #show_but {
+	    text-align: center;
+	    font-size: 30px;
+	    background-color: white;
+	    border-color: gray;
+	    margin-top: 30px;
+	    cursor:pointer;
+  	}
+
+  	.bmw_but_wrap #show_but:active {
+	    background-color: #a3a3a3;
+	    color: white;
+  	}
+
+  	.bmw_but_wrap #new_show_but {
+	    text-align: center;
+	    font-size: 30px;
+	    background-color: white;
+	    border-color: gray;
+	    margin-top: 30px;
+	    cursor:pointer;
+  	}
+
+  	.bmw_but_wrap #new_show_but:active {
+	    background-color: #a3a3a3;
+	    color: white;
+  	}
+
+  	.best_menu_wrap .mrr_frist {
+  		margin-top: 40px;
+  	}
+
+  	.new_menu_wrap .mrr_frist {
+  		margin-top: 40px;
+  	}
+
+  	.best_menu_wrap_more .mrr_frist {
+  		margin-top: 40px;
+  	}
+
+  	.best_menu_wrap .mrr_frist .best_link_but {
+  		 border: none;
+  		 border-top: 1px solid orange;
+  		 background-color: white;
+  		 margin-top: 15px;
+  		 padding: 10px;
+  		 display: block;
+  		 overflow: hidden;
+  		 text-overflow: ellipsis;
+  		 white-space: normal;
+  		 -webkit-line-clamp: 2;
+  		 font-size: 20px;
+  		 cursor: pointer;
+  	}
+  	.best_menu_wrap .mrr_frist .hit {
+  		 border: none;
+  		 background-color: white;
+  		 margin-top: 15px;
+  		 padding: 10px;
+  		 display: block;
+  		 overflow: hidden;
+  		 text-overflow: ellipsis;
+  		 white-space: normal;
+  		 -webkit-line-clamp: 2;
+  		 font-size: 10px;
+  		 cursor: pointer;
+  	}
+
+  	.best_menu_wrap .mrr_frist .date {
+  		 border: none;
+  		 background-color: white;
+  		 margin-top: 15px;
+  		 padding: 10px;
+  		 display: block;
+  		 overflow: hidden;
+  		 text-overflow: ellipsis;
+  		 white-space: normal;
+  		 -webkit-line-clamp: 2;
+  		 font-size: 10px;
+  		 cursor: pointer;
+  	}
+
+  	.best_menu_wrap_more .mrr_frist .new_link_but {
+  		 border: none;
+  		 border-top: 1px solid orange;
+  		 background-color: white;
+  		 margin-top: 15px;
+  		 padding: 10px;
+  		 display: block;
+  		 overflow: hidden;
+  		 text-overflow: ellipsis;
+  		 white-space: normal;
+  		 -webkit-line-clamp: 2;
+  		 font-size: 17px;
+  		 cursor: pointer;
+  	}
+
+  	.best_menu_wrap_start .mrr_frist .new_link_but {
+  		 border: none;
+  		 border-top: 1px solid orange;
+  		 background-color: white;
+  		 margin-top: 15px;
+  		 padding: 10px;
+  		 display: block;
+  		 overflow: hidden;
+  		 text-overflow: ellipsis;
+  		 white-space: normal;
+  		 -webkit-line-clamp: 2;
+  		 font-size: 17px;
+  		 cursor: pointer;
+  	}
+
+  	.best_menu_wrap .new_menu_wrap_hide .mrr_frist .new_link_but {
+  		 border: none;
+  		 border-top: 1px solid orange;
+  		 background-color: white;
+  		 margin-top: 15px;
+  		 padding: 10px;
+  		 display: block;
+  		 overflow: hidden;
+  		 text-overflow: ellipsis;
+  		 white-space: normal;
+  		 -webkit-line-clamp: 2;
+  		 font-size: 17px;
+  		 cursor: pointer;
+  	}
+
+  	.best_menu_wrap .new_menu_wrap_hide .mrr_frist .new_link_but {
+  		 border: none;
+  		 border-top: 1px solid orange;
+  		 background-color: white;
+  		 margin-top: 15px;
+  		 padding: 10px;
+  		 display: block;
+  		 overflow: hidden;
+  		 text-overflow: ellipsis;
+  		 white-space: normal;
+  		 -webkit-line-clamp: 2;
+  		 font-size: 17px;
+  		 cursor: pointer;
+  	}
+
+
+  	.best_menu_wrap .mrr_frist .best_link_but:hover{
+	  background-color: orange;
+	  color: white;
+	}
+
+  	.best_menu_wrap_more .mrr_frist .new_link_but:hover{
+	  background-color: orange;
+	  color: white;
+	}
+</style>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+<main class="b_main_wrap">
+    <div class="best_menu_wrap_more">
+        <div class="best_menu_wrap_start">
+            <div class="best_menu_wrap">
+                <div class="best_menu_wrap_inside">
+                    <h2 class="best_menu_h2">New</h2>
+                    <hr width = "40px" color = "gray" text-align= "center"><br>
+                    <div class="main_recom_recipe mrr_frist" th:each="newlist: ${newlist}">
+                        <a class="video" th:href="@{'/recipedetail/'+${newlist.recipekey}}"><iframe style="pointer-events:none;" width="250" height="150" th:src="${newlist.recipelink}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <button type="button" class="best_link_but"><strong th:text = "${newlist.recipetitle}"></strong></button></a>
+                        <a class="date" th:text="${newlist.recipeupdated}"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div th:replace="fragments/footer::footer"></div>
+
+</body>
+</html>

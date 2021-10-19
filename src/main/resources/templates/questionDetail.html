@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../static/css/style2.css">
+<link rel="stylesheet" href="../static/css/main.css">
+<head>
+	<meta charset="UTF-8">
+	<title>1:1 질문 확인</title>
+	<style type="text/css">
+	@font-face {
+		 font-family: 'NanumBarunGothic';
+		 font-style: normal;
+		 font-weight: 400;
+		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+	}
+
+	.nanumbarungothic * {
+		 font-family: 'NanumBarunGothic', sans-serif;
+	}
+	@font-face {
+	    font-family: 'Cafe24Simplehae';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Simplehae.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	@font-face {
+	    font-family: 'Cafe24Dangdanghae';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.2/Cafe24Dangdanghae.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	*{
+		margin: 0 auto;
+		padding: 0;
+	}
+	#adminque_main{
+		height:2000px;
+		width:1200px;
+		margin: 0 auto;
+		padding-left: 5px;
+	}
+	#adminque_section_wrap{
+		float: left;
+		width: 79%;
+
+	}
+	#adminque_section{
+		width: 100%;
+		height: 50px;
+		background: #dddddd;
+		box-shadow : 2px 2px 5px #999;
+		margin: 60px 0 0 10px;
+		letter-spacing: 4px;
+	}
+	#adminque_section p{
+		padding: 15px 0 0 20px;
+		font-family: 'Cafe24Dangdanghae';
+		font-size: 20px;
+
+	}
+	#am_section_content{
+		width: 100%;
+		height: 1200px;
+		background: #dddddd;
+		box-shadow : 2px 2px 5px #999;
+		margin: 10px 0 0 10px;
+		letter-spacing: 4px;
+	}
+	.am_quede_wrap {
+		padding: 20px 0 10px 20px;
+		width: 250px;
+		border-bottom: 2px solid orange;
+		float: left;
+
+	}
+	.am_quede_wrap p{
+		font-family: 'NanumBarunGothic', sans-serif;
+		font-size: 25px;
+		font-weight: bold;
+	}
+	.am_quede_conwrap{
+		clear: left;
+		padding: 20px 0 0 10px;
+		height: 300px;
+
+	}
+	.am_quede_title{
+		border-top: 2px solid #cccccc;
+		height: 100px;
+		width: 90%;
+		padding: 13px 20px 13px 0;
+		background: white;
+	}
+	.am_quede_title2{
+		border-bottom: 2px solid #cccccc;
+		border-top: 2px solid #cccccc;
+		height: 300px;
+		width: 90%;
+		padding: 13px 20px 0 0;
+		background: white;
+	}
+	#aqt_con{
+		font-family: 'NanumBarunGothic';
+		font-size: 20px;
+		font-weight: bold;
+	}
+	#aqt_date{
+		font-family: 'NanumBarunGothic';
+		font-size: 20px;
+		float: right;
+	}
+	.am_quede_content{
+		border-bottom: 2px solid #cccccc;
+		padding: 30px 50px 0 50px;
+		height: 300px;
+		width: 90%;
+		background: white;
+	}
+	.am_quede_coment{
+		width: 95%;
+		height: 300px;
+		text-align: center;
+		padding-top: 30px;
+	}
+	#aqc_p{
+		text-align: left;
+		padding-bottom: 10px;
+		font-family: 'NanumBarunGothic';
+		font-size: 18px;
+	}
+	#aqc_text{
+		padding: 10px 0 0 10px;
+		font-family: 'NanumBarunGothic';
+		font-size: 15px;
+	}
+	#aqc_subbut{
+		border: 0;
+		background: orange;
+		color: white;
+		padding: 10px 20px;
+		font-family: 'Cafe24Simplehae';
+		font-size: 18px;
+		margin-top: 10px;
+	}
+	#aqc_backbut{
+		border: 2px solid orange;
+		text-decoration: none;
+		color: orange;
+		padding: 8px 14px;
+		font-family: 'Cafe24Simplehae';
+		font-size: 18px;
+		background: white;
+	}
+	.notion_table_thead{
+			border-bottom: 1px solid gray;
+		}
+		.notion_table_th{
+			font-family: 'Cafe24Simplehae';
+			padding: 20px 0 20px 0;
+			border-bottom: 1px solid gray;
+		}
+
+</style>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+
+<main id="adminque_main_wrap">
+	<section id="adminque_main">
+		<section id="adminque_section_wrap">
+			<div id="adminque_section">
+				<p>1:1 질문 관리</p>
+			</div>
+			<div id="am_section_content" >
+				<div class="am_quede_wrap" style="margin-left:50px">
+					<p>1:1문의 세부내용<p>
+				</div>
+				<div class="am_quede_conwrap">
+
+					<div class="am_quede_title">
+						<form th:action="@{'/qnadetail/' + ${qnaDto.qnakey}}" method="get">
+							<input type="hidden" name="_method" value="put"/>
+							<table style="width:100% ;" >
+							<thead class="notion_table_thead">
+							<tr >
+
+
+								<th class="notion_table_th" style="text-align:center; padding:0px;">작성일자</th>
+								<th class="notion_table_th" style="text-align:center;">제&nbsp;&nbsp;&nbsp;&nbsp;목</th>
+								<th class="notion_table_th" style="text-align:center;">답변현황</th>
+
+							</tr>
+							</thead>
+								<tbody style="padding-bottom:20px;">
+								<tr >
+									<td style="text-align:center;" th:text="${qnaDto.qnadate}"></td>
+									<td style="text-align:center;"  th:text="${qnaDto.qnatitle}"></td>
+									<td style="text-align:center;"  th:text="${qnaDto.answerstate}"></td>
+								</tr>
+								</tbody>
+
+							</table>
+							<div style="margin-top:50px; margin-left:20px;"><h2>질문내용</h2></div>
+							<div style="margin-top:50px; width:850px;" class="am_quede_title2" name="qnacontent" th:text="${qnaDto.qnacontent}">
+
+							</div>
+							<div  style="margin-top:50px; margin-left:20px;"><h2>답&nbsp;&nbsp;&nbsp;&nbsp;변</h2></div>
+							<div style="margin-top:50px; width:850px;" class="am_quede_title2" name="answercontent" th:text="${qnaDto.answercontent}"></div>
+					<div class="am_quede_coment" >
+							<a th:href="@{/myqnamain}" id="aqc_backbut">목록가기</a>
+
+					</div>
+						</form>
+
+
+				</div>
+			</div>
+			</div>
+		</section>
+	</section>
+</main>
+<footer>
+</footer>
+</body>
+</html>

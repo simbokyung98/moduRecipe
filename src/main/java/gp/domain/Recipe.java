@@ -4,10 +4,16 @@ package gp.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import gp.web.dto.RecipeDto;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+
 import java.util.List;
 
 @Getter
@@ -16,6 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "recipe")
 public class Recipe {
+
     @Id
     @Column(name = "recipekey")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -75,5 +82,6 @@ public class Recipe {
         this.recipearrang = recipearrang;
 
     }
+
 
 }

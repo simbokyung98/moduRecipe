@@ -127,7 +127,8 @@ function btn(sample){
 
 
 </script>
-    <script src="/js/memberAddress.js"></script>
+    <script src="../static/js/memberAddress.js"></script>
+
     <script type="text/javascript" src="/js/memberJoin.js"></script>
 </head>
 <style>
@@ -410,7 +411,7 @@ function btn(sample){
         <a class="passwd">비밀번호</a>
         <input type="password" class="pwd" name="password" ><br>
         <a class="passwdche">비밀번호확인</a>
-        <input type="password" class="pwdCheck"  ><br>
+        <input type="password" class="pwdCheck" ><br>
         <a class="Na">이름</a>
         <input type="text" class="name" name="name" ><br>
         <a class="adr">주소</a>
@@ -586,9 +587,9 @@ function btn(sample){
         </div>
         <br>
         <a class="gen">성별</a>
-        <input type="radio" name="gender" class="MS_radio" value="1"/>
+        <input type="radio" name="gender" class="MS_radio" value="남"/>
         <a class="gender">남</a>
-        <input type="radio" name="gender" class="MS_radio" value="2"/>
+        <input type="radio" name="gender" class="MS_radio" value="여"/>
         <a class="gender">여</a>
 
         <br>
@@ -618,6 +619,7 @@ function btn(sample){
             <label for="mail_agree">이메일수신동의</label>
         </div>
         <input type="submit" class="join" value="가입하기">
+
     </form>
 </div>
 <div th:replace="fragments/footer::footer"></div>

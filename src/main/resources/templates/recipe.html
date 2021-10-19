@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>모두의 레시피</title>
+    <link rel="stylesheet" href="../static/css/style2.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script>
+   $(document).ready(function(){
+      $('#show_but').click(function(){
+
+           if($('.best_menu_wrap_hide').css('display') == 'none'){
+              $('.best_menu_wrap_hide').show();
+              $('#show_but').html('hide');
+           }else{
+              $('.best_menu_wrap_hide').hide();
+              $('#show_but').html('open');
+           }
+
+      });
+
+      $('#new_show_but').click(function(){
+
+           if($('.new_menu_wrap_hide').css('display') == 'none'){
+              $('.new_menu_wrap_hide').show();
+              $('#new_show_but').html('hide');
+           }else{
+              $('.new_menu_wrap_hide').hide();
+              $('#new_show_but').html('open');
+           }
+
+      });
+   });
+</script>
+</head>
+<style>
+	@font-face {
+		 font-family: 'NanumBarunGothic';
+		 font-style: normal;
+		 font-weight: 400;
+		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+	}
+
+	 *{
+      margin: 0 auto;
+      padding: 0;
+      font-family: 'NanumBarunGothic';
+   }
+
+   .best_menu_wrap{
+      width: 1200px;
+      height: 850px;
+   }
+   .new_menu_wrap{
+      width: 1200px;
+      height: 2000px;
+   }
+   .best_menu_h2{
+      text-align: center;
+      margin-top: 100px;
+      margin-bottom: 20px;
+   }
+
+   .new_menu_h2{
+      text-align: center;
+      margin-top: 100px;
+      margin-bottom: 20px;
+   }
+
+   .best_menu_wrap_inside{
+      width: 1200px;
+   }
+   .new_menu_wrap_inside{
+      width: 1200px;
+   }
+   .main_recom_recipe{
+      float: left;
+      width: 300px;
+      height: 200px;
+   }
+   .best_link_but{
+      text-align: left;
+      float: left;
+   }
+
+   .new_link_but {
+   	  text-align: left;
+      float: left;
+   }
+   .best_menu_wrap_hide{
+      clear: left;
+      display: none;
+   }
+   .new_menu_wrap_hide{
+      clear: left;
+      display: none;
+   }
+   .bmw_but_wrap{
+      clear: left;
+      width: 1200px;
+      height: 50px;
+      text-align: center;
+   }
+
+   .bmw_but_wrap #show_but {
+	    text-align: center;
+	    font-size: 30px;
+	    background-color: white;
+	    border-color: gray;
+	    margin-top: 30px;
+	    cursor:pointer;
+  	}
+
+  	.bmw_but_wrap #show_but:active {
+	    background-color: #a3a3a3;
+	    color: white;
+  	}
+
+  	.bmw_but_wrap #new_show_but {
+	    text-align: center;
+	    font-size: 30px;
+	    background-color: white;
+	    border-color: gray;
+	    margin-top: 30px;
+	    cursor:pointer;
+  	}
+
+  	.bmw_but_wrap #new_show_but:active {
+	    background-color: #a3a3a3;
+	    color: white;
+  	}
+
+  	.best_menu_wrap .mrr_frist {
+  		margin-top: 40px;
+  	}
+
+  	.new_menu_wrap .mrr_frist {
+  		margin-top: 40px;
+  	}
+
+  	.best_menu_wrap .mrr_frist .best_link_but {
+  		 border: none;
+  		 border-top: 1px solid orange;
+  		 background-color: white;
+  		 margin-top: 15px;
+  		 padding: 10px;
+  		 display: block;
+  		 overflow: hidden;
+  		 text-overflow: ellipsis;
+  		 white-space: normal;
+  		 -webkit-line-clamp: 2;
+  		 font-size: 20px;
+  		 cursor: pointer;
+  	}
+
+  	.best_menu_wrap .mrr_frist .hit {
+  		 border: none;
+  		 background-color: white;
+  		 margin-top: 15px;
+  		 padding: 10px;
+  		 display: block;
+  		 overflow: hidden;
+  		 text-overflow: ellipsis;
+  		 white-space: normal;
+  		 -webkit-line-clamp: 2;
+  		 font-size: 10px;
+  		 cursor: pointer;
+  	}
+
+  	.new_menu_wrap .mrr_frist .date {
+  		 border: none;
+  		 background-color: white;
+  		 margin-top: 15px;
+  		 padding: 10px;
+  		 display: block;
+  		 overflow: hidden;
+  		 text-overflow: ellipsis;
+  		 white-space: normal;
+  		 -webkit-line-clamp: 2;
+  		 font-size: 10px;
+  		 cursor: pointer;
+  	}
+
+  	.new_menu_wrap .mrr_frist .new_link_but {
+  		 border: none;
+  		 border-top: 1px solid orange;
+  		 background-color: white;
+  		 margin-top: 15px;
+  		 padding: 10px;
+  		 display: block;
+  		 overflow: hidden;
+  		 text-overflow: ellipsis;
+  		 white-space: normal;
+  		 -webkit-line-clamp: 2;
+  		 font-size: 17px;
+  		 cursor: pointer;
+  	}
+
+
+  	.best_menu_wrap .mrr_frist .best_link_but:hover{
+	  background-color: orange;
+	  color: white;
+
+	}
+
+	.new_menu_wrap .mrr_frist .new_link_but:hover{
+	  background-color: orange;
+	  color: white;
+
+	}
+
+</style>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+<form>
+<main class="b_main_wrap">
+    <div class="best_menu_wrap">
+        <div class="best_menu_wrap_inside" >
+            <h2 class="best_menu_h2">BEST</h2>
+            <hr width = "40px" color = "gray" text-align= "center"><br>
+            <div class="main_recom_recipe mrr_frist" th:each="recipelist: ${recipelist}">
+                <a class="video" th:href="@{'/recipedetail/'+${recipelist.recipekey}}"><iframe style="pointer-events:none;" width="250" height="150" th:src="${recipelist.recipelink}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <button type="button" class="best_link_but"><strong th:text = "${recipelist.recipetitle}"></strong></button></a>
+                <a class="hit">조회수:<strong th:text="${recipelist.recipehit}"></strong></a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="new_menu_wrap">
+        <div class="new_menu_wrap_inside" >
+            <h2 class="new_menu_h2">NEW</h2>
+            <hr width = "40px" color = "gray" text-align= "center"><br>
+            <div class="main_recom_recipe mrr_frist" th:each="recipelist: ${recipelist}">
+                <a class="video" th:href="@{'/recipedetail/'+${recipelist.recipekey}}"><iframe style="pointer-events:none;" width="250" height="150" th:src="${recipelist.recipelink}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <button type="button" class="new_link_but"><strong th:text = "${recipelist.recipetitle}"></strong></button></a>
+                <a class="date"><strong th:text="${recipelist.recipeupdated}"></strong></a>
+            </div>
+        </div>
+    </div>
+
+</main>
+</form>
+<footer th:insert="footer.html"></footer>
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>모두의 레시피</title>
+  <link rel="stylesheet" href="../static/css/style2.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script type="text/javascript" src="/js/login.js"></script>
+</head>
+<style>
+   @font-face {
+       font-family: 'NanumBarunGothic';
+       font-style: normal;
+       font-weight: 400;
+       src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+       src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+   }
+
+   body {
+      font-family: 'NanumBarunGothic';
+      height:100%;
+         margin:0;
+   }
+
+
+
+   .login-form {
+      width: 300px;
+      margin-right: auto;
+       margin-left: auto;
+       margin-top:50px;
+       padding: 20px;
+      text-align: center;
+       border: none;
+   }
+
+   .id {
+         font-size: 14px;
+         padding: 10px;
+         border: none;
+         border-bottom: 1px solid gray;
+         width: 260px;
+         margin-bottom: 10px;
+
+   }
+
+   .pwd {
+         font-size: 14px;
+         padding: 10px;
+         border: none;
+         border-bottom: 1px solid gray;
+         width: 260px;
+         margin-bottom: 10px;
+
+   }
+
+   .log {
+     font-size: 14px;
+     border: 3px solid gray;
+     padding: 10px;
+     width: 260px;
+     background-color: white;
+     margin-bottom: 30px;
+     color: black;
+     cursor:pointer;
+   }
+
+   .log a:hover, .log a:focus {
+      background-color: black;
+      color: white;
+   }
+
+   .log a:active {
+      background-color:black;
+   }
+
+   .check {
+     text-align: right;
+   }
+
+   .check input[type='checkbox']
+   {
+     width: 20px;
+     height: 20px;
+     border-radius: 0;
+     border: 0;
+     margin: 0;
+     margin-right: 5px;
+     padding: 0;
+     cursor: pointer;
+   }
+
+   .check label {
+     font-size: 16px;
+     line-height: 20px;
+     font-family: "notoSans-Light", "맑은 고딕", "Malgun Gothic", sans-serif;
+     color: #555;
+     vertical-align: middle;
+   }
+
+
+
+   .id_find {
+       float: center;
+       font-size: 12px;
+       margin-top: -20px;
+       padding: 0px;
+       border: none;
+       width: 80px;
+       margin-bottom: 10px;
+       background-color: white;
+       color: black;
+
+   }
+
+   .pwd_find {
+      text-align: right;
+        font-size: 12px;
+        margin-top: -20px;
+        padding: 0px;
+        width: 80px;
+        border: none;
+        margin-bottom: 10px;
+        background-color: white;
+      color: black;
+   }
+
+   .join {
+      background-color: white;
+      font-size: 15px;
+      border: none;
+
+   }
+
+   .Administrator_Login {
+      background-color: white;
+      font-size: 15px;
+      border: none;
+   }
+   p {
+      font-size: 13px;
+      color: gray;
+
+   }
+
+   .check {
+      overflow: hidden;
+      margin-top: -12px;
+      float: left;
+   }
+
+   input[type="checkbox"] {
+      margin-top: -1px;
+      width: 18px;
+      height: 18px;
+      border: 0;
+      cursor: pointer;
+      border-radius: 50%;
+      background-size: 100% 100%;
+   }
+
+   input[type=checkbox], input[type=radio] {
+      margin-right: 4px;
+   }
+</style>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<script type="text/javascript"></script>
+<script type="memberLogin.js"></script>
+</script>
+<div class="login-form">
+  <h2 align="center">Admin Login</h2>
+  <form action="/adminLog" method="post">
+    <input type="text" class="id" name="username" placeholder="ID">
+    <input type="password" class="pwd" name="password"  placeholder="PASSWORD">
+    <input type="submit" class="log" value="로그인"><br>
+    <br>
+    <br>
+
+  </form>
+
+</div>
+<div th:replace="fragments/footer::footer"></div>
+</body>
+</html>
+

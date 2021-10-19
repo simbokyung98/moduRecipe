@@ -33,6 +33,9 @@
        right: 15%;
        cursor:pointer;
     }
+    .video{
+        display:block;
+    }
     #main_content_wrap{
        width: 1200px;
        margin: 0 auto;

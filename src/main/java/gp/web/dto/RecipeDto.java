@@ -10,6 +10,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Date;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,8 +28,11 @@ public class RecipeDto {
     private Date recipeupdated;
 
 
+
+
+
     @Builder
-    public RecipeDto(Long recipekey, String recipetitle, String recipetype, Integer recipehit, String recipecreator, String recipedetail, String recipelink, Date recipeupdated, String recipearrang) {
+    public RecipeDto(Long recipekey, String recipetitle, String recipetype, String recipecreator, String recipedetail, String recipelink, int recipehit, Date recipeupdated,String recipemateriallist) {
         this.recipekey = recipekey;
         this.recipetitle = recipetitle;
         this.recipetype = recipetype;
@@ -37,6 +42,8 @@ public class RecipeDto {
         this.recipehit = recipehit;
         this.recipeupdated = recipeupdated;
         this.recipearrang = recipearrang;
+
+
 
 
     }
@@ -51,6 +58,9 @@ public class RecipeDto {
                 .recipelink(recipelink)
                 .recipeupdated(recipeupdated)
                 .recipearrang(recipearrang)
+                .recipehit(recipehit)
                 .build();
+
     }
+
 }
