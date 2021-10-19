@@ -49,20 +49,15 @@ public class Recipe {
     @CreationTimestamp
     @Column(name = "recipeupdated")
     private Date recipeupdated;
-
-
-
-    @Builder
-    public Recipe(Long recipekey, String recipetitle, String recipetype, String recipecreator, String recipedetail, String recipelink, int recipehit, Date recipeupdated){
-    @Column(name = "recipeMaterialList")
-    private String recipemateriallist;
+    @Column(name = "recipearrang")
+    private String recipearrang;
 
 
 
 
 
     @Builder
-    public Recipe(Long recipekey, String recipetitle, String recipetype, String recipecreator, String recipedetail, String recipelink, int recipehit, Date recipeupdated, String recipemateriallist){
+    public Recipe(Long recipekey, String recipetitle, String recipetype, String recipecreator, String recipedetail, String recipelink, int recipehit, Date recipeupdated, String recipearrang){
         this.recipekey=recipekey;
         this.recipetitle=recipetitle;
         this.recipetype=recipetype;
@@ -71,7 +66,7 @@ public class Recipe {
         this.recipelink=recipelink;
         this.recipehit=recipehit;
         this.recipeupdated=recipeupdated;
-        this.recipemateriallist=recipemateriallist;
+        this.recipearrang=recipearrang;
 
     }
 

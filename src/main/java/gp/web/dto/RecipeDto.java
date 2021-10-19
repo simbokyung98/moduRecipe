@@ -26,13 +26,13 @@ public class RecipeDto {
     private Integer recipehit;
     private Date recipeupdated;
 
-    private String recipemateriallist;
+    private String recipearrang;
 
 
 
 
     @Builder
-    public RecipeDto(Long recipekey, String recipetitle, String recipetype, String recipecreator, String recipedetail, String recipelink, int recipehit, Date recipeupdated,String recipemateriallist) {
+    public RecipeDto(Long recipekey, String recipetitle, String recipetype, String recipecreator, String recipedetail, String recipelink, int recipehit, Date recipeupdated,String recipearrang) {
         this.recipekey = recipekey;
         this.recipetitle = recipetitle;
         this.recipetype = recipetype;
@@ -42,7 +42,7 @@ public class RecipeDto {
         this.recipehit = recipehit;
         this.recipeupdated = recipeupdated;
 
-        this.recipemateriallist= recipemateriallist;
+        this.recipearrang= recipearrang;
 
 
 
@@ -60,7 +60,7 @@ public class RecipeDto {
                 .recipelink(recipelink)
                 .recipehit(recipehit)
                 .recipeupdated(recipeupdated)
-                .recipemateriallist(recipemateriallist)
+                .recipearrang(recipearrang)
                 .build();
 
     }
