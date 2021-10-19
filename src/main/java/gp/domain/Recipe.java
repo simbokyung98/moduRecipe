@@ -54,8 +54,6 @@ public class Recipe {
     @CreationTimestamp
     @Column(name = "recipeupdated")
     private Date recipeupdated;
-    @Column(name = "recipearrang")
-    private String recipearrang;
 
 
 

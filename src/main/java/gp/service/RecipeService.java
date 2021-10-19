@@ -121,8 +121,6 @@ public class RecipeService {
         return recipeDtoList;
     }
 
-    public List<RecipeDto> getbestrecipe(){
-        List<Recipe> recipes = recipeRepository.bestrecipe();
 
     // creator best
     public List<RecipeDto> getcreatorbestRecipe(String recipecreator) {

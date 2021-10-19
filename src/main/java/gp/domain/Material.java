@@ -86,12 +86,6 @@ public class Material {
         this.materialUnit = materialUnit;
         this.materialPrice = materialPrice;
     }
-    //재료 업데이트
-    public void materialUpdate(String materialPrice, String materialCountry, String materialSale){
-        this.materialPrice = materialPrice;
-        this.materialCountry = materialCountry;
-        this.materialSale = materialSale;
-    }
 
     //재료 업데이트
     public void materialUpdate(String materialPrice, String materialCountry, String materialSale){
