@@ -84,4 +84,5 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 
 
     public List<Recipe> findByRecipecreator(String recipecreator);
+
 }

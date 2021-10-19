@@ -1,9 +1,12 @@
 package gp.web;
 
 import gp.service.AdminService;
+import gp.domain.Member;
+import gp.domain.MemberRepository;
 import gp.service.MemberService;
 import gp.web.dto.AdminDto;
 import gp.web.dto.MemberDto;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,21 +20,25 @@ import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
+
 public class MemberController {
-
     private final MemberService memberService;
+
     private final AdminService adminService;
+    private final HttpServletRequest request;
     private final HttpSession session;
+    private final MemberRepository memberRepository;
 
-
-
-
-
-    // 회원가입
-    @GetMapping("/user/join")
+    @GetMapping("/join")
     public String join() {
         return "/memberJoin";
     }
@@ -54,22 +61,21 @@ public class MemberController {
     // 사용자 로그인 처리
     @PostMapping("/userLogin")
     public String userLogin(MemberDto memberDto) {
+
         MemberDto result = memberService.userLogin(memberDto);
 
         if(result != null){
 
             session.setAttribute("user", result);
+            session.setAttribute("username",memberDto.getUsername());
+
             return "redirect:/" ;
 
-        }
-        else{
+        }else{
             return "redirect:/login";
         }
-
-
     }
-
-    // 사용자 로그아웃
+    //로그아웃
     @GetMapping("/userlogout")
     public String logout(){
         session.setAttribute("user", null);
@@ -121,11 +127,13 @@ public class MemberController {
         if(session.getAttribute("user")==null){
             return "redirect:/login";
         } else {
-            return "membercheck";
+
+            return "/membercheck";
         }
     }
     @PostMapping("/membercheck")
     public String pwcheck(MemberDto memberDto, HttpSession session, Model model, RedirectAttributes attr){
+
         MemberDto loginMember=(MemberDto)session.getAttribute("user");
         memberDto.setUsername(loginMember.getUsername());
         MemberDto memberXO = memberService.userLogin(memberDto);
@@ -134,25 +142,30 @@ public class MemberController {
             return "redirect:/membercheck";
         }
         session.setAttribute("user", memberXO);
-        return "redirect:/datachange";
+
+        System.out.println("memberXO + " + memberXO.toString());
+        return "datachange";
 
     }
 
-    @GetMapping("/datachange")
-    public String updateform(Model model, HttpSession session){
-        if(session.getAttribute("user")==null){
-            return "redirect:/login";
-        } else {
-            return "/datachange";
-        }
+    @PostMapping("/datachange/{id}")
+    public String pwChange(MemberDto memberDto, HttpSession session, Model model, RedirectAttributes attr, @PathVariable("id") Long id){
+
+        memberService.userUpdatePwd(id, memberDto.getPassword());
+
+        return "/memberLogin";
 
     }
 
+    @DeleteMapping("/member/{id}")
+    public String deleteUser(@PathVariable("id") Long id){
 
-    //---------------------------------------------------------
+        memberService.deleteUser(id);
 
+        return "/memberLogin";
 
-
+    }
 
 
 }
+

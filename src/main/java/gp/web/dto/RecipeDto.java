@@ -1,12 +1,16 @@
 package gp.web.dto;
 
+
+import gp.domain.Material;
 import gp.domain.Recipe;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,10 +25,14 @@ public class RecipeDto {
     private String recipelink;
     private Integer recipehit;
     private Date recipeupdated;
-    //private Material material;
+
+    private String recipemateriallist;
+
+
+
 
     @Builder
-    public RecipeDto(Long recipekey, String recipetitle, String recipetype, String recipecreator, String recipedetail, String recipelink, int recipehit, Date recipeupdated) {
+    public RecipeDto(Long recipekey, String recipetitle, String recipetype, String recipecreator, String recipedetail, String recipelink, int recipehit, Date recipeupdated,String recipemateriallist) {
         this.recipekey = recipekey;
         this.recipetitle = recipetitle;
         this.recipetype = recipetype;
@@ -33,6 +41,12 @@ public class RecipeDto {
         this.recipelink = recipelink;
         this.recipehit = recipehit;
         this.recipeupdated = recipeupdated;
+
+        this.recipemateriallist= recipemateriallist;
+
+
+
+
 
     }
 
@@ -46,14 +60,9 @@ public class RecipeDto {
                 .recipelink(recipelink)
                 .recipehit(recipehit)
                 .recipeupdated(recipeupdated)
+                .recipemateriallist(recipemateriallist)
                 .build();
+
     }
 
-    /*
-    public void updateView(RecipeDto recipeDto) throws Exception {
-        // 조회수 업데이트
-        Session.("Recipe.updateView", recipeDto);
-    }
-
-     */
 }

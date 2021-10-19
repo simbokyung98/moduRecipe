@@ -247,8 +247,10 @@
 							</thead>
 							<tbody>
 								<tr th:each="addMater : ${addMater}">
+                  <form th:action="@{'/materialUpdate/'+${addMater.materialKey}}" method="post">
+
 									<td  class="am_sc_td-center"><span th:text="${addMater.materialKey}"></span></td>
-									<td class="am_sc_td-center"><img  th:src="@{../static/img/} + ${addMater.materialImg}" style="width: 50px; height: 60px; "></td>
+									<td class="am_sc_td-center"><img  th:src="@{../static/materialImg/} + ${addMater.materialImg}" style="width: 50px; height: 60px; "></td>
 									<td class="am_sc_td-center"><span th:text="${addMater.materialTitle}"></span></td>
 									<td class="am_sc_td-center">2021-06-19</td>
 									<td class="am_sc_td-center"><span th:text="${addMater.materialPrice}"></span>원</td>

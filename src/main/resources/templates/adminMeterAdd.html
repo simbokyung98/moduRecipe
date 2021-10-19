@@ -155,13 +155,16 @@
 				<div id="adminmeter_section">
 					<p>재료추가</p>
 				</div>
+
+				<form method="post" action="/materAdd" enctype="multipart/form-data" >
 					<div id="am_section_contents_wrap">
 						<div class="am_add_wrap">
 							<p>재료이미지</p>
 							<hr>
 							 <div>
 							 	<img alt="재료샘플" src="../static/img/add-image.png" class="mater_add_imgsam">
-							 	<input type="file" class="mater_add_imgfile">
+
+							 	<input type="file" class="mater_add_imgfile" name="materialImg">
 							 </div>
 						</div>
 						<div class="am_add_wrap float_no">
@@ -173,8 +176,9 @@
 										<td colspan="2">재료설명</td>
 									</tr>
 									<tr>
-										<td><input type="text" class="mater_add_input" style="width: 250px"> </td>
-										<td  colspan="2"><input type="text" class="mater_add_input" style="width: 350px"> </td>
+
+										<td><input type="text" class="mater_add_input" style="width: 250px" name="materialTitle"> </td>
+										<td  colspan="2"><input type="text" class="mater_add_input" style="width: 350px" name="materialDetail"> </td>
 									</tr>
 									<tr>
 										<td>판매단위</td>
@@ -182,9 +186,10 @@
 										<td>원산지</td>
 									</tr>
 									<tr>
-										<td><input type="text" class="mater_add_input" style="width: 200px"></td>
-										<td><input type="text" class="mater_add_input" style="width: 200px"></td>
-										<td><input type="text" class="mater_add_input" style="width: 200px"></td>
+
+										<td><input type="text" class="mater_add_input" style="width: 200px" name="materialUnit"></td>
+										<td><input type="text" class="mater_add_input" style="width: 200px" name="materialCapacity"></td>
+										<td><input type="text" class="mater_add_input" style="width: 200px" name="materialCountry"></td>
 									</tr>
 									<tr>
 										<td>100g 당 가격</td>
@@ -192,19 +197,24 @@
 										<td>소분류</td>
 									</tr>
 									<tr>
-										<td><input type="text" class="mater_add_input" style="width: 200px"></td>
-										<td><select class="mater_add_input" style="width: 200px">
-											<option>정육</option><option>수산/해산</option><option>면/견과</option><option>과일</option><option>채소</option><option>베이커리</option><option>양념/오일</option><option>계란/유제품</option>
+
+										<td><input type="text" class="mater_add_input" style="width: 200px"name="materialPrice"></td>
+										<td><select class="mater_add_input" style="width: 200px" name="materialMainCate">
+											<option value="정육">정육</option><option value="수산">수산/해산</option>
+											<option value="면">면/견과</option><option value="과일">과일</option>
+											<option value="채소">채소</option><option value="베이커리">베이커리</option>
+											<option value="양념">양념/오일</option><option value="계란">계란/유제품</option>
 										</select> </td>
-										<td><input type="text" class="mater_add_input" style="width: 200px"></td>
+										<td><input type="text" class="mater_add_input" style="width: 200px" name="materialSubCate"></td>
 									</tr>
 									<tr>
 										<td>유통기한</td>
 										<td>재고</td>
 									</tr>
 									<tr>
-										<td><input type="text" class="mater_add_input" style="width: 200px"></td>
-										<td><input type="text" class="mater_add_input" style="width: 200px"></td>
+
+										<td><input type="text" class="mater_add_input" style="width: 200px" name="materialDistDate"></td>
+										<td><input type="text" class="mater_add_input" style="width: 200px" name="materialInventory"></td>
 									</tr>
 								</table>
 						</div>
@@ -213,7 +223,8 @@
 							<hr>
 							 <div>
 							 	<img alt="재료샘플" src="../static/img/add-image.png" class="mater_add_imgsam">
-							 	<input type="file" class="mater_add_imgfile">
+
+							 	<input type="file" class="mater_add_imgfile" name="materialDeImg">
 							 </div>
 						</div>
 						<div class="float_no mater_add_but_wrap" >
@@ -221,7 +232,8 @@
 							<button class="mater_add_backbut"  th:onclick="'location.href=\''+ @{/adminMater} + '\''">목록</button>
 						</div>
 					</div>
-						
+
+				</form>
 					
 			</section>
 		</section>

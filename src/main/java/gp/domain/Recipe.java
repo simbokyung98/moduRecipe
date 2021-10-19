@@ -4,10 +4,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import gp.web.dto.RecipeDto;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -48,6 +54,15 @@ public class Recipe {
 
     @Builder
     public Recipe(Long recipekey, String recipetitle, String recipetype, String recipecreator, String recipedetail, String recipelink, int recipehit, Date recipeupdated){
+    @Column(name = "recipeMaterialList")
+    private String recipemateriallist;
+
+
+
+
+
+    @Builder
+    public Recipe(Long recipekey, String recipetitle, String recipetype, String recipecreator, String recipedetail, String recipelink, int recipehit, Date recipeupdated, String recipemateriallist){
         this.recipekey=recipekey;
         this.recipetitle=recipetitle;
         this.recipetype=recipetype;
@@ -56,6 +71,8 @@ public class Recipe {
         this.recipelink=recipelink;
         this.recipehit=recipehit;
         this.recipeupdated=recipeupdated;
+        this.recipemateriallist=recipemateriallist;
 
     }
+
 }
