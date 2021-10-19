@@ -68,7 +68,7 @@ public class RecipeService {
                     .recipelink(recipe.getRecipelink())
                     .recipetype(recipe.getRecipetype())
                     .recipeupdated(recipe.getRecipeupdated())
-                    .recipemateriallist(recipe.getRecipemateriallist())
+                    .recipearrang(recipe.getRecipearrang())
                     .build();
             recipeDtoList.add(recipeDto);
         }
@@ -88,7 +88,7 @@ public class RecipeService {
                 .recipelink(recipe.getRecipelink())
                 .recipetype(recipe.getRecipetype())
                 .recipeupdated(recipe.getRecipeupdated())
-                .recipemateriallist(recipe.getRecipemateriallist())
+                .recipearrang(recipe.getRecipearrang())
                 .build();
 
         return recipeDto;
@@ -103,7 +103,7 @@ public class RecipeService {
                 .recipehit(recipe.getRecipehit())
                 .recipelink(recipe.getRecipelink())
                 .recipetype(recipe.getRecipetype())
-                .recipemateriallist(recipe.getRecipemateriallist())
+                .recipearrang(recipe.getRecipearrang())
                 .recipeupdated(recipe.getRecipeupdated()).build();
 
 
@@ -264,7 +264,7 @@ public class RecipeService {
                     .recipetitle(recipe.getRecipetitle())
                     .recipetype(recipe.getRecipetype())
                     .recipeupdated(recipe.getRecipeupdated())
-                    .recipemateriallist(recipe.getRecipemateriallist())
+                    .recipearrang(recipe.getRecipearrang())
                     .build();
             recipeDtoList.add(recipeDto);
         }
@@ -354,7 +354,7 @@ public class RecipeService {
     */
 
 
-    public void recipemateriallist(){
+    public void recipearrang(){
         String rm = "h,e,l,l,o";
         String[] arr = rm.split(",");
         for(int i=0; i<arr.length-1; i++);{

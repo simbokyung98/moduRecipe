@@ -89,7 +89,7 @@ public class MaterialController {
     //관리자 재료페이지[카테고리]
     @GetMapping("/adminMaterCate/{materialMainCate}")
     public String adminMaterCate (@PathVariable("materialMainCate") String materialMainCate, Model model,
-                              @PageableDefault(size = 5, sort = "materialKey", direction = Sort.Direction.DESC)Pageable pageable){
+                                  @PageableDefault(size = 5, sort = "materialKey", direction = Sort.Direction.DESC)Pageable pageable){
 
         Page<Material> materialDto = materialService.pageGetMainCateMaterial(materialMainCate, pageable);
         model.addAttribute("addMater", materialDto);
@@ -189,6 +189,7 @@ public class MaterialController {
         return "redirect:/adminMater";
     }
 
+
     //재료 수정
     @PostMapping("/materialUpdate/{materialKey}")
     public String adminMaterialUpdate(@PathVariable("materialKey") Long materialKey, MaterialDto materialDto){
@@ -198,4 +199,3 @@ public class MaterialController {
     }
 
 }
-

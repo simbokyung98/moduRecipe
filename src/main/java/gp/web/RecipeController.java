@@ -180,7 +180,7 @@ public class RecipeController {
         MemberDto loginMember=(MemberDto)session.getAttribute("user");
         RecipeDto recipeDto = recipeService.getRecipe(recipekey);
 
-        String materialStr = recipeDto.getRecipemateriallist();
+        String materialStr = recipeDto.getRecipearrang();
 
         if(! StringUtils.isEmpty(materialStr)){
             String[] materialList = materialStr.split(",");

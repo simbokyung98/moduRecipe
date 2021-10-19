@@ -54,6 +54,8 @@ public class Recipe {
     @CreationTimestamp
     @Column(name = "recipeupdated")
     private Date recipeupdated;
+    @Column(name = "recipearrang")
+    private String recipearrang;
 
 
 
@@ -82,6 +84,4 @@ public class Recipe {
         this.recipearrang = recipearrang;
 
     }
-
-
 }
