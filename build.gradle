@@ -26,7 +26,9 @@ dependencies {
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	compileOnly ('org.springframework.boot:spring-boot-devtools')
+	// 자동빌드
+	implementation 'org.springframework.boot:spring-boot-devtools'
+
 }
 
 test {

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../static/css/style2.css">
+<link rel="stylesheet" href="../static/css/material.css">
+<html>
+<head>
+<meta charset="UTF-8">
+<title>관리자 페이지</title>
+<style type="text/css">
+	@font-face {
+		 font-family: 'NanumBarunGothic';
+		 font-style: normal;
+		 font-weight: 400;
+		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+	}
+	
+	.nanumbarungothic * {
+		 font-family: 'NanumBarunGothic', sans-serif;
+	}
+	@font-face {
+	    font-family: 'Cafe24Simplehae';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Simplehae.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	@font-face {
+	    font-family: 'Cafe24Dangdanghae';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.2/Cafe24Dangdanghae.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	*{
+		margin: 0 auto;
+		padding: 0;
+	}
+	#adminmeter_main_wrap{
+		
+	}
+	#adminmeter_main{
+		height:2000px;
+		width:1200px;
+		margin: 0 auto;
+		padding-left: 5px;
+	}
+	#adminmeter_section_wrap{
+		float: left;
+		width: 78%; 
+		
+	}
+	#adminmeter_section{
+		width: 100%;      
+		height: 50px;
+		box-shadow : 2px 2px 5px #999;
+		margin: 60px 0 0 10px;
+		letter-spacing: 4px;
+		background: #dddddd;
+	}
+	#adminmeter_section p{
+		padding: 15px 0 0 20px; 
+		font-family: 'Cafe24Dangdanghae';
+		font-size: 20px;
+		
+	}
+	#am_section_menu{
+		width: 100%;      
+		height: auto;
+		margin: 10px 0 0 10px;
+		letter-spacing: 4px; 
+		box-shadow : 2px 2px 5px #999;
+		background: #dddddd;
+	}
+	
+	#am_section_content{
+		width: 100%;      
+		height: 840px;
+		margin: 10px 0 0 10px;
+		letter-spacing: 4px; 
+		box-shadow : 2px 2px 5px #999;
+		background: #dddddd;
+	}
+	#adcon_menu{
+		width: 100%;
+		background:orange;
+		height:60px;
+		border: 0;
+		font-family: 'NanumBarunGothic';
+		font-size: 25px;
+		color: white;		
+	}
+	#adcon_deme_wrap{
+		clear: left;
+		height: auto;
+		display: none;
+	}
+	#adcon_deme_wrap ul{
+		list-style: none;
+	}
+	.adcon_deme{
+		width: 100%;
+		background: #d3d3d3;
+		border: 2px solid #808080;
+		text-align: center;
+		padding: 12px 0;
+		
+	}
+	.adcon_deme a{
+		font-family: 'NanumBarunGothic';
+		font-size: 20px;
+		text-decoration: none;
+		color: #696969;
+		
+	}
+	#adcon_section_search_wrap{
+		float: right;
+		margin: 20px 30px 0 0;
+		
+	}
+	#adcon_ssearch_sele{
+		font-family: 'Cafe24Simplehae';
+		padding: 10px;
+		font-size: 15px;
+	}
+	#adcon_ssearch_text{
+		padding: 10px 10px 10px 10px;
+		font-family: 'Cafe24Simplehae';
+		font-size: 15px;
+		
+	}
+	#adcon_ssearch_sub{
+		color: black;
+		border: 0;
+		font-family: 'Cafe24Simplehae';
+		font-size: 20px;
+		padding: 10px;
+		background: orange;
+		
+	}
+	#adcon_content_wrap{
+		clear: right;
+		padding-top: 20px;
+	}
+	#adcon_table{
+		width: 90%;
+	}
+	#adcon_table th{
+		font-family: 'NanumBarunGothic';
+		height: 40px;
+	}
+	#adcon_table td{
+		text-align: center;
+		height: 100px;
+		background: white;
+		border: 0;
+		border-collapse: collapse;
+		font-family: 'NanumBarunGothic';
+		font-size: 20px;
+	}
+	#adcon_add_wrap{
+		float: right;
+		margin: 30px 30px 0 0 ;
+	}
+	.adcon_add_but{
+		color: white;
+		background: orange;
+		padding: 10px 20px;
+		border: 0;
+		font-family: 'NanumBarunGothic';
+		border-radius: 10px;
+		font-size: 16px;
+		letter-spacing: 2px;
+	}
+	.adcon_add_but:hover {
+		color: white;
+		background: orange;
+		padding: 10px 20px;
+		border: 0;
+		font-family: 'NanumBarunGothic';
+		border-radius: 10px;
+		font-size: 16px;
+		letter-spacing: 2px;
+		box-shadow : 2px 2px 5px #999; 
+		
+	}
+	.page-num{
+		padding-top:10px;
+		height: 50px;
+		padding-left: 450px;
+	}
+	.add_mater_ul{
+		list-style-type: none;
+	}
+	.add_mater_ul li{
+		float:left;
+		margin-right: 5px;
+
+	}
+</style>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+	<main id="adminmeter_main_wrap">
+		<section id="adminmeter_main">
+			<div th:replace="fragments/adminmenu :: adminmenu"></div>
+			<section id="adminmeter_section_wrap">
+				<div id="adminmeter_section">
+					<p>컨텐츠관리</p>
+				</div>
+				<div id="am_section_menu">
+					<button id="adcon_menu" onclick="openCloseMenu()">분류별 보기</button>
+					<div id="adcon_deme_wrap">
+						<ul>
+							<li class="adcon_deme"><a th:href="@{/adminContent}">전체</a></li>
+							<li class="adcon_deme"><a th:href="@{/adminCotentCate/한식}">한식</a></li>
+							<li class="adcon_deme"><a th:href="@{/adminCotentCate/양식}">양식</a></li>
+							<li class="adcon_deme"><a th:href="@{/adminCotentCate/중식}">중식</a></li>
+							<li class="adcon_deme"><a th:href="@{/adminCotentCate/일식}">일식</a></li>
+							<li class="adcon_deme"><a th:href="@{/adminCotentCate/분식}">분식</a></li>
+						</ul>
+					</div>
+				</div>
+				<script type="text/javascript">
+					function openCloseMenu(){
+						if(document.getElementById('adcon_deme_wrap').style.display === 'block'){
+							document.getElementById('adcon_deme_wrap').style.display = 'none';
+						}else{
+							document.getElementById('adcon_deme_wrap').style.display = 'block';
+						}
+					}
+				</script>
+				<div id="am_section_content">
+					<form action="/recipesearch" method="get">
+					<div id="adcon_section_search_wrap">
+						<select id="adcon_ssearch_sele" name="select">
+							<option value= "recipetitle">제목</option>
+							<option value= "recipecreator">크리에이터</option>
+						</select>
+						<input type="text" id="adcon_ssearch_text" placeholder="검색어를 입력하세요" name="keyword">
+						<input type="submit" id="adcon_ssearch_sub" value="검색">
+					</div>
+					</form>
+					<div id="adcon_content_wrap">
+						<table id="adcon_table">
+						<thead>
+							<tr>
+								<th colspan="2">타이틀</th>
+								<th>크리에이터</th>
+								<th>조회수</th>
+								<th>비고</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							<tr th:each = "addcontent : ${addContent}">
+								<td><iframe width="120" height="80" th:src="${addcontent.recipelink}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+								<td><span th:text = "${addcontent.recipetitle}"></span></td>
+								<td><span th:text = "${addcontent.recipecreator}"></span></td>
+								<td><span th:text = "${addcontent.recipehit}"></span></td>
+								<td>
+									<a  th:href="@{'/adminContentUpdate/'+${addcontent.recipekey}}">수정</a>
+									<a  th:href="@{'/adminContentDelete/'+${addcontent.recipekey}}">삭제</a>
+								</td>
+							</tr>
+						</tbody>
+						</table>
+						<div class="page-num">
+							<ul class="add_mater_ul">
+								<li ><a th:href="@{/adminContent?(page=${previous})}">Previous</a></li>
+								<li th:if="${check}"><a th:href="@{/adminContent?(page=${next})}">Next</a></li>
+							</ul>
+						</div>
+
+						<div id="adcon_add_wrap">
+							<button class="adcon_add_but" th:onclick="'location.href=\''+ @{/adminContentAdd} + '\''">컨텐츠 추가</button>
+						</div>
+					</div>
+				</div>				
+			</section>
+		</section>
+	</main>
+	<footer>
+		<div th:replace="fragments/footer::footer"></div>
+	</footer>
+</body>
+</html>

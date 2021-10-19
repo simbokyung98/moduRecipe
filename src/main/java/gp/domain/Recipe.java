@@ -1,9 +1,10 @@
 package gp.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import gp.web.dto.RecipeDto;
@@ -39,10 +40,14 @@ public class Recipe {
     @Column(name = "recipedetail")
     private String recipedetail;
 
+    @Column(name = "recipearrang")
+    private String recipearrang;
+
     @Column(name = "recipelink")
     private String recipelink;
 
     @Column(name = "recipehit")
+    @ColumnDefault("0")
     private Integer recipehit;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -66,8 +71,17 @@ public class Recipe {
         this.recipelink=recipelink;
         this.recipehit=recipehit;
         this.recipeupdated=recipeupdated;
-        this.recipearrang=recipearrang;
+        this.recipearrang = recipearrang;
 
     }
 
+    //레시피 업데이트 메소드
+    public void recipeUpdate(String recipetitle, String recipetype, String recipecreator , String recipedetail, String recipearrang){
+        this.recipetitle = recipetitle;
+        this.recipetype = recipetype;
+        this.recipecreator = recipecreator;
+        this.recipedetail = recipedetail;
+        this.recipearrang = recipearrang;
+
+    }
 }

@@ -1,5 +1,7 @@
 package gp.domain;
 
+import org.springframework.beans.propertyeditors.PathEditor;
+
 import gp.web.dto.MaterialDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +15,10 @@ public interface MaterialRepository extends JpaRepository<Material, Long> {
 //    public List<Material> findByMaterialMainCate(String MaterialMainCate);
     public Page<Material> findByMaterialMainCate(String materialMainCate, Pageable pageable);
     public List<Material> findByMaterialMainCate(String materialMainCate);
+    public Page<Material> findByMaterialTitleContaining(String MaterialTitle, Pageable pageable);
+    public Page<Material> findByMaterialDistDateContaining(String materialDistDate, Pageable pageable);
+    public Page<Material> findBymaterialSaleContaining(String materialSale, Pageable pageable);
+
     public Page<Material> findByMaterialTitleContaining(String MaterialTitle, Pageable pageable);
     public Page<Material> findByMaterialDistDateContaining(String materialDistDate, Pageable pageable);
     public Page<Material> findBymaterialSaleContaining(String materialSale, Pageable pageable);

@@ -2,9 +2,10 @@
 <html  lang="en" xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="../static/css/style2.css">
 <link rel="stylesheet" href="../static/css/material.css">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 페이지</title>
+<title>관리자 페이지</title>-
 <style type="text/css">
 	@font-face {
 		 font-family: 'NanumBarunGothic';
@@ -36,7 +37,7 @@
 	#adminmeter_main_wrap{
 	}
 	#adminmeter_main{
-		height:2000px;
+		height:1500px;
 		width:1200px;
 		margin: 0 auto;
 		padding-left: 5px;
@@ -66,7 +67,7 @@
 	#am_section_contents_wrap{
 		clear: left; 
 		width: 100%;
-		height: 868px;
+		height: 1100px;
 		background: #dddddd;
 		box-shadow : 2px 2px 5px #999;   
 		margin: 10px 0 0 10px; 
@@ -75,7 +76,7 @@
 	.am_add_wrap{
 		width: 95%;
 		height: auto;
-		padding-bottom: 50px;
+		padding-bottom: 30px;
 	}
 	.am_add_wrap p{
 		font-family: 'Cafe24Simplehae';
@@ -89,16 +90,7 @@
 		border: 0;
 		height: 2px;
 	}
-	.mater_add_imgsam{
-		width: 100px;
-		height: 70px;
-		float: left;
-		margin: 30px;
-	}
-	.mater_add_imgfile{
-		float: left;
-		margin: 45px 20px 20px 20px;
-	}
+
 	.float_no{
 		clear: left;
 	}
@@ -110,7 +102,7 @@
 		font-size: 18px;
 		font-family: 'Cafe24Simplehae';
 	}
-	.mater_add_input{
+	.content_add_input{
 		border: 0;
 		padding: 7px;
 		border-radius: 2px;
@@ -144,96 +136,90 @@
 		font-size: 20px;
 		border-radius: 3px;
 	}
+	.con_add_recipe{
+		margin: 20px 0 0 0;
+		font-size: 20px;
+		padding: 30px;
+	}
+	#content_add_select{
+		width: 150px;
+		height: 35px;
+		font-size: 20px;
+		font-family: 'NanumBarunGothic';
+	}
 </style>
 </head>
 <body>
-	<div th:replace="fragments/header :: header"></div>
+<div th:replace="fragments/header :: header"></div>
 	<main id="adminmeter_main_wrap">
 		<section id="adminmeter_main">
 			<div th:replace="fragments/adminmenu :: adminmenu"></div>
 			<section id="adminmeter_section_wrap">
 				<div id="adminmeter_section">
-					<p>재료추가</p>
+					<p>컨텐츠수정</p>
 				</div>
-
-				<form method="post" action="/materAdd" enctype="multipart/form-data" >
+				<form method="post" th:action="@{'/recipeUpdate/'+${recipedetail.recipekey}}">
 					<div id="am_section_contents_wrap">
-						<div class="am_add_wrap">
-							<p>재료이미지</p>
-							<hr>
-							 <div>
-							 	<img alt="재료샘플" src="../static/img/add-image.png" class="mater_add_imgsam">
-
-							 	<input type="file" class="mater_add_imgfile" name="materialImg">
-							 </div>
-						</div>
+						
 						<div class="am_add_wrap float_no">
-							<p>재료세부사항</p>
+							<p>컨텐츠 기본정보</p>
 							<hr>
 								<table id="mater_add_table">
 									<tr>
-										<td>재료명</td>
-										<td colspan="2">재료설명</td>
+										<td>컨텐츠명</td>
+										<td>크리에이터</td>
 									</tr>
 									<tr>
-
-										<td><input type="text" class="mater_add_input" style="width: 250px" name="materialTitle"> </td>
-										<td  colspan="2"><input type="text" class="mater_add_input" style="width: 350px" name="materialDetail"> </td>
+										<td><input type="text" class="content_add_input" style="width: 460px" th:value = "${recipedetail.recipetitle}" name="recipetitle"></td>
+										<td><input type="text" class="content_add_input" style="width: 250px"  th:value = "${recipedetail.recipecreator}" name="recipecreator"></td>
 									</tr>
 									<tr>
-										<td>판매단위(*팩, *봉지)</td>
-										<td>중량/용량(g단위/숫자)</td>
-										<td>원산지</td>
+										<td>유튜브 링크</td>
+										<td>레시피 종류</td>
 									</tr>
 									<tr>
-
-										<td><input type="text" class="mater_add_input" style="width: 200px" name="materialUnit"></td>
-										<td><input type="text" class="mater_add_input" style="width: 200px" name="materialCapacity"></td>
-										<td><input type="text" class="mater_add_input" style="width: 200px" name="materialCountry"></td>
-									</tr>
-									<tr>
-										<td>가격(숫자만)</td>
-										<td>대분류</td>
-										<td>소분류</td>
-									</tr>
-									<tr>
-
-										<td><input type="text" class="mater_add_input" style="width: 200px"name="materialPrice"></td>
-										<td><select class="mater_add_input" style="width: 200px" name="materialMainCate">
-											<option value="정육">정육</option><option value="수산">수산/해산</option>
-											<option value="면">면/견과</option><option value="과일">과일</option>
-											<option value="채소">채소</option><option value="베이커리">베이커리</option>
-											<option value="양념">양념/오일</option><option value="계란">계란/유제품</option>
-										</select> </td>
-										<td><input type="text" class="mater_add_input" style="width: 200px" name="materialSubCate"></td>
-									</tr>
-									<tr>
-										<td>유통기한(yyyy-mm-dd)</td>
-										<td>재고(숫자만)</td>
-									</tr>
-									<tr>
-
-										<td><input type="text" class="mater_add_input" style="width: 200px" name="materialDistDate"></td>
-										<td><input type="text" class="mater_add_input" style="width: 200px" name="materialInventory"></td>
+										<td><input type="text" class="content_add_input" style="width: 600px"  th:value = "${recipedetail.recipelink}" name="recipelink"></td>
+										<td>
+											<select id="content_add_select" name="recipetype" th>
+												<option value="한식">한식</option>
+												<option value="중식">중식</option>
+												<option value="일식">일식</option>
+												<option value="양식">양식</option>
+												<option value="분식">분식</option>
+											</select>
+										</td>
+										<script th:inline="javascript">
+											window.onload = function(){
+												/*<![CDATA[*/ let name = /*[[ ${recipedetail.recipetype} ]]*/; /*]]*/
+												 var sel = document.getElementById("content_add_select");
+												for(var i=0; i<sel.length; i++){
+       												 if(sel[i].value==name){
+            											sel[i].selected = true;
+            										}
+            									}
+											}
+										</script>
 									</tr>
 								</table>
 						</div>
 						<div class="am_add_wrap">
-							<p>재료세부설명파일</p>
+							<p>컨텐츠 레시피</p>
 							<hr>
-							 <div>
-							 	<img alt="재료샘플" src="../static/img/add-image.png" class="mater_add_imgsam">
-
-							 	<input type="file" class="mater_add_imgfile" name="materialDeImg">
-							 </div>
+							<textarea rows="15" cols="78" class="con_add_recipe"  th:text = "${recipedetail.recipedetail}" th:value = "${recipedetail.recipedetail}" name="recipedetail"></textarea>
 						</div>
+						<div class="am_add_wrap">
+							<p>컨텐츠 재료</p>
+							<hr>
+							<textarea rows="3" cols="78" class="con_add_recipe" th:text = "${recipedetail.recipearrang}" th:value = "${recipedetail.recipearrang}" name="recipearrang"></textarea>
+						</div>
+						
+						
 						<div class="float_no mater_add_but_wrap" >
-							<button class="mater_add_detail_but">등록</button>
-							<button class="mater_add_backbut"  th:onclick="'location.href=\''+ @{/adminMater} + '\''">목록</button>
+							<button class="mater_add_detail_but" type="submit">등록</button>
+							<button class="mater_add_backbut" th:onclick="'location.href=\''+ @{/adminContent} + '\''">목록</button>
 						</div>
 					</div>
-
-				</form>
+					</form>
 					
 			</section>
 		</section>
