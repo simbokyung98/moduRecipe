@@ -13,6 +13,9 @@ public interface MaterialRepository extends JpaRepository<Material, Long> {
 //    public List<Material> findByMaterialMainCate(String MaterialMainCate);
     public Page<Material> findByMaterialMainCate(String materialMainCate, Pageable pageable);
     public List<Material> findByMaterialMainCate(String materialMainCate);
+    public Page<Material> findByMaterialTitleContaining(String MaterialTitle, Pageable pageable);
+    public Page<Material> findByMaterialDistDateContaining(String materialDistDate, Pageable pageable);
+    public Page<Material> findBymaterialSaleContaining(String materialSale, Pageable pageable);
 
     @Query(value = "select * from  material where material_Title in (:materialList)", nativeQuery = true)
     List<Material> findMaterialList(String[] materialList);

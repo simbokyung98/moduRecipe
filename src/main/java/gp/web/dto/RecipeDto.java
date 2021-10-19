@@ -25,7 +25,6 @@ public class RecipeDto {
     private String recipelink;
     private Integer recipehit;
     private Date recipeupdated;
-
     private String recipearrang;
 
 

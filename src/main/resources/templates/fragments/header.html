@@ -13,7 +13,7 @@
         <div class="usermenu" style="position: absolute; width: 500px; right: 13%; margin: 0 -150px 0 0; font-size: 15px;">
             <nav id="sub-menu">
                 <ul class="dep1">
-                    <li class="usermenuli" th:if = "${session.user == null && session.admin == null}"><a class="subusermenuli" th:href="@{/user/join}">회원가입</a>
+                    <li class="usermenuli" th:if = "${session.user == null && session.admin == null}"><a class="subusermenuli" th:href="@{/join}">회원가입</a>
                     </li>
                     <li th:if = "${session.user == null && session.admin == null}" class="usermenuli"><a class="subusermenuli" th:href="@{/login}">로그인</a>
                     </li>
@@ -26,10 +26,9 @@
 
                     <li class="usermenuli" th:if = "${session.user != null}"><a class="subusermenuli" href="#">마이페이지</a>
                         <ul class="sub-menu2">
-                            <li class="usermenuli2"><a class="subusermenu" href="orderlist.html" >주문목록</a></li>
-                            <li class="usermenuli2"><a class="subusermenu" href="myreview.html">작성후기</a></li>
-                            <li class="usermenuli2"><a class="subusermenu"  href="membercheck.html">개인정보</a></li>
-                            <li class="usermenuli"><a class="subusermenu" th:href="@{/notionmain}">장바구니</a></li>
+                            <li class="usermenuli2"><a class="subusermenu" th:href="@{/orderlist}" >주문목록</a></li>
+                            <li class="usermenuli2"><a class="subusermenu"  th:href="@{/myqnamain}">1대1문의</a></li>
+                            <li class="usermenuli"><a class="subusermenu" th:href="@{/cart}">장바구니</a></li>
                         </ul>
                     </li>
                     <li class="usermenuli"><a class="subusermenuli" href="#">고객센터</a>
@@ -71,13 +70,13 @@
                         </ul></li>
                     <li class="menu"><a class="menu-a" href="#">MENU</a>
                         <ul class="navsub" id="menusub">
-                            <li class="menusub"><img class="menusubsubimg" src="img/koreanfood.png"><a class="menusubsub" th:href="@{/menu/한식}">한식</a></li>
-                            <li class="menusub"><img class="menusubsubimg" src="img/sushi.png"><a class="menusubsub" th:href="@{/menu/일식}">일식</a></li>
-                            <li class="menusub"><img class="menusubsubimg" src="img/steak.png"><a class="menusubsub" th:href="@{/menu/양식}">양식</a></li>
-                            <li class="menusub"><img class="menusubsubimg" src="img/jjajang.png"><a class="menusubsub" th:href="@{/menu/중식}">중식</a></li>
-                            <li class="menusub"><img class="menusubsubimg" src="img/dduk.png"><a class="menusubsub" th:href="@{/menu/분식}">분식</a></li>
-                            <li class="menusub"><img class="menusubsubimg" src="img/chicken.png"><a class="menusubsub" th:href="@{/menu/치킨}">치킨</a></li>
-                            <li class="menusub"><img class="menusubsubimg" src="img/pizza.png"><a class="menusubsub" th:href="@{/menu/피자}">피자</a></li>
+                            <li class="menusub"><img class="menusubsubimg" src="../static/img/koreanfood.png"><a class="menusubsub" th:href="@{/menu/한식}">한식</a></li>
+                            <li class="menusub"><img class="menusubsubimg" src="../static/img/sushi.png"><a class="menusubsub" th:href="@{/menu/일식}">일식</a></li>
+                            <li class="menusub"><img class="menusubsubimg" src="../static/img/steak.png"><a class="menusubsub" th:href="@{/menu/양식}">양식</a></li>
+                            <li class="menusub"><img class="menusubsubimg" src="../static/img/jjajang.png"><a class="menusubsub" th:href="@{/menu/중식}">중식</a></li>
+                            <li class="menusub"><img class="menusubsubimg" src="../static/img/dduk.png"><a class="menusubsub" th:href="@{/menu/분식}">분식</a></li>
+                            <li class="menusub"><img class="menusubsubimg" src="../static/img/chicken.png"><a class="menusubsub" th:href="@{/menu/치킨}">치킨</a></li>
+                            <li class="menusub"><img class="menusubsubimg" src="../static/img/pizza.png"><a class="menusubsub" th:href="@{/menu/피자}">피자</a></li>
                         </ul></li>
                     <li class="menu"><a class="menu-a" href="#">Material</a>
                         <ul class="navsub" id="materialsub">
