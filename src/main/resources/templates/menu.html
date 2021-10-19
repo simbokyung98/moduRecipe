@@ -249,7 +249,7 @@
                     <hr width = "40px" color = "gray" text-align= "center"><br>
                     <div class="main_recom_recipe mrr_frist" th:each="menu: ${menulist}">
                         <a class="video" th:href="@{'/recipedetail/'+${menu.recipekey}}"><iframe style="pointer-events:none;" width="250" height="150" th:src="${menu.recipelink}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></a>
-                        <a class="best_link_but"><strong th:text = "${menu.recipetitle}"></strong></a>
+                        <a class="best_link_but" th:href="@{'/recipedetail/'+${menu.recipekey}}"><strong th:text = "${menu.recipetitle}"></strong></a>
                         <a class="hit">조회수:<strong th:text="${menu.recipehit}"></strong></a>
                     </div>
                 </div>

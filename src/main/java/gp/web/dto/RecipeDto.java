@@ -59,7 +59,7 @@ public class RecipeDto {
                 .recipelink(recipelink)
                 .recipeupdated(recipeupdated)
                 .recipearrang(recipearrang)
-                .recipehit(recipehit)
+                //.recipehit(recipehit)
                 .build();
 
     }

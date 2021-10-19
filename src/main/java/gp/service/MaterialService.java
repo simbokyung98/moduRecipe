@@ -113,9 +113,6 @@ public class MaterialService {
         if(select.equals("materialTitle")){
             return materialRepository.findByMaterialTitleContaining(keyword, pageable);
 
-        }else if(select.equals("materialRegDate")){
-            return materialRepository.findByMaterialDistDateContaining(keyword, pageable);
-
         }else if(select.equals("materialSale")){
             return materialRepository.findBymaterialSaleContaining(keyword, pageable);
         }

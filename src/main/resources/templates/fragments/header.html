@@ -47,18 +47,10 @@
         <nav class="navigation" style="position: absolute; width: 900px; height:56px; left: 50%; margin: 0 0 0 -450px; left:450px;">
             <div id="nav">
                 <ul class="menulist" style="position: relative; top: 15px; height:45px;">
-                    <li class="menu"><a class="menu-a" href="New.jsp">New</a>
-                        <ul class="navsub" style="width: 70px;">
-                            <li class="menusub"><a class="menusubsub"
-                                                   style="position: relative; right: 5px;" th:href="@{/new}"
-                            >New</a></li>
-                        </ul></li>
-                    <li class="menu"><a class="menu-a" href="Best.jsp">Best</a>
-                        <ul class="navsub" id="bestsub" style="width: 70px;">
-                            <li class="menusub" style="position: relative;"><a
-                                    class="menusubsub" th:href="@{/best}"
-                            >Best</a></li>
-                        </ul></li>
+                    <li class="menu"><a class="menu-a" th:href="@{/new}">New</a>
+
+                    <li class="menu"><a class="menu-a" th:href="@{/best}">Best</a>
+
                     <li class="menu"><a class="menu-a" href="#"
                                         style="position: relative; right: 10px;"
                     >Creator</a>

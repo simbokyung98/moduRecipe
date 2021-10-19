@@ -33,6 +33,8 @@ public class AdminController {
     public String memberlist(Model model) {
         List<MemberDto> memberDtoList = adminService.getMember();
         model.addAttribute("adminuserlist", memberDtoList);
+        //adminsidebar 설정 용도
+        model.addAttribute("adminmenu", "회원");
         return "/adminUser";
     }
 
