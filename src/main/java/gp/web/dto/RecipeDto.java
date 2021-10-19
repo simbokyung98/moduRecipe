@@ -1,6 +1,5 @@
 package gp.web.dto;
 
-
 import gp.domain.Material;
 import gp.domain.Recipe;
 import lombok.Builder;
@@ -10,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+
 import java.util.List;
 
 @Getter
@@ -24,9 +24,10 @@ public class RecipeDto {
     private String recipedetail;
     private String recipelink;
     private Integer recipehit;
+    private String recipearrang;
     private Date recipeupdated;
 
-    private String recipearrang;
+
 
 
 
@@ -41,9 +42,7 @@ public class RecipeDto {
         this.recipelink = recipelink;
         this.recipehit = recipehit;
         this.recipeupdated = recipeupdated;
-
-        this.recipearrang= recipearrang;
-
+        this.recipearrang = recipearrang;
 
 
 
@@ -58,9 +57,9 @@ public class RecipeDto {
                 .recipecreator(recipecreator)
                 .recipedetail(recipedetail)
                 .recipelink(recipelink)
-                .recipehit(recipehit)
                 .recipeupdated(recipeupdated)
                 .recipearrang(recipearrang)
+                .recipehit(recipehit)
                 .build();
 
     }
