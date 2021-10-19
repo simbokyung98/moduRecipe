@@ -52,7 +52,6 @@ public class RecipeController {
     }
 
     // 영상 클릭시 조회수 증가
-    /*
     @GetMapping("/recipedetail/{recipekey}")
     public String recipedetailrecipe(@PathVariable("recipekey")Long recipekey, Model model){
         RecipeDto recipeDto = recipeService.getRecipe(recipekey);
@@ -62,30 +61,6 @@ public class RecipeController {
         model.addAttribute("recipehit",recipeService.updateView(recipekey));
         model.addAttribute("recipeDto",recipeDto);
         return "recipedetail.html";
-    }
-
-
-     */
-    @GetMapping("/recipedetail/{recipekey}")
-    public String recipedetail(@PathVariable("recipekey")Long recipekey, Model model, HttpSession session){
-
-        MemberDto loginMember=(MemberDto)session.getAttribute("user");
-        RecipeDto recipeDto = recipeService.getRecipe(recipekey);
-
-        String materialStr = recipeDto.getRecipearrang();
-
-        if(! StringUtils.isEmpty(materialStr)){
-            String[] materialList = materialStr.split(",");
-
-            List<Material> materialDtoList = materialService.getMaterialByTitles(materialList);
-
-            model.addAttribute("materialDtoList",materialDtoList);
-
-        }
-        model.addAttribute("recipehit", recipeService.creatorupdateView(recipekey));
-        model.addAttribute("recipehit",recipeService.updateView(recipekey));
-        model.addAttribute("recipeDto",recipeDto);
-        return "recipedetail";
     }
 
 
