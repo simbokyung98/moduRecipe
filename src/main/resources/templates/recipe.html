@@ -1,13 +1,11 @@
-
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-  <title>모두의 레시피</title>
-  <link rel="stylesheet" href="../static/css/style2.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script>
-
+    <title>모두의 레시피</title>
+    <link rel="stylesheet" href="../static/css/style2.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script>
    $(document).ready(function(){
       $('#show_but').click(function(){
 
@@ -45,27 +43,31 @@
 	}
 
 	 *{
-
+      margin: 0 auto;
+      padding: 0;
       font-family: 'NanumBarunGothic';
-   }
-
-   .b_main_wrap{
-      width: 1200px;
-      height: 2000px;
-
    }
 
    .best_menu_wrap{
       width: 1200px;
+      height: 850px;
    }
    .new_menu_wrap{
       width: 1200px;
+      height: 2000px;
    }
    .best_menu_h2{
       text-align: center;
       margin-top: 100px;
       margin-bottom: 20px;
    }
+
+   .new_menu_h2{
+      text-align: center;
+      margin-top: 100px;
+      margin-bottom: 20px;
+   }
+
    .best_menu_wrap_inside{
       width: 1200px;
    }
@@ -84,7 +86,6 @@
 
    .new_link_but {
    	  text-align: left;
-
       float: left;
    }
    .best_menu_wrap_hide{
@@ -98,12 +99,11 @@
    .bmw_but_wrap{
       clear: left;
       width: 1200px;
-      height: 80px;
+      height: 50px;
       text-align: center;
    }
 
    .bmw_but_wrap #show_but {
-
 	    text-align: center;
 	    font-size: 30px;
 	    background-color: white;
@@ -139,10 +139,6 @@
   		margin-top: 40px;
   	}
 
-  	.best_menu_wrap_more .mrr_frist {
-  		margin-top: 40px;
-  	}
-
   	.best_menu_wrap .mrr_frist .best_link_but {
   		 border: none;
   		 border-top: 1px solid orange;
@@ -172,9 +168,8 @@
   		 cursor: pointer;
   	}
 
-  	.best_menu_wrap_more .mrr_frist .new_link_but {
+  	.new_menu_wrap .mrr_frist .date {
   		 border: none;
-  		 border-top: 1px solid orange;
   		 background-color: white;
   		 margin-top: 15px;
   		 padding: 10px;
@@ -183,41 +178,11 @@
   		 text-overflow: ellipsis;
   		 white-space: normal;
   		 -webkit-line-clamp: 2;
-  		 font-size: 17px;
+  		 font-size: 10px;
   		 cursor: pointer;
   	}
 
-  	.best_menu_wrap_start .mrr_frist .new_link_but {
-  		 border: none;
-  		 border-top: 1px solid orange;
-  		 background-color: white;
-  		 margin-top: 15px;
-  		 padding: 10px;
-  		 display: block;
-  		 overflow: hidden;
-  		 text-overflow: ellipsis;
-  		 white-space: normal;
-  		 -webkit-line-clamp: 2;
-  		 font-size: 17px;
-  		 cursor: pointer;
-  	}
-
-  	.best_menu_wrap .new_menu_wrap_hide .mrr_frist .new_link_but {
-  		 border: none;
-  		 border-top: 1px solid orange;
-  		 background-color: white;
-  		 margin-top: 15px;
-  		 padding: 10px;
-  		 display: block;
-  		 overflow: hidden;
-  		 text-overflow: ellipsis;
-  		 white-space: normal;
-  		 -webkit-line-clamp: 2;
-  		 font-size: 17px;
-  		 cursor: pointer;
-  	}
-
-  	.best_menu_wrap .new_menu_wrap_hide .mrr_frist .new_link_but {
+  	.new_menu_wrap .mrr_frist .new_link_but {
   		 border: none;
   		 border-top: 1px solid orange;
   		 background-color: white;
@@ -236,35 +201,49 @@
   	.best_menu_wrap .mrr_frist .best_link_but:hover{
 	  background-color: orange;
 	  color: white;
+
 	}
 
-  	.best_menu_wrap_more .mrr_frist .new_link_but:hover{
+	.new_menu_wrap .mrr_frist .new_link_but:hover{
 	  background-color: orange;
 	  color: white;
+
 	}
+
 </style>
 
 <body>
 <div th:replace="fragments/header :: header"></div>
+<form>
 <main class="b_main_wrap">
-  <div class="best_menu_wrap_more">
-    <div class="best_menu_wrap_start">
-      <div class="best_menu_wrap">
-        <div class="best_menu_wrap_inside">
-          <h2 class="best_menu_h2">Best</h2>
-          <hr width = "40px" color = "gray" text-align= "center"><br>
-          <div class="main_recom_recipe mrr_frist" th:each="bestlist: ${bestlist}">
-            <a class="video" th:href="@{'/recipedetail/'+${bestlist.recipekey}}"><iframe style="pointer-events:none;" width="250" height="150" th:src="${bestlist.recipelink}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></a>
-            <a class="best_link_but"><strong th:text = "${bestlist.recipetitle}"></strong></a>
-            <a class="hit">조회수:<strong th:text="${bestlist.recipehit}"></strong></a>
-          </div>
+    <div class="best_menu_wrap">
+        <div class="best_menu_wrap_inside" >
+            <h2 class="best_menu_h2">BEST</h2>
+            <hr width = "40px" color = "gray" text-align= "center"><br>
+            <div class="main_recom_recipe mrr_frist" th:each="recipelist: ${recipelist}">
+                <a class="video" th:href="@{'/recipedetail/'+${recipelist.recipekey}}"><iframe style="pointer-events:none;" width="250" height="150" th:src="${recipelist.recipelink}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <button type="button" class="best_link_but"><strong th:text = "${recipelist.recipetitle}"></strong></button></a>
+                <a class="hit">조회수:<strong th:text="${recipelist.recipehit}"></strong></a>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</main>
 
-<div th:replace="fragments/footer::footer"></div>
+
+    <div class="new_menu_wrap">
+        <div class="new_menu_wrap_inside" >
+            <h2 class="new_menu_h2">NEW</h2>
+            <hr width = "40px" color = "gray" text-align= "center"><br>
+            <div class="main_recom_recipe mrr_frist" th:each="recipelist: ${recipelist}">
+                <a class="video" th:href="@{'/recipedetail/'+${recipelist.recipekey}}"><iframe style="pointer-events:none;" width="250" height="150" th:src="${recipelist.recipelink}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <button type="button" class="new_link_but"><strong th:text = "${recipelist.recipetitle}"></strong></button></a>
+                <a class="date"><strong th:text="${recipelist.recipeupdated}"></strong></a>
+            </div>
+        </div>
+    </div>
+
+</main>
+</form>
+<footer th:insert="footer.html"></footer>
 
 </body>
 </html>

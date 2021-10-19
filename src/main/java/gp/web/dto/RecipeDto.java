@@ -1,5 +1,6 @@
 package gp.web.dto;
 
+
 import gp.domain.Material;
 import gp.domain.Recipe;
 import lombok.Builder;
@@ -24,6 +25,7 @@ public class RecipeDto {
     private String recipelink;
     private Integer recipehit;
     private Date recipeupdated;
+
     private String recipemateriallist;
 
 
@@ -39,6 +41,7 @@ public class RecipeDto {
         this.recipelink = recipelink;
         this.recipehit = recipehit;
         this.recipeupdated = recipeupdated;
+
         this.recipemateriallist= recipemateriallist;
 
 

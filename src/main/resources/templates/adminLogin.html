@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" href="../static/css/style2.css">
 <head>
-    <meta charset="UTF-8">
-    <title>모두의 레시피</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script type="text/javascript" src="/js/login.js"></script>
-
+  <meta charset="UTF-8">
+  <title>모두의 레시피</title>
+  <link rel="stylesheet" href="../static/css/style2.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script type="text/javascript" src="/js/login.js"></script>
 </head>
 <style>
    @font-face {
@@ -171,37 +169,18 @@
 <script type="memberLogin.js"></script>
 </script>
 <div class="login-form">
-    <h2 align="center">Member Login</h2>
-    <form action="/userLogin" method="post">
-
-        <input type="text" class="id" name="username" placeholder="ID">
-        <input type="password" class="pwd" name="password"  placeholder="PASSWORD">
-        <input type="submit" class="log" value="로그인"><br>
-        <div class=""></div>
-        <div class="loginUtil">
-            <p class="check">
-
-                <input type="checkbox" name="idsave" id="idsave" value="Y" aria-describedby="rememberMeHelp"/>아이디저장
-
-
-            </p>
-
-            <input type="button" class="id_find" onclick="location.href='idfind.jsp'" value="아이디 찾기">
-
-            <input type="button"  class="pwd_find" onclick="location.href='pwdfind.jsp'" value="비밀번호 찾기">
-
-        </div>
-    </form>
+  <h2 align="center">Admin Login</h2>
+  <form action="/adminLog" method="post">
+    <input type="text" class="id" name="username" placeholder="ID">
+    <input type="password" class="pwd" name="password"  placeholder="PASSWORD">
+    <input type="submit" class="log" value="로그인"><br>
     <br>
     <br>
 
-
-    <form th:action="@{/adLogin}" method="get">
-        <input type="submit" th:if = "${session.admin == null}" class="Administrator_Login" value="관리자 로그인">
-    </form>
-
-
+  </form>
 
 </div>
 <div th:replace="fragments/footer::footer"></div>
 </body>
+</html>
+

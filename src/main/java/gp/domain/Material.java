@@ -1,5 +1,6 @@
 package gp.domain;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,6 +13,7 @@ import javax.persistence.*;
 @Getter
 @Builder
 @AllArgsConstructor
+
 @Table(name = "material")
 public class Material {
 
@@ -22,6 +24,7 @@ public class Material {
 
     @Column(length = 40)
     private String materialTitle;
+
 
     @Column(length = 45)
     private String materialDetail;
@@ -50,6 +53,7 @@ public class Material {
 
     @Column(length = 40)
     private String materialSale;
+
 
     @Column(length = 100)
     private String materialDeImg;

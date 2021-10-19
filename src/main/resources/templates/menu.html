@@ -1,13 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-  <title>모두의 레시피</title>
-  <link rel="stylesheet" href="../static/css/style2.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script>
-
+    <title>모두의 레시피</title>
+    <link rel="stylesheet" href="../static/css/style2.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script>
    $(document).ready(function(){
       $('#show_but').click(function(){
 
@@ -45,14 +43,12 @@
 	}
 
 	 *{
-
       font-family: 'NanumBarunGothic';
    }
 
    .b_main_wrap{
       width: 1200px;
-      height: 2000px;
-
+      height: 1400px;
    }
 
    .best_menu_wrap{
@@ -84,7 +80,6 @@
 
    .new_link_but {
    	  text-align: left;
-
       float: left;
    }
    .best_menu_wrap_hide{
@@ -103,7 +98,6 @@
    }
 
    .bmw_but_wrap #show_but {
-
 	    text-align: center;
 	    font-size: 30px;
 	    background-color: white;
@@ -247,21 +241,21 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 <main class="b_main_wrap">
-  <div class="best_menu_wrap_more">
-    <div class="best_menu_wrap_start">
-      <div class="best_menu_wrap">
-        <div class="best_menu_wrap_inside">
-          <h2 class="best_menu_h2">Best</h2>
-          <hr width = "40px" color = "gray" text-align= "center"><br>
-          <div class="main_recom_recipe mrr_frist" th:each="bestlist: ${bestlist}">
-            <a class="video" th:href="@{'/recipedetail/'+${bestlist.recipekey}}"><iframe style="pointer-events:none;" width="250" height="150" th:src="${bestlist.recipelink}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></a>
-            <a class="best_link_but"><strong th:text = "${bestlist.recipetitle}"></strong></a>
-            <a class="hit">조회수:<strong th:text="${bestlist.recipehit}"></strong></a>
-          </div>
+    <div class="best_menu_wrap_more">
+        <div class="best_menu_wrap_start">
+            <div class="best_menu_wrap">
+                <div class="best_menu_wrap_inside">
+                    <h2 class="best_menu_h2">Menu</h2>
+                    <hr width = "40px" color = "gray" text-align= "center"><br>
+                    <div class="main_recom_recipe mrr_frist" th:each="menu: ${menulist}">
+                        <a class="video" th:href="@{'/recipedetail/'+${menu.recipekey}}"><iframe style="pointer-events:none;" width="250" height="150" th:src="${menu.recipelink}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></a>
+                        <a class="best_link_but"><strong th:text = "${menu.recipetitle}"></strong></a>
+                        <a class="hit">조회수:<strong th:text="${menu.recipehit}"></strong></a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </main>
 
 <div th:replace="fragments/footer::footer"></div>
