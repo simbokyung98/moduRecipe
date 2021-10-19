@@ -68,9 +68,4 @@ public class AdminController {
         return "adminMeter";
     }
 
-    @GetMapping("/adminMaterialAdd")
-    public String adminMaterialAdd(){
-        return "adminMeterAdd";
-    }
-
 }

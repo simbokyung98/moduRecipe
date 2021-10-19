@@ -167,6 +167,15 @@ public class MaterialService {
 
     }
 
+    @Transactional
+    public List<Material> getMaterialByTitles(String[] materialList) {
+        return materialRepository.findMaterialList(materialList);
+    }
+
+    public List<Material> getMaterialById(String[] materialList) {
+        return materialRepository.findMaterialListById(materialList);
+    }
+
 
 
 

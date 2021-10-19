@@ -198,7 +198,7 @@
 
 
 			<div id="notion_btn" style="margin-top:50px;">
-				<a th:href="@{/notionwrite}" class="notionw_btn">등록</a>
+				<a th:if = "${session.admin != null}" th:href="@{/notionwrite}" class="notionw_btn">등록</a>
 			</div>
 		</section>
 
