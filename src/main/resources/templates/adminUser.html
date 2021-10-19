@@ -156,18 +156,19 @@
             <div class="adminmeter_section1">
                 <p>회원 관리</p>
             </div>
-
+            <form action="/memberlistsearch" method="get">
             <div class="adminmeter_section2" >
-                <select id="admin_usersele" name="searchType">
-                    <option>아이디</option>
-                    <option>이름</option>
-                    <option>생년월일</option>
+
+                <select id="admin_usersele" name="searchType" >
+                    <option value="username">아이디</option>
+                    <option value="name">이름</option>
+                    <option value="date">생년월일</option>
                     <option>최근로그인</option>
                 </select>
-                <form name="/member/search" autocapitalize="off">
                 <input type="text" placeholder="회원검색" id="admin_usertext" name="keyword">
-                <input type="submit" id="admin_userusb" value="">
-                </form></div>
+                <input type="submit" id="admin_userusb" value="검색">
+            </div>
+            </form>
 
             <div class="am_section_content" >
                 <p>전체 사용자 <span> 3 </span>명</p>

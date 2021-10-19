@@ -1,13 +1,20 @@
 package gp.web;
 
 import com.sun.org.apache.xpath.internal.operations.Mod;
+import gp.domain.Material;
 import gp.domain.Member;
+import gp.domain.MemberRepository;
 import gp.domain.Recipe;
 import gp.service.AdminService;
 import gp.service.MemberService;
 import gp.web.dto.MemberDto;
 import gp.web.dto.RecipeDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -22,20 +29,36 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AdminController {
 
+    private final MemberRepository memberRepository;
     private final AdminService adminService;
     private final MemberService memberService;
     private final HttpSession session;
 
 
 
+    /*
+    @GetMapping("/adminUser")
+    public String list(Model model) {
+        Page<Member> members = memberRepository.findAll(PageRequest.of(0, 20));
+        model.addAttribute("adminuserlist", members);
+        return "/adminUser";
+    }
+
+     */
+
 
 
 
     // 회원 정보
     @GetMapping("/adminUser")
-    public String memberlist(Model model) {
-        List<MemberDto> memberDtoList = adminService.getMember();
+    public String memberlist(Model model, @PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC)Pageable pageable){
+
+        Page<Member> memberDtoList = adminService.pageGetAllMember(pageable);
         model.addAttribute("adminuserlist", memberDtoList);
+        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("check", adminService.getListCheck(pageable));
+        //adminsidebar 설정 용도
+        model.addAttribute("adminmenu", "회원");
         return "/adminUser";
     }
 
@@ -51,29 +74,23 @@ public class AdminController {
 
 
 
-/*
-    @GetMapping("/member/search")
-    public String search(@RequestParam(value = "keyword") String keyword, Model model) {
+    //관리자 회원 정보 검색
+    @GetMapping("/memberlistsearch")
+    public String adminMemberSearch(@RequestParam(value="keyword") String keyword, @RequestParam(value="searchType") String searchType, Model model,
+                                      @PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
+        Page<Member> memberDtoList = adminService.pageGetMemberSearch(keyword, searchType, pageable);
+        model.addAttribute("adminuserlist", memberDtoList);
+        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("next", pageable.next().getPageNumber());
+        model.addAttribute("check", adminService.getListCheck(pageable));
+        //adminsidebar 설정 용도
+        model.addAttribute("adminmenu", "회원");
+        return "adminUser";
 
-        List<MemberDto> memberDtoList = adminService.searchPosts(keyword);
-        model.addAttribute("adminList", memberDtoList);
-
-        return "/member/adminUser.html";
     }
 
- */
 
 
 
-
-    @GetMapping("/adminMeter")
-    public String adminMater(){
-        return "adminMeter";
-    }
-
-    @GetMapping("/adminMaterialAdd")
-    public String adminMaterialAdd(){
-        return "adminMeterAdd";
-    }
 
 }

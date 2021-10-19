@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../static/css/style2.css">
+<head>
+    <meta charset="UTF-8">
+  <title>모두의 레시피</title>
+</head>
+<style>
+	@font-face {
+		 font-family: 'NanumBarunGothic';
+		 font-style: normal;
+		 font-weight: 400;
+		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+	}
+
+	.bo_dy {
+		font-family: 'NanumBarunGothic';
+	}
+
+	.form-horizontal {
+		text-align: center;
+	}
+
+	.h3 {
+		font-size: 45px;
+	}
+
+	.h6 {
+		font-size: 15px;
+		color: gray;
+	}
+
+	.row {
+		width: 400px;
+	  	margin-right: auto;
+	    margin-left: auto;
+	    margin-top: auto;
+	    padding: 20px;
+	  	text-align: center;
+	    border: none;
+	}
+
+	.find {
+		font-size: 14px;
+	  	border: 3px solid gray;
+	 	padding: 10px;
+	  	width: 200px;
+	  	background-color: white;
+	  	margin-bottom: 30px;
+	  	color: black;
+	}
+
+	.form-control {
+      font-size: 14px;
+      padding: 10px;
+      border-radius: 7px;
+      border: 1px solid gray;
+      width: 260px;
+      margin-bottom: 10px;
+  }
+
+
+</style>
+<body class="bo_dy">
+<div th:replace="fragments/header :: header"></div>
+<form class="form-horizontal" role="form" method="post" action="starters?cmd=idfineAfter">
+  <h3 class="h3">아이디 찾기</h3>
+  <h6 class="h6">아이디는 가입시 입력하신 이메일을 통해 찾을 수 있습니다.</h6>
+  <div class="row">
+    <div class="col-md-10 inputbb">
+      <div class="form-group has-danger">
+        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+          <input type="text" name="name" class="form-control" id="name" placeholder="이름" required autofocus>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 inputbb">
+      <div class="form-gorup">
+        <div class="input-gorup mb-2 mr-sm-2 mb-sm-0">
+          <input type="email" name="email" class="form-control" id="email" placeholder="이메일" required autofocus>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 inputbb">
+      <button type="submit" class="find">찾기</button>
+    </div>
+  </div>
+</form>
+<div th:replace="fragments/footer::footer"></div>
+
+</body>
+<script type="text/javascript">
+
+
+
+  		$("#name").focusout(function(){
+
+	     if($('#name').val() == ""){
+	   		$('#check').text('이름을 입력해주세요.');
+	   	  	$('#check').css('color', 'red');
+
+	     }else{
+	    	 $('#check').hide();
+	     }
+	     });
+
+  		$("#email").focusout(function(){
+	     if($('#email').val() == ""){
+	   		$('#check').text('이메일을 입력해주세요');
+	   	  	$('#check').css('color', 'red');
+	     }else{
+	    	 $('#check').hide();
+	     }
+	     });
+
+  </script>
+</html>

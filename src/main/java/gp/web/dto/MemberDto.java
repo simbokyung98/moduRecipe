@@ -4,7 +4,6 @@ import gp.domain.Member;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -21,7 +20,6 @@ public class MemberDto {
     private String phone;
     private String email;
     private LocalDate create_dated;
-
 
 
 

@@ -1,6 +1,9 @@
 package gp.web;
 
+import gp.domain.Material;
+import gp.service.MaterialService;
 import gp.service.RecipeService;
+import gp.web.dto.MemberDto;
 import gp.web.dto.RecipeDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -8,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.thymeleaf.util.StringUtils;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -16,6 +21,7 @@ import java.util.List;
 public class RecipeController {
 
     private final RecipeService recipeService;
+    private final MaterialService materialService;
 
     // main 추천 영상
     @GetMapping("/")
@@ -46,6 +52,7 @@ public class RecipeController {
     }
 
     // 영상 클릭시 조회수 증가
+    /*
     @GetMapping("/recipedetail/{recipekey}")
     public String recipedetailrecipe(@PathVariable("recipekey")Long recipekey, Model model){
         RecipeDto recipeDto = recipeService.getRecipe(recipekey);
@@ -55,6 +62,30 @@ public class RecipeController {
         model.addAttribute("recipehit",recipeService.updateView(recipekey));
         model.addAttribute("recipeDto",recipeDto);
         return "recipedetail.html";
+    }
+
+
+     */
+    @GetMapping("/recipedetail/{recipekey}")
+    public String recipedetail(@PathVariable("recipekey")Long recipekey, Model model, HttpSession session){
+
+        MemberDto loginMember=(MemberDto)session.getAttribute("user");
+        RecipeDto recipeDto = recipeService.getRecipe(recipekey);
+
+        String materialStr = recipeDto.getRecipearrang();
+
+        if(! StringUtils.isEmpty(materialStr)){
+            String[] materialList = materialStr.split(",");
+
+            List<Material> materialDtoList = materialService.getMaterialByTitles(materialList);
+
+            model.addAttribute("materialDtoList",materialDtoList);
+
+        }
+        model.addAttribute("recipehit", recipeService.creatorupdateView(recipekey));
+        model.addAttribute("recipehit",recipeService.updateView(recipekey));
+        model.addAttribute("recipeDto",recipeDto);
+        return "recipedetail";
     }
 
 

@@ -33,6 +33,9 @@ public class Recipe {
     @Column(name = "recipedetail")
     private String recipedetail;
 
+    @Column(name = "recipearrang")
+    private String recipearrang;
+
     @Column(name = "recipelink")
     private String recipelink;
 
@@ -47,7 +50,7 @@ public class Recipe {
 
 
     @Builder
-    public Recipe(Long recipekey, String recipetitle, String recipetype, String recipecreator, String recipedetail, String recipelink, int recipehit, Date recipeupdated){
+    public Recipe(Long recipekey, String recipetitle, String recipetype, String recipecreator, String recipedetail, String recipelink, int recipehit, Date recipeupdated, String recipearrang){
         this.recipekey=recipekey;
         this.recipetitle=recipetitle;
         this.recipetype=recipetype;
@@ -56,6 +59,17 @@ public class Recipe {
         this.recipelink=recipelink;
         this.recipehit=recipehit;
         this.recipeupdated=recipeupdated;
+        this.recipearrang = recipearrang;
+
+    }
+
+    //레시피 업데이트 메소드
+    public void recipeUpdate(String recipetitle, String recipetype, String recipecreator , String recipedetail, String recipearrang){
+        this.recipetitle = recipetitle;
+        this.recipetype = recipetype;
+        this.recipecreator = recipecreator;
+        this.recipedetail = recipedetail;
+        this.recipearrang = recipearrang;
 
     }
 }

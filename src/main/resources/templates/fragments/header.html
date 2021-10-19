@@ -21,15 +21,15 @@
                     <li class="usermenuli" th:if = "${session.user != null}"><a class="subusermenuli" th:href="@{/userlogout}">로그아웃</a></li>
                     <li class="usermenuli" th:if = "${session.admin != null}"><a class="subusermenuli"  th:href="@{/adminlogout}">로그아웃</a></li>
                     </li>
-                    <li class="usermenuli" th:if = "${session.user != null}" ><a class="subusermenuli"><span th:text = "${session.user.name}"></span></a></li>
+                    <li class="usermenuli" th:if = "${session.user != null}" ><span class="subusermenuli" th:text = "${session.user.name}"></span></li>
                     <li class="usermenuli" th:if = "${session.admin != null}" ><a class="subusermenuli" th:href="@{/adminUser}"><span th:text = "${session.admin.name}"></span></a></li>
 
                     <li class="usermenuli" th:if = "${session.user != null}"><a class="subusermenuli" href="#">마이페이지</a>
                         <ul class="sub-menu2">
-                            <li class="usermenuli2"><a class="subusermenu" href="orderlist.html" >주문목록</a></li>
+                            <li class="usermenuli2"><a class="subusermenu" th:href="@{/orderlist}" >주문목록</a></li>
                             <li class="usermenuli2"><a class="subusermenu" href="myreview.html">작성후기</a></li>
-                            <li class="usermenuli2"><a class="subusermenu"  href="membercheck.html">개인정보</a></li>
-                            <li class="usermenuli"><a class="subusermenu" th:href="@{/notionmain}">장바구니</a></li>
+                            <li class="usermenuli2"><a class="subusermenu"  th:href="@{/membercheck}">개인정보</a></li>
+                            <li class="usermenuli"><a class="subusermenu" th:href="@{/meterialMain}">장바구니</a></li>
                         </ul>
                     </li>
                     <li class="usermenuli"><a class="subusermenuli" href="#">고객센터</a>
@@ -47,13 +47,13 @@
         <nav class="navigation" style="position: absolute; width: 900px; height:56px; left: 50%; margin: 0 0 0 -450px; left:450px;">
             <div id="nav">
                 <ul class="menulist" style="position: relative; top: 15px; height:45px;">
-                    <li class="menu"><a class="menu-a" href="New.jsp">New</a>
+                    <li class="menu"><a class="menu-a" th:href="@{/new}">New</a>
                         <ul class="navsub" style="width: 70px;">
                             <li class="menusub"><a class="menusubsub"
                                                    style="position: relative; right: 5px;" th:href="@{/new}"
                             >New</a></li>
                         </ul></li>
-                    <li class="menu"><a class="menu-a" href="Best.jsp">Best</a>
+                    <li class="menu"><a class="menu-a" th:href="@{/best}">Best</a>
                         <ul class="navsub" id="bestsub" style="width: 70px;">
                             <li class="menusub" style="position: relative;"><a
                                     class="menusubsub" th:href="@{/best}"
@@ -82,7 +82,7 @@
                         <ul class="navsub" id="materialsub">
                             <li>
                                 <img class="menusubsubimg" src="../static/img/meat.png">
-                                <a class="menusubsub" th:href="@{/meterialMain}">정육</a>
+                                <a class="menusubsub" th:href="@{/meterialMain/정육}">정육</a>
                             </li>
                             <li>
                                 <img class="menusubsubimg" src="../static/img/fish.png">

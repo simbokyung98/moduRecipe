@@ -1,21 +1,20 @@
 package gp.web;
 
+import gp.domain.Member;
 import gp.service.AdminService;
 import gp.service.MemberService;
 import gp.web.dto.AdminDto;
 import gp.web.dto.MemberDto;
+import javassist.bytecode.annotation.MemberValue;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 @Controller
@@ -152,7 +151,45 @@ public class MemberController {
     //---------------------------------------------------------
 
 
+    /*
+    // 아이디 중복 확인
+    @ResponseBody
+    @RequestMapping(value="/idCheck", method= RequestMethod.POST)
+    public String idCheck(Member member){
+        //select * from member where userid = #{};
+        //이 member 객체에는 id만 값이 들어있고, 다른 것은 다 null 값이다.
+        Member m = memberService.idCheck(member);
+        String message=null;
+        if(m==null) {//사용할 수 있다. db에서 찾았는데없으니까
+            message = "success";
+        }else {//사용할 수 없다.
+            message ="fail";
+        }
+        return message;
+    }
 
 
+
+
+
+    @GetMapping("/user-username/{username}/exists")
+    public ResponseEntity<Boolean> checkUsername(@PathVariable String username) {
+        return ResponseEntity.ok(memberService.checkUsername(username));
+    }
+*/
+
+
+
+    // 아이디 찾기
+    @GetMapping("/idfind")
+    public String idfind() {
+        return "/idFind";
+    }
+
+    // 비밀번호 찾기
+    @GetMapping("/pwdfind")
+    public String pwdFind() {
+        return "/pwdFind";
+    }
 
 }

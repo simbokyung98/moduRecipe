@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>모두의 레시피</title>
-    <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="/js/login.js"></script>
 </head>
@@ -238,7 +237,7 @@ function enterKeyCheck(){
         <input type="text" class="id" name="username" placeholder="ID">
         <input type="password" class="pwd" name="password"  placeholder="PASSWORD">
         <input type="submit" class="log" value="로그인"><br>
-        <div class=""></div>
+        <div class=""></div></form>
         <div class="loginUtil">
             <p class="check">
 
@@ -247,12 +246,11 @@ function enterKeyCheck(){
 
             </p>
 
-            <input type="button" class="id_find" onclick="location.href='idfind.jsp'" value="아이디 찾기">
 
-            <input type="button"  class="pwd_find" onclick="location.href='pwdfind.jsp'" value="비밀번호 찾기">
-
+            <input type="button" class="id_find"  th:href="@{/idfind}" value="아이디 찾기">
+            <input type="button"  class="pwd_find"  th:href="@{/pwdfind}" value="비밀번호 찾기">
         </div>
-    </form>
+
     <br>
     <br>
 

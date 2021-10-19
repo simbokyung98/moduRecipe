@@ -126,6 +126,7 @@ function btn(sample){
 </script>
     <script src="../static/js/memberAddress.js"></script>
     <script type="text/javascript" src="/js/memberJoin.js"></script>
+    <script type="text/javascript" src="/js/idCheck.js"></script>
 </head>
 <style>
 	@font-face {
@@ -402,8 +403,9 @@ function btn(sample){
     <h2 align="center">Join</h2>
     <form action="/userJoin" method="post">
         <a class="i_d">아이디</a>
-        <input type="text" class="id" name="username">
-        <input type="submit" class="idcheck" name="username" onclick="openIdChk()" value="중복확인">&nbsp;<br>
+        <input type="text" class="id" name="username" onkeydown="inputIdChk()">
+        <input type="submit" class="idcheck" name="usernameCheck" th:onclick="openIdChk()" value="중복확인">&nbsp;<br>
+        <input type="hidden" name="idDuplication" value="idUncheck" >
         <a class="passwd">비밀번호</a>
         <input type="password" class="pwd" name="password" ><br>
         <a class="passwdche">비밀번호확인</a>

@@ -32,18 +32,10 @@
 		<div class="main_recom_recipe_wrap">
 			<h2 class="mian_content_title">추천 레시피 <button class="main_content_but"><img alt="plus" src="../static/img/plus.png" style="width: 25px; height: 25px;"> </button> </h2>
 			<div id="main_recom_reci_content_wrap">
-				<div class="main_recom_recipe mrr_frist">
-					<iframe width="250" height="150" src="https://www.youtube.com/embed/BqxpjY7TJ8g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<div class="main_recom_recipe mrr_frist"  th:each="recipelist: ${recipelist}">
+					<a class="video" th:href="@{'/recipedetail/'+${recipelist.recipekey}}"><iframe style="pointer-events:none;" width="250" height="150" th:src="${recipelist.recipelink}"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></a>
 				</div>
-				<div class="main_recom_recipe">
-					<iframe width="250" height="150" src="https://www.youtube.com/embed/5iRPP3nqCJE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-				</div>
-				<div class="main_recom_recipe">
-					<iframe width="250" height="150" src="https://www.youtube.com/embed/wPxuQdfYErk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-				</div>
-				<div class="main_recom_recipe">
-					<iframe width="250" height="150" src="https://www.youtube.com/embed/_qnLV46GSr4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-				</div>
+
 			</div>
 		</div>
 

@@ -5,6 +5,8 @@ import gp.web.dto.AdminDto;
 import gp.web.dto.MemberDto;
 import gp.web.dto.RecipeDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,6 +46,7 @@ public class AdminService {
 
 
 
+    /*
     // 회원 관리
     public List<MemberDto> getMember(){
         List<Member> memberList = memberRepository.memberlist();
@@ -66,71 +69,64 @@ public class AdminService {
         return memberDtoList;
     }
 
-
-    // 회원수
-    public List<MemberDto> getMembercount(){
-        List<Member> memberList = memberRepository.membercount();
-        List<MemberDto> memberDtoList = new ArrayList<>();
-
-        for(Member member : memberList){
-            MemberDto memberDto = MemberDto.builder()
-                    .id(member.getId())
-                    .username(member.getUsername())
-                    .password(member.getPassword())
-                    .name(member.getName())
-                    .address(member.getAddress())
-                    .date(member.getDate())
-                    .gender(member.getGender())
-                    .phone(member.getPhone())
-                    .email(member.getEmail())
-                    .create_dated(member.getCreate_dated()).build();
-            memberDtoList.add(memberDto);
-        }
-        return memberDtoList;
-    }
-
-
-
-
-
-
-
-
-
-    /*
-
-    // 회원 검색
-    @Transactional
-    public List<MemberDto> searchPosts(String keyword) {
-        List<Member> memberList = memberRepository.findByKeyword(keyword);
-        List<MemberDto> memberDtoList = new ArrayList<>();
-
-        if(memberList.isEmpty()) return memberDtoList;
-
-        for (Member member : memberList) {
-            memberDtoList.add(this.convertEntityToDto(member));
-        }
-        return memberDtoList;
-    }
-
-    private MemberDto convertEntityToDto(Member member){
-        return MemberDto.builder()
-                .id(member.getId())
-                .username(member.getUsername())
-                .password(member.getPassword())
-                .name(member.getName())
-                .address(member.getAddress())
-                .date(member.getDate())
-                .gender(member.getGender())
-                .phone(member.getPhone())
-                .email(member.getEmail())
-                .create_dated(member.getCreate_dated()).build();
-
-
-    }
-
      */
 
+    //관리자 회원 정보 전체 조회
+    @Transactional
+    public Page<Member> pageGetAllMember(Pageable pageable){
+
+        return memberRepository.findAll(pageable);
+    }
+
+
+    //관리자 회원 정보 검색
+    public Page<Member> pageGetMemberSearch(String keyword, String searchType, Pageable pageable){
+
+        if(searchType.equals("username")){
+            return memberRepository.findByUsernameContaining(keyword, pageable);
+
+        }else if(searchType.equals("name")){
+            return memberRepository.findByNameContaining(keyword, pageable);
+
+        }else if(searchType.equals("date")){
+            return memberRepository.findByDateContaining(keyword, pageable);
+        }
+        return null;
+    }
+
+
+
+
+
+    //관리자 회원 정보 다음장 유무 확인
+    @Transactional
+    public Boolean getListCheck(Pageable pageable) {
+        Page<Member> saved = pageGetAllMember(pageable);
+        Boolean check = saved.hasNext();
+
+        return check;
+    }
+
+
+
+    //관리자 회원 정보 카테고리 조회
+    @Transactional
+    public Page<Member> pageGetMainMemberList(String username, Pageable pageable){
+
+        Page<Member> memberPage = memberRepository.findByUsername(username, pageable);
+
+
+        return memberPage;
+    }
+
+    //관리자 회원 정보 페이지 다음장 유무 확인
+    @Transactional
+    public Boolean geCateListCheck(String username,Pageable pageable) {
+        Page<Member> saved = pageGetMainMemberList(username,pageable);
+        Boolean check = saved.hasNext();
+
+        return check;
+    }
 
 
 
