@@ -56,8 +56,10 @@ public class RecipeController {
     private MaterialService materialService;
 
     @GetMapping("/")
-    public String indexrecipe(Model model,@RequestParam(value = "page",defaultValue = "1") Integer pageNum){
+    public String indexrecipe(Model model,@RequestParam(value = "page",defaultValue = "1") Integer pageNum, @PageableDefault(size = 4, sort = "materialKey", direction = Sort.Direction.DESC)Pageable pageable){
         List<RecipeDto> recipeDtoList = recipeService.getrecipelist(pageNum);
+        Page<Material> materialDtoList = materialService.pageGetAllMaterial(pageable);
+        model.addAttribute("addMater", materialDtoList);
 
         model.addAttribute("recipelist", recipeDtoList);
 

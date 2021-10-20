@@ -104,7 +104,7 @@
 <div th:replace="fragments/header :: header"></div>
 <main class="meter_main">
 	<div class="meter_total_title">
-		<h2>정육</h2>
+		<h2 th:text="${materH2}"></h2>
 	</div>
 	<aside class="meter_aside">
 		<div class="meter_cate_wrap">
@@ -130,6 +130,7 @@
 		<ul class="meter_list">
 
 			<li class="meter_item" th:each = "materialDto : ${materialList}">
+
 				<a th:href="@{'/meter_detail/'+${materialDto.materialKey}}">
 					<div class="meter_size">
 						<div class="meter_img_wrap">
@@ -137,7 +138,15 @@
 								<img alt="for문 test"  th:src="@{../static/materialImg/} + ${materialDto.materialImg}">
 							</div>
 							<div class="meter_cart">
-								<button type="button" class="meter_cart_but"><img alt="장바구니" src="../static/img/cart.png"> </button>
+								<form action="/saveCart" method="post">
+									<input type="hidden" name="cartMaterial" th:value = "${materialDto.materialTitle}">
+									<input type="hidden" name="cartPrice" th:value = "${materialDto.materialPrice}">
+									<input type="hidden" name="cartCapacity" th:value = "${materialDto.materialCapacity}">
+									<input type="hidden" name="cartImage" th:value = ${materialDto.materialImg}>
+									<input type="hidden" name="cartCount" value = "1">
+									<input type="hidden" name="username" th:value = "${session.user?.name}">
+								<button type="submit" class="meter_cart_but"><img alt="장바구니" src="../static/img/cart.png"> </button>
+								</form>
 							</div>
 						</div>
 						<div class="meter_text">
@@ -150,6 +159,7 @@
 						</div>
 					</div>
 				</a>
+
 			</li>
 
 		</ul>

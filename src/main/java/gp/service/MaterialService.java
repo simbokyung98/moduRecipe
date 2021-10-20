@@ -173,9 +173,4 @@ public class MaterialService {
         return materialRepository.findMaterialListById(materialList);
     }
 
-
-
-
-
-
 }
