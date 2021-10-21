@@ -28,12 +28,14 @@ public class MaterialController {
     private final MaterialService materialService;
     private final SimpleDateFormat dateForServer = new SimpleDateFormat("yyyyMMddHHmmss_");
 
+    //재료 전체 띄우기
     @GetMapping("/meterialMain")
     public String meterrialMain(Model model){
 
         List<MaterialDto> materialDtoList = materialService.getAllMaterial();
 
         model.addAttribute("materialList", materialDtoList);
+        model.addAttribute("materH2", "전체");
 
         return "meterialMain";
     }
@@ -44,6 +46,7 @@ public class MaterialController {
         List<MaterialDto> materialDtoList =materialService.getCateMaterial(materialMainCate);
 
         model.addAttribute("materialList", materialDtoList);
+        model.addAttribute("materH2", materialMainCate);
 
         return "meterialMain";
     }

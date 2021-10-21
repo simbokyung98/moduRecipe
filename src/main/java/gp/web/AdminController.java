@@ -33,13 +33,15 @@ public class AdminController {
     public String memberlist(Model model) {
         List<MemberDto> memberDtoList = adminService.getMember();
         model.addAttribute("adminuserlist", memberDtoList);
+        //adminsidebar 설정 용도
+        model.addAttribute("adminmenu", "회원");
         return "/adminUser";
     }
 
 
     // 관리자 회원 삭제
-    @RequestMapping("/memberDelete/{id} ")
-    public String memberDelete(@PathVariable("id") Long id) {
+    @RequestMapping("/memberDelete/{userid}")
+    public String memberDelete(@PathVariable("userid") Long id) {
         adminService.adminUserDelete(id);
 
         return "redirect:/adminUser";
