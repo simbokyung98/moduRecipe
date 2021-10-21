@@ -4,36 +4,6 @@ $(document).ready(function(){
  });
 
 
-let replyIndex = {
-    init: function () {
-        $("#review-btn-save").on("click", () => {
-            this.reviewsave();
-        });
-    },
-
-    reviewsave: function () {
-        let data = {
-            content: $("#reviewcontent").val(),
-        }
-        let recipekey = $("#recipekey").val();
-        console.log(data);
-        console.log(recipekey);
-        $.ajax({
-            type: "POST",
-            url: `/recipedetail/{recipekey}`,
-            data: JSON.stringify(data),
-            contentType: "application/json; charset=utf-8",
-            dataType: "text"
-        }).done(function (res) {
-            alert("댓글작성이 완료되었습니다.");
-            location.href = `/recipedetail/{recipekey}`;
-        }).fail(function (err) {
-            alert(JSON.stringify(err));
-        });
-    },
-
-}
-
 function setTotalPrice() {
     var obj_length = document.getElementsByName("buy").length;
     var totalPrice = 0;
@@ -50,9 +20,8 @@ function setTotalPrice() {
 function nullCheck(){
 
     if($("input:checkbox[name='buy']").is(":checked")==false){
-        alert("한개 이상의 물품은 구매하셔야합니다");
-        location.reload();
-        return;
+        alert("한개 이상의 물품은 선택하셔야합니다");
+        return false;
     }
 }
 

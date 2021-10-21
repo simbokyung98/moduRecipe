@@ -182,10 +182,12 @@ public class RecipeController {
 
    
     @GetMapping("/recipedetail/{recipekey}")
-    public String recipedetail(@PathVariable("recipekey")Long recipekey, Model model, HttpSession session){
+    public String recipedetail(@PathVariable("recipekey")Long recipekey, Model model,@RequestParam(value = "page",defaultValue = "1") Integer pageNum, HttpSession session){
 
         MemberDto loginMember=(MemberDto)session.getAttribute("user");
         RecipeDto recipeDto = recipeService.getRecipe(recipekey);
+        List<RecipeDto> recipeDtoList = recipeService.getrecipelist(pageNum);
+
 
         String materialStr = recipeDto.getRecipearrang();
 
@@ -197,6 +199,7 @@ public class RecipeController {
             model.addAttribute("materialDtoList",materialDtoList);
 
         }
+        model.addAttribute("recipelist", recipeDtoList);
         model.addAttribute("recipehit", recipeService.creatorupdateView(recipekey));	
         model.addAttribute("recipehit",recipeService.updateView(recipekey));
         model.addAttribute("recipeDto",recipeDto);

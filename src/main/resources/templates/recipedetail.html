@@ -7,9 +7,6 @@
 	<title>모두의 레시피</title>
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script th:src="@{../static/js/review.js}"></script>
-	var str = document.getElementById("input:text").value;
-
-	str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
 
 
 
@@ -317,7 +314,7 @@
 			</div>
 		</div>
 		<div class="basket_order" style="padding-top:50px;">
-			<input type="button" class="basket" value="장바구니" onclick="cartMaterials();">
+			<input type="button" class="basket" value="장바구니" onclick="cartMaterials(); nullCheck();">
 			<input type="button" class="order" value="구매하기" onclick="orderMaterials(); nullCheck();">
 		</div>
 
@@ -342,10 +339,10 @@
 
 			</form>
 
-			<div class="main_recom_recipe_wrap">
+			<div class="main_recom_recipe_wrap" >
 				<h2 class="mian_content_title">추천 레시피 <button class="main_content_but"><img alt="plus" src="../static/img/plus.png" style="width: 25px; height: 25px;"> </button> </h2>
 				<div id="main_recom_reci_content_wrap">
-					<div class="main_recom_recipe mrr_frist"  th:each="recipelist: ${recipelist}">
+					<div class="main_recom_recipe mrr_frist"  style="width:250px;" th:each="recipelist: ${recipelist}">
 						<a class="video" th:href="@{'/recipedetail/'+${recipelist.recipekey}}"><iframe style="pointer-events:none;" width="250" height="150" th:src="${recipelist.recipelink}"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></a>
 					</div>
 
