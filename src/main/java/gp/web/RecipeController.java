@@ -56,8 +56,10 @@ public class RecipeController {
     private MaterialService materialService;
 
     @GetMapping("/")
-    public String indexrecipe(Model model,@RequestParam(value = "page",defaultValue = "1") Integer pageNum){
+    public String indexrecipe(Model model,@RequestParam(value = "page",defaultValue = "1") Integer pageNum, @PageableDefault(size = 4, sort = "materialKey", direction = Sort.Direction.DESC)Pageable pageable){
         List<RecipeDto> recipeDtoList = recipeService.getrecipelist(pageNum);
+        Page<Material> materialDtoList = materialService.pageGetAllMaterial(pageable);
+        model.addAttribute("addMater", materialDtoList);
 
         model.addAttribute("recipelist", recipeDtoList);
 
@@ -116,7 +118,10 @@ public class RecipeController {
 
     //관리자 레시피 추가 페이지 이동
     @GetMapping("/adminContentAdd")
-    public String adminConAdd(){
+    public String adminConAdd(Model model){
+
+        //adminsidebar 설정 용도
+        model.addAttribute("adminmenu", "레시피");
         return "adminContentAdd";
     }
 
@@ -135,6 +140,8 @@ public class RecipeController {
         RecipeDto recipeDto = recipeService.getRecipeUp(recipekey);
 
         model.addAttribute("recipedetail", recipeDto);
+        //adminsidebar 설정 용도
+        model.addAttribute("adminmenu", "레시피");
 
         return "adminContentUpdate";
 
@@ -193,6 +200,7 @@ public class RecipeController {
         model.addAttribute("recipehit", recipeService.creatorupdateView(recipekey));	
         model.addAttribute("recipehit",recipeService.updateView(recipekey));
         model.addAttribute("recipeDto",recipeDto);
+
         return "recipedetail";
     }
 

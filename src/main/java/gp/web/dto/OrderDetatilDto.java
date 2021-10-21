@@ -5,6 +5,8 @@ import gp.domain.Order;
 import gp.domain.OrderDetail;
 import lombok.*;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @ToString
@@ -16,14 +18,16 @@ public class OrderDetatilDto {
     private Material material;
     private String materialname;
     private int ordernum;
+    private Date orderdate;
 
     @Builder
-    public OrderDetatilDto(Long orderdetailkey, Order order, Material material, String materialname, int ordernum){
+    public OrderDetatilDto(Long orderdetailkey, Order order, Material material, String materialname, int ordernum, Date orderdate){
         this.orderdetailkey=orderdetailkey;
         this.order=order;
         this.material=material;
         this.materialname=materialname;
         this.ordernum=ordernum;
+        this.orderdate=orderdate;
     }
 
     public OrderDetail toEntity(){
@@ -33,6 +37,7 @@ public class OrderDetatilDto {
                 .material(material)
                 .materialname(materialname)
                 .ordernum(ordernum)
+                .orderdate(orderdate)
                 .build();
         return orderDetail;
     }

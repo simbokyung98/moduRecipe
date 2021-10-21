@@ -41,91 +41,33 @@
 
 
 		<div class="all_meter-wrap">
-			<h2 class="mian_content_title">오늘의 재료 <button class="main_content_but"><img alt="plus" src="../static/img/plus.png" style="width: 25px; height: 25px;"></button> </h2>
+			<h2 class="mian_content_title">오늘의 재료 <button class="main_content_but" th:onclick="'location.href=\''+ @{/meterialMain} + '\''"><img alt="plus" src="../static/img/plus.png" style="width: 25px; height: 25px;"></button> </h2>
 			<div class="cut_side">
 				<ul class="meter_list">
-					<li class="meter_item">
-						<a href="meter_detail.jsp">
+					<li class="meter_item"th:each="addMater : ${addMater}">
+						<a  th:href="@{'/meter_detail/'+${addMater.materialKey}}">
 							<div class="meter_size">
 								<div class="meter_img_wrap">
 									<div class="meter_img">
-										<img alt="돼지고기 다짐육" src="../static/img/chop_pig.jpg">
+										<img th:alt="${addMater.materialImg}" th:src="@{../static/materialImg/} + ${addMater.materialImg}">
 									</div>
 									<div class="meter_cart">
-										<button type="button" class="meter_cart_but"><img alt="장바구니" src="../static/img/cart.png"> </button>
+										<form action="/saveCart" method="post">
+											<input type="hidden" name="cartMaterial" th:value = "${addMater.materialTitle}">
+											<input type="hidden" name="cartPrice" th:value = "${addMater.materialPrice}">
+											<input type="hidden" name="cartCapacity" th:value = "${addMater.materialCapacity}">
+											<input type="hidden" name="cartImage" th:value = ${addMater.materialImg}>
+											<input type="hidden" name="cartCount" value = "1">
+											<input type="hidden" name="username" th:value = "${session.user?.name}">
+										<button type="submit" class="meter_cart_but"><img alt="장바구니" src="../static/img/cart.png"> </button>
+										</form>
 									</div>
 								</div>
 								<div class="meter_text">
 									<div class="meter_full">
-										<div class="meter_title"><strong>[냉장]돼지고기 다짐육(한돈) , 200g</strong></div>
-										<div class="meter_price">3,000원</div>
-										<div class="meter_g">(100g 당 1,500원)</div>
-									</div>
-								</div>
-							</div>
-						</a>
-					</li>
-					<li class="meter_item">
-						<a href="meter_detail.jsp">
-							<div class="meter_size">
-								<div class="meter_img_wrap">
-									<div class="meter_img">
-										<img alt="소고기 다짐육" src="../static/img/chop_beef.jpg">
-									</div>
-									<div class="meter_cart">
-										<button type="button" class="meter_cart_but"><img alt="장바구니" src="../static/img/cart.png"> </button>
-									</div>
-								</div>
-								<div class="meter_text">
-
-									<div class="meter_full">
-										<div class="meter_title"><strong >[냉장]소고기 다짐육(한우), 200g</strong></div>
-										<div class="meter_price">20,000원</div>
-										<div class="meter_g">(100g 당 10,000원)</div>
-									</div>
-								</div>
-							</div>
-						</a>
-					</li>
-					<li class="meter_item">
-						<a href="meter_detail.jsp">
-							<div class="meter_size">
-								<div class="meter_img_wrap">
-									<div class="meter_img">
-										<img alt="소고기 패티" src="../static/img/hambuger_beef.jpg">
-									</div>
-									<div class="meter_cart">
-										<button type="button" class="meter_cart_but"><img alt="장바구니" src="../static/img/cart.png"> </button>
-									</div>
-								</div>
-								<div class="meter_text">
-
-									<div class="meter_full">
-										<div class="meter_title"><strong >[냉장]소고기 패티 , 400g</strong></div>
-										<div class="meter_price">16,000원</div>
-										<div class="meter_g">(100g 당 4,000원)</div>
-									</div>
-								</div>
-							</div>
-						</a>
-					</li>
-					<li class="meter_item">
-						<a href="meter_detail.jsp">
-							<div class="meter_size">
-								<div class="meter_img_wrap">
-									<div class="meter_img">
-										<img alt="등갈비" src="../static/img/back_ribs_pig.jpg">
-									</div>
-									<div class="meter_cart">
-										<button type="button" class="meter_cart_but"><img alt="장바구니" src="../static/img/cart.png"> </button>
-									</div>
-								</div>
-								<div class="meter_text">
-
-									<div class="meter_full">
-										<div class="meter_title"><strong >[냉장]돼지고기 등갈비(한돈),600g</strong></div>
-										<div class="meter_price">12,000원</div>
-										<div class="meter_g">(100g 당 2,000원)</div>
+										<div class="meter_title"><strong th:text="${addMater.materialTitle}"></strong></div>
+										<div class="meter_price"><span th:text="${addMater.materialPrice}"></span>원</div>
+										<div class="meter_g">(<span th:text="${addMater.materialCapacity}"></span>g 기준)</div>
 									</div>
 								</div>
 							</div>

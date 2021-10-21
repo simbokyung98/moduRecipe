@@ -7,7 +7,7 @@ function order(){
         var materialKeys = getParameterByName("keys")
 
         $("#orderphone").val($("#emergency11").val() + "-" + $("#emergency12").val() + "-" + $("#emergency13").val())
-        $("#orderaddress").val($("#address1").val() + " " + $("#post1").val() + "-" + $("#post2").val())
+        $("#orderaddress").val($("#sample4_postcode").val() + " " + $("#sample4_roadAddress").val() + "-" + $("#sample4_detailAddress").val())
 
 
         $("#order_form").attr("method", "post");
@@ -19,10 +19,12 @@ function order(){
 
 }
 
+
 function getParameterByName(name) {
 name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
 var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
 results = regex.exec(location.search);
 return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
+
 

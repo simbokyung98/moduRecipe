@@ -68,6 +68,9 @@
 			font-family: 'Cafe24Simplehae';
 			font-size: 20px;
 		}
+		.news-ul a:active`{
+			color: #ffa500;
+		}
 		.news_img_wrap {
 			text-align: center;
 			padding: 30px 0 30px 0;
@@ -85,12 +88,13 @@
 		}
 		.news-ul a:link, .news-ul a:visited, .news-ul a:active{
 			text-decoration: none;
-			color: black;
+			color: #black;
 		}
 		.news-ul a:hover{   
 			color: black;
 			font-weight: bold;
-		} 
+		}
+
 		#news_section{
 			width: 79%;
 			float: left;
@@ -169,14 +173,15 @@
 
 	<main id="news_main">
 		<aside id="news_aside">
-			
+
 			<ul class="news-ul">
 				<li class="news_title_wrap"><h4 class="news-title">고객센터</h4></li>
 				<li class="news_img_wrap"><img alt="악수" src="/static/img/notionIcon.png" style="width: 100px;height: 100px;"><p>모두를 위한 고객센터</p> </li>
-				<li class="news_list_wrap"><a class="news-li" th:href="@{/notionmain}" style="font-weight: bold;color: #ffa500;">공지사항<span>></span></a></li>
-				<li class="news_list_wrap"><a class="news-li" th:href="@{/question}">Q&A<span>></span></a></li>
-				<li class="news_list_wrap"><a class="news-li" th:href="@{/notionwrite}">1대1문의<span>></span></a></li>
-			</ul>	
+				<li class="news_list_wrap"><a class="news-li" th:href="@{/notionmain}" style="font-weight: bold;">공지사항<span>></span></a></li>
+				<li class="news_list_wrap"><a class="news-li" th:href="@{/question}" style="font-weight: bold; ">Q&A<span>></span></a></li>
+				<li class="news_list_wrap"><a class="news-li" th:href="@{/myqnamain}" style="font-weight: bold;">1대1문의<span>></span></a></li>
+
+			</ul>
 		</aside>
 		<section id="news_section">
 					<div id="question_wrap">
@@ -196,7 +201,7 @@
 
 					</div>
 			<div id="question_btn" style="margin-top:50px;">
-				<a th:href="@{/questionwrite}" class="question_btn">등록</a>
+				<a th:if="${session.admin!=null}" th:href="@{/questionwrite}" class="question_btn">등록</a>
 			</div>
 				</section>
 	</main>

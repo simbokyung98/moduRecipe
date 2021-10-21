@@ -255,7 +255,7 @@
           <hr width = "40px" color = "gray" text-align= "center"><br>
           <div class="main_recom_recipe mrr_frist" th:each="bestlist: ${bestlist}">
             <a class="video" th:href="@{'/recipedetail/'+${bestlist.recipekey}}"><iframe style="pointer-events:none;" width="250" height="150" th:src="${bestlist.recipelink}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></a>
-            <a class="best_link_but"><strong th:text = "${bestlist.recipetitle}"></strong></a>
+            <a class="best_link_but" th:href="@{'/recipedetail/'+${bestlist.recipekey}}"><strong th:text = "${bestlist.recipetitle}"></strong></a>
             <a class="hit">조회수:<strong th:text="${bestlist.recipehit}"></strong></a>
           </div>
         </div>

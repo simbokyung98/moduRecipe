@@ -8,13 +8,13 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-public interface RecipeRepository extends JpaRepository<Recipe,Long> {
-
-
+import org.springframework.data.repository.query.Param;
 
 
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
+    public Page<Recipe> findByRecipetype(String recipetype, Pageable pageable);
+    public Page<Recipe> findByRecipetitleContaining(String recipetitle, Pageable pageable);
+    public Page<Recipe> findByRecipecreatorContaining(String recipecreator, Pageable pageable);
 
     // best조회수
     @Query(value = "select * from recipe order by recipehit desc",nativeQuery = true)
@@ -51,6 +51,10 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     // menu
     @Query(value = "select * from recipe where recipetype = :recipetype order by recipehit desc",nativeQuery = true)
     List<Recipe> menurecipe(@Param("recipetype") String recipetype);
+
+
+
+
 
 
 

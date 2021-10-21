@@ -59,6 +59,9 @@ public class QnaController {
         qnaDto.setAnswerstate(answerstate);
         qnaService.saveQna(qnaDto);
 
+        if(session.getAttribute("user")==null){
+            return "redirect:/login";
+        }
 
 
 

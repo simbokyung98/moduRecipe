@@ -3,11 +3,20 @@
 <link rel="stylesheet" href="../static/css/style2.css">
 <head>
 
-<meta charset="UTF-8">
-<title>모두의 레시피</title>
+	<meta charset="UTF-8">
+	<title>모두의 레시피</title>
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script th:src="@{../static/js/review.js}"></script>
+	var str = document.getElementById("input:text").value;
+
+	str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+
+
+
+
 </head>
+
+
 
 <style type="text/css">
 	@font-face {
@@ -218,38 +227,75 @@
   	}
 
 </style>
+<script>
+	function cartMaterials() {
+
+		let cartList = [];
+
+		for ( var i = 0; i < $("input[name=buy]:checkbox" ).length; i++) {
+			if ($( "input[name=buy]:checkbox")[i].checked == true ) {
+				const target = $("input[name=buy]:checkbox")[i];
+				const cartMaterial = $(target).parent().prev().prev().prev().text();
+				const cartPrice = $(target).parent().prev().prev().text();
+				const cartCapacity = $(target).parent().prev().val();
+
+				console.log(cartMaterial);
+				console.log(cartPrice);
+				console.log(cartCapacity);
+				cartList.push({
+					'cartMaterial':cartMaterial,
+					'cartPrice':cartPrice,
+					'cartCapacity':cartCapacity,
+					'cartCount':1
+				});
+			}
+		}
+		$.ajax({
+			url:'/saveCartList',
+			type: 'POST',
+			dataType: "text",
+			contentType: 'application/json',
+			traditional :true,
+			data: JSON.stringify(cartList),
+			success:function(data){
+				alert('장바구니에 넣었습니다.!');
+			}
+		});
+	}
+
+</script>
 <body>
 <div th:replace="fragments/header :: header"></div>
 
 
 <table class="notion_table">
 	<thead class="notion_table_thead">
-		<tr class="tr2">
-			<th class="th1">제목</th>
-			<th class="th2">크리에이터명</th>
-			<th class="th1">조회수</th>
+	<tr class="tr2">
+		<th class="th1">제목</th>
+		<th class="th2">크리에이터명</th>
+		<th class="th1">조회수</th>
 
 	</tr>
-		<tr class="tr2">
-			<th class="th1" th:text="${recipeDto.recipetitle}"></th>
-			<th class="th2" th:text="${recipeDto.recipecreator}"></th>
-			<th class="th1" th:text="${recipeDto.recipehit}"></th>
-		</tr>
+	<tr class="tr2">
+		<th class="th1" th:text="${recipeDto.recipetitle}"></th>
+		<th class="th2" th:text="${recipeDto.recipecreator}"></th>
+		<th class="th1" th:text="${recipeDto.recipehit}"></th>
+	</tr>
 
 	</thead>
 </table>
-	<div class="wrap">
-			<section id="section">
-			<div class="img">
+<div class="wrap">
+	<section id="section">
+		<div class="img">
 
-				<iframe width="700" height="500" th:src="${recipeDto.recipelink}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-			</div>
+			<iframe width="700" height="500" th:src="${recipeDto.recipelink}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		</div>
 
-			<div class="meterial">
-				<h2>재료 장바구니</h2>
-				<div class="text">
+		<div class="meterial">
+			<h2>재료 장바구니</h2>
+			<div class="text">
 
-					<form id="materialForm" method="post">
+				<form id="materialForm" method="post">
 					<table class="table1">
 						<tr class="tr1" style="text-align:right">
 							<th class="th1"> 재료명 </th>
@@ -257,58 +303,59 @@
 							<th class="th1"> 선택여부</th>
 
 						</tr>
-						<tr  class="tr1" style="text-align:right" th:each="material : ${materialDtoList}">
+						<tr  class="tr1 chks" style="text-align:right;" th:each="material : ${materialDtoList}">
 							<input type="hidden" name="materialKey" th:value="${material.materialKey}"/>
 							<th class="th1" name="materialTitle" th:text="${material.materialTitle}"></th>
 							<th class="th1" name="materialPrice" th:text="${material.materialPrice}"></th>
+							<input type="hidden" name="materialCapacity"  th:value="${material.materialCapacity}">
 							<th class="th1"><input type="checkbox" onchange="setTotalPrice()" name="buy" th:value="${material.materialPrice}" checked=""></th>
 						</tr>
 					</table>
-						<input type="hidden" id="hiddenTotalPrice" name="hiddenTotalPrice" />
-					<span>총 가격 : <span id="totalPrice" name="totalPrice"></span></span>
-					</form>
-				</div>
-			</div>
-				<div class="basket_order">
-					<input type="button" class="basket" value="장바구니" onclick="cartMaterials();'">
-					<input type="button" class="order" value="구매하기" onclick="orderMaterials(); nullCheck();">
-				</div>
-
-			<hr width="100%" color="#b0aeae">
-			<div class="msg">
-				<div class="vdoclick">
-
-
-			   	</div>
-
-				<div class="recipedetail">
-			   		<input th:text="${recipeDto.recipedetail}" style="white-space:pre-line;" value="more" class="more" onclick="if(this.parentNode.getElementsByTagName('div')[0].style.display != ''){this.parentNode.getElementsByTagName('div')[0].style.display = '';this.value = 'Hide';}else{this.parentNode.getElementsByTagName('div')[0].style.display = 'none'; this.value = 'more';}" type="button" />
-			   </div>
-			  <hr width="100%" color="#ededed">
-			  <br>
-				<br><br><br><br><br><br><br><br><br>
-				<form class="review">
-					<div class="card-body">
-						<input type="hidden" id="recipekey" th:value="${recipeDto.recipekey}">
-
-					</div>
-
+					<input type="hidden" id="hiddenTotalPrice" name="hiddenTotalPrice" />
+					<span>총 가격 : <span id="totalPrice" name="totalPrice"></span><span>원</span></span>
 				</form>
+			</div>
+		</div>
+		<div class="basket_order" style="padding-top:50px;">
+			<input type="button" class="basket" value="장바구니" onclick="cartMaterials();">
+			<input type="button" class="order" value="구매하기" onclick="orderMaterials(); nullCheck();">
+		</div>
 
-				<div class="main_recom_recipe_wrap">
-					<h2 class="mian_content_title">추천 레시피 <button class="main_content_but"><img alt="plus" src="../static/img/plus.png" style="width: 25px; height: 25px;"> </button> </h2>
-					<div id="main_recom_reci_content_wrap">
-						<div class="main_recom_recipe mrr_frist"  th:each="recipelist: ${recipelist}">
-							<a class="video" th:href="@{'/recipedetail/'+${recipelist.recipekey}}"><iframe style="pointer-events:none;" width="250" height="150" th:src="${recipelist.recipelink}"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></a>
-						</div>
+		<hr width="100%" color="#b0aeae">
+		<div class="msg">
+			<div class="vdoclick">
 
-					</div>
-				</div>
 
 			</div>
-		</section>
-	</div>
-	</div>
+
+			<div class="recipedetail">
+				<input th:text="${recipeDto.recipedetail}" style="white-space:pre-line;" value="more" class="more" onclick="if(this.parentNode.getElementsByTagName('div')[0].style.display != ''){this.parentNode.getElementsByTagName('div')[0].style.display = '';this.value = 'Hide';}else{this.parentNode.getElementsByTagName('div')[0].style.display = 'none'; this.value = 'more';}" type="button" />
+			</div>
+			<hr width="100%" color="#ededed">
+			<br>
+			<br><br><br><br><br><br><br><br><br>
+			<form class="review">
+				<div class="card-body">
+					<input type="hidden" id="recipekey" th:value="${recipeDto.recipekey}">
+
+				</div>
+
+			</form>
+
+			<div class="main_recom_recipe_wrap">
+				<h2 class="mian_content_title">추천 레시피 <button class="main_content_but"><img alt="plus" src="../static/img/plus.png" style="width: 25px; height: 25px;"> </button> </h2>
+				<div id="main_recom_reci_content_wrap">
+					<div class="main_recom_recipe mrr_frist"  th:each="recipelist: ${recipelist}">
+						<a class="video" th:href="@{'/recipedetail/'+${recipelist.recipekey}}"><iframe style="pointer-events:none;" width="250" height="150" th:src="${recipelist.recipelink}"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></a>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</section>
+</div>
+
 
 </body>
 

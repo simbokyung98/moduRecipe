@@ -182,6 +182,15 @@
 	    color: rgba(110, 109, 109, 0.363);
 	
 	}
+	.news-ul a:link, .news-ul a:visited, .news-ul a:active{
+    			text-decoration: none;
+    			color:#ffa550;
+    		}
+
+    .news-ul a:hover{
+
+        color:black;
+    }
 	.menu-a:hover {
 	    color: black;
 	}
@@ -286,15 +295,15 @@
 		padding-right:40px;
 	}
 	.mysidebarul a:hover{
-		color:#ffa550;
+		color:black;
 		font-weight: bold;
 	}
 	.mysidebarul a:link, .mysidebarul a:visited, .mysidebarul a:active{
 		text-decoration: none;
-		color: black;
+		color: #ffa550;
 	}
 	.mysidebarli a:hover{
-		color:#ffa550;
+		color:black ;
 	}
 	.sub-menu2 a:hover{
 		color:#ffa550;
