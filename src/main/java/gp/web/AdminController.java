@@ -64,7 +64,7 @@ public class AdminController {
 
 
     @GetMapping("/adminMeter")
-    public String adminMater(){
+    public String asdasd(){
         return "adminMeter";
     }
 

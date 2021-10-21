@@ -54,6 +54,10 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 
 
 
+
+
+
+
     /*
     @Query(value = "select * from recipe where recipeHit=(select max(recipehit)from recipe)",nativeQuery = true)
     List<Recipe> bestrecipe();

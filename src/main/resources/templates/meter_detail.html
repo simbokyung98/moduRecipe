@@ -236,6 +236,34 @@
 		  document.getElementById('result').value = number;
 		  document.getElementById('total_price').innerHTML = total_price;
 		}
+
+	function order() {
+
+		let cartList = [];
+
+		const materialname = $('.meter_detail_title_box_dl').find('span').text();
+		const ordernum = $('.meter_detail_title_box_dl').find('.m_title_count_num').val();
+		cartList.push({
+			'materialname':materialname,
+			'ordernum':ordernum
+		});
+
+		const allSum = $('#total_price').text();
+		$.ajax({
+			url:'/order?sum='+allSum,
+			type: 'POST',
+			dataType: "text",
+			contentType: 'application/json',
+			traditional :true,
+			data: JSON.stringify(cartList),
+			async: false,
+			success:function(data){
+				console.log(data);
+				location.href = '/go_order';
+			}
+		});
+
+	}
 </script>
 </head>
 <body>
@@ -298,7 +326,7 @@
 					<input type="hidden" th:value="${session.user?.username}" name="username">
 					<input type="hidden" th:value="${material.materialCapacity}" name="cartCapacity">
 					<button class="mdtt_but1"  type="submit">장바구니</button>
-					<button class="mdtt_but2">바로구매</button>
+					<button class="mdtt_but2" onclick="order()" type="button">바로구매</button>
 				</div>
 			</div>
 			</form>

@@ -2,29 +2,31 @@ package gp.web;
 
 import gp.domain.Material;
 import gp.domain.Order;
+import gp.domain.OrderDetailRepository;
 import gp.service.MaterialService;
 import gp.service.OrderService;
-import gp.web.dto.MaterialDto;
-import gp.web.dto.MemberDto;
-import gp.web.dto.OrderDetatilDto;
-import gp.web.dto.OrderDto;
+import gp.web.dto.*;
 import lombok.AllArgsConstructor;
 import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @AllArgsConstructor
@@ -37,14 +39,19 @@ public class OrderController {
     private MaterialService materialService;
 
 
-    @GetMapping("/order")
-    public String orderform(HttpSession session, OrderDto orderDto, OrderDetatilDto orderDetatilDto, Model model){
+    @PostMapping("/order")
+    public ResponseEntity orderform(HttpSession session, OrderDto orderDto, @RequestBody List< OrderDetatilDto> OrderDetatilDtoList, @RequestParam(value = "sum") String sum) {
 
+//        if(session.getAttribute("user")==null){
+//            return "redirect:/login";
+//        }
+        System.out.println();
+        System.out.println("orderDetailListDto = " + OrderDetatilDtoList);
+        session.setAttribute("orderDetailList", OrderDetatilDtoList);
+        session.setAttribute("sum", sum);
+        System.out.println(OrderDetatilDtoList.size());
 
-
-        MemberDto loginMember=(MemberDto)session.getAttribute("user");
-        System.out.println("loginMember : " + loginMember.toString());
-        return "order";
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @PostMapping("/material/order")
@@ -59,7 +66,15 @@ public class OrderController {
         model.addAttribute("totalPrice",hiddenTotalPrice);
         model.addAttribute("userName",loginMember.getName());
 
+        session.setAttribute("sum", hiddenTotalPrice);
 
+        return "order";
+    }
+
+    @GetMapping("/go_order")
+    public String goOrder(HttpSession session, Model model){
+        MemberDto loginMember=(MemberDto)session.getAttribute("user");
+        model.addAttribute("userName",loginMember.getName());
         return "order";
     }
 
@@ -73,6 +88,7 @@ public class OrderController {
         orderDto.setOrderdate(date);
         orderDto.setOrderstate(1);
         orderDto.setMemberid(loginMember.getId());
+        orderDetatilDto.setOrderdate(date);
 
         System.out.println("orderDto : " + orderDto.toString());
         System.out.println("orderDetatilDto : " + orderDetatilDto.toString());
@@ -86,20 +102,56 @@ public class OrderController {
         order.setOrderkey(orderKey);
         orderDetatilDto.setOrder(order);
 
-        String[] materialList = materialKeys.split(",");
-        List<Material> materialDtoList = materialService.getMaterialById(materialList);
-
-        for(int i = 0; i < materialDtoList.size(); i++){
-            System.out.println("materialDtoList.get(i) : " + materialDtoList.get(i).toString());
-            orderDetatilDto.setMaterial(materialDtoList.get(i));
-            orderService.saveOrderDetail(orderDetatilDto);
+        if(orderDetatilDto.getOrdernum()==0){
+            orderDetatilDto.setOrdernum(1);
         }
+
+
+
+        if (materialKeys.isEmpty() == false) {
+            String[] materialList = materialKeys.split(",");
+            List<Material> materialDtoList = materialService.getMaterialById(materialList);
+
+            for(int i = 0; i < materialDtoList.size(); i++){
+                System.out.println("materialDtoList.get(i) : " + materialDtoList.get(i).toString());
+                orderDetatilDto.setMaterial(materialDtoList.get(i));
+                orderService.saveOrderDetail(orderDetatilDto);
+            }
+            session.removeAttribute("sum");
+
+        } else {
+            List< OrderDetatilDto> orderDetatilDtoList = (List<OrderDetatilDto>) session.getAttribute("orderDetailList");
+            String[] materialList1 = new String[orderDetatilDtoList.size()];
+
+            int index = 0;
+            for(OrderDetatilDto orderDetatilDto1 : orderDetatilDtoList){
+                materialList1[index] = orderDetatilDto1.getMaterialname();
+                index++;
+            }
+            List<Material> materialDtoList1 = materialService.getMaterialByTitles(materialList1);
+
+            index = 0;
+            for(OrderDetatilDto orderDetatilDto1 : orderDetatilDtoList){
+                orderDetatilDto1.setMaterial(materialDtoList1.get(index));
+                orderDetatilDto1.setOrder(order);
+                orderService.saveOrderDetail(orderDetatilDto1);
+                index++;
+            }
+            session.removeAttribute("orderDetailList");
+            session.removeAttribute("sum");
+        }
+
+
 
         return "orderComp";
     }
 
     @GetMapping("/orderlist")
-    public String orderList(HttpSession session, Model model){
+    public String orderList(HttpSession session, Model model,@PageableDefault(size = 5, sort = "materialKey", direction = Sort.Direction.DESC) Pageable pageable){
+
+        Page<Material> materialDtoList=materialService.pageGetAllMaterial(pageable);
+
+        model.addAttribute("material", materialDtoList);
 
         MemberDto loginMember=(MemberDto)session.getAttribute("user");
         Long userId = loginMember.getId();
@@ -108,7 +160,15 @@ public class OrderController {
 
         model.addAttribute("orderList", orderList);
 
+
         return "orderlist";
+    }
+
+    @DeleteMapping("/orderlist/{id}")
+    public String deleteOrderDetail(@PathVariable("id") Long id){
+        orderService.deleteOrderDetail(id);
+
+        return "/orderlist";
     }
 
 }

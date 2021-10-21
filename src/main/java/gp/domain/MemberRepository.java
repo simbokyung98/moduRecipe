@@ -42,6 +42,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     Member findByUsername(String username);
 
     @Modifying
-    @Query(value = "update Members m set m.password = :password where m.id = :id", nativeQuery = true)
+    @Query(value = "update Member m set m.password = :password where m.id = :id", nativeQuery = true)
     void updatePwd(Long id, String password);
 }

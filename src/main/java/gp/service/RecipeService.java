@@ -53,6 +53,8 @@ public class RecipeService {
 
     }
 
+
+
     @Transactional
     public List<RecipeDto> getAllRecipe(){
         List<Recipe> recipies = recipeRepository.findAll();
@@ -91,6 +93,27 @@ public class RecipeService {
                 .recipearrang(recipe.getRecipearrang())
                 .build();
 
+        return recipeDto;
+    }
+
+    public RecipeDto getCreatorRecipe(String recipecreator){
+        List<Recipe> recipes = recipeRepository.findByRecipecreator(recipecreator);
+        List<RecipeDto> recipeDtoList= new ArrayList<>();
+
+        for (Recipe recipe : recipes){
+            RecipeDto recipeDto = RecipeDto.builder()
+                    .recipekey(recipe.getRecipekey())
+                    .recipetitle(recipe.getRecipetitle())
+                    .recipecreator(recipe.getRecipecreator())
+                    .recipedetail(recipe.getRecipedetail())
+                    .recipehit(recipe.getRecipehit())
+                    .recipelink(recipe.getRecipelink())
+                    .recipetype(recipe.getRecipetype())
+                    .recipeupdated(recipe.getRecipeupdated())
+                    .recipearrang(recipe.getRecipearrang())
+                    .build();
+            recipeDtoList.add(recipeDto);
+        }
         return recipeDto;
     }
 

@@ -180,6 +180,8 @@ public class RecipeController {
         MemberDto loginMember=(MemberDto)session.getAttribute("user");
         RecipeDto recipeDto = recipeService.getRecipe(recipekey);
 
+
+
         String materialStr = recipeDto.getRecipearrang();
 
         if(! StringUtils.isEmpty(materialStr)){
@@ -190,9 +192,14 @@ public class RecipeController {
             model.addAttribute("materialDtoList",materialDtoList);
 
         }
+
+
+
         model.addAttribute("recipehit", recipeService.creatorupdateView(recipekey));	
         model.addAttribute("recipehit",recipeService.updateView(recipekey));
         model.addAttribute("recipeDto",recipeDto);
+
+
         return "recipedetail";
     }
 

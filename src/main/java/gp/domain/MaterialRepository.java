@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -21,8 +22,8 @@ public interface MaterialRepository extends JpaRepository<Material, Long> {
     public Page<Material> findBymaterialSaleContaining(String materialSale, Pageable pageable);
 
     @Query(value = "select * from  material where material_Title in (:materialList)", nativeQuery = true)
-    List<Material> findMaterialList(String[] materialList);
+    List<Material> findMaterialList(@Param("materialList") String[] materialList);
 
     @Query(value = "select * from  material where material_Key in (:materialList)", nativeQuery = true)
-    List<Material> findMaterialListById(String[] materialList);
+    List<Material> findMaterialListById(@Param("materialList") String[] materialList);
 }

@@ -9,6 +9,7 @@ import gp.web.dto.OrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -73,6 +74,7 @@ public class OrderService {
                     .orderdetailkey(orderDetail.getOrderdetailkey())
                     .order(orderDetail.getOrder())
                     .material(orderDetail.getMaterial())
+                    .orderdate(orderDetail.getOrderdate())
                     .ordernum(orderDetail.getOrdernum()).build();
 
             return orderDetatilDto;
@@ -99,8 +101,34 @@ public class OrderService {
 
         return orderRepository.save(orderDto.toEntity()).getOrderkey();
     }
+    public List<OrderDetatilDto> getOrderDetailList(){
+        List<OrderDetail> orderDetails = orderDetailRepository.findAll();
+        List<OrderDetatilDto> orderDtoList = new ArrayList<>();
+
+        for(OrderDetail orderDetail : orderDetails){
+            OrderDetatilDto orderDetatilDto = OrderDetatilDto.builder()
+                    .orderdetailkey(orderDetail.getOrderdetailkey())
+                    .order(orderDetail.getOrder())
+                    .material(orderDetail.getMaterial())
+                    .materialname(orderDetail.getMaterialname())
+                    .ordernum(orderDetail.getOrdernum())
+                    .build();
+
+
+            orderDtoList.add(orderDetatilDto);
+
+
+        }
+        return orderDtoList;
+    }
 
     public List<Map<String, Object>> getOrderListById(Long userId) {
         return orderRepository.findAllByUserId(userId);
     }
+
+    @Transactional
+    public void deleteOrderDetail(Long id){
+        orderDetailRepository.deleteById(id);
+    }
+
 }

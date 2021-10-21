@@ -1,6 +1,8 @@
 package gp.web;
 
+import gp.domain.Cart;
 import gp.service.BuyService;
+import gp.web.dto.CarListDto;
 import gp.web.dto.CartDto;
 import gp.web.dto.MemberDto;
 import gp.web.dto.Message;
@@ -8,10 +10,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -29,6 +28,9 @@ public class BuyController {
 
         MemberDto user = (MemberDto)session.getAttribute("user");
 
+        if(user == null){
+            return "redirect:/login";
+        }
         List<CartDto> cartDtoList = buyService.getCart(user.getUsername());
 
         model.addAttribute("cartList", cartDtoList);
@@ -58,10 +60,40 @@ public class BuyController {
             mav.clear();
             mav.addObject("data", new Message("로그인이 필요한 기능입니다", "/login"));
             mav.setViewName("Message");
-           return mav;
+            return mav;
         }
 
+    }
+    //장바구니 담기
+    @PostMapping("/saveCartList")
+    public ModelAndView saveCartList(@RequestBody List<CartDto> cartDtoList, ModelAndView mav){
 
+        System.out.println(cartDtoList.size());
+        MemberDto user = (MemberDto)session.getAttribute("user");
+
+        if(user != null){
+
+            for (CartDto cartDto : cartDtoList) {
+                System.out.println("cartDto = " + cartDto);
+                cartDto.setUsername(user.getUsername());
+                String cm = buyService.findCart(cartDto.getCartMaterial());
+                if (cm != null) {
+                    buyService.cartupdate(cartDto.getCartMaterial(), cartDto);
+                }else{
+                    buyService.saveCart(cartDto);
+                }
+            }
+            mav.clear();
+            mav.addObject("data", new Message("장바구니에 넣었습니다", "/meterialMain"));
+            mav.setViewName("Message");
+            return mav;
+
+        }else{
+            mav.clear();
+            mav.addObject("data", new Message("로그인이 필요한 기능입니다", "/login"));
+            mav.setViewName("Message");
+            return mav;
+        }
 
     }
 
@@ -86,3 +118,4 @@ public class BuyController {
 
 
 }
+
