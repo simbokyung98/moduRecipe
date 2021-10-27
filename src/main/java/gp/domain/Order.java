@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -45,9 +46,11 @@ public class Order {
     @Column(name = "orderprice")
     private Integer orderprice;
 
+
     public Long getOrderkey(){
         return orderkey;
     }
+
 
     @Builder
     public Order(Long orderkey,Long memberid,Date orderdate, String orderrec,String orderphone,String orderrequest,String orderaddress, int orderstate, int orderprice){

@@ -1,15 +1,14 @@
 package gp.service;
 
-import gp.domain.Order;
-import gp.domain.OrderDetail;
-import gp.domain.OrderDetailRepository;
-import gp.domain.OrderRepository;
+import gp.domain.*;
 import gp.web.dto.OrderDetatilDto;
 import gp.web.dto.OrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -129,6 +128,20 @@ public class OrderService {
     @Transactional
     public void deleteOrderDetail(Long id){
         orderDetailRepository.deleteById(id);
+    }
+
+    //관리자 주문 페이지
+    public Page<Order> pageGetAllMaterial(Pageable pageable){
+        return orderRepository.findAll(pageable);
+    }
+
+    ///관리자 주문 페이지 다음장 유무 확인
+    @Transactional
+    public Boolean getListCheck(Pageable pageable) {
+        Page<Order> saved = pageGetAllMaterial(pageable);
+        Boolean check = saved.hasNext();
+
+        return check;
     }
 
 }

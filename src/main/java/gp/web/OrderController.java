@@ -171,4 +171,21 @@ public class OrderController {
         return "/orderlist";
     }
 
+    //관리자 주문 페이지
+    @GetMapping("/adminOrder")
+    public String adminOrder(Model model, @PageableDefault(size = 5, sort = "orderkey", direction = Sort.Direction.DESC) Pageable pageable){
+
+        Page<Order> materialDtoList = orderService.pageGetAllMaterial(pageable);
+
+        model.addAttribute("addMater", materialDtoList);
+        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("next", pageable.next().getPageNumber());
+        model.addAttribute("check", orderService.pageGetAllMaterial(pageable));
+
+        //adminsidebar 설정 용도
+        model.addAttribute("adminmenu", "주문");
+
+        return "adminOrder";
+    }
+
 }

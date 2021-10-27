@@ -66,6 +66,7 @@ public class MaterialController {
     public String adminMater(Model model, @PageableDefault(size = 5, sort = "materialKey", direction = Sort.Direction.DESC)Pageable pageable){
 
         Page<Material> materialDtoList = materialService.pageGetAllMaterial(pageable);
+
         model.addAttribute("addMater", materialDtoList);
         model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
         model.addAttribute("next", pageable.next().getPageNumber());

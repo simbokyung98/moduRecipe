@@ -58,7 +58,7 @@
 											<input type="hidden" name="cartCapacity" th:value = "${addMater.materialCapacity}">
 											<input type="hidden" name="cartImage" th:value = ${addMater.materialImg}>
 											<input type="hidden" name="cartCount" value = "1">
-											<input type="hidden" name="username" th:value = "${session.user?.name}">
+											<input type="hidden" name="username" th:value = "${session.user?.username}">
 										<button type="submit" class="meter_cart_but"><img alt="장바구니" src="../static/img/cart.png"> </button>
 										</form>
 									</div>
