@@ -2,8 +2,13 @@ package gp.web.dto;
 
 import gp.domain.Member;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -19,12 +24,18 @@ public class MemberDto {
     private String gender;
     private String phone;
     private String email;
-    private LocalDate create_dated;
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date create_dated;
+
+
+
 
 
 
     @Builder
-    public MemberDto(Long id, String username, String password, String name, String address, String date, String gender, String phone, String email, LocalDate create_dated) {
+    public MemberDto(Long id, String username, String password, String name, String address, String date, String gender, String phone, String email, Date create_dated) {
         this.id = id;
         this.username = username;
         this.password = password;

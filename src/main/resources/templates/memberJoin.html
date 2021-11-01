@@ -4,123 +4,63 @@
     <meta charset="UTF-8">
     <title>모두의 레시피</title>
     <link rel="stylesheet" href="../static/css/style2.css">
-    <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js">
+    <script>
+ window.onload = function() {
+  //isCheck라는 아이디를 가진 객체를 찾아서 값을 false로 설정
+  document.getElementById("isCheck").value = "false";
 
-  function signUpValidation(){
-
-	var id = $("#id").val();
-	var id2 = $("#id2").val();
-	var password = $("#password").val();
-	var password2 = $("#password2").val();
-	var name = $("#name").val();
-	var postcode = $("#postcode").val();
-	var jibunAddress = $("#jibunAddress").val();
-	var detailAddress = $("#detailAddress").val();
-	var birthyear = $("#birthyear").val();
-	var birthmonth = $("#birthmonth").val();
-	var birtdate = $("#birtdate").val();
-	var gender = $("#gender").val();
-	var phone = $("#phone").val();
-	var phone2 = $("#phone2").val();
-	var phone3 = $("#phone3").val();
-	var email1 = $("#email1").val();
-	var email2 = $("#email2").val();
-	var email3 = $("#email3").val();
-
-	if(!id){
-		alert("아이디 입력은 필수입니다.");
-		$("#id").focus();
-	}else if(!password){
-		alert("비밀번호 입력은 필수입니다.");
-		$("#password").focus();
-	}else if(!password2){
-		alert("비밀번호 확인 입력은 필수입니다.");
-		$("#password2").focus();
-	}else if(password != password2){
-		alert("비밀번호가 맞지 않습니다.");
-		$("#password2").focus();
-	}else if(!name){
-		alert("이름 입력은 필수입니다.");
-		$("#name").focus();
-	}else if(!postcode){
-		alert("주소 입력은 필수입니다.");
-		$("#postcode").focus();
-	}else if(!jibunAddress){
-		alert("주소 입력은 필수입니다.");
-		$("#jibunAddress").focus();
-	}else if(!detailAddress){
-		alert("상세 주소 입력은 필수입니다.");
-		$("#detailAddress").focus();
-	}else if(!birthyear){
-		alert("생년 선택은 필수입니다.");
-		$("#birthyear").focus();
-	}else if(!birthmonth){
-		alert("월 선택은 필수입니다.");
-		$("#birthmonth").focus();
-	}else if(!birtdate){
-		alert("일 선택은 필수입니다.");
-		$("#birtdate").focus();
-	}else if(!gender){
-		alert("성별 입력은 필수입니다.");
-		$("#gender").focus();
-	}else if(!phone){
-		alert("번호 입력은 필수입니다.");
-		$("#phone").focus();
-	}else if(!phone2){
-		alert("번호 입력은 필수입니다.");
-		$("#phone2").focus();
-	}else if(!phone3){
-		alert("상세 주소 입력은 필수입니다.");
-		$("#phone3").focus();
-	}else if(!email1){
-		alert("이메일 입력은 필수입니다.");
-		$("#email1").focus();
-	}else if(!email2){
-		alert("이메일 입력은 필수입니다.");
-		$("#email2").focus();
-	}else if(!email3){
-		alert("이메일 입력은 필수입니다.");
-		$("#email3").focus();
-	}else {
-		signUp()
-	}
-
-
-	}else if(!email){
-		alert("이메일 입력은 필수입니다.");
-		$("#email").focus();
-	}else {
-		signUp()
-	}
-
-}
-
-function signUp(){
-
-	$.ajax({
-
-		url : "/jquery/signUp",
-		type:'POST',
-		data :  $("#registerform").serialize(),
-		success:function(data){
-			if(data == 1){
-				alert("회원가입이 완료됐습니다.^^");
-				location.href = "/user/login"
-			}else if(data == 2){
-				alert("이미 존재하는 아이디입니다.");
-				return false;
-		}
-
-	})
-}
+  document.getElementById("checkId").onclick = function() {
+   var sid = document.getElementById("id").value;
+   if (sid == null || sid.length == 0) {
+    alert("아이디를 입력하고 검사하세요");
+   } else {
+    //새창 출력
+    window
+      .open("checkId.jsp?id=" + sid, "",
+        "width=400 height=400");
+   }
 
 
 
-function btn(sample){
-	alert(sample);
-	document.location.href="memberLogin.jsp";
-}
+  }
 
+  //joinForm에서 submit을 눌렀을때 호출될 함수 설정
+  //true를 리턴하거나 리턴값이 없으면 action으로 전송되고
+  //false를 리턴하면 전송되지 않습니다.
+
+  document.getElementById("joinForm").onsubmit = function() {
+   //id의 값이 없으면 전송하지 않기
+
+   var sid = document.getElementById("id").value;
+   var name = document.getElementById("name").value;
+   var password = document.getElementById("password").value;
+   if (sid == null || sid.length == 0) {
+    alert("아이디는 필수 입력입니다.");
+    return false;
+   } else if (name == null || name.length == 0) {
+    alert("이름은 필수 입력 입니다.");
+    return false;
+   } else if (password == null || password.length == 0) {
+    alert("패스워드는 필수 입력 입니다.")
+    return false;
+   }
+
+   //아이디 중복체크를 하지 않았으면 전송되지 않도록
+
+   var isCheck = document.getElementById("isCheck").value;
+   if (isCheck != "true") {
+    alert("아이디 중복 체크를 하지 않으셨습니다.");
+    return false;
+   }
+   return true;
+  }
+
+  //id 란에 포커스가 오면 중복체크를 다시 하도록 isCheck의 값을 변경
+  document.getElementById("id").onblur = function() {
+   document.getElementById("isCheck").value = "false";
+  }
+
+ }
 
 
 </script>
@@ -401,11 +341,11 @@ function btn(sample){
 
 <div class="login-form">
     <h2 align="center">Join</h2>
-    <form action="/userJoin" method="post">
+    <form action="/userJoin" id="userjoin" method="post">
         <a class="i_d">아이디</a>
-        <input type="text" class="id" name="username" onkeydown="inputIdChk()">
-        <input type="submit" class="idcheck" name="usernameCheck" th:onclick="openIdChk()" value="중복확인">&nbsp;<br>
-        <input type="hidden" name="idDuplication" value="idUncheck" >
+        <input type="text" class="id" name="username" check_result="fail" required>
+        <input type="button" class="idcheck" id="usernameCheck" onclick="idCheck()" value="중복확인">&nbsp;<br>
+        <img id="id_check_sucess" style="display: none;">
         <a class="passwd">비밀번호</a>
         <input type="password" class="pwd" name="password" ><br>
         <a class="passwdche">비밀번호확인</a>
@@ -607,11 +547,13 @@ function btn(sample){
         <div class="col-content">
             <input type="text" id="Email1" class="inpTxt" name="email" >
             @
-            <input type="text" id="Email2" class="inpTxt" name="email" >
+            <input type="text" id="Email2" class="inpTxt" name="email" onChange="selectEmail(this)">
             <select class="select_email" name="email" >
+                <option value="" selected>선택하세요</option>
                 <option value="naver.com">naver.com</option>
                 <option value="gmail.com">gmail.com</option>
                 <option value="daum.net">daum.net</option>
+                <option value="1">직접입력</option>
             </select>
             <input type="checkbox" id="mail_agree">
             <label for="mail_agree">이메일수신동의</label>
@@ -628,4 +570,5 @@ function btn(sample){
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 </body>
+<script type="text/javascript" src="../static/js/memberEmail.js"></script>
 </html>

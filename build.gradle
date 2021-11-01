@@ -23,6 +23,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-validation' //validation 사용하기 위해서 추가(MemberDto @NotBlank, @Size, @Email, @Pattern)
+	implementation 'org.springframework.boot:spring-boot-starter-mail' // 메일로 임시 비밀번호 받기
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	annotationProcessor 'org.projectlombok:lombok'

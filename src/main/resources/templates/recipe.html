@@ -215,35 +215,35 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 <form>
-<main class="b_main_wrap">
-    <div class="best_menu_wrap">
-        <div class="best_menu_wrap_inside" >
-            <h2 class="best_menu_h2">BEST</h2>
-            <hr width = "40px" color = "gray" text-align= "center"><br>
-            <div class="main_recom_recipe mrr_frist" th:each="recipelist: ${recipelist}">
-                <a class="video" th:href="@{'/recipedetail/'+${recipelist.recipekey}}"><iframe style="pointer-events:none;" width="250" height="150" th:src="${recipelist.recipelink}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    <button type="button" class="best_link_but"><strong th:text = "${recipelist.recipetitle}"></strong></button></a>
-                <a class="hit">조회수:<strong th:text="${recipelist.recipehit}"></strong></a>
+    <main class="b_main_wrap">
+        <div class="best_menu_wrap">
+            <div class="best_menu_wrap_inside" >
+                <h2 class="best_menu_h2">BEST</h2>
+                <hr width = "40px" color = "gray" text-align= "center"><br>
+                <div class="main_recom_recipe mrr_frist" th:each="recipelist: ${recipelist}">
+                    <a class="video" th:href="@{'/recipedetail/'+${recipelist.recipekey}}"><iframe style="pointer-events:none;" width="250" height="150" th:src="${recipelist.recipelink}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <button type="button" class="best_link_but"><strong th:text = "${recipelist.recipetitle}"></strong></button></a>
+                    <a class="hit">조회수:<strong th:text="${recipelist.recipehit}"></strong></a>
+                </div>
             </div>
         </div>
-    </div>
 
 
-    <div class="new_menu_wrap">
-        <div class="new_menu_wrap_inside" >
-            <h2 class="new_menu_h2">NEW</h2>
-            <hr width = "40px" color = "gray" text-align= "center"><br>
-            <div class="main_recom_recipe mrr_frist" th:each="recipelist: ${recipelist}">
-                <a class="video" th:href="@{'/recipedetail/'+${recipelist.recipekey}}"><iframe style="pointer-events:none;" width="250" height="150" th:src="${recipelist.recipelink}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    <button type="button" class="new_link_but"><strong th:text = "${recipelist.recipetitle}"></strong></button></a>
-                <a class="date"><strong th:text="${recipelist.recipeupdated}"></strong></a>
+        <div class="new_menu_wrap">
+            <div class="new_menu_wrap_inside" >
+                <h2 class="new_menu_h2">NEW</h2>
+                <hr width = "40px" color = "gray" text-align= "center"><br>
+                <div class="main_recom_recipe mrr_frist" th:each="recipelist: ${recipelist}">
+                    <a class="video" th:href="@{'/recipedetail/'+${recipelist.recipekey}}"><iframe style="pointer-events:none;" width="250" height="150" th:src="${recipelist.recipelink}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <button type="button" class="new_link_but"><strong th:text = "${recipelist.recipetitle}"></strong></button></a>
+                    <a class="date"><strong th:text="${recipelist.recipeupdated}"></strong></a>
+                </div>
             </div>
         </div>
-    </div>
 
-</main>
+    </main>
 </form>
-<div th:replace="fragments/footer::footer"></div>
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>

@@ -1,33 +1,42 @@
 package gp.web;
 
-import gp.domain.Member;
 import gp.service.AdminService;
+import gp.domain.Member;
+import gp.domain.MemberRepository;
 import gp.service.MemberService;
 import gp.web.dto.AdminDto;
 import gp.web.dto.MemberDto;
-import javassist.bytecode.annotation.MemberValue;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
+
 public class MemberController {
-
     private final MemberService memberService;
+
     private final AdminService adminService;
+    private final HttpServletRequest request;
     private final HttpSession session;
-
-
-
-
+    private final MemberRepository memberRepository;
 
     // 회원가입
     @GetMapping("/user/join")
@@ -43,6 +52,10 @@ public class MemberController {
         return "redirect:/login";
     }
 
+    // id 중복 체크 컨트롤러
+
+
+
     // 사용자 로그인
     @GetMapping("/login")
     public String login() {
@@ -53,22 +66,21 @@ public class MemberController {
     // 사용자 로그인 처리
     @PostMapping("/userLogin")
     public String userLogin(MemberDto memberDto) {
+
         MemberDto result = memberService.userLogin(memberDto);
 
         if(result != null){
 
             session.setAttribute("user", result);
+            session.setAttribute("username",memberDto.getUsername());
+
             return "redirect:/" ;
 
-        }
-        else{
+        }else{
             return "redirect:/login";
         }
-
-
     }
-
-    // 사용자 로그아웃
+    //로그아웃
     @GetMapping("/userlogout")
     public String logout(){
         session.setAttribute("user", null);
@@ -120,11 +132,13 @@ public class MemberController {
         if(session.getAttribute("user")==null){
             return "redirect:/login";
         } else {
-            return "membercheck";
+
+            return "/membercheck";
         }
     }
     @PostMapping("/membercheck")
     public String pwcheck(MemberDto memberDto, HttpSession session, Model model, RedirectAttributes attr){
+
         MemberDto loginMember=(MemberDto)session.getAttribute("user");
         memberDto.setUsername(loginMember.getUsername());
         MemberDto memberXO = memberService.userLogin(memberDto);
@@ -133,63 +147,30 @@ public class MemberController {
             return "redirect:/membercheck";
         }
         session.setAttribute("user", memberXO);
-        return "redirect:/datachange";
+
+        System.out.println("memberXO + " + memberXO.toString());
+        return "datachange";
 
     }
 
-    @GetMapping("/datachange")
-    public String updateform(Model model, HttpSession session){
-        if(session.getAttribute("user")==null){
-            return "redirect:/login";
-        } else {
-            return "/datachange";
-        }
+    @PostMapping("/datachange/{id}")
+    public String pwChange(MemberDto memberDto, HttpSession session, Model model, RedirectAttributes attr, @PathVariable("id") Long id){
+
+        memberService.userUpdatePwd(id, memberDto.getPassword());
+
+        return "/memberLogin";
 
     }
 
+    @DeleteMapping("/member/{id}")
+    public String deleteUser(@PathVariable("id") Long id){
 
-    //---------------------------------------------------------
+        memberService.deleteUser(id);
 
+        return "/memberLogin";
 
-    /*
-    // 아이디 중복 확인
-    @ResponseBody
-    @RequestMapping(value="/idCheck", method= RequestMethod.POST)
-    public String idCheck(Member member){
-        //select * from member where userid = #{};
-        //이 member 객체에는 id만 값이 들어있고, 다른 것은 다 null 값이다.
-        Member m = memberService.idCheck(member);
-        String message=null;
-        if(m==null) {//사용할 수 있다. db에서 찾았는데없으니까
-            message = "success";
-        }else {//사용할 수 없다.
-            message ="fail";
-        }
-        return message;
     }
 
-
-
-
-
-    @GetMapping("/user-username/{username}/exists")
-    public ResponseEntity<Boolean> checkUsername(@PathVariable String username) {
-        return ResponseEntity.ok(memberService.checkUsername(username));
-    }
-*/
-
-
-
-    // 아이디 찾기
-    @GetMapping("/idfind")
-    public String idfind() {
-        return "/idFind";
-    }
-
-    // 비밀번호 찾기
-    @GetMapping("/pwdfind")
-    public String pwdFind() {
-        return "/pwdFind";
-    }
 
 }
+

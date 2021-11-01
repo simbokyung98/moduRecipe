@@ -4,8 +4,8 @@
 <link rel="stylesheet" type="text/css" href=https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css>
 <link rel="stylesheet" href="../static/css/style2.css">
 <head>
-<meta charset="UTF-8">
-<title>공지사항</title>
+	<meta charset="UTF-8">
+	<title>공지사항</title>
 	<link rel="stylesheet" th:href="@{css/style2.css}"/><style type="text/css">
 	@font-face {
 	    font-family: 'Cafe24Simplehae';
@@ -65,16 +65,16 @@
 		}
 		.news-ul a:link, .news-ul a:visited, .news-ul a:active{
 			text-decoration: none;
-			color: black;
+			color: #ffa550;
 		}
-		.news-ul a:hover{   
+		.news-ul a:hover{
 			color: black;
 			font-weight: bold;
-		} 
+		}
 		#news_section{
 			width: 79%;
 			float: left;
-			margin-top: 50px; 
+			margin-top: 50px;
 		}
 		#notion_title_wrap{
 			width: 800px;
@@ -87,7 +87,7 @@
 		}
 		#notion_spanL{
 			font-family: 'Cafe24Simplehae';
-			color:#aaaaaa; 
+			color:#aaaaaa;
 		}
 		#notion_btn{
 			width: 870px;
@@ -98,14 +98,14 @@
 			width: 800px;
 			border-top: 2px solid #ffa500;
 			border-collapse: collapse;
-			
+
 		}
 		.notion_table_thead{
 			border-bottom: 1px solid gray;
 		}
 		.notion_table_th{
-			font-family: 'Cafe24Simplehae'; 
-			padding: 20px 0 20px 0; 
+			font-family: 'Cafe24Simplehae';
+			padding: 20px 0 20px 0;
 			border-bottom: 1px solid gray;
 		}
 		.notion_table_a:hover{
@@ -120,13 +120,13 @@
 			padding: 20px 0 20px 0;
 		}
 		.tb2{
-			padding: 20px 0 20px 20px; 
+			padding: 20px 0 20px 20px;
 		}
 		.tb2 a:active, .tb2 a:link, .td2 a:visited {
 			text-decoration: none;
-			color: black; 
+			color: black;
 		}
-		.tb2 a:hover { 
+		.tb2 a:hover {
 			text-decoration: underline;
 			font-weight: bold;
 		}
@@ -140,8 +140,8 @@
 			font-size: 18px;
 			color: white;
 			letter-spacing: 2px;
-			
-			
+
+
 		}
 
 </style>
@@ -149,63 +149,63 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 
-	<main id="news_main">
-		<aside id="news_aside">
-			<ul class="news-ul">
-				<li class="news_title_wrap"><h4 class="news-title">고객센터</h4></li>  
-				<li class="news_img_wrap"><img alt="악수" src="/static/img/notionIcon.png" style="width: 100px;height: 100px;"><p>모두를 위한 고객센터</p> </li>
-				<li class="news_list_wrap"><a class="news-li" th:href="@{/notionmain}" style="font-weight: bold;color: #ffa500;">공지사항<span>></span></a></li>
-				<li class="news_list_wrap"><a class="news-li" th:href="@{/question}">Q&A<span>></span></a></li>
-				<li class="news_list_wrap"><a class="news-li" th:href="@{/notionwrite}">1대1문의<span>></span></a></li>
+<main id="news_main">
+	<aside id="news_aside">
+		<ul class="news-ul">
+			<li class="news_title_wrap"><h4 class="news-title">고객센터</h4></li>
+			<li class="news_img_wrap"><img alt="악수" src="/static/img/notionIcon.png" style="width: 100px;height: 100px;"><p>모두를 위한 고객센터</p> </li>
+			<li class="news_list_wrap"><a class="news-li" th:href="@{/notionmain}" style="font-weight: bold;">공지사항<span>></span></a></li>
+			<li class="news_list_wrap"><a class="news-li" th:href="@{/question}" style="font-weight: bold;">Q&A<span>></span></a></li>
+			<li class="news_list_wrap"><a class="news-li" th:href="@{/myqnamain}" style="font-weight: bold;">1대1문의<span>></span></a></li>
 
-			</ul>	
-		</aside>
-		<section id="news_section">
-			<div id="notion_title_wrap">
-				<span id="notion_spanB">공지사항</span><span id="notion_spanL">모두의 레시피 공지사항</span>
-			</div>
-			<div id="notion_box">
-						<form action="" >
-							<table class="notion_table">
-								<thead class="notion_table_thead">
-									<tr>
+		</ul>
+	</aside>
+	<section id="news_section">
+		<div id="notion_title_wrap">
+			<span id="notion_spanB">공지사항</span><span id="notion_spanL">모두의 레시피 공지사항</span>
+		</div>
+		<div id="notion_box">
+			<form action="" >
+				<table class="notion_table">
+					<thead class="notion_table_thead">
+					<tr>
 
 
-										<th class="notion_table_th" style="text-align:center;">번호</th>
-										<th class="notion_table_th" style="text-align:center;">제목</th>
-										<th class="notion_table_th" style="text-align:center;">작성자</th>
-									</tr>
-								</thead>
-								<tbody class="notion_table_tbody">
-									<tr th:each="noticelist: ${noticelist}" >
-										<td style="text-align:center" th:text="${noticelist.noticekey}"></td>
-										<td style="text-align:center"><a th:text="${noticelist.noticetitle}" th:href="@{'/notiondetail/' + ${noticelist.noticekey}}"></a></td>
-										<td style="text-align:center" th:text="관리자"></td>
+						<th class="notion_table_th" style="text-align:center;">번호</th>
+						<th class="notion_table_th" style="text-align:center;">제목</th>
+						<th class="notion_table_th" style="text-align:center;">작성자</th>
+					</tr>
+					</thead>
+					<tbody class="notion_table_tbody">
+					<tr th:each="noticelist: ${noticelist}" >
+						<td style="text-align:center" th:text="${noticelist.noticekey}"></td>
+						<td style="text-align:center"><a th:text="${noticelist.noticetitle}" th:href="@{'/notiondetail/' + ${noticelist.noticekey}}"></a></td>
+						<td style="text-align:center" th:text="관리자"></td>
 
-									</tr>
-								</tbody>
-							</table>
-						</form>
-					</div>
+					</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
 
-			<div style="margin-top:100px;" >
-				<div style="text-align:center;">
+		<div style="margin-top:100px;" >
+			<div style="text-align:center;">
 					<span th:each="pageNum : ${pageList}" th:inline="text">
 						<a th:href="@{'/notionmain/?page=' + ${pageNum}}">[[${pageNum}]]</a>
 					</span>
-				</div>
 			</div>
+		</div>
 
 
-			<div id="notion_btn" style="margin-top:50px;">
-				<a th:href="@{/notionwrite}" class="notionw_btn">등록</a>
-			</div>
-		</section>
+		<div id="notion_btn" style="margin-top:50px;">
+			<a th:if = "${session.admin != null}" th:href="@{/notionwrite}" class="notionw_btn">등록</a>
+		</div>
+	</section>
 
 
-	</main>
-	<footer>
-	</footer>
+</main>
+<footer>
+</footer>
 
 </body>
 </html>

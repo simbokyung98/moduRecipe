@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html  lang="en" xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="../static/css/style2.css">
+<link rel="stylesheet" href="../static/css/main.css">
+
 <head>
 	<meta charset="UTF-8">
 
@@ -10,10 +12,10 @@
 <aside id="adminmeter_aside">
 	<div id="am_aside_wrap">
 		<ul class="am_aside_ul">
-			<li><div class="am_aside_uwrap">
+			<li th:if = "${session.admin != null}"><div class="am_aside_uwrap">
 				<img src="../static/img/user.png" style="width: 150px; height: 150px;">
-				<p> <span th:if = "${session.user != null}" th:text = "${session.user.username}"></span> 님 환영합니다</p>
-				<input type="button" value="로그아웃" id="am_aside_logoutbtn">
+				<p> <span  th:text = "${session.admin.username}"></span>님 환영합니다</p>
+				<input type="button" value="로그아웃" th:href="@{/adminlogout}" id="am_aside_logoutbtn">
 			</div>
 			</li>
 			<li class="am_aside_menu">
@@ -25,17 +27,18 @@
 				<a th:unless = "${adminmenu.toString()} == '재료'" th:href="@{/adminMater}" class="am-aside_msuv">재료 관리</a>
 			</li>
 			<li class="am_aside_menu">
-				<a th:if = "${adminmenu.toString()} == '회원'"  href="adminUser.jsp" class="am-aside_mmain">회원 관리</a>
-				<a th:unless = "${adminmenu.toString()} == '회원'"  href="adminUser.jsp" class="am-aside_msuv">회원 관리</a>
+				<a th:if = "${adminmenu.toString()} == '회원'"  th:href="@{/adminUser}" class="am-aside_mmain">회원 관리</a>
+				<a th:unless = "${adminmenu.toString()} == '회원'"  th:href="@{/adminUser}" class="am-aside_msuv">회원 관리</a>
 			</li>
 			<li class="am_aside_menu">
-				<a th:if = "${adminmenu.toString()} == '질문'" href="adminQuestion.jsp" class="am-aside_mmain">1:1 질문 관리</a>
-				<a th:unless = "${adminmenu.toString()} == '질문'" href="adminQuestion.jsp" class="am-aside_msuv">1:1 질문 관리</a>
+				<a th:if = "${adminmenu.toString()} == '질문'" th:href="@{/adminqna}" class="am-aside_mmain">1:1 질문 관리</a>
+				<a th:unless = "${adminmenu.toString()} == '질문'" th:href="@{/adminqna}" class="am-aside_msuv">1:1 질문 관리</a>
 			</li>
 			<li class="am_aside_menu">
 				<a  th:if = "${adminmenu.toString()} == '주문'" href="adminOrder.jsp" class="am-aside_mmain">주문 관리</a>
 				<a  th:unless = "${adminmenu.toString()} == '주문'" href="adminOrder.jsp" class="am-aside_msuv">주문 관리</a>
 			</li>
+
 		</ul>
 	</div>
 </aside>

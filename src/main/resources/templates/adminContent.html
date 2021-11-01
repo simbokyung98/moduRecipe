@@ -4,9 +4,9 @@
 <link rel="stylesheet" href="../static/css/material.css">
 <html>
 <head>
-<meta charset="UTF-8">
-<title>관리자 페이지</title>
-<style type="text/css">
+	<meta charset="UTF-8">
+	<title>관리자 페이지</title>
+	<style type="text/css">
 	@font-face {
 		 font-family: 'NanumBarunGothic';
 		 font-style: normal;
@@ -199,27 +199,27 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
-	<main id="adminmeter_main_wrap">
-		<section id="adminmeter_main">
-			<div th:replace="fragments/adminmenu :: adminmenu"></div>
-			<section id="adminmeter_section_wrap">
-				<div id="adminmeter_section">
-					<p>컨텐츠관리</p>
+<main id="adminmeter_main_wrap">
+	<section id="adminmeter_main">
+		<div th:replace="fragments/adminmenu :: adminmenu"></div>
+		<section id="adminmeter_section_wrap">
+			<div id="adminmeter_section">
+				<p>컨텐츠관리</p>
+			</div>
+			<div id="am_section_menu">
+				<button id="adcon_menu" onclick="openCloseMenu()">분류별 보기</button>
+				<div id="adcon_deme_wrap">
+					<ul>
+						<li class="adcon_deme"><a th:href="@{/adminContent}">전체</a></li>
+						<li class="adcon_deme"><a th:href="@{/adminCotentCate/한식}">한식</a></li>
+						<li class="adcon_deme"><a th:href="@{/adminCotentCate/양식}">양식</a></li>
+						<li class="adcon_deme"><a th:href="@{/adminCotentCate/중식}">중식</a></li>
+						<li class="adcon_deme"><a th:href="@{/adminCotentCate/일식}">일식</a></li>
+						<li class="adcon_deme"><a th:href="@{/adminCotentCate/분식}">분식</a></li>
+					</ul>
 				</div>
-				<div id="am_section_menu">
-					<button id="adcon_menu" onclick="openCloseMenu()">분류별 보기</button>
-					<div id="adcon_deme_wrap">
-						<ul>
-							<li class="adcon_deme"><a th:href="@{/adminContent}">전체</a></li>
-							<li class="adcon_deme"><a th:href="@{/adminCotentCate/한식}">한식</a></li>
-							<li class="adcon_deme"><a th:href="@{/adminCotentCate/양식}">양식</a></li>
-							<li class="adcon_deme"><a th:href="@{/adminCotentCate/중식}">중식</a></li>
-							<li class="adcon_deme"><a th:href="@{/adminCotentCate/일식}">일식</a></li>
-							<li class="adcon_deme"><a th:href="@{/adminCotentCate/분식}">분식</a></li>
-						</ul>
-					</div>
-				</div>
-				<script type="text/javascript">
+			</div>
+			<script type="text/javascript">
 					function openCloseMenu(){
 						if(document.getElementById('adcon_deme_wrap').style.display === 'block'){
 							document.getElementById('adcon_deme_wrap').style.display = 'none';
@@ -228,8 +228,8 @@
 						}
 					}
 				</script>
-				<div id="am_section_content">
-					<form action="/recipesearch" method="get">
+			<div id="am_section_content">
+				<form action="/recipesearch" method="get">
 					<div id="adcon_section_search_wrap">
 						<select id="adcon_ssearch_sele" name="select">
 							<option value= "recipetitle">제목</option>
@@ -238,48 +238,48 @@
 						<input type="text" id="adcon_ssearch_text" placeholder="검색어를 입력하세요" name="keyword">
 						<input type="submit" id="adcon_ssearch_sub" value="검색">
 					</div>
-					</form>
-					<div id="adcon_content_wrap">
-						<table id="adcon_table">
+				</form>
+				<div id="adcon_content_wrap">
+					<table id="adcon_table">
 						<thead>
-							<tr>
-								<th colspan="2">타이틀</th>
-								<th>크리에이터</th>
-								<th>조회수</th>
-								<th>비고</th>
-							</tr>
+						<tr>
+							<th colspan="2">타이틀</th>
+							<th>크리에이터</th>
+							<th>조회수</th>
+							<th>비고</th>
+						</tr>
 						</thead>
 						<tbody>
 
-							<tr th:each = "addcontent : ${addContent}">
-								<td><iframe width="120" height="80" th:src="${addcontent.recipelink}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
-								<td><span th:text = "${addcontent.recipetitle}"></span></td>
-								<td><span th:text = "${addcontent.recipecreator}"></span></td>
-								<td><span th:text = "${addcontent.recipehit}"></span></td>
-								<td>
-									<a  th:href="@{'/adminContentUpdate/'+${addcontent.recipekey}}">수정</a>
-									<a  th:href="@{'/adminContentDelete/'+${addcontent.recipekey}}">삭제</a>
-								</td>
-							</tr>
+						<tr th:each = "addcontent : ${addContent}">
+							<td><iframe width="120" height="80" th:src="${addcontent.recipelink}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+							<td><span th:text = "${addcontent.recipetitle}"></span></td>
+							<td><span th:text = "${addcontent.recipecreator}"></span></td>
+							<td><span th:text = "${addcontent.recipehit}"></span></td>
+							<td>
+								<a  th:href="@{'/adminContentUpdate/'+${addcontent.recipekey}}">수정</a>
+								<a  th:href="@{'/adminContentDelete/'+${addcontent.recipekey}}">삭제</a>
+							</td>
+						</tr>
 						</tbody>
-						</table>
-						<div class="page-num">
-							<ul class="add_mater_ul">
-								<li ><a th:href="@{/adminContent?(page=${previous})}">Previous</a></li>
-								<li th:if="${check}"><a th:href="@{/adminContent?(page=${next})}">Next</a></li>
-							</ul>
-						</div>
-
-						<div id="adcon_add_wrap">
-							<button class="adcon_add_but" th:onclick="'location.href=\''+ @{/adminContentAdd} + '\''">컨텐츠 추가</button>
-						</div>
+					</table>
+					<div class="page-num">
+						<ul class="add_mater_ul">
+							<li ><a th:href="@{/adminContent?(page=${previous})}">Previous</a></li>
+							<li th:if="${check}"><a th:href="@{/adminContent?(page=${next})}">Next</a></li>
+						</ul>
 					</div>
-				</div>				
-			</section>
+
+					<div id="adcon_add_wrap">
+						<button class="adcon_add_but" th:onclick="'location.href=\''+ @{/adminContentAdd} + '\''">컨텐츠 추가</button>
+					</div>
+				</div>
+			</div>
 		</section>
-	</main>
-	<footer>
-		<div th:replace="fragments/footer::footer"></div>
-	</footer>
+	</section>
+</main>
+<footer>
+	<div th:replace="fragments/footer::footer"></div>
+</footer>
 </body>
 </html>

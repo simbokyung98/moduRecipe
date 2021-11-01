@@ -64,14 +64,15 @@
 </style>
 <body class="bo_dy">
 <div th:replace="fragments/header :: header"></div>
-<form class="form-horizontal" role="form" method="post" action="starters?cmd=idfineAfter">
+<form class="form-horizontal" role="form" method="post" th:action="@{/id}">
   <h3 class="h3">아이디 찾기</h3>
   <h6 class="h6">아이디는 가입시 입력하신 이메일을 통해 찾을 수 있습니다.</h6>
   <div class="row">
+    <div style='color:red' th:text="${msg}"></div>
     <div class="col-md-10 inputbb">
       <div class="form-group has-danger">
         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-          <input type="text" name="name" class="form-control" id="name" placeholder="이름" required autofocus>
+          <input type="text" name="name" class="form-control" id="name" placeholder="이름">
         </div>
       </div>
     </div>
@@ -80,16 +81,17 @@
     <div class="col-md-10 inputbb">
       <div class="form-gorup">
         <div class="input-gorup mb-2 mr-sm-2 mb-sm-0">
-          <input type="email" name="email" class="form-control" id="email" placeholder="이메일" required autofocus>
+          <input type="email" name="email" class="form-control" id="email" placeholder="이메일" >
         </div>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-md-10 inputbb">
-      <button type="submit" class="find">찾기</button>
+      <button type="submit" id="find" class="find">찾기</button>
     </div>
   </div>
+  <p class="checks" id="checks"></p><br/>
 </form>
 <div th:replace="fragments/footer::footer"></div>
 

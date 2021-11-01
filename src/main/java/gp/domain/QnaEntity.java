@@ -3,13 +3,16 @@ package gp.domain;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "qna")
@@ -32,20 +35,27 @@ public class QnaEntity {
     @Column(name ="qna_Date",nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date qnaDate;
 
+    @Column(name = "qna_Writer")
+    private String qnawriter;
 
-    @Column(name = "answer_State",nullable = true, columnDefinition = "boolean default 0")
-    private Boolean answerstate;
+
+    @Column(name = "answer_State",nullable = false, columnDefinition = "답변대기")
+
+    private String answerstate;
 
     @Builder
-    public QnaEntity(Long qnakey, String qnatitle, String qnacontent, String answercontent, Date qnadate, Boolean answerstate){
+    public QnaEntity(Long qnakey, String qnatitle, String qnacontent, String answercontent, Date qnadate, String answerstate,String qnawriter){
         this.qnakey=qnakey;
         this.qnatitle=qnatitle;
         this.qnacontent=qnacontent;
         this.answercontent=answercontent;
         this.qnaDate=qnadate;
-        this.answerstate=false;
+        this.answerstate=answerstate;
+        this.qnawriter=qnawriter;
 
     }
+
 }

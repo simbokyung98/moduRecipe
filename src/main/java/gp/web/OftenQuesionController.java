@@ -18,29 +18,29 @@ import java.util.List;
 @AllArgsConstructor
 public class OftenQuesionController {
 
-     private OftenQuestionService oftenQuestionService;
-     private OftenQuestionRepository oftenQuestionRepository;
+    private OftenQuestionService oftenQuestionService;
+    private OftenQuestionRepository oftenQuestionRepository;
 
 
-     @GetMapping("/question")
-     public String question(Model model){
+    @GetMapping("/question")
+    public String question(Model model){
 
         List<OftenQuestionDto>   oftenQuestionDtoList = oftenQuestionService.getAllOftenQuestion();
 
         model.addAttribute("questionlist", oftenQuestionDtoList);
         return "/question";
-      }
+    }
 
-     @GetMapping("/questionwrite")
-     public String questionwrite(Model model){
+    @GetMapping("/questionwrite")
+    public String questionwrite(Model model){
         model.addAttribute("question", new OftenQuestionEntity());
         return "/questionwrite";
-     }
+    }
     @PostMapping("questionwrite")
     public String questionsubmit(@ModelAttribute OftenQuestionDto oftenQuestionDto){
-            oftenQuestionService.saveOq(oftenQuestionDto);
-            return ("redirect:/question");
-        }
+        oftenQuestionService.saveOq(oftenQuestionDto);
+        return ("redirect:/question");
+    }
 
 
 

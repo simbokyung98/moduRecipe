@@ -1,3 +1,4 @@
+/*
 var httpRequest = null;
 
         // httpRequest 객체 생성
@@ -18,17 +19,19 @@ var httpRequest = null;
             }
             return httpRequest;
         }
+        */
 
 
-        // 회원가입창의 아이디 입력란의 값을 가져온다.
+
+    // 회원가입창의 아이디 입력란의 값을 가져온다.
         function pValue(){
-            document.getElementById("username").value = opener.document.userInfo.id.value;
+            document.getElementById("id").value = opener.document.userInfo.id.value;
         }
 
         // 아이디 중복체크
         function idCheck(){
 
-            var id = document.getElementById("username").value;
+            var id = document.getElementById("id").value;
 
             if (!id) {
                 alert("아이디를 입력하지 않았습니다.");
@@ -40,10 +43,10 @@ var httpRequest = null;
             }
             else
             {
-                var param="username="+username
+                var param="id="+ id
                 httpRequest = getXMLHttpRequest();
                 httpRequest.onreadystatechange = callback;
-                httpRequest.open("POST", "CheckAction.do", true);
+                httpRequest.open("POST", "memberService", true);
                 httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                 httpRequest.send(param);
             }

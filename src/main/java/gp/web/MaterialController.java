@@ -15,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.io.IOError;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -26,12 +28,14 @@ public class MaterialController {
     private final MaterialService materialService;
     private final SimpleDateFormat dateForServer = new SimpleDateFormat("yyyyMMddHHmmss_");
 
+    //재료 전체 띄우기
     @GetMapping("/meterialMain")
     public String meterrialMain(Model model){
 
         List<MaterialDto> materialDtoList = materialService.getAllMaterial();
 
         model.addAttribute("materialList", materialDtoList);
+        model.addAttribute("materH2", "전체");
 
         return "meterialMain";
     }
@@ -42,6 +46,7 @@ public class MaterialController {
         List<MaterialDto> materialDtoList =materialService.getCateMaterial(materialMainCate);
 
         model.addAttribute("materialList", materialDtoList);
+        model.addAttribute("materH2", materialMainCate);
 
         return "meterialMain";
     }
@@ -87,7 +92,7 @@ public class MaterialController {
     //관리자 재료페이지[카테고리]
     @GetMapping("/adminMaterCate/{materialMainCate}")
     public String adminMaterCate (@PathVariable("materialMainCate") String materialMainCate, Model model,
-                              @PageableDefault(size = 5, sort = "materialKey", direction = Sort.Direction.DESC)Pageable pageable){
+                                  @PageableDefault(size = 5, sort = "materialKey", direction = Sort.Direction.DESC)Pageable pageable){
 
         Page<Material> materialDto = materialService.pageGetMainCateMaterial(materialMainCate, pageable);
         model.addAttribute("addMater", materialDto);
@@ -187,6 +192,7 @@ public class MaterialController {
         return "redirect:/adminMater";
     }
 
+
     //재료 수정
     @PostMapping("/materialUpdate/{materialKey}")
     public String adminMaterialUpdate(@PathVariable("materialKey") Long materialKey, MaterialDto materialDto){
@@ -196,4 +202,3 @@ public class MaterialController {
     }
 
 }
-

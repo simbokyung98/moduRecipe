@@ -6,9 +6,9 @@
 <link rel="stylesheet" href="../static/css/style2.css">
 <link rel="stylesheet" href="../static/css/main.css">
 <head>
-<meta charset="UTF-8">
-<title>공지사항</title>
-<style type="text/css">
+	<meta charset="UTF-8">
+	<title>공지사항</title>
+	<style type="text/css">
 	@font-face {
 	    font-family: 'Cafe24Simplehae';
 	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Simplehae.woff') format('woff');
@@ -67,18 +67,18 @@
 		}
 		.news-ul a:link, .news-ul a:visited, .news-ul a:active{
 			text-decoration: none;
-			color: black;
+			color: #ffa550;
 		}
-		.news-ul a:hover{   
+		.news-ul a:hover{
 			color: black;
 			font-weight: bold;
-		} 
-		
-		
+		}
+
+
 		#news_section{
 			width: 79%;
 			float: left;
-			margin-top: 50px; 
+			margin-top: 50px;
 		}
 		#notion_title_wrap{
 			width: 800px;
@@ -91,20 +91,20 @@
 		}
 		#notion_spanL{
 			font-family: 'Cafe24Simplehae';
-			color:#aaaaaa; 
+			color:#aaaaaa;
 		}
 		.notion_table{
 			width: 800px;
 			border-top: 2px solid #ffa500;
 			border-collapse: collapse;
 			border-bottom: 2px solid #ffa500;
-			
+
 		}
 		.notion_table_th{
-			font-family: 'Cafe24Simplehae'; 
-			padding: 20px 0 20px 0; 
+			font-family: 'Cafe24Simplehae';
+			padding: 20px 0 20px 0;
 			border-bottom: 1px solid gray;
-		} 
+		}
 		.notion_table_a:hover{
 			background: gray;
 		}
@@ -125,20 +125,20 @@
 			padding: 20px 0 20px 0;
 		}
 		.tb2{
-			padding: 20px 0 20px 20px; 
+			padding: 20px 0 20px 20px;
 		}
 		.tb2 a:active, .tb2 a:link, .td2 a:visited {
 			text-decoration: none;
-			color: black; 
+			color: black;
 		}
-		.tb2 a:hover { 
+		.tb2 a:hover {
 			text-decoration: underline;
 			font-weight: bold;
 		}
 		.notion_detail_contents{
 			height: 500px;
-			border-bottom: 1px solid #dddddd; 
-			
+			border-bottom: 1px solid #dddddd;
+
 		}
 		.notion_detail_contents textarea{
 			border: 2px solid #cccccc;
@@ -155,9 +155,9 @@
 		}
 		.go_notion{
 			padding: 15px 50px 15px 50px;
-			
+
 			font-family: 'Cafe24Simplehae';
-			text-decoration: none; 
+			text-decoration: none;
 			font-size: 20px;
 			color: black;
 			background: #cccccc;
@@ -173,16 +173,16 @@
 		.write_notion{
 			padding: 15px 50px 15px 50px;
 			font-family: 'Cafe24Simplehae';
-			text-decoration: none; 
+			text-decoration: none;
 			font-size: 20px;
 			color: white;
-			background: #ffa500; 
+			background: #ffa500;
 			border: 0;
 			font-weight: bold;
 			border: 2px solid white;
-		} 
+		}
 		.write_notion:hover {
-			color: #ffa500; 
+			color: #ffa500;
 			border: 2px solid #ffa500;
 			background: white;
 		}
@@ -191,18 +191,18 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 
-	<form action="/notionwrite" method="post">
+<form action="/notionwrite" method="post">
 	<main id="news_main">
 		<aside id="news_aside">
-			
-			<ul class="news-ul">
-				<li class="news_title_wrap"><h4 class="news-title">고객센터</h4></li>  
-				<li class="news_img_wrap"><img alt="악수" src="img/notionIcon.png" style="width: 100px;height: 100px;"><p>모두를 위한 고객센터</p> </li>
-				<li class="news_list_wrap"><a class="news-li" th:href="@{/notionmain}" style="font-weight: bold;color: #ffa500;">공지사항<span>></span></a></li>
-				<li class="news_list_wrap"><a class="news-li" th:href="@{/question}">Q&A<span>></span></a></li>
-				<li class="news_list_wrap"><a class="news-li" th:href="@{/notionwrite}">1대1문의<span>></span></a></li>
 
-			</ul>	
+			<ul class="news-ul">
+				<li class="news_title_wrap"><h4 class="news-title">고객센터</h4></li>
+				<li class="news_img_wrap"><img alt="악수" src="/static/img/notionIcon.png" style="width: 100px;height: 100px;"><p>모두를 위한 고객센터</p> </li>
+				<li class="news_list_wrap"><a class="news-li" th:href="@{/notionmain}" style="font-weight: bold;">공지사항<span>></span></a></li>
+				<li class="news_list_wrap"><a class="news-li" th:href="@{/question}" style="font-weight: bold; ">Q&A<span>></span></a></li>
+				<li class="news_list_wrap"><a class="news-li" th:href="@{/myqnamain}" style="font-weight: bold;">1대1문의<span>></span></a></li>
+
+			</ul>
 		</aside>
 		<section id="news_section">
 			<div id="notion_title_wrap">
@@ -212,14 +212,14 @@
 				<form action="#" th:action="@{/notionwrite}" th:object="${notice}" method="post">
 					<table class="notion_table">
 						<thead class="notion_table_thead">
-							<tr>
-								<td class="notion_table_tb tb2">제목 : <input type="text" name="noticetitle" th:field="*{noticetitle}"></td>
-							</tr>
-							<tr class="notion_detail_tr">
-								<td class="notion_detail_contents">
-									<textarea name="noticecontent" th:field="*{noticecontent}" rows="25" cols="100"></textarea>
-								</td>
-							</tr>
+						<tr>
+							<td class="notion_table_tb tb2">제목 : <input type="text" name="noticetitle" th:field="*{noticetitle}"></td>
+						</tr>
+						<tr class="notion_detail_tr">
+							<td class="notion_detail_contents">
+								<textarea name="noticecontent" th:field="*{noticecontent}" rows="25" cols="100"></textarea>
+							</td>
+						</tr>
 						</thead>
 					</table>
 					<div class="notion_detail_go_back">
@@ -232,6 +232,6 @@
 	</main>
 	<footer>
 	</footer>
-	</form>
+</form>
 </body>
 </html>

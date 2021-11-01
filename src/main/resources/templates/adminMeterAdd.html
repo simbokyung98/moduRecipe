@@ -13,7 +13,7 @@
 		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
 		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
 	}
-	
+
 	.nanumbarungothic * {
 		 font-family: 'NanumBarunGothic', sans-serif;
 	}
@@ -43,10 +43,10 @@
 	}
 	#adminmeter_section_wrap{
 		float: left;
-		width: 78%; 
+		width: 78%;
 	}
 	#adminmeter_section{
-		width: 100%;      
+		width: 100%;
 		height: 50px;
 		background: #dddddd;
 		box-shadow : 2px 2px 5px #999;
@@ -54,22 +54,22 @@
 		letter-spacing: 4px;
 	}
 
-	
-	#adminmeter_section p{ 
-		padding: 15px 0 0 20px; 
+
+	#adminmeter_section p{
+		padding: 15px 0 0 20px;
 		font-family: 'Cafe24Dangdanghae';
 		font-size: 20px;
-		
+
 	}
 
-	
+
 	#am_section_contents_wrap{
-		clear: left; 
+		clear: left;
 		width: 100%;
 		height: 868px;
 		background: #dddddd;
-		box-shadow : 2px 2px 5px #999;   
-		margin: 10px 0 0 10px; 
+		box-shadow : 2px 2px 5px #999;
+		margin: 10px 0 0 10px;
 		padding-top: 20px;
 	}
 	.am_add_wrap{
@@ -130,7 +130,7 @@
 		background: orange;
 		font-size: 20px;
 		border-radius: 3px;
-		
+
 	}
 	.mater_add_detail_but:hover, .mater_add_backbut:hover{
 		box-shadow : 2px 2px 5px #999;
@@ -155,6 +155,7 @@
 			<div id="adminmeter_section">
 				<p>재료추가</p>
 			</div>
+
 			<form method="post" action="/materAdd" enctype="multipart/form-data" >
 				<div id="am_section_contents_wrap">
 					<div class="am_add_wrap">
@@ -162,6 +163,7 @@
 						<hr>
 						<div>
 							<img alt="재료샘플" src="../static/img/add-image.png" class="mater_add_imgsam">
+
 							<input type="file" class="mater_add_imgfile" name="materialImg">
 						</div>
 					</div>
@@ -174,6 +176,7 @@
 								<td colspan="2">재료설명</td>
 							</tr>
 							<tr>
+
 								<td><input type="text" class="mater_add_input" style="width: 250px" name="materialTitle"> </td>
 								<td  colspan="2"><input type="text" class="mater_add_input" style="width: 350px" name="materialDetail"> </td>
 							</tr>
@@ -183,6 +186,7 @@
 								<td>원산지</td>
 							</tr>
 							<tr>
+
 								<td><input type="text" class="mater_add_input" style="width: 200px" name="materialUnit"></td>
 								<td><input type="text" class="mater_add_input" style="width: 200px" name="materialCapacity"></td>
 								<td><input type="text" class="mater_add_input" style="width: 200px" name="materialCountry"></td>
@@ -193,6 +197,7 @@
 								<td>소분류</td>
 							</tr>
 							<tr>
+
 								<td><input type="text" class="mater_add_input" style="width: 200px"name="materialPrice"></td>
 								<td><select class="mater_add_input" style="width: 200px" name="materialMainCate">
 									<option value="정육">정육</option><option value="수산">수산/해산</option>
@@ -207,6 +212,7 @@
 								<td>재고(숫자만)</td>
 							</tr>
 							<tr>
+
 								<td><input type="text" class="mater_add_input" style="width: 200px" name="materialDistDate"></td>
 								<td><input type="text" class="mater_add_input" style="width: 200px" name="materialInventory"></td>
 							</tr>
@@ -217,6 +223,7 @@
 						<hr>
 						<div>
 							<img alt="재료샘플" src="../static/img/add-image.png" class="mater_add_imgsam">
+
 							<input type="file" class="mater_add_imgfile" name="materialDeImg">
 						</div>
 					</div>
@@ -225,6 +232,7 @@
 						<button class="mater_add_backbut"  th:onclick="'location.href=\''+ @{/adminMater} + '\''">목록</button>
 					</div>
 				</div>
+
 			</form>
 
 		</section>

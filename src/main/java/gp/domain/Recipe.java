@@ -1,13 +1,20 @@
 package gp.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import gp.web.dto.RecipeDto;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -40,12 +47,15 @@ public class Recipe {
     private String recipelink;
 
     @Column(name = "recipehit")
+    @ColumnDefault("0")
     private Integer recipehit;
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     @Column(name = "recipeupdated")
     private Date recipeupdated;
+
+
 
 
 

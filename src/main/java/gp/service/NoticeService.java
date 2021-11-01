@@ -40,7 +40,7 @@ public class NoticeService {
                     .noticekey(noticeEntity.getNoticekey())
                     .title(noticeEntity.getNoticetitle())
                     .content(noticeEntity.getNoticecontent()).build();
-           noticeDtoList.add(noticeDto);
+            noticeDtoList.add(noticeDto);
 
         }
         return noticeDtoList;
@@ -56,6 +56,7 @@ public class NoticeService {
                 .title(noticeEntity.getNoticetitle())
                 .content(noticeEntity.getNoticecontent())
                 .build();
+
 
         return noticeDto;
     }
@@ -104,8 +105,8 @@ public class NoticeService {
 
 // 현재 페이지를 기준으로 블럭의 마지막 페이지 번호 계산
         Integer blockLastPageNum = (totalLastPageNum > curPageNum + BLOCK_PAGE_NUM_COUNT - 1 )
-                        ?curPageNum + BLOCK_PAGE_NUM_COUNT - 1
-                        : totalLastPageNum;
+                ?curPageNum + BLOCK_PAGE_NUM_COUNT - 1
+                : totalLastPageNum;
 
 // 페이지 시작 번호 조정
         curPageNum = (curPageNum <= 3) ? 1 : curPageNum - 2;
@@ -119,7 +120,7 @@ public class NoticeService {
     }
 
 
-    
+
 
 
 }

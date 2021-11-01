@@ -6,9 +6,9 @@
 <link rel="stylesheet" href="../static/css/style2.css">
 <link rel="stylesheet" href="../static/css/main.css">
 <head>
-<meta charset="UTF-8">
-<title>Q&A</title>
-<style type="text/css">
+	<meta charset="UTF-8">
+	<title>Q&A</title>
+	<style type="text/css">
 	@font-face {
 	    font-family: 'Cafe24Simplehae';
 	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Simplehae.woff') format('woff');
@@ -68,6 +68,9 @@
 			font-family: 'Cafe24Simplehae';
 			font-size: 20px;
 		}
+		.news-ul a:active`{
+			color: #ffa500;
+		}
 		.news_img_wrap {
 			text-align: center;
 			padding: 30px 0 30px 0;
@@ -85,16 +88,17 @@
 		}
 		.news-ul a:link, .news-ul a:visited, .news-ul a:active{
 			text-decoration: none;
-			color: black;
+			color: #black;
 		}
-		.news-ul a:hover{   
+		.news-ul a:hover{
 			color: black;
 			font-weight: bold;
-		} 
+		}
+
 		#news_section{
 			width: 79%;
 			float: left;
-		} 
+		}
 		#question_wrap{
 			margin: 70px 0 0 70px;
 		}
@@ -107,7 +111,7 @@
 			border-top: 1px solid gray;
 			list-style: none;
 		}
-		
+
 		.question_things h5{
 			float: left;
 			padding-left: 20px;
@@ -131,7 +135,7 @@
 			background: #FFDEAD;
 			border-bottom: 1px solid gray;
 			display: none;
-			
+
 		}
 		.question_inside{
 			padding: 20px 20px 20px 20px;
@@ -139,27 +143,27 @@
 		.question_inside_left{
 			float: left;
 			font-family: 'Cafe24Simplehae';
-			color:#8977ad; 
+			color:#8977ad;
 			padding: 5px 5px 0 0;
 		}
 		.question_inside_right{
 			float: left;
 			font-family: 'Cafe24Simplehae';
-			 
-		} 
-		
+
+		}
+
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script>
 	$(document).ready(function(){
 		$('.but_click').click(function(){
-			
+
 			  if($(this).parent().next().css('display') == 'none'){
 				  $(this).parent().next().show();
 			  }else{
 				  $(this).parent().next().hide();
 			  }
-			
+
 		});
 	});
 </script>
@@ -167,41 +171,42 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 
-	<main id="news_main">
-		<aside id="news_aside">
-			
-			<ul class="news-ul">
-				<li class="news_title_wrap"><h4 class="news-title">고객센터</h4></li>
-				<li class="news_img_wrap"><img alt="악수" src="/static/img/notionIcon.png" style="width: 100px;height: 100px;"><p>모두를 위한 고객센터</p> </li>
-				<li class="news_list_wrap"><a class="news-li" th:href="@{/notionmain}" style="font-weight: bold;color: #ffa500;">공지사항<span>></span></a></li>
-				<li class="news_list_wrap"><a class="news-li" th:href="@{/question}">Q&A<span>></span></a></li>
-				<li class="news_list_wrap"><a class="news-li" th:href="@{/notionwrite}">1대1문의<span>></span></a></li>
-			</ul>	
-		</aside>
-		<section id="news_section">
-					<div id="question_wrap">
-						<ul th:each="questionlist: ${questionlist}" class="question_things" id="1">
-							<li>
-							<h5 th:text="${questionlist.oq_title}"> </h5>
-							<button class="but_click" id="1"><img src="/static/img/open.png" style="width: 20px; height: 20px;"> </button>
-							</li>
-							<div class="question_content">
-								<div class="question_inside">
-									<div class="question_inside_left"><h4>A.</h4></div>
-									<div class="question_inside_right" th:text="${questionlist.oq_content}">
-									</div>
-								</div>
-							</div>
-						</ul>
+<main id="news_main">
+	<aside id="news_aside">
 
+		<ul class="news-ul">
+			<li class="news_title_wrap"><h4 class="news-title">고객센터</h4></li>
+			<li class="news_img_wrap"><img alt="악수" src="/static/img/notionIcon.png" style="width: 100px;height: 100px;"><p>모두를 위한 고객센터</p> </li>
+			<li class="news_list_wrap"><a class="news-li" th:href="@{/notionmain}" style="font-weight: bold;">공지사항<span>></span></a></li>
+			<li class="news_list_wrap"><a class="news-li" th:href="@{/question}" style="font-weight: bold; ">Q&A<span>></span></a></li>
+			<li class="news_list_wrap"><a class="news-li" th:href="@{/myqnamain}" style="font-weight: bold;">1대1문의<span>></span></a></li>
+
+		</ul>
+	</aside>
+	<section id="news_section">
+		<div id="question_wrap">
+			<ul th:each="questionlist: ${questionlist}" class="question_things" id="1">
+				<li>
+					<h5 th:text="${questionlist.oq_title}"> </h5>
+					<button class="but_click" id="1"><img src="/static/img/open.png" style="width: 20px; height: 20px;"> </button>
+				</li>
+				<div class="question_content">
+					<div class="question_inside">
+						<div class="question_inside_left"><h4>A.</h4></div>
+						<div class="question_inside_right" th:text="${questionlist.oq_content}">
+						</div>
 					</div>
-			<div id="question_btn" style="margin-top:50px;">
-				<a th:href="@{/questionwrite}" class="question_btn">등록</a>
-			</div>
-				</section>
-	</main>
-	<footer>
-	</footer>
+				</div>
+			</ul>
+
+		</div>
+		<div id="question_btn" style="margin-top:50px;">
+			<a th:if="${session.admin!=null}" th:href="@{/questionwrite}" class="question_btn">등록</a>
+		</div>
+	</section>
+</main>
+<footer>
+</footer>
 
 </body>
 </html>

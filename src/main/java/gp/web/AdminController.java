@@ -1,17 +1,12 @@
 package gp.web;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import gp.domain.Material;
 import gp.domain.Member;
-import gp.domain.MemberRepository;
-import gp.domain.Recipe;
 import gp.service.AdminService;
 import gp.service.MemberService;
 import gp.web.dto.MemberDto;
 import gp.web.dto.RecipeDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -29,29 +24,18 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AdminController {
 
-    private final MemberRepository memberRepository;
     private final AdminService adminService;
     private final MemberService memberService;
     private final HttpSession session;
 
 
 
-    /*
-    @GetMapping("/adminUser")
-    public String list(Model model) {
-        Page<Member> members = memberRepository.findAll(PageRequest.of(0, 20));
-        model.addAttribute("adminuserlist", members);
-        return "/adminUser";
-    }
-
-     */
-
 
 
 
     // 회원 정보
     @GetMapping("/adminUser")
-    public String memberlist(Model model, @PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC)Pageable pageable){
+    public String memberlist(Model model, @PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
 
         Page<Member> memberDtoList = adminService.pageGetAllMember(pageable);
         model.addAttribute("adminuserlist", memberDtoList);
@@ -64,8 +48,8 @@ public class AdminController {
 
 
     // 관리자 회원 삭제
-    @RequestMapping("/memberDelete/{id} ")
-    public String memberDelete(@PathVariable("id") Long id) {
+    @RequestMapping("/memberDelete/{userid}")
+    public String memberDelete(@PathVariable("userid") Long id) {
         adminService.adminUserDelete(id);
 
         return "redirect:/adminUser";
@@ -77,7 +61,7 @@ public class AdminController {
     //관리자 회원 정보 검색
     @GetMapping("/memberlistsearch")
     public String adminMemberSearch(@RequestParam(value="keyword") String keyword, @RequestParam(value="searchType") String searchType, Model model,
-                                      @PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
+                                    @PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
         Page<Member> memberDtoList = adminService.pageGetMemberSearch(keyword, searchType, pageable);
         model.addAttribute("adminuserlist", memberDtoList);
         model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
@@ -88,6 +72,7 @@ public class AdminController {
         return "adminUser";
 
     }
+
 
 
 

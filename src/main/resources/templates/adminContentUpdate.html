@@ -4,9 +4,9 @@
 <link rel="stylesheet" href="../static/css/material.css">
 <html>
 <head>
-<meta charset="UTF-8">
-<title>관리자 페이지</title>-
-<style type="text/css">
+	<meta charset="UTF-8">
+	<title>관리자 페이지</title>-
+	<style type="text/css">
 	@font-face {
 		 font-family: 'NanumBarunGothic';
 		 font-style: normal;
@@ -151,44 +151,44 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
-	<main id="adminmeter_main_wrap">
-		<section id="adminmeter_main">
-			<div th:replace="fragments/adminmenu :: adminmenu"></div>
-			<section id="adminmeter_section_wrap">
-				<div id="adminmeter_section">
-					<p>컨텐츠수정</p>
-				</div>
-				<form method="post" th:action="@{'/recipeUpdate/'+${recipedetail.recipekey}}">
-					<div id="am_section_contents_wrap">
-						
-						<div class="am_add_wrap float_no">
-							<p>컨텐츠 기본정보</p>
-							<hr>
-								<table id="mater_add_table">
-									<tr>
-										<td>컨텐츠명</td>
-										<td>크리에이터</td>
-									</tr>
-									<tr>
-										<td><input type="text" class="content_add_input" style="width: 460px" th:value = "${recipedetail.recipetitle}" name="recipetitle"></td>
-										<td><input type="text" class="content_add_input" style="width: 250px"  th:value = "${recipedetail.recipecreator}" name="recipecreator"></td>
-									</tr>
-									<tr>
-										<td>유튜브 링크</td>
-										<td>레시피 종류</td>
-									</tr>
-									<tr>
-										<td><input type="text" class="content_add_input" style="width: 600px"  th:value = "${recipedetail.recipelink}" name="recipelink"></td>
-										<td>
-											<select id="content_add_select" name="recipetype" th>
-												<option value="한식">한식</option>
-												<option value="중식">중식</option>
-												<option value="일식">일식</option>
-												<option value="양식">양식</option>
-												<option value="분식">분식</option>
-											</select>
-										</td>
-										<script th:inline="javascript">
+<main id="adminmeter_main_wrap">
+	<section id="adminmeter_main">
+		<div th:replace="fragments/adminmenu :: adminmenu"></div>
+		<section id="adminmeter_section_wrap">
+			<div id="adminmeter_section">
+				<p>컨텐츠수정</p>
+			</div>
+			<form method="post" th:action="@{'/recipeUpdate/'+${recipedetail.recipekey}}">
+				<div id="am_section_contents_wrap">
+
+					<div class="am_add_wrap float_no">
+						<p>컨텐츠 기본정보</p>
+						<hr>
+						<table id="mater_add_table">
+							<tr>
+								<td>컨텐츠명</td>
+								<td>크리에이터</td>
+							</tr>
+							<tr>
+								<td><input type="text" class="content_add_input" style="width: 460px" th:value = "${recipedetail.recipetitle}" name="recipetitle"></td>
+								<td><input type="text" class="content_add_input" style="width: 250px"  th:value = "${recipedetail.recipecreator}" name="recipecreator"></td>
+							</tr>
+							<tr>
+								<td>유튜브 링크</td>
+								<td>레시피 종류</td>
+							</tr>
+							<tr>
+								<td><input type="text" class="content_add_input" style="width: 600px"  th:value = "${recipedetail.recipelink}" name="recipelink"></td>
+								<td>
+									<select id="content_add_select" name="recipetype" th>
+										<option value="한식">한식</option>
+										<option value="중식">중식</option>
+										<option value="일식">일식</option>
+										<option value="양식">양식</option>
+										<option value="분식">분식</option>
+									</select>
+								</td>
+								<script th:inline="javascript">
 											window.onload = function(){
 												/*<![CDATA[*/ let name = /*[[ ${recipedetail.recipetype} ]]*/; /*]]*/
 												 var sel = document.getElementById("content_add_select");
@@ -199,33 +199,33 @@
             									}
 											}
 										</script>
-									</tr>
-								</table>
-						</div>
-						<div class="am_add_wrap">
-							<p>컨텐츠 레시피</p>
-							<hr>
-							<textarea rows="15" cols="78" class="con_add_recipe"  th:text = "${recipedetail.recipedetail}" th:value = "${recipedetail.recipedetail}" name="recipedetail"></textarea>
-						</div>
-						<div class="am_add_wrap">
-							<p>컨텐츠 재료</p>
-							<hr>
-							<textarea rows="3" cols="78" class="con_add_recipe" th:text = "${recipedetail.recipearrang}" th:value = "${recipedetail.recipearrang}" name="recipearrang"></textarea>
-						</div>
-						
-						
-						<div class="float_no mater_add_but_wrap" >
-							<button class="mater_add_detail_but" type="submit">등록</button>
-							<button class="mater_add_backbut" th:onclick="'location.href=\''+ @{/adminContent} + '\''">목록</button>
-						</div>
+							</tr>
+						</table>
 					</div>
-					</form>
-					
-			</section>
+					<div class="am_add_wrap">
+						<p>컨텐츠 레시피</p>
+						<hr>
+						<textarea rows="15" cols="78" class="con_add_recipe"  th:text = "${recipedetail.recipedetail}" th:value = "${recipedetail.recipedetail}" name="recipedetail"></textarea>
+					</div>
+					<div class="am_add_wrap">
+						<p>컨텐츠 재료</p>
+						<hr>
+						<textarea rows="3" cols="78" class="con_add_recipe" th:text = "${recipedetail.recipearrang}" th:value = "${recipedetail.recipearrang}" name="recipearrang"></textarea>
+					</div>
+
+
+					<div class="float_no mater_add_but_wrap" >
+						<button class="mater_add_detail_but" type="submit">등록</button>
+						<button class="mater_add_backbut" th:onclick="'location.href=\''+ @{/adminContent} + '\''">목록</button>
+					</div>
+				</div>
+			</form>
+
 		</section>
-	</main>
-	<footer>
-		<div th:replace="fragments/footer::footer"></div>
-	</footer>
+	</section>
+</main>
+<footer>
+	<div th:replace="fragments/footer::footer"></div>
+</footer>
 </body>
 </html>

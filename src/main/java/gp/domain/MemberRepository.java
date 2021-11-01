@@ -3,6 +3,7 @@ package gp.domain;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -20,10 +21,12 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     public Page<Member> findByDateContaining(String date, Pageable pageable);
 
 
-    Optional<Member> findByUsername(String username);
+    Optional<Member> findByName(String name);
 
-    boolean existsByUsername(String username);
 
+    @Modifying
+    @Query(value = "select count(id) form member where id = :id", nativeQuery = true)
+    void idcheck(Long id);
 
     // 회원 정보 이름순
     @Query(value = "select * from member order by name asc",nativeQuery = true)
@@ -35,12 +38,9 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query(value = "select count(*) from member",nativeQuery = true)
     List<Member> membercount();
 
-
-
-
-
-
-
+    @Modifying
+    @Query(value = "update Member m set m.password = :password where m.id = :id", nativeQuery = true)
+    void updatePwd(Long id, String password);
 
 
 }

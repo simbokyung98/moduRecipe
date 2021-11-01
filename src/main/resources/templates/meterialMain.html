@@ -3,8 +3,8 @@
 <link rel="stylesheet" href="../static/css/style2.css">
 <link rel="stylesheet" href="../static/css/material.css">
 <head>
-<title>Insert title here</title>
-<style type="text/css">
+	<title>Insert title here</title>
+	<style type="text/css">
 	@font-face {
     font-family: 'Cafe24Oneprettynight';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff');
@@ -104,16 +104,16 @@
 <div th:replace="fragments/header :: header"></div>
 <main class="meter_main">
 	<div class="meter_total_title">
-		<h2>정육</h2>
+		<h2 th:text="${materH2}"></h2>
 	</div>
 	<aside class="meter_aside">
 		<div class="meter_cate_wrap">
 			<div class="meter_cate_title">
 				<h4>카테고리</h4>
 			</div>
-			<div>	
+			<div>
 				<ul class="meter_cate_ul">
-					<li class="meter_cate_li"><a th:href="@{/meterialMain/정육}"><img src="../static/img/meat.png" class="meter_cate_img"> 정육</a></li>
+					<li class="meter_cate_li"><a th:href="@{/meterialMain}"><img src="../static/img/meat.png" class="meter_cate_img"> 정육</a></li>
 					<li class="meter_cate_li"><a th:href="@{/meterialMain/수산}"><img src="../static/img/fish.png" class="meter_cate_img">수산 &#124; 해산</a></li>
 					<li class="meter_cate_li"><a th:href="@{/meterialMain/면}"><img src="../static/img/wheat.png" class="meter_cate_img">면 &#124; 견과</a></li>
 					<li class="meter_cate_li"><a th:href="@{/meterialMain/과일}"><img src="../static/img/fruits.png" class="meter_cate_img">과일</a></li>
@@ -126,10 +126,11 @@
 		</div>
 	</aside>
 	<section class="meter_section">
-<!--		<div th:replace="fragments/MeterialExample :: MeterialExample "></div>-->
+		<!--		<div th:replace="fragments/MeterialExample :: MeterialExample "></div>-->
 		<ul class="meter_list">
 
 			<li class="meter_item" th:each = "materialDto : ${materialList}">
+
 				<a th:href="@{'/meter_detail/'+${materialDto.materialKey}}">
 					<div class="meter_size">
 						<div class="meter_img_wrap">
@@ -137,7 +138,15 @@
 								<img alt="for문 test"  th:src="@{../static/materialImg/} + ${materialDto.materialImg}">
 							</div>
 							<div class="meter_cart">
-								<button type="button" class="meter_cart_but"><img alt="장바구니" src="../static/img/cart.png"> </button>
+								<form action="/saveCart" method="post">
+									<input type="hidden" name="cartMaterial" th:value = "${materialDto.materialTitle}">
+									<input type="hidden" name="cartPrice" th:value = "${materialDto.materialPrice}">
+									<input type="hidden" name="cartCapacity" th:value = "${materialDto.materialCapacity}">
+									<input type="hidden" name="cartImage" th:value = ${materialDto.materialImg}>
+									<input type="hidden" name="cartCount" value = "1">
+									<input type="hidden" name="username" th:value = "${session.user?.username}">
+									<button type="submit" class="meter_cart_but"><img alt="장바구니" src="../static/img/cart.png"> </button>
+								</form>
 							</div>
 						</div>
 						<div class="meter_text">
@@ -150,6 +159,7 @@
 						</div>
 					</div>
 				</a>
+
 			</li>
 
 		</ul>

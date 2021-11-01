@@ -45,8 +45,8 @@ public class AdminService {
 
 
 
-
     /*
+
     // 회원 관리
     public List<MemberDto> getMember(){
         List<Member> memberList = memberRepository.memberlist();
@@ -69,7 +69,11 @@ public class AdminService {
         return memberDtoList;
     }
 
+
      */
+
+
+
 
     //관리자 회원 정보 전체 조회
     @Transactional
@@ -93,10 +97,6 @@ public class AdminService {
         }
         return null;
     }
-
-
-
-
 
     //관리자 회원 정보 다음장 유무 확인
     @Transactional
@@ -127,6 +127,7 @@ public class AdminService {
 
         return check;
     }
+
 
 
 

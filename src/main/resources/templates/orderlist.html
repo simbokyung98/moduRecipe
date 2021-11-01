@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html  lang="en" xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" href="../static/css/style2.css">
-
-<head>
-<style>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../static/css/main.css">
+<link rel="stylesheet" href="../static/css/style2.css"><head>
+    <style>
 	@font-face {
 	    font-family: 'Cafe24Simplehae';
 	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Simplehae.woff') format('woff');
@@ -11,6 +10,7 @@
 	    font-style: normal;
 	}
 .mysidebarul{
+
 	font-family: 'NanumSquareRound';
 }
 .mysidebarli{
@@ -20,228 +20,79 @@
 	font-weight:bold;
 	border : 1px solid #dddddd;
 	padding :15px 0 15px 10px;
-	
+
+
 }
 .mysidebar{
 			width: 20%;
 			float: left;
-			margin-top: 110px;	
+			margin-top: 110px;
 }
 
 </style>
-<link href="style2.css" rel="stylesheet" type="text/css">
-<meta charset="EUC-KR">
-<title>orderlist</title>
-<script>
+    <link href="style2.css" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <title>orderlist</title>
+    <script>
 function showConfirm() {
-	 if (confirm("¡÷πÆ¿ª √Îº“«œΩ√∞⁄Ω¿¥œ±Ó?"))
+	 if (confirm("Ï£ºÎ¨∏ÏùÑ Ï∑®ÏÜåÌïòÏãúÍ≤†ÏäµÎãàÍπå?"))
 	  {
-	   alert("¡÷πÆ¿Ã √Îº“µ«æ˙Ω¿¥œ¥Ÿ.");
+	   alert("Ï£ºÎ¨∏Ïù¥ Ï∑®ÏÜåÎêòÏóàÏäµÎãàÎã§.");
 	  }
 	 }
 </script>
 </head>
 <body>
+
+
 <div th:replace="fragments/header :: header"></div>
 
 <div id="wrap" style="position:relative; padding-bottom:70px;min-height:100%; ">
-           <div class="all_meter">
-           <div class="mysidebardiv" style="position:relative; " >
-	<aside class="mysidebar">
-		<ul class="mysidebarul">
-			<li class="mysidebarli" style="background:#ffa500;"><h1 style="color:white;">MyºÓ«Œ</h1></li>
-			<li class="mysidebarli"><a href="orderlist.jsp" style="font-family: 'Cafe24Simplehae';">≥™¿« ¡÷πÆ∏Ò∑œ</a></li>
-			<li class="mysidebarli"><a href="myreview.jsp"style="font-family: 'Cafe24Simplehae';">≥™¿« ∏Æ∫‰∏Ò∑œ</a></li>
-			<li class="mysidebarli"><a href="qna.jsp"style="font-family: 'Cafe24Simplehae';">1¥Î1πÆ¿««œ±‚</a></li>
-			<li class="mysidebarli"><a href="membercheck.jsp"style="font-family: 'Cafe24Simplehae';">∞≥¿Œ¡§∫∏∫Ø∞Ê</a></li>
-	
-		</ul>
-	</aside>
-	</div>
-                <div class="orderlisttitle" style="padding-top: 10px; padding-left:300px; ">
-                    <p style="font-size: 25px;font-family: 'NanumSquareRound';">¡÷πÆ∏Ò∑œ</p>
-                    <p class ="p_orderlisttitle"style="font-family: 'NanumSquareRound';font-size: 15px; color: gray;  padding-bottom: 30px;">¡ˆ≥≠ ¡÷πÆ ≥ªø™ ¡∂»∏∏¶ «“ ºˆ ¿÷Ω¿¥œ¥Ÿ</p>
+    <div class="all_meter">
+        <div class="mysidebardiv" style="position:relative; " >
+            <aside class="mysidebar">
+                <ul class="mysidebarul" >
+                    <li class="mysidebarli" style="background:#ffa500;"><h1 style="color:white;">MyÏáºÌïë</h1></li>
+                    <li class="mysidebarli"><a th:href="@{/orderlist}" style="font-family: 'Cafe24Simplehae';">ÎÇòÏùò Ï£ºÎ¨∏Î™©Î°ù</a></li>
+                    <li class="mysidebarli"><a th:href="@{/myqnamain}" style="font-family: 'Cafe24Simplehae';">1ÎåÄ1Î¨∏ÏùòÌïòÍ∏∞</a></li>
+                    <li class="mysidebarli"><a th:href="@{/membercheck}" style="font-family: 'Cafe24Simplehae';">Í∞úÏù∏Ï†ïÎ≥¥Î≥ÄÍ≤Ω</a></li>
+
+                </ul>
+            </aside>
+        </div>
+
+        <div class="orderlisttitle" style="padding-top: 10px; padding-left:300px; ">
+            <p style="font-size: 25px;font-family: 'NanumSquareRound';">Ï£ºÎ¨∏Î™©Î°ù</p>
+            <p class ="p_orderlisttitle"style="font-family: 'NanumSquareRound';font-size: 15px; color: gray;  padding-bottom: 30px;">ÏßÄÎÇú Ï£ºÎ¨∏ ÎÇ¥Ïó≠ Ï°∞ÌöåÎ•º Ìï† Ïàò ÏûàÏäµÎãàÎã§</p>
+        </div>
+
+
+        <block th:each="order : ${orderList}" th:remove="tag">
+            <div class="orderlisttablediv" style="width:90%; padding-left:250px;">
+                <div class="orderlisttable" style="padding-top: 30px; font-size: 20px;"></div>
+                <div class="orderlistdate" style="font-family: 'NanumSquareRound';padding-top: 30px; font-size: 30px; border-top: gray solid 1px; border-width=1em;">
+                    [[${order.orderdate}]] Ï£ºÎ¨∏</div>
+
+                <span style="font-family: 'NanumSquareRound';">[[${order.orderstate}]]</span>
+
+                <div class="productimgdiv"  style="height: 150px; width: 100%; border-bottom:solid 1px gray; ">
+                    <span style="font-family: 'NanumSquareRound';padding-left: 80px; margin-left:300px; margin-top:30px; display: inline-block; height: 150px; padding-bottom: 65px; vertical-align: middle;">[[${order.materialname}]]</span>
+
+
+
+
                 </div>
 
-                <div class="orderlisttablediv" style="width:90%; padding-left:250px;">
-                    <div class="orderlisttable" style="padding-top: 30px; font-size: 20px;"></div>
-                    <div
-                        class="orderlistdate"
-                        style="font-family: 'NanumSquareRound';padding-top: 30px; font-size: 30px; border-top: gray solid 1px; border-width=1em;">
-                            2021. 6. 02 ¡÷πÆ</div>
 
-                    <span style="font-family: 'NanumSquareRound';">6/5¿œ µµ¬¯øπ¡§&nbsp;&nbsp;&nbsp;</span>
-                    <span style="font-family: 'NanumSquareRound';">πËº€¡ﬂ</span>
-                    
-                    <div
-                        class="productimgdiv"
-                        style="height: 150px; width: 100%; border-bottom:solid 1px gray; ">
-                        <img src="img/Logo.png">
-                        <span
-                            style="font-family: 'NanumSquareRound';padding-left: 80px; display: inline-block; height: 150px; padding-bottom: 65px; vertical-align: middle;">∏µŒ¿«∑πΩ√««(¡¶«∞∏Ì)</span>
-                        <div class="orderlistbtndiv" style="position:relative; right:200px;">
-                            <div style="padding-bottom:10px;"><button onClick="location.href='reviewdetail.jsp'" class="reviewwritebtn">∏Æ∫‰¿€º∫</button></div>
-                            <div style="padding-bottom:10px;"><button onClick="location.href='orderlistdetail.jsp'" class="orderdetailbtn">¡÷πÆªÛºº</button></div>
-                            <div><button onClick="javascript:showConfirm()" class="ordercancelbtn">¡÷πÆ√Îº“</button></div>
-                        </div>
-                        
-                    </div>
-
-                    
-                </div>
-                <div class="orderlisttablediv" style="width:90%; padding-left:250px;">
-                    <div class="orderlisttable" style="padding-top: 30px; font-size: 20px;"></div>
-                    <div
-                        class="orderlistdate"
-                        style="font-family: 'NanumSquareRound';padding-top: 30px; font-size: 30px; border-top: gray solid 1px; border-width=1em;">
-                            2021. 6. 02 ¡÷πÆ</div>
-
-                    <span style="font-family: 'NanumSquareRound';">6/5¿œ µµ¬¯øπ¡§&nbsp;&nbsp;&nbsp;</span>
-                    <span style="font-family: 'NanumSquareRound';">πËº€¡ﬂ</span>
-                    
-                    <div
-                        class="productimgdiv"
-                        style="height: 150px; width: 100%; border-bottom:solid 1px gray; ">
-                        <img src="img/Logo.png">
-                        <span
-                            style="font-family: 'NanumSquareRound';padding-left: 80px; display: inline-block; height: 150px; padding-bottom: 65px; vertical-align: middle;">∏µŒ¿«∑πΩ√««(¡¶«∞∏Ì)</span>
-                        <div class="orderlistbtndiv" style="position:relative; right:200px;">
-                            <div style="padding-bottom:10px;"><button onClick="location.href='reviewdetail.jsp'" class="reviewwritebtn">∏Æ∫‰¿€º∫</button></div>
-                            <div style="padding-bottom:10px;"><button onClick="location.href='orderlistdetail.jsp'" class="orderdetailbtn">¡÷πÆªÛºº</button></div>
-                            <div><button onClick="javascript:showConfirm()" class="ordercancelbtn">¡÷πÆ√Îº“</button></div>
-                        </div>
-                        
-                    </div>
-
-                    
-                </div><div class="orderlisttablediv" style="width:90%; padding-left:250px;">
-                    <div class="orderlisttable" style="padding-top: 30px; font-size: 20px;"></div>
-                    <div
-                        class="orderlistdate"
-                        style="font-family: 'NanumSquareRound';padding-top: 30px; font-size: 30px; border-top: gray solid 1px; border-width=1em;">
-                            2021. 6. 02 ¡÷πÆ</div>
-
-                    <span style="font-family: 'NanumSquareRound';">6/5¿œ µµ¬¯øπ¡§&nbsp;&nbsp;&nbsp;</span>
-                    <span style="font-family: 'NanumSquareRound';">πËº€¡ﬂ</span>
-                    
-                    <div
-                        class="productimgdiv"
-                        style="height: 150px; width: 100%; border-bottom:solid 1px gray; ">
-                        <img src="img/Logo.png">
-                        <span
-                            style="font-family: 'NanumSquareRound';padding-left: 80px; display: inline-block; height: 150px; padding-bottom: 65px; vertical-align: middle;">∏µŒ¿«∑πΩ√««(¡¶«∞∏Ì)</span>
-                        <div class="orderlistbtndiv" style="position:relative; right:200px;">
-                            <div style="padding-bottom:10px;"><button onClick="location.href='reviewdetail.jsp'" class="reviewwritebtn">∏Æ∫‰¿€º∫</button></div>
-                            <div style="padding-bottom:10px;"><button onClick="location.href='orderlistdetail.jsp'" class="orderdetailbtn">¡÷πÆªÛºº</button></div>
-                            <div><button onClick="javascript:showConfirm()" class="ordercancelbtn">¡÷πÆ√Îº“</button></div>
-                        </div>
-                        
-                    </div>
-
-                    
-                </div><div class="orderlisttablediv" style="width:90%; padding-left:250px;">
-                    <div class="orderlisttable" style="padding-top: 30px; font-size: 20px;"></div>
-                    <div
-                        class="orderlistdate"
-                        style="font-family: 'NanumSquareRound';padding-top: 30px; font-size: 30px; border-top: gray solid 1px; border-width=1em;">
-                            2021. 6. 02 ¡÷πÆ</div>
-
-                    <span style="font-family: 'NanumSquareRound';">6/5¿œ µµ¬¯øπ¡§&nbsp;&nbsp;&nbsp;</span>
-                    <span style="font-family: 'NanumSquareRound';">πËº€¡ﬂ</span>
-                    
-                    <div
-                        class="productimgdiv"
-                        style="height: 150px; width: 100%; border-bottom:solid 1px gray; ">
-                        <img src="img/Logo.png">
-                        <span
-                            style="font-family: 'NanumSquareRound';padding-left: 80px; display: inline-block; height: 150px; padding-bottom: 65px; vertical-align: middle;">∏µŒ¿«∑πΩ√««(¡¶«∞∏Ì)</span>
-                        <div class="orderlistbtndiv" style="position:relative; right:200px;">
-                            <div style="padding-bottom:10px;"><button onClick="location.href='reviewdetail.jsp'" class="reviewwritebtn">∏Æ∫‰¿€º∫</button></div>
-                            <div style="padding-bottom:10px;"><button onClick="location.href='orderlistdetail.jsp'" class="orderdetailbtn">¡÷πÆªÛºº</button></div>
-                            <div><button onClick="javascript:showConfirm()" class="ordercancelbtn">¡÷πÆ√Îº“</button></div>
-                        </div>
-                        
-                    </div>
-
-                    
-                </div><div class="orderlisttablediv" style="width:90%; padding-left:250px;">
-                    <div class="orderlisttable" style="padding-top: 30px; font-size: 20px;"></div>
-                    <div
-                        class="orderlistdate"
-                        style="font-family: 'NanumSquareRound';padding-top: 30px; font-size: 30px; border-top: gray solid 1px; border-width=1em;">
-                            2021. 6. 02 ¡÷πÆ</div>
-
-                    <span style="font-family: 'NanumSquareRound';">6/5¿œ µµ¬¯øπ¡§&nbsp;&nbsp;&nbsp;</span>
-                    <span style="font-family: 'NanumSquareRound';">πËº€¡ﬂ</span>
-                    
-                    <div
-                        class="productimgdiv"
-                        style="height: 150px; width: 100%; border-bottom:solid 1px gray; ">
-                        <img src="img/Logo.png">
-                        <span
-                            style="font-family: 'NanumSquareRound';padding-left: 80px; display: inline-block; height: 150px; padding-bottom: 65px; vertical-align: middle;">∏µŒ¿«∑πΩ√««(¡¶«∞∏Ì)</span>
-                        <div class="orderlistbtndiv" style="position:relative; right:200px;">
-                            <div style="padding-bottom:10px;"><button onClick="location.href='reviewdetail.jsp'" class="reviewwritebtn">∏Æ∫‰¿€º∫</button></div>
-                            <div style="padding-bottom:10px;"><button onClick="location.href='orderlistdetail.jsp'" class="orderdetailbtn">¡÷πÆªÛºº</button></div>
-                            <div><button onClick="javascript:showConfirm()" class="ordercancelbtn">¡÷πÆ√Îº“</button></div>
-                        </div>
-                        
-                    </div>
-
-                    
-                </div><div class="orderlisttablediv" style="width:90%; padding-left:250px;">
-                    <div class="orderlisttable" style="padding-top: 30px; font-size: 20px;"></div>
-                    <div
-                        class="orderlistdate"
-                        style="font-family: 'NanumSquareRound';padding-top: 30px; font-size: 30px; border-top: gray solid 1px; border-width=1em;">
-                            2021. 6. 02 ¡÷πÆ</div>
-
-                    <span style="font-family: 'NanumSquareRound';">6/5¿œ µµ¬¯øπ¡§&nbsp;&nbsp;&nbsp;</span>
-                    <span style="font-family: 'NanumSquareRound';">πËº€¡ﬂ</span>
-                    
-                    <div
-                        class="productimgdiv"
-                        style="height: 150px; width: 100%; border-bottom:solid 1px gray; ">
-                        <img src="img/Logo.png">
-                        <span
-                            style="font-family: 'NanumSquareRound';padding-left: 80px; display: inline-block; height: 150px; padding-bottom: 65px; vertical-align: middle;">∏µŒ¿«∑πΩ√««(¡¶«∞∏Ì)</span>
-                        <div class="orderlistbtndiv" style="position:relative; right:200px;">
-                            <div style="padding-bottom:10px;"><button onClick="location.href='reviewdetail.jsp'" class="reviewwritebtn">∏Æ∫‰¿€º∫</button></div>
-                            <div style="padding-bottom:10px;"><button onClick="location.href='orderlistdetail.jsp'" class="orderdetailbtn">¡÷πÆªÛºº</button></div>
-                            <div><button onClick="javascript:showConfirm()" class="ordercancelbtn">¡÷πÆ√Îº“</button></div>
-                        </div>
-                        
-                    </div>
-
-                    
-                </div><div class="orderlisttablediv" style="width:90%; padding-left:250px;">
-                    <div class="orderlisttable" style="padding-top: 30px; font-size: 20px;"></div>
-                    <div
-                        class="orderlistdate"
-                        style="font-family: 'NanumSquareRound';padding-top: 30px; font-size: 30px; border-top: gray solid 1px; border-width=1em;">
-                            2021. 6. 02 ¡÷πÆ</div>
-
-                    <span style="font-family: 'NanumSquareRound';">6/5¿œ µµ¬¯øπ¡§&nbsp;&nbsp;&nbsp;</span>
-                    <span style="font-family: 'NanumSquareRound';">πËº€¡ﬂ</span>
-                    
-                    <div
-                        class="productimgdiv"
-                        style="height: 150px; width: 100%; border-bottom:solid 1px gray; ">
-                        <img src="img/Logo.png">
-                        <span
-                            style="font-family: 'NanumSquareRound';padding-left: 80px; display: inline-block; height: 150px; padding-bottom: 65px; vertical-align: middle;">∏µŒ¿«∑πΩ√««(¡¶«∞∏Ì)</span>
-                        <div class="orderlistbtndiv" style="position:relative; right:200px;">
-                            <div style="padding-bottom:10px;"><button onClick="location.href='reviewdetail.jsp'" class="reviewwritebtn">∏Æ∫‰¿€º∫</button></div>
-                            <div style="padding-bottom:10px;"><button onClick="location.href='orderlistdetail.jsp'" class="orderdetailbtn">¡÷πÆªÛºº</button></div>
-                            <div><button onClick="javascript:showConfirm()" class="ordercancelbtn">¡÷πÆ√Îº“</button></div>
-                        </div>
-                        
-                    </div>
-
-                    
-                </div>
             </div>
-            <%@ include file="footer.jsp"%>
-            </div>
+            </tr>
+        </block>
+
+    </div>
+
+
+</div>
+</div>
+</div>
 </body>
 </html>

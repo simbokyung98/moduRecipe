@@ -157,17 +157,16 @@
                 <p>회원 관리</p>
             </div>
             <form action="/memberlistsearch" method="get">
-            <div class="adminmeter_section2" >
+                <div class="adminmeter_section2" >
 
-                <select id="admin_usersele" name="searchType" >
-                    <option value="username">아이디</option>
-                    <option value="name">이름</option>
-                    <option value="date">생년월일</option>
-                    <option>최근로그인</option>
-                </select>
-                <input type="text" placeholder="회원검색" id="admin_usertext" name="keyword">
-                <input type="submit" id="admin_userusb" value="">
-            </div>
+                    <select id="admin_usersele" name="searchType" >
+                        <option value="username">아이디</option>
+                        <option value="name">이름</option>
+                        <option value="date">생년월일</option>
+                    </select>
+                    <input type="text" placeholder="회원검색" id="admin_usertext" name="keyword">
+                    <input type="submit" id="admin_userusb" th:src="@{../static/img/user}" value="">
+                </div>
             </form>
 
             <div class="am_section_content" >
@@ -180,7 +179,6 @@
                         <th class="amst_th">가입일자</th>
                         <th class="amst_th">연락처</th>
                         <th class="amst_th">생년월일</th>
-                        <th class="amst_th">최근로그인</th>
                         <th class="amst_th"></th>
                     </tr>
                     </thead>
@@ -191,7 +189,6 @@
                         <td class="amst_td" th:text="${memberDto.create_dated}"></td>
                         <td class="amst_td" th:text="${memberDto.phone}"></td>
                         <td class="amst_td" th:text="${memberDto.date}"></td>
-                        <td class="amst_td">2021-05-27</td>
                         <td class="amst_td" ><a th:href="@{'/memberDelete/'+${memberDto.id}}" class="amst_td_a">삭제</a></td>
                     </tr>
                     </tbody>

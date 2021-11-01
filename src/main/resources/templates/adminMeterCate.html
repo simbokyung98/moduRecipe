@@ -3,9 +3,9 @@
 <link rel="stylesheet" href="../static/css/style2.css">
 <link rel="stylesheet" href="../static/css/material.css">
 <head>
-<meta charset="UTF-8">
-<title>관리자 페이지</title>
-<style type="text/css">
+	<meta charset="UTF-8">
+	<title>관리자 페이지</title>
+	<style type="text/css">
 	@font-face {
 		 font-family: 'NanumBarunGothic';
 		 font-style: normal;
@@ -202,97 +202,97 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
-	<main id="adminmeter_main_wrap">
-		<section id="adminmeter_main">
-			<div th:replace="fragments/adminmenu :: adminmenu"></div>
-			<section id="adminmeter_section_wrap">
-				<div id="adminmeter_section">
-					<p>재료관리</p>
+<main id="adminmeter_main_wrap">
+	<section id="adminmeter_main">
+		<div th:replace="fragments/adminmenu :: adminmenu"></div>
+		<section id="adminmeter_section_wrap">
+			<div id="adminmeter_section">
+				<p>재료관리</p>
+			</div>
+			<div id="am_section_search-as">
+				<ul class="am_section_ul">
+					<li><a th:href="@{/adminMater}" class="am_section_ul_asuv">전체</a></li>
+					<li>
+						<a th:if="${main.toString()} == '정육'" th:href="@{/adminMaterCate/정육}" class="am_section_ul_ama">정육</a>
+						<a th:unless="${main.toString()} == '정육'" th:href="@{/adminMaterCate/정육}" class="am_section_ul_asuv">정육</a>
+					</li>
+					<li>
+						<a th:if="${main.toString()} == '수산'" th:href="@{/adminMaterCate/수산}" class="am_section_ul_ama">수산/해산</a>
+						<a th:unless="${main.toString()} == '수산'" th:href="@{/adminMaterCate/수산}" class="am_section_ul_asuv">수산/해산</a>
+					</li>
+					<li>
+						<a th:if="${main.toString()} == '면'" th:href="@{/adminMaterCate/면}" class="am_section_ul_ama">면/견과</a>
+						<a th:unless="${main.toString()} == '면'" th:href="@{/adminMaterCate/면}" class="am_section_ul_asuv">면/견과</a>
+					</li>
+					<li>
+						<a th:if="${main.toString()} == '과일'" th:href="@{/adminMaterCate/과일}" class="am_section_ul_ama">과일</a>
+						<a th:unless="${main.toString()} == '과일'" th:href="@{/adminMaterCate/과일}" class="am_section_ul_asuv">과일</a>
+					</li>
+					<li>
+						<a th:if="${main.toString()} == '채소'" th:href="@{/adminMaterCate/채소}" class="am_section_ul_ama">채소</a>
+						<a th:unless="${main.toString()} == '채소'" th:href="@{/adminMaterCate/채소}" class="am_section_ul_asuv">채소</a>
+					</li>
+					<li>
+						<a th:if="${main.toString()} == '베이커리'" th:href="@{/adminMaterCate/베이커리}" class="am_section_ul_ama">베이커리</a>
+						<a th:unless="${main.toString()} == '베이커리'" th:href="@{/adminMaterCate/베이커리}" class="am_section_ul_asuv">베이커리</a>
+					</li>
+					<li>
+						<a th:if="${main.toString()} == '양념'" th:href="@{/adminMaterCate/양념}" class="am_section_ul_ama">양념/오일</a>
+						<a th:unless="${main.toString()} == '양념'" th:href="@{/adminMaterCate/양념}" class="am_section_ul_asuv">양념/오일</a>
+					</li>
+					<li>
+						<a th:if="${main.toString()} == '계란'" th:href="@{/adminMaterCate/계란}" class="am_section_ul_ama">계란/유제품</a>
+						<a th:unless="${main.toString()} == '계란'" th:href="@{/adminMaterCate/계란}" class="am_section_ul_asuv">계란/유제품</a>
+					</li>
+				</ul>
+			</div>
+			<div id="am_section_contents_wrap">
+				<table class="am_sc_table">
+					<thead>
+					<tr>
+						<th class="am_sc_th">상품코드</th>
+						<th class="am_sc_th" colspan="2">상품명</th>
+						<th class="am_sc_th">등록마감일</th>
+						<th class="am_sc_th">가격<span style="font-weight: normal;font-size: 10px;">(100g)</span></th>
+						<th class="am_sc_th">현재고</th>
+						<th class="am_sc_th">수정재고</th>
+						<th class="am_sc_th">상태</th>
+						<th class="am_sc_th">비고</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr th:each="addMater : ${addMater}">
+						<td  class="am_sc_td-center"><span th:text="${addMater.materialKey}"></span></td>
+						<td class="am_sc_td-center"><img  th:src="@{../static/img/} + ${addMater.materialImg}" style="width: 50px; height: 60px; "></td>
+						<td class="am_sc_td-center"><span th:text="${addMater.materialTitle}"></span></td>
+						<td class="am_sc_td-center">2021-06-19</td>
+						<td class="am_sc_td-center"><span th:text="${addMater.materialPrice}"></span>원</td>
+						<td class="am_sc_td-center"><span th:text="${addMater.materialInventory}"></span></td>
+						<td class="am_sc_td-center"><input th:value="${addMater.materialInventory}" style="width: 15px;"> </td>
+						<td class="am_sc_td-center"><input type="radio" >판매<br><input type="radio" >품절 </td>
+						<td class="am_sc_td-center"><input type="button" value="수정"><br><input type="button" value="삭제" th:onclick="'location.href=\''+ @{'/adminMaterDelete/' +${addMater.materialKey} } + '\''"></td>
+					</tr>
+					</tbody>
+				</table>
+				<div class="page-num">
+					<ul class="add_mater_ul">
+						<li ><a th:href="@{/adminMater/${addMater.materialMainCate}?(page=${previous})}">Previous</a></li>
+						<li th:if="${check}"><a th:href="@{/adminMater/${addMater.materialMainCate}?(page=${next})}">Next</a></li>
+					</ul>
 				</div>
-					<div id="am_section_search-as">
-						<ul class="am_section_ul">
-							<li><a th:href="@{/adminMater}" class="am_section_ul_asuv">전체</a></li>
-							<li>
-								<a th:if="${main.toString()} == '정육'" th:href="@{/adminMaterCate/정육}" class="am_section_ul_ama">정육</a>
-								<a th:unless="${main.toString()} == '정육'" th:href="@{/adminMaterCate/정육}" class="am_section_ul_asuv">정육</a>
-							</li>
-							<li>
-								<a th:if="${main.toString()} == '수산'" th:href="@{/adminMaterCate/수산}" class="am_section_ul_ama">수산/해산</a>
-								<a th:unless="${main.toString()} == '수산'" th:href="@{/adminMaterCate/수산}" class="am_section_ul_asuv">수산/해산</a>
-							</li>
-							<li>
-								<a th:if="${main.toString()} == '면'" th:href="@{/adminMaterCate/면}" class="am_section_ul_ama">면/견과</a>
-								<a th:unless="${main.toString()} == '면'" th:href="@{/adminMaterCate/면}" class="am_section_ul_asuv">면/견과</a>
-							</li>
-							<li>
-								<a th:if="${main.toString()} == '과일'" th:href="@{/adminMaterCate/과일}" class="am_section_ul_ama">과일</a>
-								<a th:unless="${main.toString()} == '과일'" th:href="@{/adminMaterCate/과일}" class="am_section_ul_asuv">과일</a>
-							</li>
-							<li>
-								<a th:if="${main.toString()} == '채소'" th:href="@{/adminMaterCate/채소}" class="am_section_ul_ama">채소</a>
-								<a th:unless="${main.toString()} == '채소'" th:href="@{/adminMaterCate/채소}" class="am_section_ul_asuv">채소</a>
-							</li>
-							<li>
-								<a th:if="${main.toString()} == '베이커리'" th:href="@{/adminMaterCate/베이커리}" class="am_section_ul_ama">베이커리</a>
-								<a th:unless="${main.toString()} == '베이커리'" th:href="@{/adminMaterCate/베이커리}" class="am_section_ul_asuv">베이커리</a>
-							</li>
-							<li>
-								<a th:if="${main.toString()} == '양념'" th:href="@{/adminMaterCate/양념}" class="am_section_ul_ama">양념/오일</a>
-								<a th:unless="${main.toString()} == '양념'" th:href="@{/adminMaterCate/양념}" class="am_section_ul_asuv">양념/오일</a>
-							</li>
-							<li>
-								<a th:if="${main.toString()} == '계란'" th:href="@{/adminMaterCate/계란}" class="am_section_ul_ama">계란/유제품</a>
-								<a th:unless="${main.toString()} == '계란'" th:href="@{/adminMaterCate/계란}" class="am_section_ul_asuv">계란/유제품</a>
-							</li>
-						</ul>
-					</div>
-					<div id="am_section_contents_wrap">
-						<table class="am_sc_table">
-							<thead>
-								<tr>
-									<th class="am_sc_th">상품코드</th>
-									<th class="am_sc_th" colspan="2">상품명</th>
-									<th class="am_sc_th">등록마감일</th>
-									<th class="am_sc_th">가격<span style="font-weight: normal;font-size: 10px;">(100g)</span></th>
-									<th class="am_sc_th">현재고</th>
-									<th class="am_sc_th">수정재고</th>
-									<th class="am_sc_th">상태</th>
-									<th class="am_sc_th">비고</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="addMater : ${addMater}">
-									<td  class="am_sc_td-center"><span th:text="${addMater.materialKey}"></span></td>
-									<td class="am_sc_td-center"><img  th:src="@{../static/img/} + ${addMater.materialImg}" style="width: 50px; height: 60px; "></td>
-									<td class="am_sc_td-center"><span th:text="${addMater.materialTitle}"></span></td>
-									<td class="am_sc_td-center">2021-06-19</td>
-									<td class="am_sc_td-center"><span th:text="${addMater.materialPrice}"></span>원</td>
-									<td class="am_sc_td-center"><span th:text="${addMater.materialInventory}"></span></td>
-									<td class="am_sc_td-center"><input th:value="${addMater.materialInventory}" style="width: 15px;"> </td>
-									<td class="am_sc_td-center"><input type="radio" >판매<br><input type="radio" >품절 </td>
-									<td class="am_sc_td-center"><input type="button" value="수정"><br><input type="button" value="삭제" th:onclick="'location.href=\''+ @{'/adminMaterDelete/' +${addMater.materialKey} } + '\''"></td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="page-num">
-							<ul class="add_mater_ul">
-								<li ><a th:href="@{/adminMater/${addMater.materialMainCate}?(page=${previous})}">Previous</a></li>
-								<li th:if="${check}"><a th:href="@{/adminMater/${addMater.materialMainCate}?(page=${next})}">Next</a></li>
-							</ul>
-						</div>
 
 
 
-						<div id="mater_add_wrap">
-							<button class="mater_add_but" th:onclick="'location.href=\''+ @{/adminMaterialAdd} + '\''">재료추가</button>
-						</div>
-					</div>	
-					
-			</section>
+				<div id="mater_add_wrap">
+					<button class="mater_add_but" th:onclick="'location.href=\''+ @{/adminMaterialAdd} + '\''">재료추가</button>
+				</div>
+			</div>
+
 		</section>
-	</main>
-	<footer>
-		<div th:replace="fragments/footer::footer"></div>
-	</footer>
+	</section>
+</main>
+<footer>
+	<div th:replace="fragments/footer::footer"></div>
+</footer>
 </body>
 </html>

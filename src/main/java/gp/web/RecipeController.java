@@ -1,32 +1,63 @@
 package gp.web;
 
+
+
 import gp.domain.Material;
+import gp.domain.Recipe;
+import gp.domain.Review;
 import gp.service.MaterialService;
 import gp.service.RecipeService;
+import gp.web.dto.MaterialDto;
 import gp.web.dto.MemberDto;
 import gp.web.dto.RecipeDto;
+import gp.web.dto.ReviewDto;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class RecipeController {
+    @Autowired
+    private RecipeService recipeService;
 
-    private final RecipeService recipeService;
-    private final MaterialService materialService;
 
-    // main 추천 영상
+
+//    @GetMapping("/")
+//    public String indexrecipe(Model model,@RequestParam(value = "page",defaultValue = "1") Integer pageNum){
+//        List<RecipeDto> recipeDtoList = recipeService.getrecipelist(pageNum);
+//
+//        model.addAttribute("recipelist", recipeDtoList);
+//
+//        return "index";
+//    }
+
+    @Autowired
+    private MaterialService materialService;
+
     @GetMapping("/")
-    public String indexrecipe(Model model,@RequestParam(value = "page",defaultValue = "1") Integer pageNum){
+    public String indexrecipe(Model model,@RequestParam(value = "page",defaultValue = "1") Integer pageNum, @PageableDefault(size = 4, sort = "materialKey", direction = Sort.Direction.DESC)Pageable pageable){
         List<RecipeDto> recipeDtoList = recipeService.getrecipelist(pageNum);
+        Page<Material> materialDtoList = materialService.pageGetAllMaterial(pageable);
+        model.addAttribute("addMater", materialDtoList);
 
         model.addAttribute("recipelist", recipeDtoList);
 
@@ -44,6 +75,7 @@ public class RecipeController {
     }
 
     // best
+
     @GetMapping("/best")
     public String bestrecipe(Model model){
         List<RecipeDto> recipeDtoList = recipeService.getbestrecipe();
@@ -51,16 +83,161 @@ public class RecipeController {
         return "best";
     }
 
-    // 영상 클릭시 조회수 증가
+
+    //관리자 레시피 페이지(전체) 이동
+    @GetMapping("/adminContent")
+    public String adminContent(Model model, @PageableDefault(size = 5, sort = "recipekey", direction = Sort.Direction.DESC)Pageable pageable){
+
+        Page<Recipe> recipePage =recipeService.pageGetAllContent(pageable);
+        model.addAttribute("addContent", recipePage);
+        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("next", pageable.next().getPageNumber());
+        model.addAttribute("check", recipeService.getConAllListCheck(pageable));
+        //adminsidebar 설정 용도
+        model.addAttribute("adminmenu", "레시피");
+
+        return "adminContent";
+    }
+    //관리자 레시피 페이지(카테고리) 이동
+    @GetMapping("/adminCotentCate/{recipetype}")
+    public String adminCotentCate (@PathVariable("recipetype") String recipetype, Model model,@PageableDefault(size = 5, sort = "recipekey", direction = Sort.Direction.DESC)Pageable pageable ){
+        Page<Recipe> recipePage = recipeService.pageGetRecipeCate(recipetype, pageable);
+        model.addAttribute("addContent", recipePage);
+        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("next", pageable.next().getPageNumber());
+        model.addAttribute("check", recipeService.getConAllListCheck(pageable));
+        //adminsidebar 설정 용도
+        model.addAttribute("adminmenu", "레시피");
+
+        return "adminContent";
+
+    }
+
+
+    //관리자 레시피 추가 페이지 이동
+    @GetMapping("/adminContentAdd")
+    public String adminConAdd(Model model){
+
+        //adminsidebar 설정 용도
+        model.addAttribute("adminmenu", "레시피");
+        return "adminContentAdd";
+    }
+
+    //관리자 레시피 추가 액션
+    @PostMapping("/adminContentAddAction")
+    public String adminConAddAction(RecipeDto recipeDto){
+        recipeService.adminContentAdd(recipeDto);
+
+        return "redirect:/adminContent";
+
+    }
+    //관리자 레시피 수정 페이지 이동
+    @GetMapping("/adminContentUpdate/{recipekey}")
+    public String adminContentUpdate(@PathVariable("recipekey") Long recipekey, Model model){
+
+        RecipeDto recipeDto = recipeService.getRecipeUp(recipekey);
+
+        model.addAttribute("recipedetail", recipeDto);
+        //adminsidebar 설정 용도
+        model.addAttribute("adminmenu", "레시피");
+
+        return "adminContentUpdate";
+
+    }
+
+    //관리자 레시피 수정 액션
+    @PostMapping("/recipeUpdate/{recipekey}")
+    public String adminRecipeUpdate(@PathVariable("recipekey") Long recipekey, RecipeDto recipeDto){
+        recipeService.recipeUpdate(recipekey, recipeDto);
+
+        return "redirect:/adminContent";
+    }
+
+    //관리자 레시피 검색
+    @GetMapping("/recipesearch")
+    public String adminRecipeSearch(@RequestParam(value="keyword") String keyword, @RequestParam(value="select") String select, Model model,
+                                    @PageableDefault(size = 5, sort = "recipekey", direction = Sort.Direction.DESC)Pageable pageable){
+        Page<Recipe> recipePage = recipeService.pageGetRecipeSearch(keyword,select, pageable);
+        model.addAttribute("addContent", recipePage);
+        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("next", pageable.next().getPageNumber());
+        model.addAttribute("check", recipeService.getConAllListCheck(pageable));
+        //adminsidebar 설정 용도
+        model.addAttribute("adminmenu", "레시피");
+
+        return "adminContent";
+    }
+
+    //관리자 레시피 삭제
+    @RequestMapping("/adminContentDelete/{recipekey}")
+    public String adminRecipeDelete(@PathVariable("recipekey") Long recipekey){
+
+        recipeService.adminRecipeDelete(recipekey);
+
+        return "redirect:/adminContent";
+
+    }
+
+    /*
+
     @GetMapping("/recipedetail/{recipekey}")
-    public String recipedetailrecipe(@PathVariable("recipekey")Long recipekey, Model model){
+    public String recipedetail(@PathVariable("recipekey")Long recipekey, Model model,@RequestParam(value = "page",defaultValue = "1") Integer pageNum, HttpSession session){
+
+        MemberDto loginMember=(MemberDto)session.getAttribute("user");
         RecipeDto recipeDto = recipeService.getRecipe(recipekey);
+        List<RecipeDto> recipeDtoList = recipeService.getrecipelist(pageNum);
 
 
+        String materialStr = recipeDto.getRecipearrang();
+
+        if(! StringUtils.isEmpty(materialStr)){
+            String[] materialList = materialStr.split(",");
+
+            List<Material> materialDtoList = materialService.getMaterialByTitles(materialList);
+
+            model.addAttribute("materialDtoList",materialDtoList);
+
+        }
+        model.addAttribute("recipelist", recipeDtoList);
         model.addAttribute("recipehit", recipeService.creatorupdateView(recipekey));
         model.addAttribute("recipehit",recipeService.updateView(recipekey));
         model.addAttribute("recipeDto",recipeDto);
-        return "recipedetail.html";
+
+        return "recipedetail";
+    }
+
+     */
+
+    @GetMapping("/recipedetail/{recipekey}")
+    public String recipedetail(@PathVariable("recipekey")Long recipekey, Model model,@RequestParam(value = "page",defaultValue = "1") Integer pageNum, HttpSession session){
+
+        MemberDto loginMember=(MemberDto)session.getAttribute("user");
+        RecipeDto recipeDto = recipeService.getRecipe(recipekey);
+
+
+        List<RecipeDto> recipeDtoList = recipeService.getrecipelist(pageNum);
+        List<RecipeDto> recipeDtoList1 = recipeService.getrecipepage(pageNum);
+        Integer[] pageList= recipeService.getPageList(pageNum);
+
+        model.addAttribute("recipepage",recipeDtoList1);
+        model.addAttribute("pagelist",pageList);
+
+
+        String materialStr = recipeDto.getRecipearrang();
+
+        if(! StringUtils.isEmpty(materialStr)){
+            String[] materialList = materialStr.split(",");
+
+            List<Material> materialDtoList = materialService.getMaterialByTitles(materialList);
+
+            model.addAttribute("materialDtoList",materialDtoList);
+
+        }
+        model.addAttribute("recipelist", recipeDtoList);
+        model.addAttribute("recipehit", recipeService.creatorupdateView(recipekey));
+        model.addAttribute("recipeDto",recipeDto);
+
+        return "recipedetail";
     }
 
 
@@ -164,6 +341,7 @@ public class RecipeController {
     }
 
      */
+
 
 
 
