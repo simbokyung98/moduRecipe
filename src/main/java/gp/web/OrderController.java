@@ -7,6 +7,7 @@ import gp.service.OrderService;
 import gp.web.dto.MemberDto;
 import gp.web.dto.OrderDetatilDto;
 import gp.web.dto.OrderDto;
+import gp.web.dto.OrderListDto;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -165,6 +166,19 @@ public class OrderController {
         orderService.deleteOrderDetail(id);
 
         return "/orderlist";
+    }
+
+    //관리자 주문 페이지 띄우기
+    @GetMapping("/adminOrder")
+    public String adminorder(Model model){
+
+        List<OrderListDto> orderListDtoList = orderService.getOrderList();
+
+        model.addAttribute("orderList", orderListDtoList);
+
+        //adminsidebar 설정 용도
+        model.addAttribute("adminmenu", "주문");
+        return "adminOrder";
     }
 
 }

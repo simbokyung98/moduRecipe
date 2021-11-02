@@ -1,15 +1,15 @@
 package gp.service;
 
-import gp.domain.Order;
-import gp.domain.OrderDetail;
-import gp.domain.OrderDetailRepository;
-import gp.domain.OrderRepository;
+import gp.domain.*;
+import gp.web.dto.OrderDetailListDto;
 import gp.web.dto.OrderDetatilDto;
 import gp.web.dto.OrderDto;
+import gp.web.dto.OrderListDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +19,7 @@ import java.util.Optional;
 public class OrderService {
     @Autowired private OrderRepository orderRepository;
     @Autowired private OrderDetailRepository orderDetailRepository;
+    @Autowired private MemberRepository memberRepository;
 
     public Long saveOrder(OrderDto orderDto){
         return orderRepository.save(orderDto.toEntity()).getOrderkey();
@@ -129,6 +130,53 @@ public class OrderService {
     @Transactional
     public void deleteOrderDetail(Long id){
         orderDetailRepository.deleteById(id);
+    }
+
+    //관리자 주문 목록 구현
+    public List<OrderListDto> getOrderList(){
+        List<Order> orders = orderRepository.findAll();
+        List<OrderListDto> orderListDtoList = new ArrayList<>();
+        SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd");
+
+        for(Order order:orders){
+            String orderre;
+            int ordercount;
+            String orderstate;
+            String orderdate;
+            Optional<Member> optionalMember = memberRepository.findById(order.getMemberid());
+            Member member = optionalMember.get();
+
+            //받는분
+            if(order.getOrderrec() == null || order.getOrderrec().equals("")){
+                orderre = member.getUsername();
+            }else{
+                orderre = order.getOrderrec();
+            }
+
+            //주문수량
+            List<OrderDetail> orderDetailList = orderDetailRepository.findByAndOrder_Orderkey(order.getOrderkey());
+            ordercount = orderDetailList.size();
+
+            //주문날짜
+            orderdate = format1.format(order.getOrderdate());
+
+            //주문상태
+            String[] state = {"주문완료", "배송준비", "배송완료", "교환,환불신청", "교환,환불완료"};
+            orderstate = state[order.getOrderstate()-1];
+
+            OrderListDto orderListDto = OrderListDto.builder()
+                    .orderkey(order.getOrderkey())
+                    .username(member.getUsername())
+                    .orderrec(orderre)
+                    .ordercount(ordercount)
+                    .orderprice(order.getOrderprice())
+                    .orderdate(orderdate)
+                    .orderstate(orderstate).build();
+
+            orderListDtoList.add(orderListDto);
+
+        }
+        return orderListDtoList;
     }
 
 }
