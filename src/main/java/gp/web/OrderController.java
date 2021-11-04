@@ -172,9 +172,23 @@ public class OrderController {
     @GetMapping("/adminOrder")
     public String adminorder(Model model){
 
-        List<OrderListDto> orderListDtoList = orderService.getOrderList();
+        List<OrderListDto> orderListDtoList = orderService.getMainOrderList();
 
         model.addAttribute("orderList", orderListDtoList);
+        model.addAttribute("orderstt", "0");
+
+        //adminsidebar 설정 용도
+        model.addAttribute("adminmenu", "주문");
+        return "adminOrder";
+    }
+
+    @GetMapping("/adminOrderState/{orderstate}")
+    public String adminOrderState(@PathVariable("orderstate") Integer orderstate, Model model){
+        List<OrderListDto> orderListDtoList = orderService.getOrderState(orderstate);
+
+        model.addAttribute("orderList", orderListDtoList);
+        String orderstt = orderstate.toString();
+        model.addAttribute("orderstt", orderstt);
 
         //adminsidebar 설정 용도
         model.addAttribute("adminmenu", "주문");

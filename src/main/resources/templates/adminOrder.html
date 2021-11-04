@@ -2,6 +2,7 @@
 <html  lang="en" xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="../static/css/style2.css">
 <link rel="stylesheet" href="../static/css/material.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -79,12 +80,12 @@
 		width: 200px;
 	}
 	#admod_sub{
-		float: right;
+		float: left;
 		border: 0;
 		background: orange;
 		padding: 5px 10px;
 		font-family: 'NanumBarunGothic';
-		margin: 0 20px 20px 0;
+		margin: 10px 0 0 10px;
 		color: white;
 		font-size: 17px;
 	}
@@ -144,11 +145,16 @@
 </style>
 <script type="text/javascript">
 	function popup() {
-		var url = "adminOrderDetail.jsp";
+		var url = "[[@{/adminOrder}]]";
 		var name = "popup test"
 		var option = "width=800, height = 700, top = 100, left = 200, location = no";
 		window.open(url, name, option);
 	}
+
+	$(document).ready(function()
+	{
+ 		$("input:radio[name='orderstate']:input[value='[[${orderstt}]]']").attr("checked",true);
+	})
 </script>
 </head>
 <body>
@@ -166,22 +172,23 @@
 							<select id="admod_sele">
 								<option>주문번호</option>
 								<option>주문자</option>
-								<option>받는분</option>
-								<option>주문상품</option>
-							</select> 
+							</select>
 							<input type="text" id="admod_text" placeholder="검색 내용 입력">
+							<input type="submit" value="검색" id="admod_sub">
 						</div>
 						<div class="admod_statme_wrap"> 
 							<span>주문상태&ensp;&ensp;</span> 
-							<input type="radio" name="orderstat" checked="checked">전체&ensp;
-							<input type="radio" name="orderstat">주문완료 &ensp;
-							<input type="radio" name="orderstat">배송준비&ensp;
-							<input type="radio" name="orderstat">배송완료&ensp;
-							<input type="radio" name="orderstat">교환,환불 신청&ensp;
-							<input type="radio" name="orderstat">교환,환불 완료
-							<input type="submit" value="검색" id="admod_sub">
+							<input type="radio" name="orderstate" value="0" th:onclick="'window.location.href=\''+ @{/adminOrder} + '\''" >전체&ensp;
+							<input type="radio" name="orderstate" value="1" th:onclick="'location.href=\''+ @{/adminOrderState/1} + '\''">주문완료
+							<input type="radio" name="orderstate" value="2" th:onclick="'location.href=\''+ @{/adminOrderState/2} + '\''">배송준비&ensp;
+							<input type="radio" name="orderstate" value="3" th:onclick="'location.href=\''+ @{/adminOrderState/3} + '\''">배송완료&ensp;
+							<input type="radio" name="orderstate" value="4" th:onclick="'location.href=\''+ @{/adminOrderState/4} + '\''">교환,환불 신청&ensp;
+							<input type="radio" name="orderstate" value="5" th:onclick="'location.href=\''+ @{/adminOrderState/5} + '\''">교환,환불 완료
+
 						</div>
-					</form>	
+
+
+					</form>
 				</div>
 				<div id="am_section_content">
 					<table class="am_or_table">

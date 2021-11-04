@@ -133,10 +133,27 @@ public class OrderService {
     }
 
     //관리자 주문 목록 구현
-    public List<OrderListDto> getOrderList(){
+    public List<OrderListDto> getMainOrderList(){
+
         List<Order> orders = orderRepository.findAll();
-        List<OrderListDto> orderListDtoList = new ArrayList<>();
+        List<OrderListDto> orderListDtoList = getOrderList(orders);
+
+        return orderListDtoList;
+    }
+    //주문 상태 별 목록 만들기
+    public List<OrderListDto> getOrderState(Integer orderstate) {
+
+        List<Order> orders = orderRepository.findByOrderstate(orderstate);
+        List<OrderListDto> orderListDtoList = getOrderList(orders);
+
+        return orderListDtoList;
+    }
+
+
+    //주문목록 가져오기 메소드
+    public List<OrderListDto> getOrderList(List<Order> orders){
         SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd");
+        List<OrderListDto> orderListDtoList = new ArrayList<>();
 
         for(Order order:orders){
             String orderre;
@@ -178,5 +195,4 @@ public class OrderService {
         }
         return orderListDtoList;
     }
-
 }
