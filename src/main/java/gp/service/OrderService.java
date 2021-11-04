@@ -7,8 +7,8 @@ import gp.web.dto.OrderDto;
 import gp.web.dto.OrderListDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -178,7 +178,7 @@ public class OrderService {
             orderdate = format1.format(order.getOrderdate());
 
             //주문상태
-            String[] state = {"주문완료", "배송준비", "배송완료", "교환,환불신청", "교환,환불완료"};
+            String[] state = {"주문완료", "배송준비", "배송완료", "교환,환불신청", "교환,환불완료", "배송취소"};
             orderstate = state[order.getOrderstate()-1];
 
             OrderListDto orderListDto = OrderListDto.builder()
@@ -194,5 +194,51 @@ public class OrderService {
 
         }
         return orderListDtoList;
+    }
+    //orderkey로 해당 table값 가져오기
+    public OrderDto getOrderkey(Long orderkey) {
+        Optional<Order> orderOptional = orderRepository.findById(orderkey);
+        Order order = orderOptional.get();
+
+
+        OrderDto orderDto = OrderDto.builder()
+                .orderkey(order.getOrderkey())
+                .memberid(order.getMemberid())
+                .orderdate(order.getOrderdate())
+                .orderrec(order.getOrderrec())
+                .orderphone(order.getOrderphone())
+                .orderaddress(order.getOrderaddress())
+                .orderrequest(order.getOrderrequest())
+                .orderstate(order.getOrderstate())
+                .orderprice(order.getOrderprice()).build();
+        return orderDto;
+    }
+
+    //
+    public List<OrderDetatilDto> getOrderDetailKey(Long orderkey) {
+        List<OrderDetail> orderDetailList = orderDetailRepository.findByAndOrder_Orderkey(orderkey);
+        List<OrderDetatilDto> orderDetatilDtoList = new ArrayList<>();
+
+
+        for(OrderDetail orderDetail:orderDetailList){
+            OrderDetatilDto orderDetatilDto = OrderDetatilDto.builder()
+                    .orderdetailkey(orderDetail.getOrderdetailkey())
+                    .order(orderDetail.getOrder())
+                    .material(orderDetail.getMaterial())
+                    .materialname(orderDetail.getMaterialname())
+                    .ordernum(orderDetail.getOrdernum())
+                    .orderdate(orderDetail.getOrderdate())
+                    .build();
+            orderDetatilDtoList.add(orderDetatilDto);
+        }
+        return orderDetatilDtoList;
+    }
+    //주문상태 변경
+    @Transactional
+    public void orderStateUpdate(OrderDto orderDto, Long orderkey) {
+        Optional<Order> optionalOrder = orderRepository.findById(orderkey);
+        Order order = optionalOrder.get();
+
+        order.orderStateUpdate(orderDto.getOrderstate());
     }
 }

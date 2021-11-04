@@ -2,6 +2,7 @@ package gp.web;
 
 import gp.domain.Material;
 import gp.domain.Order;
+import gp.domain.OrderDetail;
 import gp.service.MaterialService;
 import gp.service.OrderService;
 import gp.web.dto.MemberDto;
@@ -21,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -193,6 +195,39 @@ public class OrderController {
         //adminsidebar 설정 용도
         model.addAttribute("adminmenu", "주문");
         return "adminOrder";
+    }
+    //관리자 주문 상세보기 팝업
+    @GetMapping("/adminOrderDetail/{orderkey}")
+    public String adminOrderDetail(@PathVariable("orderkey") Long orderkey, Model model){
+
+        OrderDto orderDto = orderService.getOrderkey(orderkey);
+        List<OrderDetatilDto> orderDetatilDto = orderService.getOrderDetailKey(orderkey);
+
+        //주문상태
+        String[] state = {"주문완료", "배송준비", "배송완료", "교환,환불신청", "교환,환불완료", "배송취소"};
+        String orderstate = state[orderDto.getOrderstate()-1];
+        model.addAttribute("orderstate", orderstate);
+
+        //상품수량
+        int orderCount = orderDetatilDto.size();
+        model.addAttribute("orderCount", orderCount);
+
+        //주문일자
+        SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd");
+        String orderdate = format1.format(orderDto.getOrderdate());
+        model.addAttribute("orderdate", orderdate);
+
+        model.addAttribute("order", orderDto);
+        model.addAttribute("orderDetail", orderDetatilDto);
+
+        return "adminOrderDetail";
+    }
+
+    //주문 상태 변경
+    @PostMapping("/adminOrderStateChang/{orderkey}")
+    public String adminOrderStateChange(OrderDto orderDto, @PathVariable("orderkey") Long orderkey){
+        orderService.orderStateUpdate(orderDto, orderkey);
+        return "redirect:/adminOrder";
     }
 
 }

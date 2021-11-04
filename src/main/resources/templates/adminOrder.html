@@ -144,18 +144,10 @@
 	}
 </style>
 <script type="text/javascript">
-	function popup() {
-		var url = "[[@{/adminOrder}]]";
-		var name = "popup test"
-		var option = "width=800, height = 700, top = 100, left = 200, location = no";
-		window.open(url, name, option);
-	}
-
-	$(document).ready(function()
-	{
- 		$("input:radio[name='orderstate']:input[value='[[${orderstt}]]']").attr("checked",true);
-	})
+	window.name = 'myPage';
 </script>
+
+
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
@@ -168,14 +160,7 @@
 				</div>
 				<div class="adminorder_search">
 					<form action="">
-						<div id="admod_sele_wrap">
-							<select id="admod_sele">
-								<option>주문번호</option>
-								<option>주문자</option>
-							</select>
-							<input type="text" id="admod_text" placeholder="검색 내용 입력">
-							<input type="submit" value="검색" id="admod_sub">
-						</div>
+
 						<div class="admod_statme_wrap"> 
 							<span>주문상태&ensp;&ensp;</span> 
 							<input type="radio" name="orderstate" value="0" th:onclick="'window.location.href=\''+ @{/adminOrder} + '\''" >전체&ensp;
@@ -213,11 +198,27 @@
 								<td><span th:text = "${orderListDto.orderprice}"></span>원</td>
 								<td><span th:text = "${orderListDto.orderdate}"></span></td>
 								<td><span th:text = "${orderListDto.orderstate}"></span></td>
-								<td><a href="javascript:popup()" class="am_order_dbut">보기</a></td>
+								<td><button th:onclick="popup([[${orderListDto.orderkey}]]);" class="am_order_dbut">보기</button></td>
 							</tr>
 
 						</tbody>
+
 					</table>
+					<script type="text/javascript">
+
+						function popup(key) {
+							console.log(key);
+							var url = `[[@{/adminOrderDetail/${key}}]]`;
+							var name = "popup test"
+							var option = "width=1250, height = 1000, top = 100, left = 200, location = no";
+							window.open(url, name, option);
+						}
+
+						$(document).ready(function()
+						{
+							$("input:radio[name='orderstate']:input[value='[[${orderstt}]]']").attr("checked",true);
+						})
+					</script>
 				</div>
 			</section>
 		</section>

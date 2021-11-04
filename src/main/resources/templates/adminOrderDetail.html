@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<head>
+<style type="text/css">
+	@font-face {
+		 font-family: 'NanumBarunGothic';
+		 font-style: normal;
+		 font-weight: 400;
+		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+	}
+	
+	.nanumbarungothic * {
+		 font-family: 'NanumBarunGothic', sans-serif;
+	}
+	@font-face {
+	    font-family: 'Cafe24Simplehae';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Simplehae.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	@font-face {
+	    font-family: 'Cafe24Dangdanghae';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.2/Cafe24Dangdanghae.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	#adorde_main{
+		margin: 0 ;
+		width: 800px;
+		height: 100%;
+	}
+	.adorde_num{
+		width: 100%;
+		height: 50px;
+		font-family: 'NanumBarunGothic';
+		background: orange;
+		margin: 0 auto;
+	}
+	.adorde_num_span{
+		float: left;
+		color: white;
+		font-weight: bold;
+		font-size: 20px;
+		margin: 13px 0 0 10px;
+	}
+	.adorde_num li {
+		list-style: none;
+		float: left;
+		color: #eeeeee;
+		font-size: 17px;
+		margin: 15px 7px 0 0 ;
+	}
+	.adorde_meter{
+		margin: 30px 0 0 10px;
+	}
+	.adorde_meter p, .adorde_addwrap p{
+		font-family: 'Cafe24Dangdanghae';
+		letter-spacing: 3px;
+		font-size: 25px;
+	}
+	.adorde_meter table{
+		border-top: 3px solid black;
+		border-collapse: collapse;
+		width: 97%;
+	}
+	.adorde_meter th{
+		padding: 8px 5px;
+		font-size: 14px;
+		font-weight: normal;
+		font-family: 'NanumBarunGothic';
+		border-bottom: 1px solid #bbbbbb;
+		color: gray;
+		text-align: center;
+	}
+	.adorde_mmain td{
+		padding: 8px 5px;
+		font-size: 14px;
+		border-bottom: 1px solid #bbbbbb;
+	}
+	.mtd{
+		border-right: 1px solid #bbbbbb; 
+		text-align: center;
+	}
+	.mtbbold{
+		font-weight: bold;
+		width: 350px;
+		text-align: left;
+	}
+	.adormet_but{
+		border: 0;
+		background: orange;
+		font-family: 'NanumBarunGothic';
+		padding: 5px;
+		color: white;
+		
+	}
+	.adorde_addwrap{
+		margin: 50px 0 0 10px;
+	}
+	.adorde_addwrap table{
+		border-top: 3px solid black;
+		border-collapse: collapse;
+		width: 97%;
+		text-align: left;
+		border-bottom: 1px solid #bbbbbb;
+	}
+	.adorde_addwrap th{
+		padding: 15px 10px;
+		font-family: 'NanumBarunGothic';
+		background: #eeeeee;
+		font-weight: normal;	
+		font-size: 13px;
+		border-bottom: 1px solid #dddddd;
+	}
+	.adorde_addwrap td{
+		font-family: 'NanumBarunGothic';
+		padding-left: 10px;
+		font-size: 14px;
+		border-bottom: 1px solid #dddddd;
+	}
+	.adorder_span{
+		font-family: 'NanumBarunGothic';
+		font-size: 14px;
+	}
+	.adorde_statewrap{
+		margin: 30px 0 0 10px;
+		width: 90%;
+		border: 3px solid black;
+		box-shadow : 2px 2px 5px #999;
+		padding: 20px;
+	}
+	.adorde_statewrap th{
+		border-right: 3px solid black;
+		padding: 5px 20px 5px 0;
+	}
+	.adorde_statewrap td{
+		padding-left: 10px;
+	}
+	.adorde_end{
+		margin-top: 30px;
+		padding: 40px;
+		text-align: center;
+		background: #eeeeee;
+	}
+	#adorde_sub{
+		padding: 10px 30px;
+		font-family: 'NanumBarunGothic';
+		font-size: 20px;
+		color: white;
+		background: orange;
+		border: 0;
+		
+	}
+	#adorde_res{
+		padding: 10px 30px;
+		font-family: 'NanumBarunGothic';
+		font-size: 20px;
+		color: white;
+		background: gray;
+		border: 0;
+	}
+</style>
+<script type="text/javascript">
+ 	window.onload=function(){
+  		var pop_btn = document.getElementById('adorde_sub');
+ 		pop_btn.onclick=function(){
+ 			window.opener.name = 'myPage';
+   			document.myForm.target= opener.name; //호출하고자하는 부모창의 이름
+   			document.myForm.submit(); // 폼 전송
+   			self.close(); //창 닫기
+  		}
+ };
+</script>
+
+
+	출처: https://mobilenweb.tistory.com/194 [모바일앤웹]
+<meta charset="UTF-8">
+<title>주문 상세 페이지</title>
+</head>
+<body>
+	<main id="adorde_main">
+		<form th:action="@{'/adminOrderStateChang/'+${order.orderkey}}" method="post" name="myForm">
+		<div class="adorde_num">
+			<span class="adorde_num_span">[관리자 주문 상세]</span>
+			<ul>
+				<li>주문번호 : <span th:text = "${order.orderkey}" class="adorder_span"></span> |</li>
+				<li>주문상태 : <span th:text = "${orderstate}" class="adorder_span"></span> | </li>
+				<li>주문일자 : <span th:text = "${orderdate}" class="adorder_span"></span></li>
+			</ul>
+		</div>
+		<div class="adorde_meter">
+			<p>주문 상품</p>
+			<table>
+				<thead>
+					<tr>
+						<th>상품번호</th>
+						<th>상품명</th>
+						<th>주문수량</th>
+						<th>주문상태</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="adorde_mmain" th:each = "orderDe : ${orderDetail}">
+						<td class="mtd"><span th:text = "${orderDe.orderdetailkey}"></span></td>
+						<td class="mtd mtbbold"><span th:text = "${orderDe.materialname}"></span></td>
+						<td class="mtd"><span th:text = "${orderDe.ordernum}"></span></td>
+						<td style="text-align: center;"><input type="submit" th:value="${orderstate}" class="adormet_but"> </td>
+					</tr> 
+
+					<tr class="adorde_mmain">
+						<td colspan="2"></td>
+						<td colspan="3" style="color: gray;">상품수랑 : <span th:text = "${orderCount}"></span>개 / 총 주문금액 : <span th:text = "${order.orderprice}"></span>원</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="adorde_addwrap">
+			<p>배송지</p>
+			<table>
+				<tr>
+					<th>받는사람</th>
+					<td><span th:text = "${order.orderrec}"></span></td>
+				</tr>
+				<tr>
+					<th>휴대폰</th>
+					<td><span th:text = "${order.orderphone}"></span></td>
+				</tr>
+				<tr>
+					<th>배송지</th>
+					<td><span th:text = "${order.orderaddress}"></span> </td>
+				</tr>
+				<tr>
+					<th>요청 사항</th>
+					<td><span th:text = "${order.orderrequest}"></span></td>
+				</tr>
+			</table>
+		</div>
+		<div class="adorde_statewrap">
+			<table>
+				<tr>
+					<th>주문상태</th>
+					<td>
+					<input type="radio" name="orderstate" value="1">주문완료&ensp;
+					<input type="radio" name="orderstate" value="2">배송준비&ensp;
+					<input type="radio" name="orderstate" value="3">배송완료&ensp;
+					<input type="radio" name="orderstate" value="4">교환,환불 신청&ensp;
+					<input type="radio" name="orderstate" value="5">교환, 환불 완료
+					<input type="radio" name="orderstate" value="6">배송불가
+					</td>
+					<script type="text/javascript">
+
+						$(document).ready(function()
+						{
+							$("input:radio[name='orderstate']:input[value='[[${order.orderstate}]]']").attr("checked",true);
+						})
+					</script>
+				</tr>
+			</table>
+		</div>
+		<div class="adorde_end"> 
+			<button type="button" id="adorde_sub">확인</button>
+			<button type="reset" id="adorde_res">취소</button>
+		</div>
+		</form>
+	</main>
+</body>
+</html>

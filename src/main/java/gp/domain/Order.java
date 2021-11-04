@@ -62,4 +62,9 @@ public class Order {
         this.orderprice=orderprice;
     }
 
+    //주문상태 업데이터
+    public void orderStateUpdate(Integer orderstate){
+        this.orderstate = orderstate;
+    }
+
 }
