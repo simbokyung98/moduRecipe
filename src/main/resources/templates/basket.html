@@ -464,7 +464,7 @@
 									<div class="tb-center">
 										<div class="thumb">
 											<a href="b.jsp" class="cart_a">
-												<img class="img" th:src="@{../static/materialImg/} + ${cartDto.cartImage}" alt="상품 섬네일">
+												<img class="img" th:src="@{/materialImg/} + ${cartDto.cartImage}" alt="상품 섬네일">
 											</a>
 										</div>
 									</div>
@@ -522,8 +522,7 @@
 					<div class="btn-order-ctr12">
 						<a  class="CSSbuttonBlackB" onmousedown="try{_CTS_CART();}catch(_e){}" onclick="orderAll();">전체상품 주문하기</a>
 						<a  class="CSSbuttonB cart_a" onclick="orderSelect();"	onmousedown="try{_CTS_CART();}catch(_e){}">선택상품 주문하기</a>
-						<a href="javascript:basket clear();" class="cart_a CSSbuttonB" >장바구니 비우기</a>
-						<a href="main.jsp" class="cart_a CSSbuttonB">쇼핑 계속하기</a>
+						<a th:href="@{/}" class="cart_a CSSbuttonB">쇼핑 계속하기</a>
 					</div>
 					<div class="cart-ft2">
 					</div>
